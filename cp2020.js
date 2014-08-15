@@ -1206,6 +1206,9 @@ function randAgeClick() {
 function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     "use strict";
     //Adds the row for the lifeTable table
+    console.log(td1Val, td2Val, td3Val, td4Val);
+    console.log(typeof td1Val, typeof td2Val, typeof td3Val, typeof td4Val);
+
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
     //console.log(tBody);
@@ -1218,7 +1221,13 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     td1.innerHTML = td1Val;
     td2.innerHTML = td2Val;
     td3.innerHTML = td3Val;
-    td4.innerHTML = td4Val;
+
+    if (typeof td4Val === "string" || typeof td4Val === "number") {
+        td4.innerHTML = td4Val;
+    } else if (typeof td4Val === "object") {
+        td4.appendChild(td4Val);
+    }
+
     //td5.innerHTML = td5Val;
     newRow.appendChild(td1);
     newRow.appendChild(td2);
@@ -1382,30 +1391,65 @@ function randLifeEvent(age) {
         } else if (secondLifeRoll >= 6) {
             //Make an enemy
             console.log("Make enemy");
+            eventType = "Make an Enemy";
             enemy.addEnemy(age, thirdLifeRoll, fourthLifeRoll);
-            var enemyDetailTable = AddEnemyTable(
-                enemy.enemyWhoIsIt,
-                enemy.enemyCauseIs,
-                enemy.enemyWhoMad,
-                enemy.enemyWhatDo,
-                enemy.enemyWhatThrow
+            var enemyDetailTable = addEnemyTable(
+                enemy.enemyWhoIsIt[age],
+                enemy.enemyCauseIs[age],
+                enemy.enemyWhoMad[age],
+                enemy.enemyWhatDo[age],
+                enemy.enemyWhatThrow[age]
             );
-            //addLifeRow(age, eventType, enemy.enemyMade[thirdLifeRoll])
+            //var tableID = age + "enemyDetailTable";
+            //enemyDetailTable.setAttribute("id", tableID);
 
+            enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
+            //console.log(typeof enemyDetailTable);
+            console.log(enemyDetailTable);
+            //addLifeRow(age, eventType, enemy.enemyMade[thirdLifeRoll], enemyDetailTable);//.innerHTML);
+            addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
         }
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
         //Romantic involvement
         console.log("romantic involve");
-    } else if (lifeEventRoll >=9) {
+        eventType = "Romantice Involvement";
+        
+    } else if (lifeEventRoll >= 9) {
         //Nothing
         console.log("nothing");
     }
 }
 
-function AddEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
+function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     "use strict";
+    //console.log(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5);
+
     var enemyDetailTable = document.createElement("table");
+
+    var enemyDetailHeader = document.createElement("tr");
+    enemyDetailHeader.setAttribute("class", "enemyDetailTableHeader");
+    var head1 = document.createElement("td");
+    var head2 = document.createElement("td");
+    var head3 = document.createElement("td");
+    var head4 = document.createElement("td");
+    var head5 = document.createElement("td");
+
+    head1.innerHTML = "Who";
+    head2.innerHTML = "Cause";
+    head3.innerHTML = "Who's Angry?";
+    head4.innerHTML = "Reaction If You See Them?";
+    head5.innerHTML = "What Can They Throw At You?";
+
+    enemyDetailHeader.appendChild(head1);
+    enemyDetailHeader.appendChild(head2);
+    enemyDetailHeader.appendChild(head3);
+    enemyDetailHeader.appendChild(head4);
+    enemyDetailHeader.appendChild(head5);
+
+    enemyDetailTable.appendChild(enemyDetailHeader);
+
+
     var enemyDetailRow = document.createElement("tr");
     var enemyTD1 = document.createElement("td");
     var enemyTD2 = document.createElement("td");
@@ -1413,11 +1457,13 @@ function AddEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     var enemyTD4 = document.createElement("td");
     var enemyTD5 = document.createElement("td");
 
-    enemyTD1.innerHTML = enemy.enemyWhoIsIt[tdVal1];
-    enemyTD2.innerHTML = enemy.enemyCauseIs[tdVal2];
-    enemyTD3.innerHTML = enemy.enemyWhoMad[tdVal3];
-    enemyTD4.innerHTML = enemy.enemyWhatDo[tdVal4];
-    enemyTD5.innerHTML = enemy.enemyWhatThrow[tdVal5];
+    enemyTD1.innerHTML = tdVal1;
+    enemyTD2.innerHTML = tdVal2;
+    enemyTD3.innerHTML = tdVal3;
+    enemyTD4.innerHTML = tdVal4;
+    enemyTD5.innerHTML = tdVal5;
+
+    console.log(enemyTD1, enemyTD2, enemyTD3, enemyTD4, enemyTD5);
 
     enemyDetailRow.appendChild(enemyTD1);
     enemyDetailRow.appendChild(enemyTD2);
@@ -1426,6 +1472,7 @@ function AddEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     enemyDetailRow.appendChild(enemyTD5);
 
     enemyDetailTable.appendChild(enemyDetailRow);
+    //enemyDetailTable.setAttribute("id", )
     return enemyDetailTable;
 }
 
@@ -1967,16 +2014,50 @@ var enemy = {
         var whatDoRoll = getRandomInt(1,10);
         var whatThrowRoll = getRandomInt(1,10);
 
+        var enGender = "Enemy gender: ";
+
         if ((fourthLifeRoll % 2 === 0) === true) {
-            this.enemyGender[age] = "gender: male";
+            this.enemyGender[age] = enGender + "male";
         } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.enemyGender[age] = "gender: female";
+            this.enemyGender[age] = enGender + "female";
         }
+
         this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; //who are they
         this.enemyCauseIs[age] = this.enemyCause[causeRoll]; //what is the cause
-        this.enemyWhoMad[age] = this.whoIsAngry[whoIsMadRoll]; //who's mad
-        this.enemyWhatDo[age] = this.whatDo[whatDoRoll]; //what they gonna do about it
-        this.enemyWhatThrow[age] = this.whatThrow[whatThrowRoll]; //what can they throw against you
+        if (whoIsMadRoll <= 4) { //Who's mad
+            this.enemyWhoMad[age] = this.whoIsAngry[1];
+        } else if (whoIsMadRoll >= 5 && whoIsMadRoll <= 7) {
+            this.enemyWhoMad[age] = this.whoIsAngry[2];
+        } else if (whoIsMadRoll >= 8 && whoIsMadRoll <= 10) {
+            this.enemyWhoMad[age] = this.whoIsAngry[3];
+        }
+        if (whatDoRoll <= 2) { //Whatcha gonna do about it
+            this.enemyWhatDo[age] = this.whatDo[1];
+        } else if (whatDoRoll >= 3 && whatDoRoll <= 4) {
+            this.enemyWhatDo[age] = this.whatDo[2];
+        } else if (whatDoRoll >= 5 && whatDoRoll <= 6) {
+            this.enemyWhatDo[age] = this.whatDo[3];
+        } else if (whatDoRoll >= 7 && whatDoRoll <= 8) {
+            this.enemyWhatDo[age] = this.whatDo[4];
+        } else if (whatDoRoll >= 9 && whatDoRoll <= 10) {
+            this.enemyWhatDo[age] = this.whatDo[5];
+        }
+        if (whatThrowRoll <=3) { //What can they trhow against you
+            this.enemyWhatThrow[age] = this.whatThrow[1];
+        } else if (whatThrowRoll >= 4 && whatThrowRoll <= 5) {
+            this.enemyWhatThrow[age] = this.whatThrow[2];
+        } else if (whatThrowRoll >= 6 && whatThrowRoll <= 7) {
+            this.enemyWhatThrow[age] = this.whatThrow[3];
+        } else if (whatThrowRoll === 8) {
+            this.enemyWhatThrow[age] = this.whatThrow[4];
+        } else if (whatThrowRoll === 9) {
+            this.enemyWhatThrow[age] = this.whatThrow[5];
+        } else if (whatThrowRoll === 10) {
+            this.enemyWhatThrow[age] = this.whatThrow[6];
+        }
+
+        //this.enemyWhatDo[age] = this.whatDo[whatDoRoll]; //what they gonna do about it
+        //this.enemyWhatThrow[age] = this.whatThrow[whatThrowRoll]; //what can they throw against you
 
     },
     enemyMade: {
@@ -1988,7 +2069,7 @@ var enemy = {
         6: "Person you work for",
         7: "Partner or co-worker",
         8: "Booster gang member",
-        9: "Corporate Exec",
+        9: "Corporate Executive",
         10: "Government Official"
     },
     enemyCause: {
@@ -2009,80 +2090,21 @@ var enemy = {
         3: "The feeling's mutual"
     },
     whatDo: {
-        1: "Go into a murderous rage and rip his face off",
+        1: "Go into a murderous killing rage",
         2: "Avoid the scum",
         3: "Backstab them indirectly",
         4: "Ingore them",
         5: "Rip into them verbally"
     },
     whatThrow: {
-        1: "Just themself",
-        2: "Themself and a few friends",
+        1: "Just themselves",
+        2: "Them and a few friends",
         3: "An entire gang",
         4: "A small corporation",
         5: "A Large corporation",
         6: "An entire government agency"
     }
 };
-
-/*
-var enemyMade = {
-    1: "Ex friend",
-    2: "Ex lover",
-    3: "Relative",
-    4: "Childhood enemy",
-    5: "Person working for you",
-    6: "Person you work for",
-    7: "Partner or co-worker",
-    8: "Booster gang member",
-    9: "Corporate Exec",
-    10: "Government Official"
-};
-
-*/
-/*
-var enemyCause = {
-    1: "Caused the other to lose face or status",
-    2: "Caused the loss of a lover, friend or relative",
-    3: "Caused a major humliation",
-    4: "Accused the other of cowardice or other personal flaw",
-    5: "Caused a physical disability",
-    6: "Deserted or betrayed the other",
-    7: "Turned down the other's offer of job or romantic involvement",
-    8: "Just didn't like each other",
-    9: "Was a romantic rival",
-    10: "Foiled plans of the other"
-};
-*/
-
-/*
-var whoIsAngry = {
-    1: "They hate you",
-    2: "You hate them",
-    3: "The feeling's mutual"
-};
-*/
-
-/*
-var whatDo = {
-    1: "Go into a murderous rage and rip his face off",
-    2: "Avoid the scum",
-    3: "Backstab them indirectly",
-    4: "Ingore them",
-    5: "Rip into them verbally"
-};
-*/
-/*
-
-var whatThrow = {
-    1: "Just themself",
-    2: "Themself and a few friends",
-    3: "An entire gang",
-    4: "A small corporation",
-    5: "A Large corporation",
-    6: "An entire government agency"
-};
-*/
 
 var friendMade = {
     1: "Like a big brother/sister to you",

@@ -106,8 +106,14 @@ body {
     display: none;
 }
 
+/* #LifeTable */
 #lifeTable tr:nth-child(odd) {
     background-color: #E6E6E6;
+}
+
+
+#lifeTable td:nth-child(1) {
+    width: 35px;
 }
 
 #lifeTable {
@@ -116,19 +122,51 @@ body {
 }
 
 #lifeTable td {
-    /*border: 1px solid black;*/
     border: 1px solid #ccc;
     padding: 3px;
 }
 
 .boldTableHead {
     font-weight: bold;
-    background-color: #BDBDBD;
+    background-color: #BDBDBD !important;
+    /*background-color: red;*/
     border: 1px solid #ccc;
 }
 
-/*
-tr {
-    font-size: smaller;
+.enemyDetailTableHeader {
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background-color: #D8D8D8 !important;
 }
-*/
+
+.enemyDetailTable {
+    font-size: smaller;
+    border-collapse: collapse;
+    background-color: #FFF;
+    margin: 2px;
+}
+
+.enemyDetailTable tr {
+    align: center;
+}
+
+.enemyDetailTable td {
+    border: 1px solid #A4A4A4 !important;
+    /*width: 150px;*/
+}
+
+.enemyDetailTable td:nth-child(1) {
+    width: 120px !important;
+}
+
+.enemyDetailTable td:nth-child(2) {
+    width: 170px !important;
+}
+
+.enemyDetailTable td:nth-child(3) {
+    width: 120px !important;
+}
+
+.enemyDetailTable td:nth-child(4) {
+    width: 175px;
+}
