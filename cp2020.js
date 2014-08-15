@@ -417,7 +417,7 @@ function randParentsClick() {
     parentSomethingHappenedField.style.display = "none"; //hide this initially
 
     console.log("randParentsClick() fired");
-    var randParentRoll = getRandomInt(1,10); //uncomment for prod!
+    var randParentRoll = getRandomInt(1,10);
     console.log("randParentRoll: " + randParentRoll);
     if (randParentRoll <= 6) {
         parentStatusField.value = parentStatus.okay;
@@ -1180,34 +1180,44 @@ function ManPosSelectChange() {
 
 function randAgeClick() {
     "use strict";
+    //var age = 0;
+
+    //Remove all children from lifeTable
+    //var lifeTableHead = document.getElementsByClassName("boldTableHead");
+    var lifeTable = document.getElementById("lifeTable");
+    //console.log(lifeTable);
+    //var rows = lifeTable.getElementsByTagName("tr");
+    var rowCount = lifeTable.rows.length;
+    for (var i = rowCount -1; i > 0 ;i--) {
+        lifeTable.deleteRow(i);
+    }
+
     var ageField = document.getElementById("ageField");
     var ageRoll1 = getRandomInt(1,6);
     var ageRoll2 = getRandomInt(1,6);
+    //console.log(ageRoll1, ageRoll2);
     var numEvents = ageRoll1 + ageRoll2;
-    var age = 16 + numEvents;
+    //console.log("numEvents: " + typeof numEvents, numEvents);
+    var age = numEvents + 16;
     ageField.value = age;
-    //console.log(numEvents);
+    var lifeEventStart = 17;
 
-    //Life events
-    /*
-    for (var i = 0; i < numEvents; i++) {
-        //var lifeEventRoll = getRandomInt(1,10);
-        //do stuff
-        randLifeEvent();
-
+    //Life Events
+    for (var i = lifeEventStart; i <= age; i++) {
+        //console.log(i);
+        randLifeEvent(i);
     }
-    */
-    randLifeEvent(age);
-    //Table for events?
-    // | eventType | what | detail | output within detail
-
 }
 
 function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     "use strict";
     //Adds the row for the lifeTable table
-    console.log(td1Val, td2Val, td3Val, td4Val);
-    console.log(typeof td1Val, typeof td2Val, typeof td3Val, typeof td4Val);
+    if (!td1Val || !td2Val || !td3Val || !td4Val) {
+        throw new Error("addLifeRow() missing a required parameter!");
+    }
+
+    //console.log(td1Val, td2Val, td3Val, td4Val);
+    //console.log(typeof td1Val, typeof td2Val, typeof td3Val, typeof td4Val);
 
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
@@ -1242,11 +1252,13 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
 
 function randLifeEvent(age) {
     "use strict";
-    //var lifeEventRoll = getRandomInt(1,10);
-    var lifeEventRoll = 4; //
 
-    //var secondLifeRoll = getRandomInt(1,10);
-    var secondLifeRoll = 6;
+    //Main Life Event: Problem/Win, Friend/Enemy, Romance, Nothing
+    var lifeEventRoll = getRandomInt(1,10);
+    //var lifeEventRoll = 7; //
+
+    var secondLifeRoll = getRandomInt(1,10);
+    //var secondLifeRoll = 8;
 
     var thirdLifeRoll = getRandomInt(1,10);
     //var thirdLifeRoll = 1;
@@ -1264,8 +1276,8 @@ function randLifeEvent(age) {
         if ((secondLifeRoll % 2 === 0) === true) {
             //Even, Big Score
             eventType = "You Get Lucky";
-            console.log(getLucky[thirdLifeRoll].title);
-            console.log(getLucky[thirdLifeRoll].detail);
+            //console.log(getLucky[thirdLifeRoll].title);
+            //console.log(getLucky[thirdLifeRoll].detail);
 
             //Arguments that are duplicated a lot / used a lot, passed by .apply(null, dupAgrs) to functions
             var dupArgs = [age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail];
@@ -1279,54 +1291,54 @@ function randLifeEvent(age) {
                     connection = getLuckyConnection[3];
                 }
                 connection = "You made a connection " + connection;
-                console.log("connection: " + connection);
+                //console.log("connection: " + connection);
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, connection);
             } else if (thirdLifeRoll === 2) {
-                console.log(getLucky[thirdLifeRoll].title);
-                console.log(getLucky[thirdLifeRoll].detail);
-                console.log(getLucky.windfallAmount);
+                //console.log(getLucky[thirdLifeRoll].title);
+                //console.log(getLucky[thirdLifeRoll].detail);
+                //console.log(getLucky.windfallAmount);
                 //getLucky = addWindfall(getLucky, age);
                 addWindfall(getLucky, age);
-                console.log(getLucky.windfallAmount);
+                //console.log(getLucky.windfallAmount);
                 amount = "Amount: " + getLucky.windfallHistory[age] + " eb";
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 3) {
-                console.log(getLucky.scoreHistory);
+                //console.log(getLucky.scoreHistory);
                 addScore(getLucky, age);
                 //var amount = "Score Amount: " +
                 amount = amount.concat("Amount: ", getLucky.scoreHistory[age], " eb");
-                console.log(getLucky.scoreHistory);
+                //console.log(getLucky.scoreHistory);
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 4) {
-                console.log(getLucky);
+                //console.log(getLucky);
                 addSensei(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
-                console.log(getLucky);
+                //console.log(getLucky);
             } else if (thirdLifeRoll === 5) {
-                console.log(getLucky);
+                //console.log(getLucky);
                 addTeacher(getLucky, age);
-                console.log(getLucky);
+                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 6) {
                 addCorpFavor(getLucky, age);
-                console.log(getLucky);
+                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 7) {
                 addNomadFavor(getLucky, age);
-                console.log(getLucky);
+                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 8) {
                 addPoliceFriend(getLucky, age);
-                console.log(getLucky);
+                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 9) {
                 addBoosterFriend(getLucky, age);
-                console.log(getLucky);
+                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 10) {
@@ -1381,16 +1393,16 @@ function randLifeEvent(age) {
         }
     } else if (lifeEventRoll >= 4 && lifeEventRoll <= 6) {
         //Friend / enemy
-        console.log("Friends & Enemies");
+        //console.log("Friends & Enemies");
         if (secondLifeRoll <= 5) {
             //Make a friend
-            console.log("make friend");
+            //console.log("make friend");
             eventType = "Make a Friend";
             friendMade.addFriend(age, thirdLifeRoll, fourthLifeRoll);
             addLifeRow(age, eventType, friendMade[thirdLifeRoll], friendMade.friendMadeGender[age]);
         } else if (secondLifeRoll >= 6) {
             //Make an enemy
-            console.log("Make enemy");
+            //console.log("Make enemy");
             eventType = "Make an Enemy";
             enemy.addEnemy(age, thirdLifeRoll, fourthLifeRoll);
             var enemyDetailTable = addEnemyTable(
@@ -1406,18 +1418,46 @@ function randLifeEvent(age) {
             enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
             //console.log(typeof enemyDetailTable);
-            console.log(enemyDetailTable);
+            //console.log(enemyDetailTable);
             //addLifeRow(age, eventType, enemy.enemyMade[thirdLifeRoll], enemyDetailTable);//.innerHTML);
             addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
         }
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
         //Romantic involvement
-        console.log("romantic involve");
-        eventType = "Romantice Involvement";
-        
+        //console.log("Romantic involvement: ");
+        var metaEventType = "Romance: ";
+        if (secondLifeRoll <= 4) {
+            eventType = metaEventType.concat("Happy Love Affair");
+            //console.log("happy");
+            romance.addHappyAffair(age);
+            //console.log(romance);
+            addLifeRow(age, eventType, romance.happyHistory[age], romance.happyDetail[age]);
+        } else if (secondLifeRoll === 5) {
+            eventType = metaEventType.concat("Tragic Love Affair");
+            //console.log("tragic");
+            romance.addTragic(age, thirdLifeRoll);
+            //console.log(romance);
+            addLifeRow(age, eventType, romance.tragicHistory[age], romance.tragicDetail[age]);
+        } else if (secondLifeRoll >= 6 && secondLifeRoll <= 7) {
+            eventType = metaEventType.concat("Love Affair With Problems");
+            //console.log("love affair with problems");
+            romance.addProblem(age, thirdLifeRoll, fourthLifeRoll);
+            //console.log(romance);
+            addLifeRow(age, eventType, romance.problemHistory[age], romance.problemDetail[age]);
+        } else if (secondLifeRoll >= 8) {
+            eventType = metaEventType.concat("Fast Affairs / Hot Dates");
+            //console.log("fast affairs");
+            romance.addFast(age);
+            addLifeRow(age, eventType, romance.fastHistory[age], romance.fastDetail[age]);
+        }
+
     } else if (lifeEventRoll >= 9) {
         //Nothing
-        console.log("nothing");
+        eventType = nothing.nothingResult;
+        //console.log("nothing");
+        nothing.addNothing(age);
+        addLifeRow(age, eventType, nothing.nothingDetail[age], nothing.nothingDetail[age]);
+
     }
 }
 
@@ -1463,7 +1503,7 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     enemyTD4.innerHTML = tdVal4;
     enemyTD5.innerHTML = tdVal5;
 
-    console.log(enemyTD1, enemyTD2, enemyTD3, enemyTD4, enemyTD5);
+    //console.log(enemyTD1, enemyTD2, enemyTD3, enemyTD4, enemyTD5);
 
     enemyDetailRow.appendChild(enemyTD1);
     enemyDetailRow.appendChild(enemyTD2);
@@ -1709,8 +1749,8 @@ var disaster = {
         "use strict";
         this.betrayalHistory[age] = this[thirdLifeRoll].title;
         this.betrayalAmount += 1;
-        console.log("betrayalAmount: " + this.betrayalAmount);
-        console.log("betrayHistory: " + this.betrayalHistory[age]);
+        //console.log("betrayalAmount: " + this.betrayalAmount);
+        //console.log("betrayHistory: " + this.betrayalHistory[age]);
         if (fourthLifeRoll <= 3) {
             this.betrayDetail[age] = " You are being blackmailed.";
         } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 7) {
@@ -1724,7 +1764,7 @@ var disaster = {
     accidentDetail: {},
     addAccident: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
-        console.log(age, thirdLifeRoll, fourthLifeRoll);
+        //console.log(age, thirdLifeRoll, fourthLifeRoll);
         this.accidentHistory[age] = this[thirdLifeRoll].title;
         this.accidentAmount += 1;
         var randInt = getRandomInt(1,10);
@@ -1796,7 +1836,7 @@ var disaster = {
     corpHuntedDetail: {},
     addCorpHunted: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
-        console.log(typeof fourthLifeRoll, fourthLifeRoll);
+        //console.log(typeof fourthLifeRoll, fourthLifeRoll);
         this.corpHuntedAmount += 1;
         this.corpHuntedHistory[age] = this[thirdLifeRoll].title;
         if (fourthLifeRoll <= 3) {
@@ -1809,7 +1849,7 @@ var disaster = {
         } else if (fourthLifeRoll >= 9) {
             this.corpHuntedDetail[age] = "Huge multinational corporation hunting you; they have armies, ninjas and spies everywhere";
         }
-        console.log(this.corpHuntedAmount, this.corpHuntedHistory[age], this.corpHuntedDetail[age]);
+        //console.log(this.corpHuntedAmount, this.corpHuntedHistory[age], this.corpHuntedDetail[age]);
     },
     incapAmount: 0,
     incapHistory: {},
@@ -2133,13 +2173,112 @@ var friendMade = {
     }
 };
 
+var romance = {
+    happyCount:0,
+    happyDetail: {},
+    happyHistory: {},
+    addHappyAffair: function(age) {
+        "use strict";
+        this.romanceCount +=1;
+        this.happyHistory[age] = this.romanceEvent[1];
+        this.happyDetail[age] = "n/a";
+    },
+    tragicCount: 0,
+    tragicDetail: {},
+    tragicHistory: {},
+    addTragic: function(age, thirdLifeRoll) {
+        "use strict";
+        this.tragicCount += 1;
+        this.tragicHistory[age] = this.romanceEvent[2];
+        this.tragicDetail[age] = this.romanceTragic[thirdLifeRoll];
+    },
+    problemCount: 0,
+    problemDetail: {},
+    problemHistory: {},
+    addProblem: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.problemCount += 1;
+        this.problemHistory[age] = this.romanceProblems[thirdLifeRoll];
+        this.problemDetail[age] = this.romanceMutalFeel[fourthLifeRoll];
+    },
+    fastCount: 0,
+    fastDetail: {},
+    fastHistory: {},
+    addFast: function(age) {
+        "use strict";
+        this.fastCount += 1;
+        this.fastHistory[age] = this.romanceEvent[4];
+        this.fastDetail[age] = "n/a";
+    },
+    romanceEvent: {
+        1: "Happy Love Affair",
+        2: "Tragic Love Affair",
+        3: "Love Affair With Problems",
+        4: "Fast affairs and Hot Dates"
+    },
+    romanceTragic: {
+        1: "Lover died in an accident",
+        2: "Lover mysteriously vanisehd",
+        3: "It didnt work out",
+        4: "A personal goal or vendetta came between you",
+        5: "Lover kidnapped",
+        6: "Lover went insane",
+        7: "Lover committed suicide",
+        8: "Lover killed in a fight",
+        9: "Rival cut you out of the action",
+        10: "Lover imprisoned or exiled"
+    },
+    romanceProblems: {
+        1: "Your lover's friends/family hate you",
+        2: "Your lover's friends/family would use any means to get rid of you",
+        3: "Your friends/family hate your lover",
+        4: "One of you has a romantic rival",
+        5: "You are seperated in some way",
+        6: "You fight constantly",
+        7: "You're professional rivals",
+        8: "One of you is insanely jealous",
+        9: "One of you is messing around",
+        10: "You have conflicting backgrounds and families"
+    },
+    romanceMutalFeel: {
+        1: "They still love you",
+        2: "You still love them",
+        3: "You still love each other",
+        4: "You hate them",
+        5: "They hate you",
+        6: "You hate each other",
+        7: "You're friends",
+        8: "No feelings either way; its over",
+        9: "You like them, they hate you",
+        10: "They like you, you hate them"
+    }
+
+};
+
+var nothing = {
+    nothingCount: 0,
+    nothingDetail: {},
+    nothingHistory: {},
+    addNothing: function(age) {
+        "use strict";
+        this.nothingCount += 1;
+        this.nothingHistory[age] = "Nothing Happened This Year";
+        this.nothingDetail[age] = "n/a";
+    },
+    nothingResult: "Nothing Happened This Year"
+    //nothingResult: "n/a"
+};
+
+/*
 var romanceEvent = {
     1: "Happy Love Affair",
     2: "Tragic Love Affair",
     3: "Love Affair With Problems",
     4: "Fast affairs and Hot Dates"
 };
+*/
 
+/*
 var romanceTragic = {
     1: "Lover died in an accident",
     2: "Lover mysteriously vanisehd",
@@ -2152,7 +2291,9 @@ var romanceTragic = {
     9: "Rival cut you out of the action",
     10: "Lover imprisoned or exiled"
 };
+*/
 
+/*
 var romanceProblems = {
     1: "Your lover's friends/family hate you",
     2: "Your lover's friends/family would use any means to get rid of you",
@@ -2165,7 +2306,9 @@ var romanceProblems = {
     9: "One of you is messing around",
     10: "You have conflicting backgrounds and families"
 };
+*/
 
+/*
 var mutualFeelings = {
     1: "They still love you",
     2: "You still love them",
@@ -2178,7 +2321,7 @@ var mutualFeelings = {
     9: "You like them, they hate you",
     10: "They like you, you hate them"
 };
-
+*/
 
 window.onload = init;
 function init() {
@@ -2187,18 +2330,15 @@ function init() {
     //Temp scroll to bottom for dev
     window.scrollTo(0, document.body.scrollHeight);
 
-    //Roll method radio buttons
+    //Roll method elements
     var randomMethod = document.getElementById("randomMethod");
     var fastMethod = document.getElementById("fastMethod");
-
     //Statistic fields
     var ma = document.getElementById("ma");
     var bt = document.getElementById("bt"); //body type stat
-
     //Statistics event handlers
     randomMethod.onclick = randomClick;
     fastMethod.onclick = fastClick;
-
     ma.onchange = updateRun;
     bt.onchange = updateBodyDerived;
 
@@ -2270,7 +2410,6 @@ function init() {
     var manualFamDanger = document.getElementById("manualFamDanger");
     var manualFamOkay = document.getElementById("manualFamOkay");
     var familyTragedySelect = document.getElementById("familyTragedySelect");
-
     //Family status event handlers
     randFamilyStatus.onclick = randFamilyStatusClick;
     manualFamilyStatus.onclick = manualFamilyStatusClick;
@@ -2282,7 +2421,6 @@ function init() {
     var randChildEnv = document.getElementById("randChildEnv");
     var manualChildEnv = document.getElementById("manualChildEnv");
     var manualChildSelect = document.getElementById("manualChildSelect");
-
     //Childhood event handlers
     randChildEnv.onclick = randChildEnvClick;
     manualChildEnv.onclick = manualChildEnvClick;
@@ -2291,7 +2429,6 @@ function init() {
     //Siblings elements
     var randSiblings = document.getElementById("randSiblings");
     var manualSiblings = document.getElementById("manualSiblings");
-
     //Siblings event handlers
     randSiblings.onclick = randSiblingsClick;
     manualSiblings.onclick = manualSiblingsClick;
@@ -2299,7 +2436,6 @@ function init() {
     //Personality elements
     var randPersTraits = document.getElementById("randPersTraits");
     var manualPersTraits = document.getElementById("manualPersTraits");
-
     //Personality event handlers
     randPersTraits.onclick = randPersTraitsClick;
     manualPersTraits.onclick = manualPersTraitsClick;

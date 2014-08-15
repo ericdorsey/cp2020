@@ -117,7 +117,7 @@ body {
 }
 
 #lifeTable {
-    font-size: smaller;
+    font-size: 12px;
     border-collapse: collapse;
 }
 
@@ -131,6 +131,7 @@ body {
     background-color: #BDBDBD !important;
     /*background-color: red;*/
     border: 1px solid #ccc;
+    font-size: 12px;
 }
 
 .enemyDetailTableHeader {
@@ -144,10 +145,6 @@ body {
     border-collapse: collapse;
     background-color: #FFF;
     margin: 2px;
-}
-
-.enemyDetailTable tr {
-    align: center;
 }
 
 .enemyDetailTable td {
