@@ -1,0 +1,8 @@
+#PHPStorm files
+.idea/
+
+#vim
+*.swp
+
+#OSX
+*.DS_Store

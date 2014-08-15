@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="cp2020.css">
+    <script src="cp2020.js"></script>
+</head>
+
+<body>
+<div>
+    <h2>Cyberpunk 2020 Charcter</h2>
+    <h3>Statistics</h3>
+    <h4 class="sub4Head">Character Points</h4>
+    <form>
+        <input type="radio" name="rollMethod" id="randomMethod"> Random <span class="instruction"> Roll 9D10 and total them</span>
+        <br>
+        <input type="radio" name="rollMethod" id="fastMethod"> Fast <span class="instruction"> Roll 9D10; Reroll any less than 2. Place rolls in stats as desired</span>
+        <p id="rollOutput"></p>
+        <br>
+        <p>
+            <span class="bold">User Assigned Values (editable):</span>
+            <br>Intelligence (INT) <input type="text" id="int" size="2" disabled="true">
+            <br>Reflexes (REF) <input type="text" id="ref" size="2" disabled="true">
+            <br>Technical Ability (TECH) <input type="text" id="tech" size="2" disabled="true">
+            <br>Cool (CL) <input type="text" id="cl" size="2" disabled="true">
+            <br>Attractiveness (ATT) <input type="text" id="att" size="2" disabled="true">
+            <br>Luck (LK) <input type="text" id="lk" size="2" disabled="true">
+            <br>Movement Allowance (MA) <input type="text" id="ma" size="2" disabled="true">
+            <br>Body Type (BT) <input type="text" id="bt" size="2" disabled="true">
+            <br>Empathy (EMP) <input type="text" id="emp" size="2" disabled="true">
+        </p>
+        <p>
+            <span class="bold">Derived Values (not editable):</span>
+            <br>Run <input type="text" id="run" size="2" disabled="true"> <span class="instruction">in meters</span>
+            <br>Leap <input type="text" id="leap" size="2" disabled="true">
+            <br>Lift <input type="text" id="lift" size="2" disabled="true"> <span class="instruction">in kgs</span> <input type="text" id="liftLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
+            <br>Carry <input type="text" id="carry" size="2" disabled="true"> <span class="instruction">in kg</span> <input type="text" id="carryLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
+            <br>Body Type <input type="text" id="bodyType" size="7" disabled="true"> Body Type Modifier <input type="text" id="btm" size="2" disabled="true">
+        </p>
+    </form>
+    <h3>Origins and Personal Style</h3>
+    <h4>Dress & Personal Style</h4>
+    <form>
+        <input type="radio" name="persStyle" id="rollStyle"> Randomly Choose Style
+        <br> <span class="instruction"> emulated Roll 1D10 to choose</span>
+        <br> <input type="radio" name="persStyle" id="manualStyle"> Manually Choose Style
+
+        <select id="manualClothesSelect"></select>
+        <select id="manualHairSelect"></select>
+        <select id="manualAffecSelect"></select>
+
+        <br>Clothes <input type="text" id="clothesField" size="15" disabled="true">
+        <br>Hairstyle <input type="text" id="hairField" size="15" disabled="true">
+        <br>Affectations <input type="text" id="affecField" size="15" disabled="true">
+
+    </form>
+    <h4>Ethnic Origins</h4>
+    <form>
+        <input type="radio" name="ethnic" id="rollEth"> Randomly Choose Origin
+        <br>
+        <span class="instruction"> Roll 1D10 to choose</span>
+        <br>
+        <input type="radio" name="ethnic" id="manualEth"> Manually Choose Origin
+        <br>
+        <select id="manualEthSelect"></select>
+        <select id="manualLangSelect"></select>
+
+        <br>Ethnicity <input type="text" id="ethField" size="20" disabled="true">
+        <br>Language <input type="text" id="ethLang" size="20" disabled="true">
+    </form>
+    <h3>Family Background</h3>
+    <h4>Family Ranking</h4>
+    <form>
+        <input type="radio" name="famRank" id="randFam"> Randomly Choose Family Ranking
+        <br>
+        <input type="radio" name="famRank" id="manualFam"> Manually Choose Family Ranking
+        <br>
+        <select id="manualFamSelect"></select>
+        <br>Family Ranking <input type="text" id="famRankField" disabled="true">
+    </form>
+    <h4>Parents</h4>
+    <span class="instruction">
+      <ul>Choose or roll one:
+          <li>1-6: Both parents are living</li>
+          <li>7-10: Something has happened to one or both parents</li>
+      </ul>
+    </span>
+    <form>
+
+        <label for="randParents">
+            <input type="radio" name="parentsAlive" id="randParents"> Randomly Choose Status of Parents
+        </label>
+        <br>
+
+        <label for="manualParents">
+            <input type="radio" name="parentsAlive" id="manualParents"> Manually Choose Status of Parents
+        </label>
+
+        <p>
+            <label for="parentsOkayRadio" id="parentsOkayRadio_label">
+                <input type="radio" name="manualParentStatus" id="parentsOkayRadio"> Parents okay
+            </label>
+
+            <label for="parentsIssuesRadio" id="parentsIssuesRadio_label">
+                <input type="radio" name="manualParentStatus" id="parentsIssuesRadio"> Something happend to parents
+            </label>
+        </p>
+        <select id="manualParentSelect"></select>
+        <br>
+        Status of Parents:
+        <br><input type="text" size="50" id="parentStatusField" disabled="true">
+
+        <p id="parentSomethingHappened">
+            What Happened to Your Parents?
+            <input type="text" size="60" id="parentSomethingHappenedField" disabled="true">
+        </p>
+    </form>
+    <h4>Family Status</h4>
+    <form>
+        <label for="randFamilyStatus" id="randFamilyStatus_label">
+            <input type="radio" name="familyStatus" id="randFamilyStatus"> Randomly Choose Family Status
+        </label>
+        <br>
+        <label for="manualFamilyStatus" id="manualFamilyStatus_label">
+            <input type="radio"  name="familyStatus" id="manualFamilyStatus"> Manually Choose Family Status
+        </label>
+        <p>
+            <label for="manualFamDanger" id="manualFamDanger_label">
+                <input type="radio" name="manualFam" id="manualFamDanger"> Family status in danger
+            </label>
+            <br>
+            <label for="manualFamOkay" id="manualFamOkay_label">
+                <input type="radio" name="manualFam" id="manualFamOkay"> Family status is OK
+            </label>
+        </p>
+        <p>
+        <h4 id="famTragedyHeader">Family Tragedy</h4>
+        <select id="familyTragedySelect"></select>
+        <br>
+        <br>
+        <label for="familyTragedyOutput" id="familyTragedyOutput_label">
+            Family Tragedy Detail
+            <br>
+            <textarea id="familyTragedyOutput" rows="3" cols=35 disabled="true"></textarea>
+        </label>
+        <p>
+            <label for="familyStatus" id="familyStatus_label">
+                Family Status
+                <input type="text" size="50" id="familyStatus" disabled="true">
+            </label>
+        </p>
+    </form>
+    <h4>Childhood Environment</h4>
+    <label for="randChildEnv" id="randChildEnv_label">
+        <input type="radio" name="childRadios" id="randChildEnv"> Randomly Choose Childhood Environment
+    </label>
+    <br>
+    <label for="manualChildEnv" id="manualChildEnv_label">
+        <input type="radio" name="childRadios" id="manualChildEnv"> Manually Choose Childhood Environment
+    </label>
+    <br>
+    <label for="manualChildSelect" id="manualChildSelect_label">
+        <select id="manualChildSelect"></select>
+    </label>
+    <br>
+    <label for="childEnvOutput" id="childEnvOutput_label">
+        Childhood Environment: <input type="text" size= "50" id="childEnvOutput" disabled="true">
+    </label>
+    <h4>Siblings</h4>
+    <div id="siblingsContainer">
+        <label for="randSiblings" id="randSiblings_label">
+            <input type="radio" name="siblingsRadios" id="randSiblings"> Randomly Choose Siblings
+        </label>
+        <br>
+        <label for="manualSiblings" id="manualSiblings_label">
+            <input type="radio" name="siblingsRadios" id="manualSiblings"> Manually Choose Siblings
+        </label>
+        <br>
+        <label for="manualSiblingSelect" id="manualSiblingSelect_label">
+            <select id="manualSiblingSelect"></select>
+        </label>
+        <br>
+        <label for="haveSiblings" id="haveSiblings_label">
+            Have Siblings? <input type="text" id="haveSiblings" disabled="true">
+        </label>
+    </div>
+    <!-- Houses the output of each sibling: gender, age, feelings about -->
+    <div id="siblingsOutput">
+
+    </div>
+    <h3>Motivations</h3>
+    <h4>Personality Traits</h4>
+    <label for="randPersTraits" id="randPersTraits_label">
+        <input type="radio" name="persRadios" id="randPersTraits"> Randomly Choose Personality Traits
+    </label>
+    <br>
+    <label for="manualPersTraits" id="manualPersTraits_label">
+        <input type="radio" name="persRadios" id="manualPersTraits"> Manually Choose Personality Traits
+    </label>
+    <br>
+    <label for="persTraitsField" id="persTraitsField_label">
+        Personality Traits: <input type="text" id="persTraitsField" disabled="true">
+    </label>
+    <select id="persTraitsSelect"></select>
+
+    <h4>Preson You Value Most</h4>
+    <label for="randPersValue" id="randPersValue_label">
+        <input type="radio" name="valRadios" id="randPersValue"> Randomly Choose Person Valued
+    </label>
+    <br>
+    <label for="manualPersValue" id="manualPersValue_label">
+        <input type="radio" name="valRadios" id="manualPersValue"> Manually Choose PersonValued
+    </label>
+    <br>
+    <label for="persValField" id="persValField_label">
+        Person You Value: <input type="text" id="persValField" disabled="true">
+    </label>
+    <br>
+    <select id="persValSelect"></select>
+
+    <h4>What Do You Value Most?</h4>
+    <label for="randYouValue" id="randYouValue_label">
+        <input type="radio" name="youRadios" id="randYouValue"> Randomly Choose What You Value
+    </label>
+    <br>
+    <label for="manYouValue" id="manYouValue_label">
+        <input type="radio" name="youRadios" id="manYouValue"> Manually Choose What You Value
+    </label>
+    <br>
+    <label for="youValField" id="youValField_label">
+        What You Value: <input type="text" id="youValField" disabled="true">
+    </label>
+    <br>
+    <select id="youValSelect"></select>
+
+    <h4>What Do You Feel About Most People?</h4>
+    <label for="randYouFeel" id="randYouFeel_label">
+        <input type="radio" name="feelRadios" id="randYouFeel"> Randomly Choose How You Feel About People
+    </label>
+    <br>
+    <label for="manYouFeel" id="manYouFeel_label">
+        <input type="radio" name="feelRadios" id="manYouFeel"> Manually Choose What How You Feel About People
+    </label>
+    <br>
+    <label for="youFeelField" id="youFeelField_label">
+        How You Feel: <input type="text" id="youFeelField" disabled="true">
+    </label>
+    <br>
+    <select id="youFeelSelect"></select>
+
+    <h4>What Is Your Most Valued Possession?</h4>
+    <label for="randPos" id="randPos_label">
+        <input type="radio" name="posRadios" id="randPos"> Randomly Choose Most Valued Possession
+    </label>
+    <br>
+    <label for="manPos" id="manPos_label">
+        <input type="radio" name="posRadios" id="manPos"> Manually Choose Most Valued Possession
+    </label>
+    <br>
+    <label for="posField" id="posField_label">
+        How You Feel: <input type="text" id="posField" disabled="true">
+    </label>
+    <br>
+    <select id="posSelect"></select>
+
+    <h3>Life Events</h3>
+    <h4>Age</h4>
+    <label for="randAge" id="randAge_label">
+        <input type="radio" name="ageRadios" id="randAge"> Randomly Choose Your Age
+    </label>
+    <br>
+    <label for="manAge" id="manAge_label">
+        <input type="radio" name="ageRadios" id="manAge"> Manually Choose Your Age
+    </label>
+    <br>
+    <label for="ageField" id="ageField_label">
+        Age: <input type="text" id="ageField" disabled="true">
+    </label>
+    <table id="lifeTable">
+        <tr class="boldTableHead">
+            <td>Age</td>
+            <td>Event Type</td>
+            <td>Result</td>
+            <td>Detail</td>
+            <!--<td>More Detail</td>-->
+        </tr>
+    </table>
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+body {
+    font-family: sans-serif;
+}
+
+.sub4Head {
+    display: inline;
+}
+
+.instruction {
+    font-size: smaller;
+    font-family: monospace;
+    margin-left: 10px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#rollOutput {
+    display: inline;
+}
+#manualClothesSelect {
+    display: none;
+}
+#manualHairSelect {
+    display: none;
+}
+#manualAffecSelect {
+    display: none;
+}
+#manualEthSelect {
+    display: none;
+}
+#manualLangSelect {
+    display: none;
+}
+#manualFamSelect {
+    display: none;
+}
+#parentSomethingHappened {
+    display: none;
+}
+#manualParentSelect {
+    display: none;
+}
+#parentsOkayRadio {
+    display: none;
+}
+#parentsIssuesRadio {
+    display: none;
+}
+#parentsOkayRadio_label {
+    display: none;
+}
+#parentsIssuesRadio_label {
+    display: none;
+}
+#manualFamDanger {
+    display: none;
+}
+#manualFamDanger_label {
+    display: none;
+}
+#manualFamOkay {
+    display: none;
+}
+#manualFamOkay_label {
+    display: none;
+}
+#famTragedyHeader {
+    display: none;
+}
+#familyTragedySelect {
+    display: none;
+}
+#familyTragedyOutput {
+    display: none;
+}
+#familyTragedyOutput_label {
+    display: none;
+}
+#manualChildSelect {
+    display: none;
+}
+#manualSiblingSelect {
+    display: none;
+}
+
+#persTraitsSelect {
+    display: none;
+}
+
+#persValSelect {
+    display: none;
+}
+
+#youValSelect {
+    display: none;
+}
+
+#youFeelSelect {
+    display: none;
+}
+
+#posSelect {
+    display: none;
+}
+
+#lifeTable tr:nth-child(odd) {
+    background-color: #E6E6E6;
+}
+
+#lifeTable {
+    font-size: smaller;
+    border-collapse: collapse;
+}
+
+#lifeTable td {
+    /*border: 1px solid black;*/
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+
+.boldTableHead {
+    font-weight: bold;
+    background-color: #BDBDBD;
+    border: 1px solid #ccc;
+}
+
+/*
+tr {
+    font-size: smaller;
+}
+*/
