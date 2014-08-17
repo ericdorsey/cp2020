@@ -167,3 +167,11 @@ body {
 .enemyDetailTable td:nth-child(4) {
     width: 175px;
 }
+
+.redBack {
+    background-color: #FE2E2E;
+}
+
+.red {
+    color: #FE2E2E;
+}

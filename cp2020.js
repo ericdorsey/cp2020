@@ -1183,16 +1183,14 @@ function randAgeClick() {
     //var age = 0;
 
     //Remove all children from lifeTable
-    //var lifeTableHead = document.getElementsByClassName("boldTableHead");
     var lifeTable = document.getElementById("lifeTable");
-    //console.log(lifeTable);
-    //var rows = lifeTable.getElementsByTagName("tr");
     var rowCount = lifeTable.rows.length;
     for (var i = rowCount -1; i > 0 ;i--) {
         lifeTable.deleteRow(i);
     }
 
     var ageField = document.getElementById("ageField");
+    ageField.setAttribute("disabled", "true");
     var ageRoll1 = getRandomInt(1,6);
     var ageRoll2 = getRandomInt(1,6);
     //console.log(ageRoll1, ageRoll2);
@@ -1203,10 +1201,84 @@ function randAgeClick() {
     var lifeEventStart = 17;
 
     //Life Events
-    for (var i = lifeEventStart; i <= age; i++) {
-        //console.log(i);
-        randLifeEvent(i);
+    for (var j = lifeEventStart; j <= age; j++) {
+        //console.log(j);
+        randLifeEvent(j);
     }
+}
+
+function manAgeClick() {
+    "use strict";
+    var ageField = document.getElementById("ageField");
+    ageField.removeAttribute("disabled");
+    ageField.className = "";
+    ageField.value = "";
+
+    //Remove all children from lifeTable
+    var lifeTable = document.getElementById("lifeTable");
+    var rowCount = lifeTable.rows.length;
+    for (var i = rowCount -1; i > 0 ;i--) {
+        lifeTable.deleteRow(i);
+    }
+
+}
+
+function ageCheck() {
+    "use strict";
+    //Remove all children from lifeTable
+    var lifeTable = document.getElementById("lifeTable");
+    var rowCount = lifeTable.rows.length;
+    for (var i = rowCount -1; i > 0 ;i--) {
+        lifeTable.deleteRow(i);
+    }
+    
+    console.log("ageCheck() fired");
+    var ageField = document.getElementById("ageField");
+    ageField.className = "";
+    var ageFieldValue = ageField.value;
+    //console.log(parseInt(ageFieldValue));
+    var errorOut = document.createElement("span");
+    errorOut.setAttribute("id", "errorOut");
+    errorOut.setAttribute("class", "red");
+    var errorDetailText = "";
+    var ageField_label = document.getElementById("ageField_label");
+    //errorOut.appendChild(document.createTextNode(errorDetailText));
+    /*
+    if (isNaN(parseInt(ageFieldValue))) {
+        console.log("Not a number");
+        ageField.className = "redBack";
+        ageField.focus();
+        errorDetailText = "Must enter a number between 17 and 99.";
+        errorOut.appendChild(document.createTextNode(errorDetailText));
+        //ageField.parentNode.appendChild(errorOut);
+        ageField.parentNode.appendChild(errorOut);
+
+    }*/
+    if ((ageFieldValue < 17 || ageFieldValue > 99) || (isNaN(parseInt(ageFieldValue)))) {
+        console.log("cant be < 17 or > 99");
+        ageField.className = "redBack";
+        ageField.focus();
+        errorDetailText = "Must enter a number between 17 and 99.";
+        var tempErr = document.getElementById("errorOut");
+        if (!tempErr) {
+            errorOut.appendChild(document.createTextNode(errorDetailText));
+            ageField.parentNode.appendChild(errorOut);
+        }
+    } else {
+        var tempErr2 = document.getElementById("errorOut");
+        if (tempErr2) {
+            tempErr2.parentNode.removeChild(tempErr2);
+        }
+        var lifeEventStart = 17;
+        var age = ageField.value;
+        var numEvents = age - lifeEventStart;
+        //Life Events
+        for (var j = lifeEventStart; j <= age; j++) {
+            console.log(j);
+            randLifeEvent(j);
+        }
+    }
+
 }
 
 function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
@@ -2471,7 +2543,12 @@ function init() {
     //Age elements
     var randAge = document.getElementById("randAge");
     var manAge = document.getElementById("manAge");
+    var ageField = document.getElementById("ageField");
+
     //Age event handlers
     randAge.onclick = randAgeClick;
-    //manAge.onclick = manAgeClick;
+    manAge.onclick = manAgeClick;
+    ageField.onchange = ageCheck;
+    //ageField.onblur = ageCheck;
+
 }
