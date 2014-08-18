@@ -38,6 +38,34 @@
             <br>Body Type <input type="text" id="bodyType" size="7" disabled="true"> Body Type Modifier <input type="text" id="btm" size="2" disabled="true">
         </p>
     </form>
+    <div id="roleAndSkills">
+        <h3>Role and Skills</h3>
+        <h4>Role</h4>
+        <label for="randRole" id="randRole_label">
+            <input type="radio" name="roleRadios" id="randRole"> Randomly Choose Role
+        </label>
+        <br>
+        <label for="manRole" id="manRole_label">
+            <input type="radio" name="roleRadios" id="manRole"> Manually Choose Role
+        </label>
+        <br>
+        <label for="roleField" id="roleField_label">
+            Role: <input type="text" id="roleField" disabled="true">
+        </label>
+    <br>
+        <label for="roleSelect" id="roleSelect_label">
+            Select Role
+            <select id="roleSelect"></select>
+        </label>
+        <h4>Skills</h4>
+        <p id="careerSkills">Career Skills</p>
+        <table id="careerSkillTable">
+
+        </table>
+        <p id="pickupSkills">Pickup Skills</p>
+
+
+    </div>
     <h3>Origins and Personal Style</h3>
     <h4>Dress & Personal Style</h4>
     <form>

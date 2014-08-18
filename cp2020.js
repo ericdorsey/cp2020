@@ -17,6 +17,9 @@
  > don't allow zero values in statistics fields
  > after get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
  > make the disaster strikes stuff affect main statistics
+ > track money gained / lost from life events
+ > add Age instructions (minimum 17)
+ > life Events: fix "make an enemy" row .. <td colspan="2"> ?
  */
 
 function getRandomInt(min,max) {
@@ -1231,7 +1234,7 @@ function ageCheck() {
     for (var i = rowCount -1; i > 0 ;i--) {
         lifeTable.deleteRow(i);
     }
-    
+
     console.log("ageCheck() fired");
     var ageField = document.getElementById("ageField");
     ageField.className = "";
@@ -1587,6 +1590,8 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     //enemyDetailTable.setAttribute("id", )
     return enemyDetailTable;
 }
+
+
 
 var clothes = {
     1: "Biker leathers",
@@ -2341,59 +2346,393 @@ var nothing = {
     //nothingResult: "n/a"
 };
 
-/*
-var romanceEvent = {
-    1: "Happy Love Affair",
-    2: "Tragic Love Affair",
-    3: "Love Affair With Problems",
-    4: "Fast affairs and Hot Dates"
+var skills = {
+    special: {
+        name: "Special Abilities",
+        Cop: "Authority",
+        Rocker: "Charismatic Leadership",
+        Solo: "Combat Sense",
+        Media: "Credibility",
+        Nomad: "Family",
+        Netrunner: "Interface",
+        Techie: "Jury Rig",
+        MedTechie: "Medical Tech",
+        Corp: "Resources",
+        Fixer: "Streetdeal"
+    },
+    attr: {
+        name: "Attractiveness Skills",
+        attr01: "Personal Grooming",
+        attr02: "Wardrobe & Style"
+    },
+    body: {
+        name: "Body Skills",
+        body01: "Endurance",
+        body02: "Strength Feat",
+        body03: "Swimming"
+    },
+    cool: {
+        name: "Cool / Will Skills",
+        cool01: "Interrogation",
+        cool02: "Intimidate",
+        cool03: "Oratory",
+        cool04: "Resist Torture/Drugs",
+        cool05: "Streetwise"
+    },
+    emp: {
+        name: "Empathy Sills",
+        emp01: "Human Perception",
+        emp02: "Interview",
+        emp03: "Leadership",
+        emp04: "Seduction",
+        emp05: "Social",
+        emp06: "Persuasion and Fast Talk",
+        emp07: "Perform"
+    },
+    int: {
+        name: "Intelligence Skills",
+        int01: "Accounting",
+        int02: "Anthropology",
+        int03: "Awareness / Notice",
+        int04: "Biology",
+        int05: "Botany",
+        int06: "Chemistry",
+        int07: "Composition",
+        int08: "Diagnose Illness",
+        int09: "Education & General Knowledge",
+        int10: {main: "Expert", sub: ""},
+        int11: "Gamble",
+        int12: "Geology",
+        int13: "Hide/Evade",
+        int14: "History",
+        int15: {main: "Know Language: ", sub: ""},
+        int16: "Library Search",
+        int17: "Mathematics",
+        int18: "Physics",
+        int19: {main: "Programming: ", sub: ""},
+        int20: "Shadow/Track",
+        int21: "Stock Market",
+        int22: "System Knowledge",
+        int23: "Teaching",
+        int24: "Wildnerness Survival",
+        int25: "Zoology"
+    },
+    ref: {
+        name: "Reflex Skills",
+        ref01: "Archery",
+        ref02: "Athletics",
+        ref03: "Brawling",
+        ref04: "Dance",
+        ref05: "Dodge & Escape",
+        ref06: "Driving",
+        ref07: "Fencing",
+        ref08: "Handgun", //Handgun
+        ref09: "Heavy Weapons",
+        ref10: {main: "Martial Art: ", sub: ""},
+        ref11: "Melee",
+        ref12: "Motorcycle",
+        ref13: "Operate Heavy Machinery",
+        ref14: "Pilot Gyro",
+        ref15: "Pilot Fixed Wing",
+        ref16: "Pilot Dirigible",
+        ref17: "Pilot Vect. Thrust Vehicle",
+        ref18: "Rifle",
+        ref19: "Stealth",
+        ref20: "Submachinegun"
+    },
+    tech: {
+        name: "Tech Skills",
+        tech01: "Aero Tech",
+        tech02: "AV Tech",
+        tech03: "Basic Tech",
+        tech04: "Cryotank Operation",
+        tech05: "Cyberdeck Design",
+        tech06: "CyberTech",
+        tech07: "Demolitions",
+        tech08: "Disguise",
+        tech09: "Electronics",
+        tech10: "Electonic Security",
+        tech11: "First Aid",
+        tech12: "Forgery",
+        tech13: "Gyro Tech",
+        tech14: "Paint or Draw",
+        tech15: "Photo & Film",
+        tech16: "Pharmaceuticals",
+        tech17: "Pick Lock",
+        tech18: "Pick Pocket",
+        tech19: "Play Instrument",
+        tech20: "Weaponsmith"
+    }
 };
-*/
 
-/*
-var romanceTragic = {
-    1: "Lover died in an accident",
-    2: "Lover mysteriously vanisehd",
-    3: "It didnt work out",
-    4: "A personal goal or vendetta came between you",
-    5: "Lover kidnapped",
-    6: "Lover went insane",
-    7: "Lover committed suicide",
-    8: "Lover killed in a fight",
-    9: "Rival cut you out of the action",
-    10: "Lover imprisoned or exiled"
-};
-*/
+var career = {
+    solo: {
+        1: skills.special.Solo,
+        2: skills.int.int03,
+        3: skills.ref.ref08,
+        4: skills.ref.ref03,
+        5: skills.ref.ref10.main,
+        6: skills.ref.ref11,
+        7: skills.tech.tech20,
+        8: skills.ref.ref18,
+        9: skills.ref.ref02,
+        10: skills.ref.ref20,
+        11: skills.ref.ref19
+    },
+    corp: {
+        1: skills.special.Corp,
+        2: skills.int.int03,
+        3: skills.emp.emp01,
+        4: skills.int.int09,
+        5: skills.int.int16,
+        6: skills.emp.emp05,
+        7: skills.emp.emp06,
+        8: skills.int.int21,
+        9: skills.attr.attr02,
+        10: skills.attr.attr01
+    },
+    media: {
+        1: skills.special.Media,
+        2: skills.int.int03,
+        3: skills.int.int07,
+        4: skills.int.int09,
+        5: skills.emp.emp06,
+        6: skills.emp.emp01,
+        7: skills.emp.emp05,
+        8: skills.cool.cool05,
+        9: skills.tech.tech15
+    },
+    nomad: {
+        1: skills.special.Nomad,
+        2: skills.int.int03,
+        3: skills.body.body01,
+        4: skills.ref.ref11,
+        5: skills.ref.ref18,
+        6: skills.ref.ref06,
+        7: skills.tech.tech03,
+        8: skills.int.int24,
+        9: skills.ref.ref03,
+        10: skills.ref.ref02
+    },
+    techie: {
+        1: skills.special.Techie,
+        2: skills.int.int03,
+        3: skills.tech.tech03,
+        4: skills.tech.tech06,
+        5: skills.int.int23,
+        6: skills.int.int09,
+        7: skills.tech.tech09,
+        8: skills.tech.tech01,
+        9: skills.tech.tech02,
+        10: skills.tech.tech20,
+        11: skills.tech.tech10,
+        12: skills.tech.tech13
+    },
+    cop: {
+        1: skills.special.Cop,
+        2: skills.int.int03,
+        3: skills.ref.ref08,
+        4: skills.emp.emp01,
+        5: skills.ref.ref02,
+        6: skills.int.int09,
+        7: skills.ref.ref03,
+        8: skills.ref.ref11,
+        9: skills.cool.cool01,
+        10: skills.cool.cool05
+    },
+    rocker: {
+        1: skills.special.Rocker,
+        2: skills.int.int03,
+        3: skills.emp.emp07,
+        4: skills.attr.attr02,
+        5: skills.int.int07,
+        6: skills.ref.ref03,
+        7: skills.tech.tech19,
+        8: skills.cool.cool05,
+        9: skills.emp.emp06,
+        10: skills.emp.emp04
+    },
+    med: {
+        1: skills.special.MedTechie,
+        2: skills.int.int03,
+        3: skills.tech.tech03,
+        4: skills.int.int08,
+        5: skills.int.int09,
+        6: skills.tech.tech04,
+        7: skills.int.int16,
+        8: skills.tech.tech16,
+        9: skills.int.int25,
+        10: skills.emp.emp01
+    },
+    fixer: {
+        1: skills.special.Fixer,
+        2: skills.int.int03,
+        3: skills.tech.tech12,
+        4: skills.ref.ref08,
+        5: skills.ref.ref03,
+        6: skills.ref.ref11,
+        7: skills.tech.tech17,
+        8: skills.tech.tech18,
+        9: skills.cool.cool02,
+        10: skills.emp.emp06
+    },
+    net: {
+        1: skills.special.Netrunner,
+        2: skills.int.int03,
+        3: skills.tech.tech03,
+        4: skills.int.int09,
+        5: skills.int.int22,
+        6: skills.tech.tech06,
+        7: skills.tech.tech05,
+        8: skills.int.int07,
+        9: skills.tech.tech09,
+        10: skills.int.int19.main
 
-/*
-var romanceProblems = {
-    1: "Your lover's friends/family hate you",
-    2: "Your lover's friends/family would use any means to get rid of you",
-    3: "Your friends/family hate your lover",
-    4: "One of you has a romantic rival",
-    5: "You are seperated in some way",
-    6: "You fight constantly",
-    7: "You're professional rivals",
-    8: "One of you is insanely jealous",
-    9: "One of you is messing around",
-    10: "You have conflicting backgrounds and families"
-};
-*/
+    }
 
-/*
-var mutualFeelings = {
-    1: "They still love you",
-    2: "You still love them",
-    3: "You still love each other",
-    4: "You hate them",
-    5: "They hate you",
-    6: "You hate each other",
-    7: "You're friends",
-    8: "No feelings either way; its over",
-    9: "You like them, they hate you",
-    10: "They like you, you hate them"
 };
-*/
+
+function roleSelectPopulate() {
+    "use strict";
+    var roleSelect = document.getElementById("roleSelect");
+    var rolesLength = Object.keys(skills.special).length;
+    var roles = Object.keys(skills.special);
+    console.log(rolesLength);
+    for (var i = 1; i < rolesLength; i++) {
+        var option = document.createElement("option");
+        console.log(roles[i]);
+        option.value = i;
+        option.textContent = roles[i];
+        roleSelect.appendChild(option);
+        //console.log(Object.keys(skills.special[i]));
+    }
+}
+
+function randRoleClick() {
+    "use strict";
+    var roleSelect = document.getElementById("roleSelect");
+    var roleSelect_label = document.getElementById("roleSelect_label");
+    roleSelect.style.display = "none";
+    roleSelect_label.style.display = "none";
+
+    var randRoll = getRandomInt(1,10);
+    var roleField = document.getElementById("roleField");
+    var roles = Object.keys(skills.special);
+    //console.log(roles);
+    roleField.value = roles[randRoll];
+
+    createCareerSkills(roleField.value);
+
+}
+
+function manRoleclick() {
+    "use strict";
+    var roleSelect = document.getElementById("roleSelect");
+    var roleField = document.getElementById("roleField");
+    var roleSelect_label = document.getElementById("roleSelect_label");
+    roleSelect.style.display = "inline";
+    roleSelect_label.style.display = "inline";
+    roleSelectPopulate();
+
+    roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
+    createCareerSkills(roleField.value);
+}
+
+function manualRoleSelectChange() {
+    "use strict";
+    var roleField = document.getElementById("roleField");
+    var roleSelect = document.getElementById("roleSelect");
+    roleField.value = roleSelect.options[roleSelect.selectedIndex].text
+    createCareerSkills(roleField.value);
+}
+
+function createCareerSkills(role) {
+    "use strict";
+    console.log(role);
+
+    var careerSkillTable = document.getElementById("careerSkillTable");
+    while (careerSkillTable.firstChild) { //Remove all children (options) from careerSkillTable
+        careerSkillTable.removeChild(careerSkillTable.firstChild);
+    }
+
+    var skills;
+
+    if (role === "Solo") {
+        skills = career.solo;
+    } else if (role === "Corp") {
+        skills = career.corp;
+    } else if (role === "Media") {
+        skills = career.media;
+    } else if (role === "Nomad") {
+        skills = career.nomad;
+    } else if (role === "Techie") {
+        skills = career.techie;
+    } else if (role === "Cop") {
+        skills = career.cop;
+    } else if (role === "Rocker") {
+        skills = career.rocker;
+    } else if (role === "MedTechie") {
+        skills = career.med;
+    } else if (role === "Fixer") {
+        skills = career.fixer;
+    } else if (role === "Netrunner") {
+        skills = career.net;
+    }
+
+    var numSkills = Object.keys(skills).length;
+
+    //var skillTable = document.createElement("table");
+    //var skillTable = document.getElementById("skillTable");
+    //careerSkills.appendChild(skillTable);
+
+    console.log(numSkills);
+    for (var i = 1; i <= numSkills; i++) {
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        var td2 = document.createElement("td");
+
+        var textField = document.createElement("input");
+        var label = document.createElement("label");
+        label.innerHTML = skills[i];
+
+        //appendBR(careerSkills);
+        td.appendChild(label);
+        td2.appendChild(textField);
+        tr.appendChild(td);
+        tr.appendChild(td2);
+
+        careerSkillTable.appendChild(tr);
+
+        //careerSkills.appendChild();
+        //careerSkills.appendChild(textField);
+
+    }
+
+
+    /*
+     //killChildren(siblingsOutput);
+
+     var label2 = document.createElement("label");
+     label2.innerHTML = "age";
+     label2.setAttribute("class", "dynamicAge_label");
+     var textBox2 = document.createElement("input");
+     textBox2.type = "text";
+     textBox2.setAttribute("disabled", "true");
+     textBox2.setAttribute("class", "dynamicAge");
+     if (siblingAge <= 5) {
+     textBox2.value = siblingAges[1];
+     } else if (siblingAge >= 6 && siblingAge <= 9) {
+     textBox2.value = siblingAges[2];
+     } else if (siblingAge === 10) {
+     textBox2.value = siblingAges[3];
+     }
+     //textBox2.value = siblingGenders[siblingGender];
+
+     siblingsOutput.appendChild(label2);
+     siblingsOutput.appendChild(textBox2);
+     */
+
+}
 
 window.onload = init;
 function init() {
@@ -2413,6 +2752,16 @@ function init() {
     fastMethod.onclick = fastClick;
     ma.onchange = updateRun;
     bt.onchange = updateBodyDerived;
+
+    var randRole = document.getElementById("randRole");
+    var manRole = document.getElementById("manRole");
+    var roleSelect = document.getElementById("roleSelect");
+
+    randRole.onclick = randRoleClick;
+    manRole.onclick = manRoleclick;
+    roleSelect.onchange = manualRoleSelectChange;
+
+    //roleSelectPopulate();
 
     //Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random

@@ -175,3 +175,15 @@ body {
 .red {
     color: #FE2E2E;
 }
+
+#roleSelect {
+    display: none;
+}
+
+#roleSelect_label {
+    display: none;
+}
+
+#careerSkills {
+    font-weight: bold;
+}
