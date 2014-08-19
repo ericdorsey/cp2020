@@ -1,92 +1,30 @@
 /*
  Items to add?
  > test for Javascript in browser
- > report issues / problems
- > tie to DB?
- > option to randomize everything
- > Useability - can click radio buttons again to refresh
+ > Way to report issues / problems / feedback
+ > Tie to a database?
+ > Option to randomize everything
+ > Instructions - can click radio buttons again to refresh / or change to buttons?
  > Run; add a convert to feet field
- > scrolling (eased scrolling?) with dynamic forms popping in below
- > cleanup console.log debugging
- > scrolling?
+ > Cleanup console.log debugging
+ > Scrolling (eased scrolling?) with dynamic forms popping in below
     http://stackoverflow.com/questions/5007530/how-do-i-scroll-to-an-element-using-javascript
     element = document.getElementById("divFirst")
     alignWithTop = true;
     element.scrollIntoView(alignWithTop);
- > convert kg to lbs function? (inside updateBodyDerived())
- > don't allow zero values in statistics fields
- > after get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
- > make the disaster strikes stuff affect main statistics
- > track money gained / lost from life events
- > add Age instructions (minimum 17)
- > life Events: fix "make an enemy" row .. <td colspan="2"> ?
+ > Convert kg to lbs function? (inside updateBodyDerived())
+ > Don't allow zero values in statistics fields
+ > After get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
+ > Make the disaster strikes stuff affect main statistics
+ > Track money gained / lost from life events
+ > Add Age instructions (minimum 17, max 99)
+ > Life Events: fix "make an enemy" row .. <td colspan="2"> ?
+ > Make updating stats fields affect rolls remaining?
  */
 
 function getRandomInt(min,max) {
     "use strict";
     return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-//Random method
-var randRolls = [];
-function randomPoints() {
-    "use strict";
-    randRolls = [];
-    var total = 0;
-    for (var i = 1; i <= 9; i++) {
-        var roll = getRandomInt(1,10);
-        //console.log("roll: " + roll);
-        total += roll;
-        randRolls.push(roll);
-    }
-    return total;
-}
-
-//Fast method
-var fastRolls = [];
-function fastPoints() {
-    "use strict";
-    fastRolls = [];
-    var total = 0;
-    for (var i = 1; i <= 9; i++) {
-        var roll = getRandomInt(3,10);
-        //console.log("roll: " + roll);
-        total += roll;
-        fastRolls.push(roll);
-    }
-    return total;
-}
-
-var randTotal;
-function randomClick() {
-    "use strict";
-    enableForms();
-    randTotal = randomPoints();
-    console.log("randTotal: " + randTotal);
-    var rollOutput = document.getElementById("rollOutput");
-    rollOutput.innerHTML =
-        "<br>" + "<br>" +
-            "Random Method Results" +
-            "<br>" +
-            "Total of 9D10: " + "<span class='bold'>" + randTotal + "</span>" +
-            "<br>" +
-            "Rolls were: " + "<span class='bold'>" + randRolls + "</span>";
-}
-
-var fastTotal;
-function fastClick() {
-    "use strict";
-    enableForms();
-    fastTotal = fastPoints();
-    console.log("fastTotal: " + fastTotal);
-    var rollOutput = document.getElementById("rollOutput");
-    rollOutput.innerHTML =
-        "<br>" + "<br>" +
-            "Fast Method Results" +
-            "<br>" +
-            "Total of 9D10: " + "<span class='bold'>" + fastTotal + "</span>" +
-            "<br>" +
-            "Rolls were: " + "<span class='bold'>" + fastRolls + "</span>";
 }
 
 function enableForms() {
@@ -110,6 +48,7 @@ function enableForms() {
     var formArr = [int, ref, tech, cl, att, lk, ma, bt, emp];
     for (var i = 0; i < formArr.length; i++) {
         formArr[i].removeAttribute("disabled");
+        //formArr[i].onchange = characterMeta.statChange; //re-enable to implement checking stats against roll remaining
     }
 }
 
@@ -1423,10 +1362,7 @@ function randLifeEvent(age) {
             }
         } else if ((secondLifeRoll % 2 ===0) === false) {
             //Uneven,  Disaster
-            //1820
             //console.log("disaster");
-            //console.log(disaster[thirdLifeRoll].title);
-            //console.log(disaster[thirdLifeRoll].detail);
             eventType = "Disaster Strikes";
             if (thirdLifeRoll === 1) {
                 //Financial loss
@@ -1488,13 +1424,10 @@ function randLifeEvent(age) {
                 enemy.enemyWhatThrow[age]
             );
             //var tableID = age + "enemyDetailTable";
-            //enemyDetailTable.setAttribute("id", tableID);
 
             enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
             //console.log(typeof enemyDetailTable);
-            //console.log(enemyDetailTable);
-            //addLifeRow(age, eventType, enemy.enemyMade[thirdLifeRoll], enemyDetailTable);//.innerHTML);
             addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
         }
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
@@ -2451,7 +2384,7 @@ var skills = {
         tech07: "Demolitions",
         tech08: "Disguise",
         tech09: "Electronics",
-        tech10: "Electonic Security",
+        tech10: "Electronic Security",
         tech11: "First Aid",
         tech12: "Forgery",
         tech13: "Gyro Tech",
@@ -2587,9 +2520,128 @@ var career = {
         8: skills.int.int07,
         9: skills.tech.tech09,
         10: skills.int.int19.main
+    }
+};
 
+function rollMethodClick() {
+    "use strict";
+    console.log("rollMethodClick() fired");
+    var rollMethod = document.getElementById("rollMethod");
+    var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
+    console.log(whatClicked);
+    characterMeta.rollStyle = whatClicked;
+    enableForms();
+    if (whatClicked === "random") {
+        characterMeta.randomPoints();
+    } else if (whatClicked === "fast") {
+        characterMeta.fastPoints();
+    } else if (whatClicked === "cineMajorHero" ||
+    whatClicked ===  "cineMajorSupp" ||
+    whatClicked === "cineMinorHero" ||
+    whatClicked === "cineMinorSupp" ||
+    whatClicked === "Average")  {
+        characterMeta.cinematicChar(whatClicked);
     }
 
+}
+
+var characterMeta = {
+    charPoints: 0,
+    charPointsRemain: 0,
+    careerSkillPointsRemain: 0,
+    pickupSkillPointsRemain: 0,
+    rollStyle: "",
+    randRolls: [],
+    randTotal: 0,
+    randRemain: 0,
+    randomPoints: function() {
+        "use strict";
+        this.randRolls.length = 0;
+        this.randTotal = 0;
+        var roll = 0;
+        for (var i = 1; i <= 9; i++) {
+            roll = getRandomInt(1,10);
+            this.randRolls.push(roll);
+        }
+        console.log(this.randRolls);
+        var rollOutput = document.getElementById("rollOutput");
+        while (rollOutput.firstChild) { //Remove all children from rollOutput
+            rollOutput.removeChild(rollOutput.firstChild);
+        }
+
+        for (var j = 0; j < this.randRolls.length; j++) {
+            this.randTotal = this.randTotal + this.randRolls[j];
+        }
+        rollOutput.appendChild(document.createTextNode("Roll Method: Random"));
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Roll Total: ".concat(this.randTotal.toString())));
+
+    },
+    fastRolls: [],
+    fastTotal: 0,
+    fastPoints: function() {
+        "use strict";
+
+        this.fastTotal = 0;
+        this.fastRolls.length = 0;
+        var roll = 0;
+        for (var i = 0; i <= 9; i++) {
+            roll = getRandomInt(2,10);
+            this.fastRolls.push(roll);
+        }
+        console.log(this.fastRolls);
+        var rollOutput = document.getElementById("rollOutput");
+        while (rollOutput.firstChild) { //Remove all children from rollOutput
+            rollOutput.removeChild(rollOutput.firstChild);
+        }
+
+        rollOutput.appendChild(document.createTextNode("Roll Method: Fast"));
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls)));
+
+    },
+    cinematicChar: function(whatClicked) {
+        "use strict";
+        var rollOutput = document.getElementById("rollOutput");
+        while (rollOutput.firstChild) { //Remove all children from rollOutput
+            rollOutput.removeChild(rollOutput.firstChild);
+        }
+        console.log(whatClicked);
+        var points = 0;
+        var cine = "";
+        if (whatClicked === "cineMajorHero") {
+            points = 80;
+            cine = "Major Hero";
+        } else if (whatClicked === "cineMajorSupp") {
+            points = 75;
+            cine = "Major Supporting Character";
+        } else if (whatClicked === "cineMinorHero") {
+            points = 70;
+            cine = "Minor Hero";
+        } else if (whatClicked === "cineMinorSupp") {
+            points = 60;
+            cine = "Minor Supporting Character";
+        } else if (whatClicked === "Average") {
+            points = 50;
+            cine = "Average";
+        }
+        rollOutput.appendChild(document.createTextNode("Cinematic Method: ".concat(cine)));
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Points: ".concat(points.toString())));
+
+
+    },
+    statChange: function() { //Flush this out if verifying rolls/totals when stats updated
+        "use strict";
+        console.log("stat changed");
+        var rollMethod = document.getElementById("rollMethod");
+        var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
+        console.log(whatClicked);
+        if (whatClicked === "random") {
+            //characterMeta.randomPoints();
+            console.log("random in statChange");
+        }
+    }
 };
 
 function roleSelectPopulate() {
@@ -2642,7 +2694,7 @@ function manualRoleSelectChange() {
     "use strict";
     var roleField = document.getElementById("roleField");
     var roleSelect = document.getElementById("roleSelect");
-    roleField.value = roleSelect.options[roleSelect.selectedIndex].text
+    roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
     createCareerSkills(roleField.value);
 }
 
@@ -2680,11 +2732,6 @@ function createCareerSkills(role) {
     }
 
     var numSkills = Object.keys(skills).length;
-
-    //var skillTable = document.createElement("table");
-    //var skillTable = document.getElementById("skillTable");
-    //careerSkills.appendChild(skillTable);
-
     console.log(numSkills);
     for (var i = 1; i <= numSkills; i++) {
         var tr = document.createElement("tr");
@@ -2700,37 +2747,10 @@ function createCareerSkills(role) {
         td2.appendChild(textField);
         tr.appendChild(td);
         tr.appendChild(td2);
-
         careerSkillTable.appendChild(tr);
-
-        //careerSkills.appendChild();
-        //careerSkills.appendChild(textField);
 
     }
 
-
-    /*
-     //killChildren(siblingsOutput);
-
-     var label2 = document.createElement("label");
-     label2.innerHTML = "age";
-     label2.setAttribute("class", "dynamicAge_label");
-     var textBox2 = document.createElement("input");
-     textBox2.type = "text";
-     textBox2.setAttribute("disabled", "true");
-     textBox2.setAttribute("class", "dynamicAge");
-     if (siblingAge <= 5) {
-     textBox2.value = siblingAges[1];
-     } else if (siblingAge >= 6 && siblingAge <= 9) {
-     textBox2.value = siblingAges[2];
-     } else if (siblingAge === 10) {
-     textBox2.value = siblingAges[3];
-     }
-     //textBox2.value = siblingGenders[siblingGender];
-
-     siblingsOutput.appendChild(label2);
-     siblingsOutput.appendChild(textBox2);
-     */
 
 }
 
@@ -2742,14 +2762,23 @@ function init() {
     window.scrollTo(0, document.body.scrollHeight);
 
     //Roll method elements
-    var randomMethod = document.getElementById("randomMethod");
-    var fastMethod = document.getElementById("fastMethod");
+    //var randomMethod = document.getElementById("randomMethod");
+    //var fastMethod = document.getElementById("fastMethod");
+    var rollMethod = document.getElementById("rollMethod");
+
     //Statistic fields
     var ma = document.getElementById("ma");
     var bt = document.getElementById("bt"); //body type stat
+
     //Statistics event handlers
-    randomMethod.onclick = randomClick;
-    fastMethod.onclick = fastClick;
+    //randomMethod.onclick = randomClick;
+    //fastMethod.onclick = fastClick;
+    //rollMethod.onclick = rollMethodClick;
+    //rollMethod.onchange = rollMethodClick;
+    rollMethod.onclick = rollMethodClick;
+
+
+
     ma.onchange = updateRun;
     bt.onchange = updateBodyDerived;
 

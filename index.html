@@ -10,15 +10,37 @@
 <div>
     <h2>Cyberpunk 2020 Charcter</h2>
     <h3>Statistics</h3>
-    <h4 class="sub4Head">Character Points</h4>
-    <form>
+    <h4 class="sub4Head">Character Points; Choose Roll Method:</h4>
+    <table id="statRollTable">
+        <tr>
+            <td>
+                <select size="7" id="rollMethod">
+                    <option value="random">Random Method</option>
+                    <option value="fast">Fast Method</option>
+                    <option value="cineMajorHero">Major Hero</option>
+                    <option value="cineMajorSupp">Major Supporting Character</option>
+                    <option value="cineMinorHero">Minor Hero</option>
+                    <option value="cineMinorSupp">Minor Supporting Character</option>
+                    <option value="Average">Average</option>
+                </select>
+            </td>
+            <td id="rollOutput">
+
+            </td>
+        </tr>
+    </table>
+
+
+        <!--
+        <br>
         <input type="radio" name="rollMethod" id="randomMethod"> Random <span class="instruction"> Roll 9D10 and total them</span>
         <br>
         <input type="radio" name="rollMethod" id="fastMethod"> Fast <span class="instruction"> Roll 9D10; Reroll any less than 2. Place rolls in stats as desired</span>
         <p id="rollOutput"></p>
+        -->
         <br>
         <p>
-            <span class="bold">User Assigned Values (editable):</span>
+            <span class="bold">User Assigned Character Points (editable):</span>
             <br>Intelligence (INT) <input type="text" id="int" size="2" disabled="true">
             <br>Reflexes (REF) <input type="text" id="ref" size="2" disabled="true">
             <br>Technical Ability (TECH) <input type="text" id="tech" size="2" disabled="true">
@@ -30,14 +52,14 @@
             <br>Empathy (EMP) <input type="text" id="emp" size="2" disabled="true">
         </p>
         <p>
-            <span class="bold">Derived Values (not editable):</span>
+            <span class="bold">Derived Character Points (not editable):</span>
             <br>Run <input type="text" id="run" size="2" disabled="true"> <span class="instruction">in meters</span>
             <br>Leap <input type="text" id="leap" size="2" disabled="true">
             <br>Lift <input type="text" id="lift" size="2" disabled="true"> <span class="instruction">in kgs</span> <input type="text" id="liftLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
             <br>Carry <input type="text" id="carry" size="2" disabled="true"> <span class="instruction">in kg</span> <input type="text" id="carryLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
             <br>Body Type <input type="text" id="bodyType" size="7" disabled="true"> Body Type Modifier <input type="text" id="btm" size="2" disabled="true">
         </p>
-    </form>
+
     <div id="roleAndSkills">
         <h3>Role and Skills</h3>
         <h4>Role</h4>
