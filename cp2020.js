@@ -1126,6 +1126,7 @@ function randAgeClick() {
 
     //Remove all children from lifeTable
     var lifeTable = document.getElementById("lifeTable");
+    lifeTable.style.display = "block";
     var rowCount = lifeTable.rows.length;
     for (var i = rowCount -1; i > 0 ;i--) {
         lifeTable.deleteRow(i);
@@ -1158,6 +1159,7 @@ function manAgeClick() {
 
     //Remove all children from lifeTable
     var lifeTable = document.getElementById("lifeTable");
+    lifeTable.style.display = "block";
     var rowCount = lifeTable.rows.length;
     for (var i = rowCount -1; i > 0 ;i--) {
         lifeTable.deleteRow(i);
@@ -1223,12 +1225,38 @@ function ageCheck() {
 
 }
 
+function addLifeRowEnemy(td1Val, td2Val, td3Val) {
+    "use strict";
+    var lifeTable = document.getElementById("lifeTable");
+    var tBody = lifeTable.getElementsByTagName("tbody");
+    var newRow = document.createElement("tr");
+
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    td3.setAttribute("colspan", "2");
+
+    td1.innerHTML = td1Val;
+    td2.innerHTML = td2Val;
+    td3.appendChild(td3Val);
+
+    newRow.appendChild(td1);
+    newRow.appendChild(td2);
+    newRow.appendChild(td3);
+    //newRow.appendChild(td4);
+
+    tBody[0].appendChild(newRow);
+}
+
 function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
+    //example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
     "use strict";
     //Adds the row for the lifeTable table
+    /*
     if (!td1Val || !td2Val || !td3Val || !td4Val) {
         throw new Error("addLifeRow() missing a required parameter!");
     }
+    */
 
     //console.log(td1Val, td2Val, td3Val, td4Val);
     //console.log(typeof td1Val, typeof td2Val, typeof td3Val, typeof td4Val);
@@ -1236,32 +1264,25 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
     //console.log(tBody);
+
     var newRow = document.createElement("tr");
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
     var td3 = document.createElement("td");
     var td4 = document.createElement("td");
-    //var td5 = document.createElement("td");
+
     td1.innerHTML = td1Val;
     td2.innerHTML = td2Val;
     td3.innerHTML = td3Val;
+    td4.innerHTML = td4Val;
 
-    if (typeof td4Val === "string" || typeof td4Val === "number") {
-        td4.innerHTML = td4Val;
-    } else if (typeof td4Val === "object") {
-        td4.appendChild(td4Val);
-    }
-
-    //td5.innerHTML = td5Val;
     newRow.appendChild(td1);
     newRow.appendChild(td2);
     newRow.appendChild(td3);
     newRow.appendChild(td4);
-    //newRow.appendChild(td5);
-    tBody[0].appendChild(newRow);
-    //lifeTable.appendChild(newRow);
 
-    //td.appendChild(document.createTextNode('\u0020'))
+    tBody[0].appendChild(newRow);
+
 }
 
 function randLifeEvent(age) {
@@ -1279,6 +1300,9 @@ function randLifeEvent(age) {
 
     var fourthLifeRoll = getRandomInt(1,10);
     //var fourthLifeRoll = 1;
+
+    //console.log(secondLifeRoll);
+
 
     var eventType = "";
     var connection = "";
@@ -1407,28 +1431,29 @@ function randLifeEvent(age) {
         //console.log("Friends & Enemies");
         if (secondLifeRoll <= 5) {
             //Make a friend
-            //console.log("make friend");
+            console.log("make friend");
             eventType = "Make a Friend";
             friendMade.addFriend(age, thirdLifeRoll, fourthLifeRoll);
             addLifeRow(age, eventType, friendMade[thirdLifeRoll], friendMade.friendMadeGender[age]);
         } else if (secondLifeRoll >= 6) {
             //Make an enemy
-            //console.log("Make enemy");
+            console.log("Make enemy");
             eventType = "Make an Enemy";
             enemy.addEnemy(age, thirdLifeRoll, fourthLifeRoll);
             var enemyDetailTable = addEnemyTable(
+                enemy.enemyGender[age],
                 enemy.enemyWhoIsIt[age],
                 enemy.enemyCauseIs[age],
                 enemy.enemyWhoMad[age],
                 enemy.enemyWhatDo[age],
                 enemy.enemyWhatThrow[age]
             );
-            //var tableID = age + "enemyDetailTable";
-
+            console.log(enemyDetailTable);
             enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
             //console.log(typeof enemyDetailTable);
-            addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
+            //addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
+            addLifeRowEnemy(age, eventType, enemyDetailTable);
         }
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
         //Romantic involvement
@@ -1458,7 +1483,6 @@ function randLifeEvent(age) {
             romance.addFast(age);
             addLifeRow(age, eventType, romance.fastHistory[age], romance.fastDetail[age]);
         }
-
     } else if (lifeEventRoll >= 9) {
         //Nothing
         eventType = nothing.nothingResult;
@@ -1469,9 +1493,9 @@ function randLifeEvent(age) {
     }
 }
 
-function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
+function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     "use strict";
-    //console.log(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5);
+    console.log(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6);
 
     var enemyDetailTable = document.createElement("table");
 
@@ -1482,18 +1506,22 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     var head3 = document.createElement("td");
     var head4 = document.createElement("td");
     var head5 = document.createElement("td");
+    var head6 = document.createElement("td");
 
-    head1.innerHTML = "Who";
-    head2.innerHTML = "Cause";
-    head3.innerHTML = "Who's Angry?";
-    head4.innerHTML = "Reaction If You See Them?";
-    head5.innerHTML = "What Can They Throw At You?";
+    head1.innerHTML = "Enemy Gender";
+    head2.innerHTML = "Who is this Enemy?";
+    head3.innerHTML = "Cause";
+    head4.innerHTML = "Who's Angry?";
+    head5.innerHTML = "Reaction If You See Them?";
+    head6.innerHTML = "What Can They Throw At You?";
+
 
     enemyDetailHeader.appendChild(head1);
     enemyDetailHeader.appendChild(head2);
     enemyDetailHeader.appendChild(head3);
     enemyDetailHeader.appendChild(head4);
     enemyDetailHeader.appendChild(head5);
+    enemyDetailHeader.appendChild(head6);
 
     enemyDetailTable.appendChild(enemyDetailHeader);
 
@@ -1504,12 +1532,15 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     var enemyTD3 = document.createElement("td");
     var enemyTD4 = document.createElement("td");
     var enemyTD5 = document.createElement("td");
+    var enemyTD6 = document.createElement("td");
+
 
     enemyTD1.innerHTML = tdVal1;
     enemyTD2.innerHTML = tdVal2;
     enemyTD3.innerHTML = tdVal3;
     enemyTD4.innerHTML = tdVal4;
     enemyTD5.innerHTML = tdVal5;
+    enemyTD6.innerHTML = tdVal6;
 
     //console.log(enemyTD1, enemyTD2, enemyTD3, enemyTD4, enemyTD5);
 
@@ -1518,6 +1549,7 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5) {
     enemyDetailRow.appendChild(enemyTD3);
     enemyDetailRow.appendChild(enemyTD4);
     enemyDetailRow.appendChild(enemyTD5);
+    enemyDetailRow.appendChild(enemyTD6);
 
     enemyDetailTable.appendChild(enemyDetailRow);
     //enemyDetailTable.setAttribute("id", )
@@ -2059,19 +2091,20 @@ var enemy = {
     addEnemy: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
         this.enemyAmount += 1;
+        //var gender = getRandomInt(1,10);
         var causeRoll = getRandomInt(1,10);
         var whoIsMadRoll = getRandomInt(1,10);
         var whatDoRoll = getRandomInt(1,10);
         var whatThrowRoll = getRandomInt(1,10);
 
-        var enGender = "Enemy gender: ";
+        //var enGender = "Enemy gender: ";
 
         if ((fourthLifeRoll % 2 === 0) === true) {
-            this.enemyGender[age] = enGender + "male";
+            this.enemyGender[age] = "male";
         } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.enemyGender[age] = enGender + "female";
+            this.enemyGender[age] = "female";
         }
-
+        //this.enemyGender
         this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; //who are they
         this.enemyCauseIs[age] = this.enemyCause[causeRoll]; //what is the cause
         if (whoIsMadRoll <= 4) { //Who's mad

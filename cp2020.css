@@ -119,11 +119,28 @@ body {
 #lifeTable {
     font-size: 12px;
     border-collapse: collapse;
+    display: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#lifeTable tr {
+    height: 40px;
 }
 
 #lifeTable td {
     border: 1px solid #ccc;
     padding: 3px;
+}
+
+#lifeTable td:nth-child(1) {
+    width: 40px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#lifeTable td:nth-child(2) {
+    width: 180px;
 }
 
 .boldTableHead {
@@ -141,10 +158,14 @@ body {
 }
 
 .enemyDetailTable {
-    font-size: smaller;
+    font-size: 12px;
     border-collapse: collapse;
     background-color: #FFF;
-    margin: 2px;
+    /*margin: 2px;*/
+}
+
+.enemyDetailTable tr {
+    height: 40px;
 }
 
 .enemyDetailTable td {
