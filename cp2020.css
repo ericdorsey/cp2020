@@ -6,10 +6,17 @@ body {
     display: inline;
 }
 
+.sub3Head{
+    display:inline;
+}
 .instruction {
     font-size: smaller;
     font-family: monospace;
-    margin-left: 10px;
+    margin-left: 12px;
+}
+
+.instructSmall {
+    font-size: 12px;
 }
 
 .bold {
@@ -125,7 +132,7 @@ body {
 }
 
 #lifeTable tr {
-    height: 40px;
+    height: 70px;
 }
 
 #lifeTable td {
@@ -140,7 +147,15 @@ body {
 }
 
 #lifeTable td:nth-child(2) {
-    width: 180px;
+    width: 140px;
+}
+
+#lifeTable td:nth-child(3) {
+    width: 375px;
+}
+
+#lifeTable td:nth-child(4) {
+    width: 375px;
 }
 
 .boldTableHead {
@@ -149,6 +164,7 @@ body {
     /*background-color: red;*/
     border: 1px solid #ccc;
     font-size: 12px;
+    height: 35px !important;
 }
 
 .enemyDetailTableHeader {
@@ -165,7 +181,7 @@ body {
 }
 
 .enemyDetailTable tr {
-    height: 40px;
+    height: 25px !important;
 }
 
 .enemyDetailTable td {
@@ -174,7 +190,7 @@ body {
 }
 
 .enemyDetailTable td:nth-child(1) {
-    width: 120px !important;
+    width: 85px !important;
 }
 
 .enemyDetailTable td:nth-child(2) {
@@ -182,11 +198,21 @@ body {
 }
 
 .enemyDetailTable td:nth-child(3) {
+    width: 220px !important;
+}
+
+/* Who's Angry */
+.enemyDetailTable td:nth-child(4) {
     width: 120px !important;
 }
 
-.enemyDetailTable td:nth-child(4) {
-    width: 175px;
+/* Reaction if they see you */
+.enemyDetailTable td:nth-child(5) {
+    width: 155px !important;
+}
+/* What can they throw at you */
+.enemyDetailTable td:nth-child(6) {
+    width: 150px !important;
 }
 
 .redBack {
@@ -208,3 +234,35 @@ body {
 #careerSkills {
     font-weight: bold;
 }
+
+#rollMethod {
+    font-size: 14px;
+    width: 200px;
+}
+
+#careerSkillTable {
+    font-size: 15px;
+}
+
+#careerSkillTable td {
+    height: 20px;
+    padding-right: 10px;
+}
+
+#statRollTable {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+#statRollTable td {
+    padding-right: 10px;
+}
+
+#rollOutput {
+    font-size: 14px;
+}
+
+#rollOutput td {
+    vertical-align: middle;
+}
+

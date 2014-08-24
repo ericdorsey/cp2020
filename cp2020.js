@@ -1,4 +1,5 @@
 /*
+ > Add Save number field; pg 29 (bottom)
  Items to add?
  > test for Javascript in browser
  > Way to report issues / problems / feedback
@@ -30,10 +31,9 @@ function getRandomInt(min,max) {
 function enableForms() {
     "use strict";
     /*
-    Only enable forms after choosing Random or Manual roll method
+    Only enable forms after choosing Character Point roll method (random, manual, hero)
     We don't disable Run, Leap & Lift because they are derived
     */
-
     //Statistics fields
     var int = document.getElementById("int");
     var ref = document.getElementById("ref");
@@ -48,21 +48,24 @@ function enableForms() {
     var formArr = [int, ref, tech, cl, att, lk, ma, bt, emp];
     for (var i = 0; i < formArr.length; i++) {
         formArr[i].removeAttribute("disabled");
-        //formArr[i].onchange = characterMeta.statChange; //re-enable to implement checking stats against roll remaining
+        formArr[i].onchange = characterMeta.statChange; //re-enable to implement checking stats against roll remaining
     }
 }
 
 function updateRun() {
-    //set the run derived field
+    //set the Run derived field
     "use strict";
     var ma = document.getElementById("ma");
-    var runDerived = parseInt(ma.value) * 3;
-    var run = document.getElementById("run");
-    run.value = runDerived;
-    updateLeap();
+    if (ma.value !== "") {
+        var runDerived = parseInt(ma.value) * 3;
+        var run = document.getElementById("run");
+        run.value = runDerived;
+        updateLeap();
+    }
 }
 
 function updateLeap() {
+    //update the Leap derived field
     "use strict";
     var run = document.getElementById("run");
     var leapDerived = parseInt(run.value) / 4;
@@ -72,6 +75,7 @@ function updateLeap() {
 
 function updateBodyDerived() {
     "use strict";
+    console.log("updateBodyDerived() fired");
     var bt = document.getElementById("bt"); //body type stat
     var bodyTypeInt = parseInt(bt.value); //Convert body type string from field to int
     //console.log(bodyTypeInt + " " + typeof bodyTypeInt);
@@ -81,31 +85,39 @@ function updateBodyDerived() {
     var carryLBs = document.getElementById("carryLBs");
     var bodyType = document.getElementById("bodyType"); //derived body type
     var btm = document.getElementById("btm"); //body type modifier
+    var save = document.getElementById("save"); //save number
 
-    lift.value = bodyTypeInt * 40;
-    carry.value = bodyTypeInt * 10;
-    liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
-    carryLBs.value = parseInt(carry.value) * 2.2046;
+    console.log("bt.value: " + bt.value);
+    if (bt.value !== "") {
+        console.log("its blank");
+        lift.value = bodyTypeInt * 40;
+        carry.value = bodyTypeInt * 10;
+        liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
+        carryLBs.value = parseInt(carry.value) * 2.2046;
+        save.value = bodyTypeInt;
 
-    if (bodyTypeInt <= 2) {
-        bodyType.value = "Very Weak";
-        btm.value = -0;
-    } else if (bodyTypeInt >= 3 && bodyTypeInt <= 4) {
-        bodyType.value = "Weak";
-        btm.value = -1;
-    } else if (bodyTypeInt >= 5 && bodyTypeInt <= 7) {
-        bodyType.value = "Average";
-        btm.value = -2;
-    } else if (bodyTypeInt >= 8 && bodyTypeInt <= 9) {
-        bodyType.value = "Strong";
-        btm.value = -3;
-    } else if (bodyTypeInt === 10) {
-        bodyType.value = "Very Strong";
-        btm.value = -4;
-    } else if (bodyTypeInt >= 11) {
-        bodyType.value = "Cybernetically Enhanced";
-        btm.value = -5;
+        if (bodyTypeInt <= 2) {
+            bodyType.value = "Very Weak";
+            btm.value = -0;
+        } else if (bodyTypeInt >= 3 && bodyTypeInt <= 4) {
+            bodyType.value = "Weak";
+            btm.value = -1;
+        } else if (bodyTypeInt >= 5 && bodyTypeInt <= 7) {
+            bodyType.value = "Average";
+            btm.value = -2;
+        } else if (bodyTypeInt >= 8 && bodyTypeInt <= 9) {
+            bodyType.value = "Strong";
+            btm.value = -3;
+        } else if (bodyTypeInt === 10) {
+            bodyType.value = "Very Strong";
+            btm.value = -4;
+        } else if (bodyTypeInt >= 11) {
+            bodyType.value = "Cybernetically Enhanced";
+            btm.value = -5;
+        }
     }
+
+
 }
 
 function rollStyleClick() {
@@ -736,13 +748,6 @@ function appendBR (toParent) {
     var br = document.createElement("br");
     br.setAttribute("class", "dynamicBR");
     toParent.appendChild(br);
-}
-
-function prependBR (beforeNode) {
-    "use strict";
-    var br = document.createElement("br");
-    br.setAttribute("class", "dynamicBR");
-    beforeNode.parentNode.insertBefore(br, beforeNode);
 }
 
 function manualSiblingsClick () {
@@ -2100,9 +2105,9 @@ var enemy = {
         //var enGender = "Enemy gender: ";
 
         if ((fourthLifeRoll % 2 === 0) === true) {
-            this.enemyGender[age] = "male";
+            this.enemyGender[age] = "Male";
         } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.enemyGender[age] = "female";
+            this.enemyGender[age] = "Female";
         }
         //this.enemyGender
         this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; //who are they
@@ -2582,7 +2587,9 @@ var characterMeta = {
     charPoints: 0,
     charPointsRemain: 0,
     careerSkillPointsRemain: 0,
+    pickupSkillPoints: 0,
     pickupSkillPointsRemain: 0,
+    pickupSkillsAdded: 0, //each dropdown box created to add a skill
     rollStyle: "",
     randRolls: [],
     randTotal: 0,
@@ -2674,6 +2681,12 @@ var characterMeta = {
             //characterMeta.randomPoints();
             console.log("random in statChange");
         }
+        var int = document.getElementById("int");
+        var ref = document.getElementById("ref");
+
+        console.log(int.value, ref.value);
+        updateBodyDerived();
+        updateRun();
     }
 };
 
@@ -2707,7 +2720,7 @@ function randRoleClick() {
     roleField.value = roles[randRoll];
 
     createCareerSkills(roleField.value);
-
+    createPickupSkills();
 }
 
 function manRoleclick() {
@@ -2721,6 +2734,7 @@ function manRoleclick() {
 
     roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
     createCareerSkills(roleField.value);
+    createPickupSkills();
 }
 
 function manualRoleSelectChange() {
@@ -2729,6 +2743,150 @@ function manualRoleSelectChange() {
     var roleSelect = document.getElementById("roleSelect");
     roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
     createCareerSkills(roleField.value);
+}
+
+function createPickupSkills() {
+    "use strict";
+    console.log("createPickupSkills() fired");
+    var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+    while (pickupSkillsTable.firstChild) { //Remove all children (options) from pickupSkillsTable
+        pickupSkillsTable.removeChild(pickupSkillsTable.firstChild);
+    }
+    //var skills;
+    var createSkillButton = document.createElement("button");
+    createSkillButton.innerHTML = "Add Pickup Skill";
+    createSkillButton.setAttribute("id", "createSkillButton");
+    pickupSkillsTable.appendChild(createSkillButton);
+    createSkillButton.onclick = createPickupOpt;
+    appendBR(pickupSkillsTable);
+    createPickupOpt(); //temp for testing, REMOVE!
+}
+
+function createPickupOpt() {
+    "use strict";
+    console.log("createPickupOpt fired");
+    var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+    var pickupOptSelect = document.createElement("select");
+    characterMeta.pickupSkillsAdded += 1;
+    console.log("charcterMeta.pickupSkillsAdded: " + characterMeta.pickupSkillsAdded);
+    var pickupOptID = "pickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
+    pickupOptSelect.setAttribute("id", pickupOptID);
+
+    //Populate the "category" pickup skill option selet (ATTR, BODY, etc)
+    for (var i = 1; i < Object.keys(skills).length; i ++) {
+        var opt = document.createElement("option");
+        opt.value = i;
+        opt.textContent = Object.keys(skills)[i].toUpperCase();
+
+        //console.log(Object.keys(skills)[i].keys(skills.));
+        //console.log(skills[i]);
+        pickupOptSelect.appendChild(opt);
+        //console.log(Object.keys(skills.special[i]));
+    }
+    appendBR(pickupSkillsTable);
+    pickupSkillsTable.appendChild(pickupOptSelect);
+    pickupOptSelect.onchange = pickupOptSelectChange;
+
+    //Create the sub-skill Select dropdown
+    var subSkillSelect = document.createElement("select");
+    pickupSkillsTable.appendChild(subSkillSelect);
+    var subSkillSelectID = "subPickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
+    subSkillSelect.setAttribute("id", subSkillSelectID);
+
+    for (var j = 1; j < Object.keys(skills.attr).length; j++) {
+        var opt2 = document.createElement("option");
+        opt2.value = j;
+        var opt2Temp;
+        opt2Temp = "attr".concat("0").concat(j.toString());
+        console.log(opt2Temp);
+        opt2.textContent = skills.attr[opt2Temp];
+        subSkillSelect.appendChild(opt2);
+    }
+
+    var subSkillField = document.createElement("input");
+    //var pickupOptID = "pickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
+    var subSkillFieldID = "subSkillField".concat(characterMeta.pickupSkillsAdded.toString());
+    subSkillField.setAttribute("id", subSkillFieldID);
+    subSkillField.setAttribute("size", "3");
+    pickupSkillsTable.appendChild(subSkillField);
+
+}
+
+function pickupOptSelectChange(eventObj) {
+    "use strict";
+    console.log("eventObj: " + eventObj);
+
+    var theSelect = eventObj.target;
+    //console.log(theSelect);
+
+    var theID = theSelect.id;
+    console.log("theID: " + theID, typeof theID);
+
+    var whichPickup = theID;
+    //console.log("whichPickup: " + whichPickup);
+    whichPickup = whichPickup.replace("pickup", "");
+    whichPickup = whichPickup.replace("Select", "");
+    //console.log("whichPickup: " + whichPickup);
+
+    var theValue = theSelect.value;
+    console.log("theValue is: " + theValue, typeof theValue);
+
+
+    var subCategory;
+    if (theValue === "1") {
+        subCategory = "attr";
+    } else if (theValue === "2") {
+        subCategory = "body";
+    } else if (theValue === "3") {
+        subCategory = "cool";
+    } else if (theValue === "4") {
+        subCategory = "emp";
+    } else if (theValue === "5") {
+        subCategory = "int";
+    } else if (theValue === "6") {
+        subCategory = "ref";
+    } else if (theValue === "7") {
+        subCategory = "tech";
+    }
+    console.log("subCateogry is: " + subCategory);
+
+    //var skillCategorySelected = pickupOptSelect[pickupOptSelect.selectedIndex].value;
+    var theSubSelectID = "subPickup".concat(whichPickup.toString()).concat("Select");
+    console.log("theSubSelectID: " + theSubSelectID);
+    var theSubSelect = document.getElementById(theSubSelectID);
+    console.log("theSubSelect: " + theSubSelect);
+    while (theSubSelect.firstChild) { //Remove all children (options) from theSubSelect
+        theSubSelect.removeChild(theSubSelect.firstChild);
+    }
+
+    for (var i = 1; i < Object.keys(skills[subCategory]).length; i++) {
+        //console.log("derp");
+        var opt = document.createElement("option");
+        opt.value = i;
+        var optText;
+        if (i  < 10) {
+            optText = subCategory.concat("0").concat(i.toString());
+            opt.textContent = skills[subCategory][optText];
+        } else if (i >= 10) {
+            optText = subCategory.concat(i.toString());
+            opt.textContent = skills[subCategory][optText];
+        }
+        theSubSelect.appendChild(opt);
+
+    }
+
+
+    /*
+    for (var i = 1; i < Object.keys(skills.attr).length; i++) {
+        var opt2 = document.createElement("option");
+        opt2.value = j;
+        var opt2Temp;
+        opt2Temp = "attr".concat("0").concat(j.toString());
+        console.log(opt2Temp);
+        opt2.textContent = skills.attr[opt2Temp];
+        subSkillSelect.appendChild(opt2);
+    }*/
+
 }
 
 function createCareerSkills(role) {
@@ -2772,6 +2930,7 @@ function createCareerSkills(role) {
         var td2 = document.createElement("td");
 
         var textField = document.createElement("input");
+        textField.setAttribute("size", "3");
         var label = document.createElement("label");
         label.innerHTML = skills[i];
 
@@ -2791,29 +2950,17 @@ window.onload = init;
 function init() {
     "use strict";
 
+    //randRoleClick();
     //Temp scroll to bottom for dev
     window.scrollTo(0, document.body.scrollHeight);
 
     //Roll method elements
-    //var randomMethod = document.getElementById("randomMethod");
-    //var fastMethod = document.getElementById("fastMethod");
     var rollMethod = document.getElementById("rollMethod");
-
-    //Statistic fields
-    var ma = document.getElementById("ma");
-    var bt = document.getElementById("bt"); //body type stat
-
-    //Statistics event handlers
-    //randomMethod.onclick = randomClick;
-    //fastMethod.onclick = fastClick;
-    //rollMethod.onclick = rollMethodClick;
-    //rollMethod.onchange = rollMethodClick;
     rollMethod.onclick = rollMethodClick;
 
-
-
-    ma.onchange = updateRun;
-    bt.onchange = updateBodyDerived;
+    updateBodyDerived();
+    //ma.onchange = updateRun;
+    //bt.onchange = updateBodyDerived;
 
     var randRole = document.getElementById("randRole");
     var manRole = document.getElementById("manRole");
@@ -2824,6 +2971,7 @@ function init() {
     roleSelect.onchange = manualRoleSelectChange;
 
     //roleSelectPopulate();
+    randRoleClick();
 
     //Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random
