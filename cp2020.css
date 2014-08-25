@@ -1,5 +1,31 @@
 body {
     font-family: sans-serif;
+    margin: 0px;
+}
+
+input {
+    font-weight: bold;
+}
+
+#fullCharOutput {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding-right: 10px;
+    padding-top: 2px;
+    width: 46%;
+    border: 2px solid black;
+    background-color: white;
+}
+
+#calcChar {
+    position: relative;
+    width: 50%;
+    margin-right: 10px;
+    border: 2px dashed black;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding: 5px;
 }
 
 .sub4Head {
@@ -9,10 +35,15 @@ body {
 .sub3Head{
     display:inline;
 }
+
+.sub2Head {
+    display: inline;
+}
+
 .instruction {
-    font-size: smaller;
+    font-size: 12px;
     font-family: monospace;
-    margin-left: 12px;
+    margin-left: 2px;
 }
 
 .instructSmall {
@@ -21,6 +52,10 @@ body {
 
 .bold {
     font-weight: bold;
+}
+
+#pickupSkillPointField_label {
+    font-size: 13px;
 }
 
 #rollOutput {
@@ -118,11 +153,6 @@ body {
     background-color: #E6E6E6;
 }
 
-
-#lifeTable td:nth-child(1) {
-    width: 35px;
-}
-
 #lifeTable {
     font-size: 12px;
     border-collapse: collapse;
@@ -141,21 +171,21 @@ body {
 }
 
 #lifeTable td:nth-child(1) {
-    width: 40px;
+    width: 30px;
     vertical-align: middle;
     text-align: center;
 }
 
 #lifeTable td:nth-child(2) {
-    width: 140px;
+    width: 80px;
 }
 
 #lifeTable td:nth-child(3) {
-    width: 375px;
+    width: 240px;
 }
 
 #lifeTable td:nth-child(4) {
-    width: 375px;
+    width: 240px;
 }
 
 .boldTableHead {
@@ -236,12 +266,13 @@ body {
 }
 
 #rollMethod {
-    font-size: 14px;
-    width: 200px;
+    font-size: 13px;
+    width: 220px;
 }
 
 #careerSkillTable {
     font-size: 15px;
+    border: 1px solid black;
 }
 
 #careerSkillTable td {
@@ -251,18 +282,38 @@ body {
 
 #statRollTable {
     border: 1px solid black;
-    padding: 2px;
-}
-
-#statRollTable td {
-    padding-right: 10px;
-}
-
-#rollOutput {
+    /*width: 38% !important;*/
     font-size: 14px;
 }
 
-#rollOutput td {
-    vertical-align: middle;
+#statRollTable tr {
+    width: 42%;
 }
 
+#statRollTable td {
+    /*width: 225px;*/
+    width: 19%;
+}
+
+#rollOutput td{
+    font-size: 25px !important;
+}
+
+/* fullCharOutput */
+#charNameOutput_label {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    padding: 4px;
+}
+
+#charRoleOutput_label {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    padding: 4px;
+}
+
+.charStatOutput {
+    padding: 4px;
+}

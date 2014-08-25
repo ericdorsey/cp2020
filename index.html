@@ -2,13 +2,32 @@
 <html>
 
 <head>
+    <noscript>
+        <meta http-equiv="refresh" content="0; URL=noJS.html">
+    </noscript>
     <link rel="stylesheet" href="cp2020.css">
     <script src="cp2020.js"></script>
 </head>
 
 <body>
-<div>
-    <h2>Cyberpunk 2020 Charcter Generator</h2>
+<div id="fullCharOutput">
+    <label for="charNameOutput" id="charNameOutput_label">
+        Handle <input type="text" id="charNameOutput" size="40">
+    </label>
+    <br>
+    <label for="charRoleOutput" id="charRoleOutput_label">
+        Role <input type="text" id="charRoleOutput" size="25" disabled="true">
+    </label>
+    <br>
+    <label for="charINTOutput" id="charINTOutput_label" class="charStatOutput">
+        INT [<span id="charINTOutput"></span>]
+    </label>
+
+</div>
+<div id="calcChar">
+    <h2 class="sub2Head">Cyberpunk 2020 Character Generator</h2>
+    <br>
+    <br>
     <h3 class="sub3Head">Statistics</h3>
     <br>
     <span class="instructSmall">
@@ -18,7 +37,7 @@
     <p></p>
     <h4 class="sub4Head">Character Points; Choose Roll Method:</h4>
     <br>
-    <span class="instructSmall">( *tip: Click roll method again to re-roll or choose another option)</span>
+    <span class="instructSmall">( * tip: Click roll method again to re-roll or choose another option )</span>
     <table id="statRollTable">
         <tr>
             <td>
@@ -38,7 +57,10 @@
         </tr>
     </table>
     <p>
-        <span class="bold">User Assigned Character Points (editable):</span>
+        <span class="bold">User Assigned Stats (editable):</span>
+        <br>
+        <span class="instructSmall">( * tip: Must choose a roll method before you can edit these fields )</span>
+        <br>
         <br>Intelligence (INT) <input type="text" id="int" size="2" disabled="true">
         <br>Reflexes (REF) <input type="text" id="ref" size="2" disabled="true">
         <br>Technical Ability (TECH) <input type="text" id="tech" size="2" disabled="true">
@@ -50,30 +72,37 @@
         <br>Empathy (EMP) <input type="text" id="emp" size="2" disabled="true">
     </p>
     <p>
-        <span class="bold">Derived Character Points (not editable):</span>
-
+        <span class="bold">Derived Stats (not editable):</span>
         <br>
         <label for="run" id="run_label">
-            Run <input type="text" id="run" size="2" disabled="true"> <span class="instruction">in meters</span>
+            Run <input type="text" id="run" size="3" disabled="true"> <span class="instruction">in meters</span>
         </label>
-
         <br>
         <label for="leap" id="leap_label">
-            Leap <input type="text" id="leap" size="2" disabled="true">
+            Leap <input type="text" id="leap" size="3" disabled="true">
         </label>
-
-        <br>Lift <input type="text" id="lift" size="2" disabled="true"> <span class="instruction">in kgs</span>
-
-        <input type="text" id="liftLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
-
-        <br>Carry <input type="text" id="carry" size="2" disabled="true"> <span class="instruction">in kg</span>
-
-        <input type="text" id="carryLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
-
-        <br>Body Type <input type="text" id="bodyType" size="7" disabled="true"> Body Type Modifier
-
-        <input type="text" id="btm" size="2" disabled="true">
-
+        <br>
+        <label for="lift" id="lift_label">
+            Lift <input type="text" id="lift" size="3" disabled="true"> <span class="instruction">in kgs</span>
+        </label>
+        <label for="liftLBs" id="liftLBs_label">
+            <input type="text" id="liftLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
+        </label>
+        <br>
+        <label for="carry" id="carry_label">
+            Carry <input type="text" id="carry" size="3" disabled="true"> <span class="instruction">in kgs</span>
+        </label>
+        <label for="carryLBs" id="carryLBs_label">
+            <input type="text" id="carryLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
+        </label>
+        <br>
+        <label for="bodyType" id="bodyType_label">
+            Body Type <input type="text" id="bodyType" size="25" disabled="true">
+        </label>
+        <br>
+        <label for="btm" id="btm_label">
+            Body Type Modifier <input type="text" id="btm" size="3" disabled="true">
+        </label>
         <br>
         <label for="save" id="save_label">
             Save<input type="text" id="save" size="3" disabled="true">
@@ -100,11 +129,17 @@
             <select id="roleSelect"></select>
         </label>
         <h4>Skills</h4>
-        <p id="careerSkills">Career Skills</p>
+        <span id="careerSkills" class="bold">Career Skills</span>
         <table id="careerSkillTable">
 
         </table>
-        <p id="pickupSkills">Pickup Skills</p>
+        <br>
+        <span id="pickupSkills" class="bold">Pickup Skills</span>
+        <br>
+        <label for="pickupSkillPointField" id="pickupSkillPointField_label">
+            Pickup Skill Points (REF + INT) : <input type="text" id="pickupSkillPointField" size= "3" disabled="true">
+        </label>
+
         <table id="pickupSkillsTable">
 
         </table>

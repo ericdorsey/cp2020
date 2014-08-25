@@ -1,5 +1,4 @@
 /*
- > Add Save number field; pg 29 (bottom)
  Items to add?
  > test for Javascript in browser
  > Way to report issues / problems / feedback
@@ -87,9 +86,9 @@ function updateBodyDerived() {
     var btm = document.getElementById("btm"); //body type modifier
     var save = document.getElementById("save"); //save number
 
-    console.log("bt.value: " + bt.value);
+    //console.log("bt.value: " + bt.value);
     if (bt.value !== "") {
-        console.log("its blank");
+        //console.log("its blank");
         lift.value = bodyTypeInt * 40;
         carry.value = bodyTypeInt * 10;
         liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
@@ -2213,9 +2212,9 @@ var friendMade = {
         this.friendMadeAmount += 1;
         this.friendMadeHistory[age] = this[thirdLifeRoll];
         if ((fourthLifeRoll % 2 === 0) === true) {
-            this.friendMadeGender[age] = "gender: male";
+            this.friendMadeGender[age] = "Gender: male";
         } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.friendMadeGender[age] = "gender: female";
+            this.friendMadeGender[age] = "Gender: female";
         }
 
     }
@@ -2566,7 +2565,7 @@ function rollMethodClick() {
     console.log("rollMethodClick() fired");
     var rollMethod = document.getElementById("rollMethod");
     var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
-    console.log(whatClicked);
+    //console.log(whatClicked);
     characterMeta.rollStyle = whatClicked;
     enableForms();
     if (whatClicked === "random") {
@@ -2676,15 +2675,30 @@ var characterMeta = {
         console.log("stat changed");
         var rollMethod = document.getElementById("rollMethod");
         var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
-        console.log(whatClicked);
+        //console.log(whatClicked);
+        /*
         if (whatClicked === "random") {
             //characterMeta.randomPoints();
             console.log("random in statChange");
-        }
-        var int = document.getElementById("int");
-        var ref = document.getElementById("ref");
+        }*/
 
-        console.log(int.value, ref.value);
+        var int = document.getElementById("int");
+        console.log("int: ", int, int.value);
+        var ref = document.getElementById("ref");
+        console.log("ref: ", ref, ref.value);
+        if (int.value !== "" && ref.value !== "") {
+            this.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
+            console.log("this.pickupSkillPoints: " + this.pickupSkillPoints);
+            var pickupSkillPointField = document.getElementById("pickupSkillPointField");
+            pickupSkillPointField.value = this.pickupSkillPoints;
+        }
+        var charINTOutput = document.getElementById("charINTOutput");
+        if (int.value !== "") {
+            charINTOutput.innerHTML = int.value;
+        }
+        //this.pickupSkillPoints = int.value + ref.value;
+
+        //console.log(int.value, ref.value);
         updateBodyDerived();
         updateRun();
     }
@@ -2721,6 +2735,10 @@ function randRoleClick() {
 
     createCareerSkills(roleField.value);
     createPickupSkills();
+
+    //Update charOutput R. Side section
+    var charRoleOutput = document.getElementById("charRoleOutput");
+    charRoleOutput.value = roleField.value;
 }
 
 function manRoleclick() {
@@ -2735,6 +2753,10 @@ function manRoleclick() {
     roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
     createCareerSkills(roleField.value);
     createPickupSkills();
+
+    //Update charOutput R. Side section
+    var charRoleOutput = document.getElementById("charRoleOutput");
+    charRoleOutput.value = roleField.value;
 }
 
 function manualRoleSelectChange() {
@@ -2743,6 +2765,10 @@ function manualRoleSelectChange() {
     var roleSelect = document.getElementById("roleSelect");
     roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
     createCareerSkills(roleField.value);
+
+    //Update charOutput R. Side section
+    var charRoleOutput = document.getElementById("charRoleOutput");
+    charRoleOutput.value = roleField.value;
 }
 
 function createPickupSkills() {
@@ -2798,7 +2824,7 @@ function createPickupOpt() {
         opt2.value = j;
         var opt2Temp;
         opt2Temp = "attr".concat("0").concat(j.toString());
-        console.log(opt2Temp);
+        //console.log(opt2Temp);
         opt2.textContent = skills.attr[opt2Temp];
         subSkillSelect.appendChild(opt2);
     }
