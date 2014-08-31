@@ -1,4 +1,5 @@
 /*
+ > cleanup the noJS.html file to have a reference back
  Items to add?
  > test for Javascript in browser
  > Way to report issues / problems / feedback
@@ -2593,10 +2594,11 @@ var characterMeta = {
     randRolls: [],
     randTotal: 0,
     randRemain: 0,
-    randomPoints: function() {
+    randomPoints: function() { //Random Method clicked
         "use strict";
         this.randRolls.length = 0;
         this.randTotal = 0;
+        this.charPoints = 0;
         var roll = 0;
         for (var i = 1; i <= 9; i++) {
             roll = getRandomInt(1,10);
@@ -2614,15 +2616,20 @@ var characterMeta = {
         rollOutput.appendChild(document.createTextNode("Roll Method: Random"));
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Roll Total: ".concat(this.randTotal.toString())));
-
+        this.charPoints = this.randTotal;
+        //console.log("this.charPoints is....:" + this.charPoints);
+        var charPointsOutput = document.getElementById("charPointsOutput");
+        console.log(charPointsOutput);
+        charPointsOutput.value = this.charPoints;
     },
     fastRolls: [],
     fastTotal: 0,
-    fastPoints: function() {
+    fastPoints: function() { //Fast Method clicked
         "use strict";
 
         this.fastTotal = 0;
         this.fastRolls.length = 0;
+        this.charPoints = 0;
         var roll = 0;
         for (var i = 0; i <= 9; i++) {
             roll = getRandomInt(2,10);
@@ -2637,10 +2644,25 @@ var characterMeta = {
         rollOutput.appendChild(document.createTextNode("Roll Method: Fast"));
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls)));
+        //console.log("fffffff " + this.fastRolls.length);
 
+        for (var j = 0; j < this.fastRolls.length; j++) {
+            this.fastTotal += this.fastRolls[j];
+            console.log(this.fastRolls[j]);
+        }
+        console.log(this.fastTotal);
+
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Rolls Total: ".concat(this.fastTotal.toString())));
+
+        this.charPoints = this.fastTotal;
+        console.log("this.charPoints is....:" + this.charPoints);
+        var charPointsOutput = document.getElementById("charPointsOutput");
+        charPointsOutput.value = this.charPoints;
     },
     cinematicChar: function(whatClicked) {
         "use strict";
+        this.charPoints = 0;
         var rollOutput = document.getElementById("rollOutput");
         while (rollOutput.firstChild) { //Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
@@ -2668,7 +2690,10 @@ var characterMeta = {
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Points: ".concat(points.toString())));
 
-
+        this.charPoints = points;
+        console.log("this.charPoints is....:" + this.charPoints);
+        var charPointsOutput = document.getElementById("charPointsOutput");
+        charPointsOutput.value = this.charPoints;
     },
     statChange: function() { //Flush this out if verifying rolls/totals when stats updated
         "use strict";
@@ -2676,16 +2701,30 @@ var characterMeta = {
         var rollMethod = document.getElementById("rollMethod");
         var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
         //console.log(whatClicked);
-        /*
-        if (whatClicked === "random") {
-            //characterMeta.randomPoints();
-            console.log("random in statChange");
-        }*/
 
         var int = document.getElementById("int");
-        console.log("int: ", int, int.value);
+        //console.log("int: ", int, int.value);
         var ref = document.getElementById("ref");
-        console.log("ref: ", ref, ref.value);
+        //console.log("ref: ", ref, ref.value);
+        var tech = document.getElementById("tech");
+        var cl = document.getElementById("cl");
+        var att = document.getElementById("att");
+        var lk = document.getElementById("lk");
+        var ma = document.getElementById("ma");
+        var bt = document.getElementById("bt"); //body type stat
+        var emp = document.getElementById("emp");
+        var run = document.getElementById("run");
+        var leap = document.getElementById("leap");
+        var lift = document.getElementById("lift");
+        var liftLBs = document.getElementById("liftLBs");
+        var carry = document.getElementById("carry");
+        var carryLBS = document.getElementById("carryLBs");
+        var save = document.getElementById("save");
+        var btm = document.getElementById("btm");
+
+        updateBodyDerived();
+        updateRun();
+
         if (int.value !== "" && ref.value !== "") {
             this.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
             console.log("this.pickupSkillPoints: " + this.pickupSkillPoints);
@@ -2696,11 +2735,64 @@ var characterMeta = {
         if (int.value !== "") {
             charINTOutput.innerHTML = int.value;
         }
-        //this.pickupSkillPoints = int.value + ref.value;
+        var charREFOutput = document.getElementById("charREFOutput");
+        if (ref.value !== "") {
+            charREFOutput.innerHTML = ref.value;
+        }
+        var charTECHOutput = document.getElementById("charTECHOutput");
+        if (tech.value !== "") {
+            charTECHOutput.innerHTML = tech.value;
+        }
+        var charCOOLOutput = document.getElementById("charCOOLOutput");
+        if (cl.value !== "") {
+            charCOOLOutput.innerHTML = cl.value;
+        }
+        var charATTROutput = document.getElementById("charATTROutput");
+        if (att.value !== "") {
+            charATTROutput.innerHTML = att.value;
+        }
+        var charLUCKOutput = document.getElementById("charLUCKOutput");
+        if (lk.value !== "") {
+            charLUCKOutput.innerHTML = lk.value;
+        }
+        var charMAOutput = document.getElementById("charMAOutput");
+        if (ma.value !== "") {
+            charMAOutput.innerHTML = ma.value;
+            //console.log("run and leap: " + run.value, leap.value);
+            //Fill out Run on char sheet
+            var charRunOutput = document.getElementById("charRunOutput");
+            charRunOutput.innerHTML = run.value;
+            //Fill out Leap on char sheet
+            var charLeapOutput = document.getElementById("charLeapOutput");
+            charLeapOutput.innerHTML = leap.value;
+        }
+        var charBODYOutput = document.getElementById("charBODYOutput");
+        if (bt.value !== "") {
+            charBODYOutput.innerHTML = bt.value;
+            //Fill out Lift on char sheet
+            var charLiftOutput = document.getElementById("charLiftOutput");
+            charLiftOutput.innerHTML = lift.value;
+            var charLiftLBsOutput = document.getElementById("charLiftLBsOutput");
+            charLiftLBsOutput.innerHTML = liftLBs.value;
+            //Fill out Carry on char sheet
+            var charCarryOutput = document.getElementById("charCarryOutput");
+            charCarryOutput.innerHTML = carry.value;
+            var charCarryLBsOutput = document.getElementById("charCarryLBsOutput");
+            charCarryLBsOutput.innerHTML = carryLBS.value;
+        }
+        var charEMPOutput = document.getElementById("charEMPOutput");
+        if (emp.value !== "") {
+            charEMPOutput.innerHTML = emp.value;
+        }
+        var saveCharOutput = document.getElementById("saveCharOutput");
+        if (save.value !== "") {
+            saveCharOutput.innerHTML = save.value;
+        }
+        var btmCharOutput = document.getElementById("btmCharOutput");
+        if (btm.value !== "") {
+            btmCharOutput.innerHTML = btm.value;
+        }
 
-        //console.log(int.value, ref.value);
-        updateBodyDerived();
-        updateRun();
     }
 };
 
@@ -2748,6 +2840,15 @@ function manRoleclick() {
     var roleSelect_label = document.getElementById("roleSelect_label");
     roleSelect.style.display = "inline";
     roleSelect_label.style.display = "inline";
+
+
+    while (roleSelect.firstChild) { //Remove all children (options) from roleSelect
+        roleSelect.removeChild(roleSelect.firstChild);
+    }
+    //var roleSelect_label = document.getElementById("roleSelect_label");
+    //appendBR(roleSelect_label);
+
+    //rollOutput.appendChild(document.createElement("br"));
     roleSelectPopulate();
 
     roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
@@ -2954,8 +3055,10 @@ function createCareerSkills(role) {
         var tr = document.createElement("tr");
         var td = document.createElement("td");
         var td2 = document.createElement("td");
+//        var td2ID = "careerSkill"
 
         var textField = document.createElement("input");
+        textField.setAttribute("id", skills[i]);
         textField.setAttribute("size", "3");
         var label = document.createElement("label");
         label.innerHTML = skills[i];
@@ -2966,10 +3069,45 @@ function createCareerSkills(role) {
         tr.appendChild(td);
         tr.appendChild(td2);
         careerSkillTable.appendChild(tr);
+    }
+    var careerSkillArray = careerSkillTable.getElementsByTagName("input");
+    console.log(careerSkillArray);
+    for (var j = 0; j < careerSkillArray.length; j++) {
+        careerSkillArray[j].onchange = careerSkillInputChange;
+    }
+}
 
+function careerSkillInputChange(eventObj) {
+    "use strict";
+    console.log(eventObj, eventObj.target.id);
+    var skillCharOutput = document.getElementById("skillCharOutput");
+    //skillCharOutput.appendChild()
+    var careerSkillTable = document.getElementById("careerSkillTable");
+    var careerSkillArray = careerSkillTable.getElementsByTagName("input");
+
+    while (skillCharOutput.firstChild) { //Remove all children from skillCharOutput
+        skillCharOutput.removeChild(skillCharOutput.firstChild);
     }
 
+    for (var i = 0; i < careerSkillArray.length; i++) {
+        //if (careerSkillArray[i])
 
+        if (careerSkillArray[i].value !== "") {
+            console.log(careerSkillArray[i].value);
+            console.log(careerSkillArray[i].id);
+            var skillLevel = careerSkillArray[i].value;
+            var skillLabel = careerSkillArray[i].id;
+            var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
+            var br = document.createElement("br");
+            console.log(skillOutString);
+            var newTextNode = document.createTextNode(skillOutString);
+            skillCharOutput.appendChild(newTextNode);
+            skillCharOutput.appendChild(br);
+
+            /*var siblingLabel = document.createTextNode(siblingLabelText);
+            siblingLabelPar.appendChild(siblingLabel);*/
+        }
+    }
 }
 
 window.onload = init;
@@ -2998,6 +3136,7 @@ function init() {
 
     //roleSelectPopulate();
     randRoleClick();
+
 
     //Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random

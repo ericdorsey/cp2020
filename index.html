@@ -19,11 +19,88 @@
         Role <input type="text" id="charRoleOutput" size="25" disabled="true">
     </label>
     <br>
-    <label for="charINTOutput" id="charINTOutput_label" class="charStatOutput">
-        INT [<span id="charINTOutput"></span>]
+    <label for="charPointsOutput" id="charPointsOutput_label">
+        Character Points <input type="text" id="charPointsOutput" size="2" disabled="true">
     </label>
+    <label for="stats" id="stats_label">
+        <br id="stats">Stats <!--<input type="text" id="stats" size="2" disabled="true">-->
+    </label>
+    <div id="charOutputStats">
+        <label for="charINTOutput" id="charINTOutput_label" class="charStatOutput">
+            INT [<span id="charINTOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charREFOutput" id="charREFOutput_label" class="charStatOutput">
+            REF [<span id="charREFOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charTECHOutput" id="charTECHOutput_label" class="charStatOutput">
+            TECH [<span id="charTECHOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charCOOLOutput" id="charCOOLOutput_label" class="charStatOutput">
+            COOL [<span id="charCOOLOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <br>
+        <label for="charATTROutput" id="charATTROutput_label" class="charStatOutput">
+            ATTR [<span id="charATTROutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charLUCKOutput" id="charLUCKOutput_label" class="charStatOutput">
+            LUCK [<span id="charLUCKOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charMAOutput" id="charMAOutput_label" class="charStatOutput">
+            MA [<span id="charMAOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charBODYOutput" id="charBODYOutput_label" class="charStatOutput">
+            BODY [<span id="charBODYOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <br>
+        <label for="charEMPOutput" id="charEMPOutput_label" class="charStatOutput">
+            EMP [<span id="charEMPOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charRunOutput" id="charRunOutput_label" class="charStatOutputDervied">
+            Run [<span id="charRunOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charLeapOutput" id="charLeapOutput_label" class="charStatOutputDervied">
+            Leap [<span id="charLeapOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <br>
+        <label for="charLiftOutput" id="charLiftOutput_label" class="charStatOutputDervied">
+            Lift (kgs) [<span id="charLiftOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charLiftLBsOutput" id="charLiftLBsOutput_label" class="charStatOutputDervied">
+            Lift  (lbs) [<span id="charLiftLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <br>
+        <label for="charCarryOutput" id="charCarryOutput_label" class="charStatOutputDervied">
+            Carry (kgs) [<span id="charCarryOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+        <label for="charCarryLBsOutput" id="charCarryLBsOutput_label" class="charStatOutputDervied">
+            Carry (lbs) [<span id="charCarryLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
+        </label>
+    </div>
+    <table class="savebtm">
+        <tr>
+            <td>Save</td>
+        </tr>
+        <tr>
+            <td id="saveCharOutput"></td>
+        </tr>
+    </table>
+    <table class="savebtm">
+        <tr>
+            <td>BTM</td>
+        </tr>
+        <tr>
+            <td id="btmCharOutput"></td>
+        </tr>
+    </table>
+    <label for="skills" id="skills_label">
+        <br id="skills">Skills
+    </label>
+    <br>
+    <div id="skillCharOutput">
+    </div>
 
 </div>
+
 <div id="calcChar">
     <h2 class="sub2Head">Cyberpunk 2020 Character Generator</h2>
     <br>
@@ -110,8 +187,10 @@
     </p>
 
     <div id="roleAndSkills">
-        <h3>Role and Skills</h3>
-        <h4>Role</h4>
+        <h3 class="sub3Head">Role and Skills</h3>
+        <br>
+        <h4 class="sub4Head">Role</h4>
+        <br>
         <label for="randRole" id="randRole_label">
             <input type="radio" name="roleRadios" id="randRole"> Randomly Choose Role
         </label>
@@ -128,7 +207,10 @@
             Select Role
             <select id="roleSelect"></select>
         </label>
-        <h4>Skills</h4>
+        <div id="roleSpace"></div>
+        <br>
+        <h4 class="sub4Head">Skills</h4>
+        <br>
         <span id="careerSkills" class="bold">Career Skills</span>
         <table id="careerSkillTable">
 
@@ -145,8 +227,11 @@
         </table>
 
     </div>
-    <h3>Origins and Personal Style</h3>
-    <h4>Dress & Personal Style</h4>
+    <br>
+    <h3 class="sub3Head">Origins and Personal Style</h3>
+    <br>
+    <h4 class="sub4Head">Dress & Personal Style</h4>
+    <p></p>
     <form>
         <input type="radio" name="persStyle" id="rollStyle"> Randomly Choose Style
         <br> <span class="instruction"> emulated Roll 1D10 to choose</span>

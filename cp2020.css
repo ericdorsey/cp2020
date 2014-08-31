@@ -14,7 +14,7 @@ input {
     padding-right: 10px;
     padding-top: 2px;
     width: 46%;
-    border: 2px solid black;
+    border: 3px solid black;
     background-color: white;
 }
 
@@ -272,7 +272,7 @@ input {
 
 #careerSkillTable {
     font-size: 15px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }
 
 #careerSkillTable td {
@@ -281,7 +281,7 @@ input {
 }
 
 #statRollTable {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     /*width: 38% !important;*/
     font-size: 14px;
 }
@@ -304,6 +304,7 @@ input {
     background-color: black;
     color: white;
     text-transform: uppercase;
+    font-weight: bold;
     padding: 4px;
 }
 
@@ -311,9 +312,86 @@ input {
     background-color: black;
     color: white;
     text-transform: uppercase;
+    font-weight: bold;
     padding: 4px;
 }
 
 .charStatOutput {
     padding: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.charStatOutputDervied {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+#charPointsOutput_label {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px;
+}
+
+#stats_label {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.savebtm {
+    /*border: 3px solid black;*/
+    /*float: left;*/
+    display: inline-block;
+    border-spacing: 0;
+    border: 2px solid black;
+    margin: 4px;
+    /*font-size: 13px;*/
+}
+
+.savebtm td {
+    border: 1px solid black;
+    padding: 2px;
+    width: 40px;
+}
+
+.savebtm tr:first-child {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 14px;
+}
+
+.savebtm tr:nth-child(2) td {
+    height: 40px;
+    font-weight: bold;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 14px;
+}
+
+#charOutputStats {
+    margin-top: 7px;
+}
+
+#skills_label {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px;
+    /*display: block;*/
+    /*clear: both;*/
+}
+
+#skillCharOutput {
+    font-weight: bold;
+    margin-top: 8px;
+    margin-left: 5px;
 }
