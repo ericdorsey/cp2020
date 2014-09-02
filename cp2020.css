@@ -12,16 +12,19 @@ input {
     top: 0;
     right: 0;
     padding-right: 10px;
-    padding-top: 2px;
-    width: 46%;
+    padding-top: 6px;
+    padding-left: 3px;
+    width: 48%;
     border: 3px solid black;
     background-color: white;
+    margin-top: 5px;
+    margin-right: 5px;
 }
 
 #calcChar {
     position: relative;
-    width: 50%;
-    margin-right: 10px;
+    width: 48%;
+    margin-right: 5px;
     border: 2px dashed black;
     margin-left: 5px;
     margin-top: 5px;
@@ -299,13 +302,37 @@ input {
     font-size: 25px !important;
 }
 
-/* fullCharOutput */
+
+
+/* Begin Character Output */
+
+#charNameOutput {
+    border: 1px solid black;
+    font-weight: bold;
+    display: inline-block;
+    width: 300px;
+    height: 18px;
+    margin-left: 5px;
+    padding: 2px;
+}
+
 #charNameOutput_label {
     background-color: black;
     color: white;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 4px;
+    padding: 3px;
+}
+
+#charRoleOutput {
+    border: 1px solid black;
+    font-weight: bold;
+    display: inline-block;
+    width: 100px;
+    height: 18px;
+    margin-left: 5px;
+    margin-top: 4px;
+    padding: 2px;
 }
 
 #charRoleOutput_label {
@@ -327,6 +354,19 @@ input {
     padding: 4px;
     font-weight: bold;
     font-size: 17px;
+}
+
+#charPointsOutput {
+    border: 1px solid black;
+    font-weight: bold;
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    padding: 2px;
+    text-align: center;
 }
 
 #charPointsOutput_label {
@@ -394,4 +434,47 @@ input {
     font-weight: bold;
     margin-top: 8px;
     margin-left: 5px;
+    display: block;
+}
+
+#pickupSkillCharOutput {
+    font-weight: bold;
+    margin-left: 5px;
+    display: block;
+}
+
+#charStyleOutput {
+    display: block;
+    margin-left: 5px;
+}
+
+#styleCharOutput_label {
+    margin-top: 2px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px;
+}
+
+/* Style */
+#clothesCharOutput_label {
+    font-weight: bold;
+}
+
+#hairCharOutput_label {
+    font-weight: bold;
+}
+
+#affecCharOutput_label {
+    font-weight: bold;
+}
+
+#ethCharOutput_label {
+    font-weight: bold;
+}
+
+#langCharOutput_label {
+    font-weight: bold;
 }

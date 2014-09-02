@@ -141,16 +141,40 @@ function rollStyleClick() {
     var affecField = document.getElementById("affecField");
 
     clothesField.value = clothes[clothesRoll];
+    //Update the character output for clothes
+    var clothesCharOutput = document.getElementById("clothesCharOutput");
+    clothesCharOutput.innerHTML = clothesField.value;
+
     hairField.value = hairStyle[hairRoll];
+    //Update the character output for hair
+    var hairCharOutput = document.getElementById("hairCharOutput");
+    hairCharOutput.innerHTML = hairField.value;
+
     affecField.value = affectations[affecRoll];
+    //Update affectations output
+    var affecCharOutput = document.getElementById("affecCharOutput");
+    affecCharOutput.innerHTML = affecField.value;
 }
 
 function manualStyleClick() {
     "use strict";
+
+
     //Clothes, Hair, Affectations Selection Dropdowns
     var manualClothesSelect = document.getElementById("manualClothesSelect");
     var manualHairSelect = document.getElementById("manualHairSelect");
     var manualAffecSelect = document.getElementById("manualAffecSelect");
+
+    //Clean the dropdowns of previous values
+    while (manualClothesSelect.firstChild) {
+        manualClothesSelect.removeChild(manualClothesSelect.firstChild);
+    }
+    while (manualHairSelect.firstChild) {
+        manualHairSelect.removeChild(manualHairSelect.firstChild);
+    }
+    while (manualAffecSelect.firstChild) {
+        manualAffecSelect.removeChild(manualAffecSelect.firstChild);
+    }
 
     manualClothesSelect.style.display = "block";
     manualHairSelect.style.display = "block";
@@ -195,6 +219,9 @@ function manualClothesSelectChange() {
     var clothesField = document.getElementById("clothesField");
     var manualClothesSelect = document.getElementById("manualClothesSelect");
     clothesField.value = manualClothesSelect.options[manualClothesSelect.selectedIndex].text;
+    //Update the character output for clothes
+    var clothesCharOutput = document.getElementById("clothesCharOutput");
+    clothesCharOutput.innerHTML = clothesField.value;
 }
 
 function manualHairSelectChange() {
@@ -203,6 +230,9 @@ function manualHairSelectChange() {
     var manualHairSelect = document.getElementById("manualHairSelect");
     //Get the actual text of the selected dropdown
     hairField.value = manualHairSelect.options[manualHairSelect.selectedIndex].text;
+
+    var hairCharOutput = document.getElementById("hairCharOutput");
+    hairCharOutput.innerHTML = hairField.value;
 }
 
 function manualAffecSelectChange() {
@@ -210,6 +240,9 @@ function manualAffecSelectChange() {
     var affecField = document.getElementById("affecField");
     var manualAffecSelect = document.getElementById("manualAffecSelect");
     affecField.value = manualAffecSelect.options[manualAffecSelect.selectedIndex].text;
+
+    var affecCharOutput = document.getElementById("affecCharOutput");
+    affecCharOutput.innerHTML = affecField.value;
 }
 
 function rollEthClick() {
@@ -2620,7 +2653,7 @@ var characterMeta = {
         //console.log("this.charPoints is....:" + this.charPoints);
         var charPointsOutput = document.getElementById("charPointsOutput");
         console.log(charPointsOutput);
-        charPointsOutput.value = this.charPoints;
+        charPointsOutput.innerHTML = this.charPoints;
     },
     fastRolls: [],
     fastTotal: 0,
@@ -2658,7 +2691,7 @@ var characterMeta = {
         this.charPoints = this.fastTotal;
         console.log("this.charPoints is....:" + this.charPoints);
         var charPointsOutput = document.getElementById("charPointsOutput");
-        charPointsOutput.value = this.charPoints;
+        charPointsOutput.innerHTML = this.charPoints;
     },
     cinematicChar: function(whatClicked) {
         "use strict";
@@ -2693,7 +2726,7 @@ var characterMeta = {
         this.charPoints = points;
         console.log("this.charPoints is....:" + this.charPoints);
         var charPointsOutput = document.getElementById("charPointsOutput");
-        charPointsOutput.value = this.charPoints;
+        charPointsOutput.innerHTML = this.charPoints;
     },
     statChange: function() { //Flush this out if verifying rolls/totals when stats updated
         "use strict";
@@ -2830,7 +2863,7 @@ function randRoleClick() {
 
     //Update charOutput R. Side section
     var charRoleOutput = document.getElementById("charRoleOutput");
-    charRoleOutput.value = roleField.value;
+    charRoleOutput.innerHTML = roleField.value;
 }
 
 function manRoleclick() {
@@ -2869,7 +2902,7 @@ function manualRoleSelectChange() {
 
     //Update charOutput R. Side section
     var charRoleOutput = document.getElementById("charRoleOutput");
-    charRoleOutput.value = roleField.value;
+    charRoleOutput.innerHTML = roleField.value;
 }
 
 function createPickupSkills() {
@@ -2937,6 +2970,23 @@ function createPickupOpt() {
     subSkillField.setAttribute("size", "3");
     pickupSkillsTable.appendChild(subSkillField);
 
+    //Assign event handler for the pickup skill fields on change
+    var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
+    console.log(pickupSkillArray);
+    for (var k = 0; k < pickupSkillArray.length; k++) {
+        pickupSkillArray[k].onchange = pickupSkillInputChange;
+    }
+
+    //Assign event handler for the pickup skill two dropdowns (pickup2Select and subPickup2Select)
+    var pickupSelectArray = pickupSkillsTable.getElementsByTagName("select");
+    console.log("pickupSelectArray" + pickupSelectArray);
+    for (var l = 0; l < pickupSelectArray.length; l++) {
+        //pickupSelectArray[l].onchange = pickupSkillInputChange;
+        pickupSelectArray[l].addEventListener("change", pickupSkillInputChange);// = pickupSkillInputChange;
+
+    }
+    //pickupSkillInputChange
+
 }
 
 function pickupOptSelectChange(eventObj) {
@@ -3003,17 +3053,70 @@ function pickupOptSelectChange(eventObj) {
     }
 
 
-    /*
-    for (var i = 1; i < Object.keys(skills.attr).length; i++) {
-        var opt2 = document.createElement("option");
-        opt2.value = j;
-        var opt2Temp;
-        opt2Temp = "attr".concat("0").concat(j.toString());
-        console.log(opt2Temp);
-        opt2.textContent = skills.attr[opt2Temp];
-        subSkillSelect.appendChild(opt2);
-    }*/
+}
 
+function pickupSkillInputChange(eventObj) {
+    "use strict";
+    console.log(eventObj);
+    var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
+    var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+    while (pickupSkillCharOutput.firstChild) { //Remove all children from pickupSkillCharOutput
+        pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
+    }
+    var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
+    console.log(pickupSkillArray);
+    for (var i = 0; i < pickupSkillArray.length; i++) {
+        if (pickupSkillArray[i].value !== "") {
+            console.log(pickupSkillArray[i].value);
+            console.log(pickupSkillArray[i].id);
+            var skillLevel = pickupSkillArray[i].value;
+            var skillLabelID = "subPickup".concat((i + 1).toString()).concat("Select");
+            console.log(skillLabelID);
+            var currentSkill = document.getElementById(skillLabelID);
+            var skillLabel = currentSkill[currentSkill.selectedIndex].text;
+            //console.log(currentSkill.innerHTML);
+            //var skillLabel = document.getElementById()
+            //var skillCategorySelected = pickupOptSelect[pickupOptSelect.selectedIndex].value;
+            //var skillLabel = pickupSkillArray[i].id;
+            var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
+            var br = document.createElement("br");
+            console.log(skillOutString);
+            var newTextNode = document.createTextNode(skillOutString);
+            pickupSkillCharOutput.appendChild(newTextNode);
+            pickupSkillCharOutput.appendChild(br);
+        }
+
+    }
+
+    /*console.log(eventObj, eventObj.target.id);
+    var skillCharOutput = document.getElementById("skillCharOutput");
+    //skillCharOutput.appendChild()
+    var careerSkillTable = document.getElementById("careerSkillTable");
+    var careerSkillArray = careerSkillTable.getElementsByTagName("input");
+
+    while (skillCharOutput.firstChild) { //Remove all children from skillCharOutput
+        skillCharOutput.removeChild(skillCharOutput.firstChild);
+    }
+
+    for (var i = 0; i < careerSkillArray.length; i++) {
+        //if (careerSkillArray[i])
+
+        if (careerSkillArray[i].value !== "") {
+            console.log(careerSkillArray[i].value);
+            console.log(careerSkillArray[i].id);
+            var skillLevel = careerSkillArray[i].value;
+            var skillLabel = careerSkillArray[i].id;
+            var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
+            var br = document.createElement("br");
+            console.log(skillOutString);
+            var newTextNode = document.createTextNode(skillOutString);
+            skillCharOutput.appendChild(newTextNode);
+            skillCharOutput.appendChild(br);
+
+            *//*var siblingLabel = document.createTextNode(siblingLabelText);
+             siblingLabelPar.appendChild(siblingLabel);*//*
+        }
+    }*/
 }
 
 function createCareerSkills(role) {
@@ -3110,6 +3213,17 @@ function careerSkillInputChange(eventObj) {
     }
 }
 
+function handleChange() {
+    "use strict";
+    console.log("handleChange fired");
+    var charNameOutput = document.getElementById("charNameOutput");
+    var handle = document.getElementById("handle");
+    console.log(handle.value);
+    if (handle.value !== "") {
+        charNameOutput.innerHTML = handle.value;
+    }
+}
+
 window.onload = init;
 function init() {
     "use strict";
@@ -3117,6 +3231,10 @@ function init() {
     //randRoleClick();
     //Temp scroll to bottom for dev
     window.scrollTo(0, document.body.scrollHeight);
+
+    //Handle
+    var handle = document.getElementById("handle");
+    handle.onchange = handleChange;
 
     //Roll method elements
     var rollMethod = document.getElementById("rollMethod");
@@ -3136,7 +3254,14 @@ function init() {
 
     //roleSelectPopulate();
     randRoleClick();
-
+/*
+    //Add event handler to pickup skill inputs
+    var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+    var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
+    console.log(pickupSkillArray);
+    for (var j = 0; j < pickupSkillArray.length; j++) {
+        pickupSkillArray[j].onchange = pickupSkillInputChange;
+    }*/
 
     //Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random
