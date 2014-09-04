@@ -107,7 +107,6 @@
         <div id="pickupSkillCharOutput">
 
     </div>
-
     <div id="charStyleOutput">
         <label for="styleCharOutput" id="styleCharOutput_label">
             <span id="styleCharOutput">Style</span>
@@ -142,6 +141,50 @@
             Language:
         </label>
         <span id="langCharOutput">&nbsp;</span>
+
+
+    </div>
+    <label for="siblingCharOutputTitle" id="siblingCharOutputTitle_label">
+        <span id="siblingCharOutputTitle">Siblings</span><span id="charSiblingOutputNum">&nbsp;&nbsp;&nbsp;</span>
+    </label>
+    <br>
+    <div id="charSiblingOutput">
+
+    </div>
+    <div id="charMotivOutput">
+        <label for="motivCharOutput" id="motivCharOutput_label">
+            <span id="motivCharOutput">Motivations</span>
+        </label>
+
+        <br>
+        <label for="persTraitCharOutput" id="persTraitCharOutput_label">
+            Personality Traits:
+        </label>
+        <span id="persTraitCharOutput">&nbsp;</span>
+
+        <br>
+        <label for="persValCharOutput" id="persValCharOutput_label">
+            Valued Person:
+        </label>
+        <span id="persValCharOutput">&nbsp;</span>
+
+        <br>
+        <label for="valMostCharOutput" id="valMostCharOutput_label">
+            Value Most:
+        </label>
+        <span id="valMostCharOutput">&nbsp;</span>
+
+        <br>
+        <label for="feelPeopleCharOutput" id="feelPeopleCharOutput_label">
+            Feel About People:
+        </label>
+        <span id="feelPeopleCharOutput">&nbsp;</span>
+
+        <br>
+        <label for="valPosessionCharOutput" id="valPosessionCharOutput_label">
+            Valued Posession:
+        </label>
+        <span id="valPosessionCharOutput">&nbsp;</span>
     </div>
 
 </div>
@@ -167,7 +210,7 @@
     <p></p>
     <h4 class="sub4Head">Character Points; Choose Roll Method:</h4>
     <br>
-    <span class="instructSmall">( * tip: Click roll method again to re-roll or choose another option )</span>
+    <span class="instructSmall">(Click a roll method; click again to re-roll)</span>
     <table id="statRollTable">
         <tr>
             <td>
@@ -189,7 +232,7 @@
     <p>
         <span class="bold">User Assigned Stats (editable):</span>
         <br>
-        <span class="instructSmall">( * tip: Must choose a roll method before you can edit these fields )</span>
+        <span class="instructSmall">(You must choose a roll method above before you can edit these fields)</span>
         <br>
         <br>Intelligence (INT) <input type="text" id="int" size="2" disabled="true">
         <br>Reflexes (REF) <input type="text" id="ref" size="2" disabled="true">
@@ -410,11 +453,14 @@
     <label for="manualChildSelect" id="manualChildSelect_label">
         <select id="manualChildSelect"></select>
     </label>
-    <br>
     <label for="childEnvOutput" id="childEnvOutput_label">
+        <br>
         Childhood Environment: <input type="text" size= "50" id="childEnvOutput" disabled="true">
     </label>
-    <h4>Siblings</h4>
+    <br>
+    <br>
+    <h4 class="sub4Head">Siblings</h4>
+    <br>
     <div id="siblingsContainer">
         <label for="randSiblings" id="randSiblings_label">
             <input type="radio" name="siblingsRadios" id="randSiblings"> Randomly Choose Siblings
@@ -427,7 +473,6 @@
         <label for="manualSiblingSelect" id="manualSiblingSelect_label">
             <select id="manualSiblingSelect"></select>
         </label>
-        <br>
         <label for="haveSiblings" id="haveSiblings_label">
             Have Siblings? <input type="text" id="haveSiblings" disabled="true" size="30">
         </label>
@@ -436,8 +481,11 @@
     <div id="siblingsOutput">
 
     </div>
-    <h3>Motivations</h3>
-    <h4>Personality Traits</h4>
+    <br>
+    <h3 class="sub3Head">Motivations</h3>
+    <br>
+    <h4 class="sub4Head">Personality Traits</h4>
+    <br>
     <label for="randPersTraits" id="randPersTraits_label">
         <input type="radio" name="persRadios" id="randPersTraits"> Randomly Choose Personality Traits
     </label>
@@ -447,11 +495,13 @@
     </label>
     <br>
     <label for="persTraitsField" id="persTraitsField_label">
-        Personality Traits: <input type="text" id="persTraitsField" disabled="true">
+        Personality Traits: <input type="text" id="persTraitsField" disabled="true" size="30">
     </label>
     <select id="persTraitsSelect"></select>
-
-    <h4>Preson You Value Most</h4>
+    <br>
+    <br>
+    <h4 class="sub4Head">Person You Value Most</h4>
+    <br>
     <label for="randPersValue" id="randPersValue_label">
         <input type="radio" name="valRadios" id="randPersValue"> Randomly Choose Person Valued
     </label>
@@ -466,7 +516,9 @@
     <br>
     <select id="persValSelect"></select>
 
-    <h4>What Do You Value Most?</h4>
+    <br>
+    <h4 class="sub4Head">What Do You Value Most?</h4>
+    <br>
     <label for="randYouValue" id="randYouValue_label">
         <input type="radio" name="youRadios" id="randYouValue"> Randomly Choose What You Value
     </label>
@@ -481,7 +533,9 @@
     <br>
     <select id="youValSelect"></select>
 
-    <h4>What Do You Feel About Most People?</h4>
+    <br>
+    <h4 class="sub4Head">How Do You Feel About Most People?</h4>
+    <br>
     <label for="randYouFeel" id="randYouFeel_label">
         <input type="radio" name="feelRadios" id="randYouFeel"> Randomly Choose How You Feel About People
     </label>
@@ -491,12 +545,15 @@
     </label>
     <br>
     <label for="youFeelField" id="youFeelField_label">
-        How You Feel: <input type="text" id="youFeelField" disabled="true">
+        How You Feel:
+        <br>
+        <input type="text" id="youFeelField" disabled="true" size="65">
     </label>
     <br>
     <select id="youFeelSelect"></select>
-
-    <h4>What Is Your Most Valued Possession?</h4>
+    <br>
+    <h4 class="sub4Head">What Is Your Most Valued Possession?</h4>
+    <br>
     <label for="randPos" id="randPos_label">
         <input type="radio" name="posRadios" id="randPos"> Randomly Choose Most Valued Possession
     </label>

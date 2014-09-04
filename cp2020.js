@@ -169,6 +169,7 @@ function manualStyleClick() {
     while (manualClothesSelect.firstChild) {
         manualClothesSelect.removeChild(manualClothesSelect.firstChild);
     }
+
     while (manualHairSelect.firstChild) {
         manualHairSelect.removeChild(manualHairSelect.firstChild);
     }
@@ -685,11 +686,22 @@ function randSiblingsClick() {
     manualSiblingSelect.style.display = "none";
     //removeElementById("manualSiblingSelect");
 
+    var charSiblingOutputNum = document.getElementById("charSiblingOutputNum");
+    charSiblingOutputNum.innerHTML = numSiblings;
+
+    var charSiblingOutput = document.getElementById("charSiblingOutput");
+    while (charSiblingOutput.firstChild) {
+        charSiblingOutput.removeChild(charSiblingOutput.firstChild);
+    }
+
     //var numSiblings = 3;
     var haveSiblings = document.getElementById("haveSiblings");
     //console.log("numSiblings: " + numSiblings);
     if (numSiblings <= 7) {
         haveSiblings.value = "You have ".concat(numSiblings.toString()).concat(" siblings");
+
+
+
         for (var i = 1; i <= numSiblings; i++) {
 
             var siblingGender = getRandomInt(1,2);
@@ -768,11 +780,18 @@ function randSiblingsClick() {
             siblingsOutput.appendChild(label3);
             siblingsOutput.appendChild(textBox3);
 
-            //Scroll window to bottom
-            window.scrollTo(0, document.body.scrollHeight);
+
+            var span01 = document.createElement("span");
+            span01.innerHTML = textBox2.value.concat(", ").concat(textBox.value).concat("; ").concat(textBox3.value);
+            span01.setAttribute("class", "charSiblingOutputItems");
+            charSiblingOutput.appendChild(span01);
+            appendBR(charSiblingOutput);
+
+
         }
     } else if (numSiblings >= 8) {
         haveSiblings.value = "Only child; no siblings";
+        charSiblingOutputNum.innerHTML = 0;
     }
 }
 
@@ -796,6 +815,12 @@ function manualSiblingsClick () {
     while (manualSiblingSelect.firstChild) {
         manualSiblingSelect.removeChild(manualSiblingSelect.firstChild);
     }
+
+    var charSiblingOutput = document.getElementById("charSiblingOutput");
+    while (charSiblingOutput.firstChild) {
+        charSiblingOutput.removeChild(charSiblingOutput.firstChild);
+    }
+
     //Populate the manual siblings selection dropdown
     for (var i = 1; i <= Object.keys(manualSiblingsList).length; i ++) {
         var opt = document.createElement("option");
@@ -816,16 +841,22 @@ function manualSiblingSelectChange() {
     var manualSiblingSelect = document.getElementById("manualSiblingSelect");
     var haveSiblings = document.getElementById("haveSiblings");
 
+    var charSiblingOutput = document.getElementById("charSiblingOutput");
+    while (charSiblingOutput.firstChild) {
+        charSiblingOutput.removeChild(charSiblingOutput.firstChild);
+    }
     //manualSiblingSelect.onchange = manualSiblingSelectChange;
 
     //haveSiblings.value = manualSiblingSelect[manualSiblingSelect.selectedIndex].text;
     var numSiblings = manualSiblingSelect[manualSiblingSelect.selectedIndex].text;
     //console.log("type of numSiblings is: " + typeof numSiblings);
     //console.log("type of numSiblings is: " + typeof parseInt(numSiblings));
+    var charSiblingOutputNum = document.getElementById("charSiblingOutputNum");
 
 
     if (numSiblings === "only child") {
         haveSiblings.value = "You have no siblings";
+        charSiblingOutputNum.innerHTML = 0;
     } else if (parseInt(numSiblings) === 1) {
         haveSiblings.value = "You have one sibling";
     } else if (parseInt(numSiblings) >= 2) {
@@ -834,6 +865,7 @@ function manualSiblingSelectChange() {
 
     if (numSiblings !== "only child") {
         numSiblings = parseInt(numSiblings);
+        charSiblingOutputNum.innerHTML = numSiblings;
         //console.log("numSiblings: " + numSiblings);
         //console.log("typeof numSiblings " + typeof numSiblings);
         for (var i = 1; i <= numSiblings; i++ ) {
@@ -939,14 +971,23 @@ function manualSiblingSelectChange() {
             siblingsOutput.appendChild(feelsSelect);
             //Set the value of the sibling feelings field to the initial dropdown selection
             textBox3.value = feelsSelect[feelsSelect.selectedIndex].text;
+
+            //need event listener for changing each sibling detail
+            var span01 = document.createElement("span");
+            span01.innerHTML = textBox2.value.concat(", ").concat(textBox.value).concat("; ").concat(textBox3.value);
+            span01.setAttribute("class", "charSiblingOutputItems");
+            charSiblingOutput.appendChild(span01);
+            appendBR(charSiblingOutput);
         }
+
+
 
 
         //Add siblingOutputSelectsChange event listener to all dynamic select dropdowns
         // gender1Select, age1Select, feels1Select, etc.
         var siblingOutputSelects = siblingsOutput.getElementsByTagName("select");
         for (var m = 0; m < siblingOutputSelects.length; m++) {
-            console.log(siblingOutputSelects[m].id);
+            //console.log(siblingOutputSelects[m].id);
             siblingOutputSelects[m].onchange = siblingOutputSelectsChange;
         }
 
@@ -956,16 +997,59 @@ function manualSiblingSelectChange() {
 //Dynamically get the changed select option and apply it's text to the text field
 function siblingOutputSelectsChange(eventObj) {
     "use strict";
-    console.log("siblingOutputSelectsChange() fired");
+    //console.log("siblingOutputSelectsChange() fired");
     var theSelect = eventObj.target;
     var name = theSelect.id;
     console.log(name);
     var theID = name.replace("Select", "");
-    console.log(theID);
+    console.log("clicked ID: ".concat(theID));
     //console.log(eventObj.id);
     //console.log(eventObj.target);
     var theField = document.getElementById(theID);
     theField.value = theSelect[theSelect.selectedIndex].text;
+
+    var charSiblingOutput = document.getElementById("charSiblingOutput");
+    while (charSiblingOutput.firstChild) {
+        charSiblingOutput.removeChild(charSiblingOutput.firstChild);
+    }
+
+    var siblingsOutput = document.getElementById("siblingsOutput");
+    var siblingOutputSelects = siblingsOutput.getElementsByTagName("select");
+    console.log("siblingOutputSelects.length: " + siblingOutputSelects.length / 3);
+    for (var m = 1; m <= (siblingOutputSelects.length / 3); m++) {
+        //console.log(siblingOutputSelects[m].id);
+        console.log("m: " + m);
+        //siblingOutputSelects[m].onchange = siblingOutputSelectsChange;
+
+        var currID = siblingOutputSelects[m].id.replace("Select", "");
+        currID = currID[currID.length-1];
+        //console.log(currID);
+
+        var span01 = document.createElement("span");
+        var tempField01 = document.getElementById("gender".concat(m.toString()));
+        var tempField02 = document.getElementById("age".concat(m.toString()));
+        var tempField03 = document.getElementById("feels".concat(m.toString()));
+        console.log(tempField01, tempField02, tempField03);
+
+        span01.innerHTML = tempField02.value.concat(", ").concat(tempField01.value).concat(": ").concat(tempField03.value);
+        span01.setAttribute("class", "charSiblingOutputItems");
+        charSiblingOutput.appendChild(span01);
+        appendBR(charSiblingOutput);
+    }
+
+
+
+
+    /*var theNum = theID[theID.length-1];
+    console.log(theNum);
+    var span01 = document.createElement("span");
+    //span01.innerHTML = textBox2.value.concat(", ").concat(textBox.value).concat("; ").concat(textBox3.value);
+    span01.innertHTML =
+    span01.innerHTML = theField.value;
+    //console.log(theField.nextSibling.nextSibling);
+    span01.setAttribute("class", "charSiblingOutputItems");
+    charSiblingOutput.appendChild(span01);
+    appendBR(charSiblingOutput);*/
 }
 
 function randPersTraitsClick() {
@@ -977,6 +1061,9 @@ function randPersTraitsClick() {
     var persTraitsField = document.getElementById("persTraitsField");
     var persRoll = getRandomInt(1,10);
     persTraitsField.value = persTraits[persRoll];
+
+    var persTraitCharOutput = document.getElementById("persTraitCharOutput");
+    persTraitCharOutput.innerHTML = persTraitsField.value;
 
 }
 
@@ -1000,6 +1087,8 @@ function manualPersTraitsClick() {
     persTraitsSelect.onchange = persTraitsSelectChange;
     persTraitsField.value = persTraitsSelect[persTraitsSelect.selectedIndex].text;
 
+    var persTraitCharOutput = document.getElementById("persTraitCharOutput");
+    persTraitCharOutput.innerHTML = persTraitsField.value;
 }
 
 function persTraitsSelectChange() {
@@ -1016,6 +1105,9 @@ function randPersValueClick() {
     var persValRoll = getRandomInt(1,10);
     var persValField = document.getElementById("persValField");
     persValField.value = persValued[persValRoll];
+
+    var persValCharOutput = document.getElementById("persValCharOutput");
+    persValCharOutput.innerHTML = persValField.value;
 }
 
 function manualPersValueClick() {
@@ -1038,6 +1130,8 @@ function manualPersValueClick() {
     persValSelect.onchange = persValSelectChange;
     persValField.value = persValSelect[persValSelect.selectedIndex].text;
 
+    var persValCharOutput = document.getElementById("persValCharOutput");
+    persValCharOutput.innerHTML = persValField.value;
 }
 
 function persValSelectChange() {
@@ -1045,6 +1139,11 @@ function persValSelectChange() {
     var persValSelect = document.getElementById("persValSelect");
     var persValField = document.getElementById("persValField");
     persValField.value = persValSelect[persValSelect.selectedIndex].text;
+
+    var persValCharOutput = document.getElementById("persValCharOutput");
+    persValCharOutput.innerHTML = persValField.value;
+
+
 }
 
 function randYouValueClick() {
@@ -1054,6 +1153,9 @@ function randYouValueClick() {
     var youValRoll = getRandomInt(1,10);
     var youValField = document.getElementById("youValField");
     youValField.value = youValue[youValRoll];
+
+    var valMostCharOutput = document.getElementById("valMostCharOutput");
+    valMostCharOutput.innerHTML = youValField.value;
 }
 
 function manYouValueClick() {
@@ -1075,6 +1177,9 @@ function manYouValueClick() {
     }
     youValSelect.onchange = youValSelectChange;
     youValField.value = youValSelect[youValSelect.selectedIndex].text;
+
+    var valMostCharOutput = document.getElementById("valMostCharOutput");
+    valMostCharOutput.innerHTML = youValField.value;
 }
 
 function youValSelectChange() {
@@ -1082,6 +1187,9 @@ function youValSelectChange() {
     var youValSelect = document.getElementById("youValSelect");
     var youValField = document.getElementById("youValField");
     youValField.value = youValSelect[youValSelect.selectedIndex].text;
+
+    var valMostCharOutput = document.getElementById("valMostCharOutput");
+    valMostCharOutput.innerHTML = youValField.value;
 }
 
 function randYouFeelClick() {
@@ -1091,6 +1199,9 @@ function randYouFeelClick() {
     var youFeelRoll = getRandomInt(1,10);
     var youFeelField = document.getElementById("youFeelField");
     youFeelField.value = howFeel[youFeelRoll];
+
+    var feelPeopleCharOutput = document.getElementById("feelPeopleCharOutput");
+    feelPeopleCharOutput.innerHTML = youFeelField.value;
 }
 
 function manYouFeelClick() {
@@ -1112,6 +1223,9 @@ function manYouFeelClick() {
     }
     youFeelSelect.onchange = youFeelSelectChange;
     youFeelField.value = youFeelSelect[youFeelSelect.selectedIndex].text;
+
+    var feelPeopleCharOutput = document.getElementById("feelPeopleCharOutput");
+    feelPeopleCharOutput.innerHTML = youFeelField.value;
 }
 
 function youFeelSelectChange() {
@@ -1119,6 +1233,9 @@ function youFeelSelectChange() {
     var youFeelSelect = document.getElementById("youFeelSelect");
     var youFeelField = document.getElementById("youFeelField");
     youFeelField.value = youFeelSelect[youFeelSelect.selectedIndex].text;
+
+    var feelPeopleCharOutput = document.getElementById("feelPeopleCharOutput");
+    feelPeopleCharOutput.innerHTML = youFeelField.value;
 }
 
 function randPosClick() {
@@ -1128,6 +1245,9 @@ function randPosClick() {
     var posRoll = getRandomInt(1,10);
     var posField = document.getElementById("posField");
     posField.value = valuedPos[posRoll];
+
+    var valPosessionCharOutput = document.getElementById("valPosessionCharOutput");
+    valPosessionCharOutput.innerHTML = posField.value;
 }
 
 function manPosClick() {
@@ -1149,6 +1269,9 @@ function manPosClick() {
     }
     posSelect.onchange = ManPosSelectChange;
     posField.value = posSelect[posSelect.selectedIndex].text;
+
+    var valPosessionCharOutput = document.getElementById("valPosessionCharOutput");
+    valPosessionCharOutput.innerHTML = posField.value;
 }
 
 function ManPosSelectChange() {
@@ -1156,6 +1279,9 @@ function ManPosSelectChange() {
     var posSelect = document.getElementById("posSelect");
     var posField = document.getElementById("posField");
     posField.value = posSelect[posSelect.selectedIndex].text;
+
+    var valPosessionCharOutput = document.getElementById("valPosessionCharOutput");
+    valPosessionCharOutput.innerHTML = posField.value;
 }
 
 function randAgeClick() {
@@ -1786,7 +1912,7 @@ var howFeel = {
     2: "Neutral",
     3: "I like almost everyone",
     4: "I hate almost everyone",
-    5: "People are tools. Use them for your own goals and discard them.",
+    5: "People are tools. Use them for your own goals and discard them",
     6: "Every person is a valuable individual",
     7: "People are obstacles to be destroyed if they cross me",
     8: "People are untrustworthy. Don't depend on anyone",

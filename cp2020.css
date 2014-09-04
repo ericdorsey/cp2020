@@ -8,7 +8,9 @@ input {
 }
 
 #fullCharOutput {
+    /*float: right;*/
     position: fixed;
+    overflow: scroll;
     top: 0;
     right: 0;
     padding-right: 10px;
@@ -420,14 +422,14 @@ input {
     margin-top: 7px;
 }
 
+/* Skills */
 #skills_label {
     background-color: black;
     color: white;
     text-transform: uppercase;
     font-weight: bold;
     padding: 4px;
-    /*display: block;*/
-    /*clear: both;*/
+    margin-left: 5px;
 }
 
 #skillCharOutput {
@@ -443,6 +445,8 @@ input {
     display: block;
 }
 
+
+/* Style */
 #charStyleOutput {
     display: block;
     margin-left: 5px;
@@ -458,7 +462,6 @@ input {
     padding: 4px;
 }
 
-/* Style */
 #clothesCharOutput_label {
     font-weight: bold;
 }
@@ -476,5 +479,77 @@ input {
 }
 
 #langCharOutput_label {
+    font-weight: bold;
+}
+
+/* Siblings */
+#charSiblingOutput {
+    margin-left: 5px;
+}
+
+#siblingCharOutputTitle {
+    margin-left: 5px;
+}
+
+#siblingCharOutputTitle {
+    margin-top: 2px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px;
+}
+
+#charSiblingOutputNum {
+    border: 1px solid black;
+    font-weight: bold;
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    padding: 2px;
+    text-align: center;
+}
+
+.charSiblingOutputItems {
+    text-transform: capitalize;
+}
+
+
+/* Motivations */
+#charMotivOutput {
+    margin-left: 5px;
+}
+
+#motivCharOutput {
+    margin-top: 2px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px;
+}
+
+#persTraitCharOutput_label {
+    font-weight: bold;
+}
+
+#persValCharOutput_label {
+    font-weight: bold;
+}
+
+#valMostCharOutput_label {
+    font-weight: bold;
+}
+
+#feelPeopleCharOutput_label {
+    font-weight: bold;
+}
+
+#valPosessionCharOutput_label {
     font-weight: bold;
 }
