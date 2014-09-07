@@ -6,3 +6,6 @@
 
 #OSX
 *.DS_Store
+
+#Misc untracked 
+gitNo/
