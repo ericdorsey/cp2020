@@ -144,6 +144,34 @@
 
 
     </div>
+
+    <label for="famBackCharOutputTitle" id="famBackCharOutputTitle_label">
+        <span id="famBackCharOutputTitle">Family Background</span>
+    </label>
+    <br>
+    <div id="charFamOutput">
+        <label for="famRankCharOutput" id="famRankCharOutput_label">
+            Family Ranking:
+        </label>
+        <span id="famRankCharOutput">&nbsp;</span>
+        <br>
+        <label for="parentStatusCharOutput" id="parentStatusCharOutput_label">
+            Status of Parents:
+        </label>
+        <span id="parentStatusCharOutput">&nbsp;</span>
+        <br>
+        <label for="familyStatusCharOutput" id="familyStatusCharOutput_label">
+            Family Status:
+        </label>
+        <span id="familyStatusCharOutput">&nbsp;</span>
+        <br>
+        <label for="childEnvCharOutput" id="childEnvCharOutput_label">
+            Childhood Environment:
+        </label>
+        <span id="childEnvCharOutput">&nbsp;</span>
+
+    </div>
+
     <label for="siblingCharOutputTitle" id="siblingCharOutputTitle_label">
         <span id="siblingCharOutputTitle">Siblings</span><span id="charSiblingOutputNum">&nbsp;&nbsp;&nbsp;</span>
     </label>
@@ -327,7 +355,7 @@
     <h3 class="sub3Head">Origins and Personal Style</h3>
     <br>
     <h4 class="sub4Head">Dress & Personal Style</h4>
-    <p></p>
+    <br>
     <form>
         <input type="radio" name="persStyle" id="rollStyle"> Randomly Choose Style
         <br> <input type="radio" name="persStyle" id="manualStyle"> Manually Choose Style
@@ -347,35 +375,34 @@
     <form>
         <input type="radio" name="ethnic" id="rollEth"> Randomly Choose Origin
         <br>
-        <span class="instruction"> Roll 1D10 to choose</span>
-        <br>
         <input type="radio" name="ethnic" id="manualEth"> Manually Choose Origin
         <br>
         <select id="manualEthSelect"></select>
         <select id="manualLangSelect"></select>
 
-        <br>Ethnicity <input type="text" id="ethField" size="20" disabled="true">
+        Ethnicity <input type="text" id="ethField" size="30" disabled="true">
         <br>Language <input type="text" id="ethLang" size="20" disabled="true">
     </form>
-    <h3>Family Background</h3>
-    <h4>Family Ranking</h4>
+
+    <br>
+    <h3 class="sub3Head">Family Background</h3>
+    <br>
+    <h4 class="sub4Head">Family Ranking</h4>
+    <br>
     <form>
         <input type="radio" name="famRank" id="randFam"> Randomly Choose Family Ranking
         <br>
         <input type="radio" name="famRank" id="manualFam"> Manually Choose Family Ranking
         <br>
         <select id="manualFamSelect"></select>
-        <br>Family Ranking <input type="text" id="famRankField" disabled="true">
-    </form>
-    <h4>Parents</h4>
-  <!--  <span class="instruction">
-      <ul>Choose or roll one:
-          <li>1-6: Both parents are living</li>
-          <li>7-10: Something has happened to one or both parents</li>
-      </ul>
-    </span>-->
-    <form>
 
+        Family Ranking <input type="text" id="famRankField" disabled="true" size="25">
+    </form>
+
+    <br>
+    <h4 class="sub4Head">Parents</h4>
+    <br>
+    <form>
         <label for="randParents">
             <input type="radio" name="parentsAlive" id="randParents"> Randomly Choose Status of Parents
         </label>
@@ -385,15 +412,15 @@
             <input type="radio" name="parentsAlive" id="manualParents"> Manually Choose Status of Parents
         </label>
 
-        <p>
-            <label for="parentsOkayRadio" id="parentsOkayRadio_label">
-                <input type="radio" name="manualParentStatus" id="parentsOkayRadio"> Parents okay
-            </label>
 
-            <label for="parentsIssuesRadio" id="parentsIssuesRadio_label">
-                <input type="radio" name="manualParentStatus" id="parentsIssuesRadio"> Something happend to parents
-            </label>
-        </p>
+        <label for="parentsOkayRadio" id="parentsOkayRadio_label">
+            <input type="radio" name="manualParentStatus" id="parentsOkayRadio"> Parents okay
+        </label>
+
+        <label for="parentsIssuesRadio" id="parentsIssuesRadio_label">
+            <input type="radio" name="manualParentStatus" id="parentsIssuesRadio"> Something happend to parents
+        </label>
+
         <select id="manualParentSelect"></select>
         <br>
         Status of Parents:
@@ -404,42 +431,39 @@
             <input type="text" size="60" id="parentSomethingHappenedField" disabled="true">
         </p>
     </form>
-    <h4>Family Status</h4>
+    <br>
+    <h4 class="sub4Head">Family Status</h4>
+    <br>
     <form>
         <label for="randFamilyStatus" id="randFamilyStatus_label">
             <input type="radio" name="familyStatus" id="randFamilyStatus"> Randomly Choose Family Status
         </label>
         <br>
+
         <label for="manualFamilyStatus" id="manualFamilyStatus_label">
             <input type="radio"  name="familyStatus" id="manualFamilyStatus"> Manually Choose Family Status
         </label>
         <br>
-        <br>
-            <label for="manualFamDanger" id="manualFamDanger_label">
-                <input type="radio" name="manualFam" id="manualFamDanger"> Family status in danger
-            </label>
-            <br>
-            <label for="manualFamOkay" id="manualFamOkay_label">
-                <input type="radio" name="manualFam" id="manualFamOkay"> Family status is OK
-            </label>
+        <label for="manualFamDanger" id="manualFamDanger_label">
+           <input type="radio" name="manualFam" id="manualFamDanger"> Family status in danger
+        </label>
+        <label for="manualFamOkay" id="manualFamOkay_label">
+            <input type="radio" name="manualFam" id="manualFamOkay"> Family status is OK
+        </label>
 
 
-        <h4 id="famTragedyHeader" class="sub4Head">Family Tragedy</h4>
+        <!--<h4 id="famTragedyHeader" class="sub4Head">Family Tragedy</h4>-->
+        <span id="famTragedyHeader">Family Tragedy</span>
         <select id="familyTragedySelect"></select>
-        <!--<br>-->
-        <!--<br>-->
-        <br>
-        <label for="familyTragedyOutput" id="familyTragedyOutput_label">
-            Family Tragedy Detail
-            <br>
+          <label for="familyTragedyOutput" id="familyTragedyOutput_label">
+            <!--Family Tragedy Detail-->
             <textarea id="familyTragedyOutput" rows="3" cols=35 disabled="true"></textarea>
         </label>
-        <br>
+
             <label for="familyStatus" id="familyStatus_label">
                 Family Status
                 <input type="text" size="65" id="familyStatus" disabled="true">
             </label>
-        </p>
     </form>
     <h4>Childhood Environment</h4>
     <label for="randChildEnv" id="randChildEnv_label">

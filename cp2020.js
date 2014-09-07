@@ -21,6 +21,7 @@
  > Add Age instructions (minimum 17, max 99)
  > Life Events: fix "make an enemy" row .. <td colspan="2"> ?
  > Make updating stats fields affect rolls remaining?
+ > What this doesn't do: ie, cyberware, gear,
  */
 
 function getRandomInt(min,max) {
@@ -265,6 +266,13 @@ function rollEthClick() {
 
     ethField.value = ethnic.origins[ethRoll].origin;
     ethLang.value = ethnic.origins[ethRoll].languages[langChoice];
+
+    var ethCharOutput = document.getElementById("ethCharOutput");
+    ethCharOutput.innerHTML = ethField.value;
+
+    var langCharOutput = document.getElementById("langCharOutput");
+    //var ethLang = document.getElementById("ethLang");
+    langCharOutput.innerHTML = ethLang.value;
 }
 
 function manualEthClick() { //Manual ethnicity radio button clicked
@@ -272,6 +280,10 @@ function manualEthClick() { //Manual ethnicity radio button clicked
     //console.log("manualEthClick() fired");
     var manualEthSelect = document.getElementById("manualEthSelect");
     var manualLangSelect = document.getElementById("manualLangSelect");
+
+    while (manualEthSelect.firstChild) {
+        manualEthSelect.removeChild(manualEthSelect.firstChild);
+    }
 
     manualEthSelect.style.display = "block";
     manualLangSelect.style.display = "block";
@@ -290,18 +302,20 @@ function manualEthClick() { //Manual ethnicity radio button clicked
     }
     updateLang();
     manualLangSelectChange();
+
+    var ethField = document.getElementById("ethField");
+    var ethCharOutput = document.getElementById("ethCharOutput");
+    ethCharOutput.innerHTML = ethField.value;
 }
 
 function clearLang() {
     "use strict";
     var manualLangSelect = document.getElementById("manualLangSelect");
-    //console.log("\n** clearLang() fired; begin **");
 
     //Clean (clear) the languages dropdown
     while (manualLangSelect.firstChild) { //Remove all children (options) from manualLangSelect
         manualLangSelect.removeChild(manualLangSelect.firstChild);
     }
-    //console.log("** clearLang() fired; end **");
 }
 
 function updateLang() { //update the languages dropdown based on ethnicity selection
@@ -329,6 +343,10 @@ function updateLang() { //update the languages dropdown based on ethnicity selec
     //Update the ethnicity and language output
     manualEthSelectChange();
     manualLangSelectChange();
+
+    var langCharOutput = document.getElementById("langCharOutput");
+    var ethLang = document.getElementById("ethLang");
+    langCharOutput.innerHTML = ethLang.value;
 }
 
 function manualEthSelectChange() {
@@ -336,6 +354,13 @@ function manualEthSelectChange() {
     var ethField = document.getElementById("ethField");
     var manualEthSelect = document.getElementById("manualEthSelect");
     ethField.value = manualEthSelect.options[manualEthSelect.selectedIndex].text;
+
+    var ethCharOutput = document.getElementById("ethCharOutput");
+    ethCharOutput.innerHTML = ethField.value;
+
+    var langCharOutput = document.getElementById("langCharOutput");
+    var ethLang = document.getElementById("ethLang");
+    langCharOutput.innerHTML = ethLang.value;
 }
 
 function manualLangSelectChange() {
@@ -343,6 +368,10 @@ function manualLangSelectChange() {
     var ethLang = document.getElementById("ethLang");
     var manualLangSelect = document.getElementById("manualLangSelect");
     ethLang.value = manualLangSelect.options[manualLangSelect.selectedIndex].text;
+
+    var langCharOutput = document.getElementById("langCharOutput");
+    //var ethLang = document.getElementById("ethLang");
+    langCharOutput.innerHTML = ethLang.value;
 }
 
 function randFamClick() {
@@ -354,6 +383,9 @@ function randFamClick() {
     var famRankField = document.getElementById("famRankField");
     var randFamRoll = getRandomInt(1,10);
     famRankField.value = famRank[randFamRoll];
+
+    var famRankCharOutput = document.getElementById("famRankCharOutput");
+    famRankCharOutput.innerHTML = famRankField.value;
 }
 
 function manualFamClick() {
@@ -361,6 +393,9 @@ function manualFamClick() {
     //console.log("manualFamClick() fired");
     var manualFamSelect = document.getElementById("manualFamSelect");
     manualFamSelect.style.display = "block";
+    while (manualFamSelect.firstChild) { //Remove all children (options) from manualLangSelect
+        manualFamSelect.removeChild(manualFamSelect.firstChild);
+    }
 
     var famRankLength = Object.keys(famRank).length;
     //Build the Family Rank dropdown
@@ -373,6 +408,10 @@ function manualFamClick() {
     }
     //auto populate the famRankField on first build of Family Rank dropdown
     manualFamSelectChange();
+
+    var famRankField = document.getElementById("famRankField");
+    var famRankCharOutput = document.getElementById("famRankCharOutput");
+    famRankCharOutput.innerHTML = famRankField.value;
 }
 
 function manualFamSelectChange() {
@@ -380,6 +419,9 @@ function manualFamSelectChange() {
     var manualFamSelect = document.getElementById("manualFamSelect");
     var famRankField = document.getElementById("famRankField");
     famRankField.value = manualFamSelect.options[manualFamSelect.selectedIndex].text;
+
+    var famRankCharOutput = document.getElementById("famRankCharOutput");
+    famRankCharOutput.innerHTML = famRankField.value;
 }
 
 function randParentsClick() {
@@ -407,8 +449,12 @@ function randParentsClick() {
     console.log("randParentsClick() fired");
     var randParentRoll = getRandomInt(1,10);
     console.log("randParentRoll: " + randParentRoll);
+
+    var parentStatusCharOutput = document.getElementById("parentStatusCharOutput");
+
     if (randParentRoll <= 6) {
         parentStatusField.value = parentStatus.okay;
+        parentStatusCharOutput.innerHTML = parentStatusField.value;
     } else if (randParentRoll >= 7) {
         //parentSomethingHappened.style.display = "block";
         parentSomethingHappened.style.display = "block";
@@ -417,7 +463,9 @@ function randParentsClick() {
         parentStatusField.value = parentStatus.somethingHappened;
         var parentTragedyRoll = getRandomInt(1,10);
         parentSomethingHappenedField.value = parentTragedy[parentTragedyRoll];
+        parentStatusCharOutput.innerHTML = parentStatusField.value.concat("; ").concat(parentSomethingHappenedField.value.toLowerCase());
     }
+
 }
 
 function manualParentsClick() {
@@ -443,6 +491,9 @@ function manualParentsClick() {
     parentSomethingHappenedField.style.display = "none"; //hide this initially
     console.log("manualParentsClick() fired");
     //Build the manual parent select
+    while (manualParentSelect.firstChild) {
+        manualParentSelect.removeChild(manualParentSelect.firstChild);
+    }
     var parentTragedyLength = Object.keys(parentTragedy).length;
     for (var i = 1; i <= parentTragedyLength; i++) {
         var opt = document.createElement("option");
@@ -450,6 +501,9 @@ function manualParentsClick() {
         opt.textContent = parentTragedy[i];
         manualParentSelect.appendChild(opt);
     }
+    //Un"check" the two other manual option radio buttons
+    document.getElementById("parentsOkayRadio").checked = false;
+    document.getElementById("parentsIssuesRadio").checked = false;
 }
 
 function parentsOkayRadioClick() {
@@ -458,12 +512,13 @@ function parentsOkayRadioClick() {
     var parentSomethingHappened = document.getElementById("parentSomethingHappened");
     var parentSomethingHappenedField = document.getElementById("parentSomethingHappenedField");
     var parentStatusField = document.getElementById("parentStatusField");
+    var parentStatusCharOutput = document.getElementById("parentStatusCharOutput");
 
     manualParentSelect.style.display = "none";
     parentSomethingHappened.style.display = "none";
     parentSomethingHappenedField.style.display = "none";
     parentStatusField.value = parentStatus.okay;
-
+    parentStatusCharOutput.innerHTML = parentStatusField.value;
 }
 
 function parentsIssuesRadioClick() {
@@ -472,12 +527,14 @@ function parentsIssuesRadioClick() {
     var parentSomethingHappened = document.getElementById("parentSomethingHappened");
     var parentSomethingHappenedField = document.getElementById("parentSomethingHappenedField");
     var parentStatusField = document.getElementById("parentStatusField");
+    var parentStatusCharOutput = document.getElementById("parentStatusCharOutput");
 
     manualParentSelect.style.display = "block"; //Show the issues w/ parents dropdown
     parentSomethingHappened.style.display = "block";
     parentSomethingHappenedField.style.display = "block";
     parentStatusField.value = parentStatus.somethingHappened; //update Status of Parents output
     manualParentSelectChange();
+    parentStatusCharOutput.innerHTML = parentStatusField.value.concat("; ").concat(parentSomethingHappenedField.value.toLowerCase());
 }
 
 function manualParentSelectClick() {
@@ -492,7 +549,11 @@ function manualParentSelectChange() {
     var manualParentSelect = document.getElementById("manualParentSelect");
     var parentStatusField = document.getElementById("parentStatusField");
     var parentSomethingHappenedField = document.getElementById("parentSomethingHappenedField");
+    var parentStatusCharOutput = document.getElementById("parentStatusCharOutput");
+
     parentSomethingHappenedField.value = manualParentSelect[manualParentSelect.selectedIndex].text;
+    parentStatusCharOutput.innerHTML = parentStatusField.value.concat("; ").concat(parentSomethingHappenedField.value.toLowerCase());
+
 }
 
 function randFamilyStatusClick() {
@@ -506,6 +567,8 @@ function randFamilyStatusClick() {
     var familyTragedySelect = document.getElementById("familyTragedySelect");
     var famTragedyHeader = document.getElementById("famTragedyHeader");
     var familyStatus = document.getElementById("familyStatus");
+    //var familyStatus_label = document.getElementById("familyStatus_label");
+    var familyStatusCharOutput = document.getElementById("familyStatusCharOutput");
 
     //console.log(manualFamDanger);
     manualFamDanger.style.display = "none";
@@ -515,26 +578,33 @@ function randFamilyStatusClick() {
     famTragedyHeader.style.display = "none";
     familyTragedySelect.style.display = "none";
     famTragedyHeader.style.display = "none";
+    //familyStatus_label.style.display = "none";
+
 
     var famStatusRoll = getRandomInt(1,10);
     if (famStatusRoll <= 6) {
-        famTragedyHeader.style.display = "block";
+        //Family is in danger
+        famTragedyHeader.style.display = "inline-block";
+        familyStatus.style.display = "block";
         familyStatus.value = familyStatusOptions.danger;
-        familyTragedyOutput.style.display = "inline";
-        familyTragedyOutput_label.style.display = "inline";
-
+        familyTragedyOutput.style.display = "block";
+        familyTragedyOutput_label.style.display = "block";
         var famTragedyRoll = getRandomInt(1,10);
         familyTragedyOutput.value = familyTragedy[famTragedyRoll];
+        familyStatusCharOutput.innerHTML = familyStatus.value.concat("; ").concat(familyTragedyOutput.value.toLowerCase());
     } else if (famStatusRoll >= 7) {
+        //Family is okay
         familyStatus.value = familyStatusOptions.okay;
         familyTragedyOutput.style.display = "none";
         familyTragedyOutput_label.style.display = "none";
+        familyStatusCharOutput.innerHTML = familyStatus.value;
         //familyTragedySelect.style.display = "none";
     }
 }
 
 function manualFamilyStatusClick() {
     "use strict";
+    console.log("manualFamilyStatusClick fired");
     var familyStatus = document.getElementById("familyStatus");
     var familyTragedyOutput = document.getElementById("familyTragedyOutput");
     var manualFamDanger = document.getElementById("manualFamDanger");
@@ -543,12 +613,16 @@ function manualFamilyStatusClick() {
     var manualFamOkay_label = document.getElementById("manualFamOkay_label");
     var famTragedyHeader = document.getElementById("famTragedyHeader");
 
+    //Un"check" the two other manual option radio buttons
+    document.getElementById("manualFamDanger").checked = false;
+    document.getElementById("manualFamOkay").checked = false;
+
     familyStatus.value = "";
     familyTragedyOutput.value = "";
-    manualFamDanger.style.display = "inline";
-    manualFamDanger_label.style.display = "inline";
+    manualFamDanger.style.display = "inline-block";
+    manualFamDanger_label.style.display = "inline-block";
     manualFamOkay.style.display = "inline";
-    manualFamOkay_label.style.display = "inline";
+    manualFamOkay_label.style.display = "block";
     famTragedyHeader.style.display = "none";
 }
 
@@ -558,11 +632,12 @@ function manualFamDangerClick() {
     var familyTragedyOutput = document.getElementById("familyTragedyOutput");
     var familyTragedyOutput_label = document.getElementById("familyTragedyOutput_label");
     var familyTragedySelect = document.getElementById("familyTragedySelect");
+    var familyStatusCharOutput = document.getElementById("familyStatusCharOutput");
 
     familyStatus.value = familyStatusOptions.danger;
-    familyTragedyOutput.style.display = "inline";
-    familyTragedyOutput_label.style.display = "inline";
-    familyTragedySelect.style.display = "inline";
+    familyTragedyOutput.style.display = "block";
+    familyTragedyOutput_label.style.display = "block";
+    familyTragedySelect.style.display = "inline-block";
 
     //Remove all children (options) from familyTragedySelect
     while (familyTragedySelect.firstChild) {
@@ -574,9 +649,13 @@ function manualFamDangerClick() {
     for (var i = 1; i <= familyTragedyLength; i++) {
         var opt = document.createElement("option");
         opt.value = i;
-        opt.textContent = familyTragedy[i].substring(0,30).concat("...");
+        opt.textContent = familyTragedy[i].substring(0,60).concat("...");
         familyTragedySelect.appendChild(opt);
     }
+    var famTragedyTemp = familyTragedySelect[familyTragedySelect.selectedIndex].value;
+    //console.log(famTragedyTemp);
+    familyTragedyOutput.value = familyTragedy[famTragedyTemp];
+    familyStatusCharOutput.innerHTML = familyStatus.value.concat("; ").concat(familyTragedyOutput.value.toLowerCase());
     familyTragedySelectChange(); //push to familyTragedyOutput on first choosing
 }
 
@@ -587,12 +666,16 @@ function manualFamOkayClick() {
     var familyTragedyOutput_label = document.getElementById("familyTragedyOutput_label");
     var familyTragedySelect = document.getElementById("familyTragedySelect");
     var famTragedyHeader = document.getElementById("famTragedyHeader");
+    var familyStatusCharOutput = document.getElementById("familyStatusCharOutput");
 
+
+    familyStatus.style.display = "block";
     familyStatus.value = familyStatusOptions.okay;
     familyTragedyOutput.style.display = "none";
     familyTragedyOutput_label.style.display = "none";
     famTragedyHeader.style.display = "none";
     familyTragedySelect.style.display = "none";
+    familyStatusCharOutput.innerHTML = familyStatus.value;
 }
 
 function familyTragedySelectChange() {
@@ -604,7 +687,11 @@ function familyTragedySelectChange() {
     famTragedyHeader.style.display = "block";
     var famTragedyTemp = familyTragedySelect[familyTragedySelect.selectedIndex].value;
     //console.log(famTragedyTemp);
+    var familyStatus = document.getElementById("familyStatus");
+
     familyTragedyOutput.value = familyTragedy[famTragedyTemp];
+    var familyStatusCharOutput = document.getElementById("familyStatusCharOutput");
+    familyStatusCharOutput.innerHTML = familyStatus.value.concat("; ").concat(familyTragedyOutput.value.toLowerCase());
 }
 
 function randChildEnvClick() {
@@ -647,34 +734,12 @@ function manualChildSelectChange() {
     childEnvOutput.value = manualChildSelect[manualChildSelect.selectedIndex].text;
 }
 
-function removeElementsByClass(className) {
-    "use strict";
-    //http://stackoverflow.com/questions/4777077/removing-elements-by-class-name
-    var elements = document.getElementsByClassName(className);
-    while (elements.length > 0) {
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-}
-
 function killChildren(myNode) {
     "use strict";
     //var myNode = document.getElementById("foo");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-}
-
-function removeElementById(id) {
-    "use strict";
-    var removeID = document.getElementById(id);
-    //console.log(removeID);
-    if (removeID) {
-        console.log("found a matching # id to remove");
-        removeID.parentNode.removeChild(removeID);
-    } else {
-        console.log("couldn't find matching #id to remove");
-    }
-
 }
 
 function randSiblingsClick() {
@@ -1036,20 +1101,6 @@ function siblingOutputSelectsChange(eventObj) {
         charSiblingOutput.appendChild(span01);
         appendBR(charSiblingOutput);
     }
-
-
-
-
-    /*var theNum = theID[theID.length-1];
-    console.log(theNum);
-    var span01 = document.createElement("span");
-    //span01.innerHTML = textBox2.value.concat(", ").concat(textBox.value).concat("; ").concat(textBox3.value);
-    span01.innertHTML =
-    span01.innerHTML = theField.value;
-    //console.log(theField.nextSibling.nextSibling);
-    span01.setAttribute("class", "charSiblingOutputItems");
-    charSiblingOutput.appendChild(span01);
-    appendBR(charSiblingOutput);*/
 }
 
 function randPersTraitsClick() {
@@ -1818,7 +1869,7 @@ var familyTragedy = {
     3: "Family exiled or otherwise driven from their original home/ nation/ corporation",
     4: "Family is imprisoned and you alone escaped",
     5: "Family vanished. You are the only remaining member",
-    6: "Family was murdered/ killed and you were the only survivor",
+    6: "Family was murdered or killed, and you were the only survivor",
     7: "Family is involved in a longterm conspiracy, organization or assocation, such as a crime family or revolutionary group",
     8: "Your family was scattered to the winds due to misfortune",
     9: "Your family is cursed with a hereditary feud that has lasted for generations",
@@ -2529,7 +2580,7 @@ var skills = {
         int06: "Chemistry",
         int07: "Composition",
         int08: "Diagnose Illness",
-        int09: "Education & General Knowledge",
+        int09: "Ed./General Knowledge",
         int10: {main: "Expert", sub: ""},
         int11: "Gamble",
         int12: "Geology",
