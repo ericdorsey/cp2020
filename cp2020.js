@@ -7,18 +7,11 @@
  > Instructions - can click radio buttons again to refresh / or change to buttons?
  > Run; add a convert to feet field
  > Cleanup console.log debugging
- > Scrolling (eased scrolling?) with dynamic forms popping in below
-    http://stackoverflow.com/questions/5007530/how-do-i-scroll-to-an-element-using-javascript
-    element = document.getElementById("divFirst")
-    alignWithTop = true;
-    element.scrollIntoView(alignWithTop);
- > Convert kg to lbs function? (inside updateBodyDerived())
  > Don't allow zero values in statistics fields
  > After get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
  > Make the disaster strikes stuff affect main statistics
  > Track money gained / lost from life events
  > Add Age instructions (minimum 17, max 99)
- > Life Events: fix "make an enemy" row .. <td colspan="2"> ?
  > Make updating stats fields affect rolls remaining?
  > What this doesn't do: ie, cyberware, gear,
  > Allow "turn off 'nothing happened' events"
@@ -1526,10 +1519,6 @@ function randLifeEvent(age) {
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, connection);
 
             } else if (thirdLifeRoll === 2) {
-                //console.log(getLucky[thirdLifeRoll].title);
-                //console.log(getLucky[thirdLifeRoll].detail);
-                //console.log(getLucky.windfallAmount);
-                //getLucky = addWindfall(getLucky, age);
                 addWindfall(getLucky, age);
                 //console.log(getLucky.windfallAmount);
                 amount = "Amount: " + getLucky.windfallHistory[age] + " eb";
@@ -1654,7 +1643,7 @@ function randLifeEvent(age) {
         //console.log("Romantic involvement: ");
         var metaEventType = "Romance: ";
         if (secondLifeRoll <= 4) {
-            eventType = metaEventType.concat("Happy Love Affair");
+            eventType = metaEventType;//.concat("Happy Love Affair");
             //console.log("happy");
             romance.addHappyAffair(age);
             //console.log(romance);
@@ -1672,7 +1661,7 @@ function randLifeEvent(age) {
             //console.log(romance);
             addLifeRow(age, eventType, romance.problemHistory[age], romance.problemDetail[age]);
         } else if (secondLifeRoll >= 8) {
-            eventType = metaEventType.concat("Fast Affairs / Hot Dates");
+            eventType = metaEventType;//.concat("Fast Affairs / Hot Dates");
             //console.log("fast affairs");
             romance.addFast(age);
             addLifeRow(age, eventType, romance.fastHistory[age], romance.fastDetail[age]);
@@ -1712,9 +1701,11 @@ function randLifeEvent(age) {
 
             if (charOutputEvent !== "Make an Enemy") {
                 charOutputResult = lifeTable.rows[i].cells[2].innerHTML;
+                console.log("line 1704 charOutputResult", charOutputResult);
                 console.log(charOutputResult);
 
                 charOutputDetail = lifeTable.rows[i].cells[3].innerHTML;
+                console.log("line 1708 charOutputDetail", charOutputDetail);
                 console.log(charOutputDetail);
             }
 
@@ -1723,7 +1714,6 @@ function randLifeEvent(age) {
                 //console.log(currCell.childNodes[k].localName);
                 if (currCell.childNodes[k].localName === "table" && currCell.childNodes[k].localName !== "null") {
                     console.log("enemy Detail Table found");
-                    //charOutputResult = "enemey!!!";
                     console.log(currCell.childNodes[k]);
                     var tempEnemyTable = currCell.childNodes[k];
                     console.log(tempEnemyTable.rows.length);
@@ -1731,6 +1721,8 @@ function randLifeEvent(age) {
                         console.log(tempEnemyTable.rows[l]);
                         var targetRows = tempEnemyTable.rows[l];
                         console.log(targetRows.cells.length);
+                        charOutputResult = "";
+                        charOutputDetail = "";
                         for (var m = 0; m < targetRows.cells.length; m++) {
                             console.log(targetRows.cells[m].innerHTML);
                             console.log("m is: ", m);
@@ -1751,23 +1743,27 @@ function randLifeEvent(age) {
         //charLifeEvents.appendChild(span01);
     }
 
+    /*var charOutputAge = "";
+    var charOutputEvent = "";
+    var charOutputResult = "";
+    var charOutputDetail = "";*/
+
     var span01 = document.createElement("span"); //Age
     span01.innerHTML = charOutputAge.concat(". ");
     charLifeEvents.appendChild(span01);
 
     var span02 = document.createElement("span");
-    span02.innerHTML = charOutputEvent.concat(", ");
+    span02.innerHTML = charOutputEvent.concat(". ");
     charLifeEvents.appendChild(span02);
 
     var span03 = document.createElement("span");
     if (charOutputEvent !== "Make an Enemy") {
-        span03.innerHTML = charOutputResult.concat(", ");
+        span03.innerHTML = charOutputResult.concat(". ");
     } else {
         span03.innerHTML = charOutputResult;
     }
 
-    if (charOutputEvent.innerHTML !== "n/a") { //Don't append n/a results/details
-        //console.log()
+    if (charOutputResult !== "n/a") {// || charOutputResult.innerHTML !== "n/a") { //Don't append n/a results
         charLifeEvents.appendChild(span03);
     }
 
@@ -1775,11 +1771,11 @@ function randLifeEvent(age) {
         var span04 = document.createElement("span");
         span04.innerHTML = charOutputDetail;
 
-        if (charOutputDetail.innerHTML !== "n/a") {
-            //console.log("charOutputDetail", charOutputDetail);
+        if (charOutputDetail !== "n/a") {// || charOutputDetail.innerHTML !== "n/a") {
             charLifeEvents.appendChild(span04);
         }
     }
+
 
 
 
@@ -2096,7 +2092,7 @@ var disaster = {
         this.accidentAmount += 1;
         var randInt = getRandomInt(1,10);
         if (fourthLifeRoll <= 4) {
-            this.accidentDetail[age] = "Terribly disfigured. Subtract -5 from ATT.";
+            this.accidentDetail[age] = "Terribly disfigured. Subtract -5 from ATT";
         } else if (fourthLifeRoll >= 5 && fourthLifeRoll <= 6) {
             this.accidentDetail[age] = "Hospitalized for " + randInt + " months this year";
         } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
@@ -2203,7 +2199,7 @@ var disaster = {
         " (your choice). Roll 1D10 for length of imprisonment in months."},
     3: {title: "Illness or addiction", detail: "You have contracted either an illness or" +
         " drug habit in this time. Lose 1 point of REF permanently as a result."},
-    4: {title: "Betrayal. You have been backstabbed in some manner.", detail:
+    4: {title: "Betrayal. You have been backstabbed in some manner", detail:
         "Roll another 1D10. 1-3, you are being blackmailed. 4-7 a secret was".concat( /*+*/
         " exposed. 8-10, you were betrayed by a close friend in either romance",
         " or career (your choice).")},

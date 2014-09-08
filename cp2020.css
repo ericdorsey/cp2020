@@ -7,23 +7,6 @@ input {
     font-weight: bold;
 }
 
-#fullCharOutput {
-    float: right;
-    /*position: fixed;*/
-    overflow: visible;
-    top: 0;
-    right: 0;
-    padding-right: 10px;
-    padding-top: 6px;
-    padding-left: 3px;
-    width: 48%;
-    border: 3px solid black;
-    background-color: white;
-    margin-top: 5px;
-    margin-right: 5px;
-    /*min-height: 185%;*/
-}
-
 #calcChar {
     position: relative;
     width: 48%;
@@ -113,8 +96,6 @@ input {
     padding-top: 12px;
 }
 
-
-
 #manualFamOkay {
     display: none;
 }
@@ -127,7 +108,6 @@ input {
 }
 #familyTragedySelect {
     display: none;
-    /*width: 400px;*/
 }
 
 #familyTragedyOutput {
@@ -136,7 +116,6 @@ input {
 #familyTragedyOutput_label {
     display: none;
 }
-
 
 #manualChildSelect {
     display: none;
@@ -289,7 +268,6 @@ input {
 
 #careerSkillTable {
     font-size: 15px;
-    /*border: 1px solid black;*/
 }
 
 #careerSkillTable td {
@@ -298,8 +276,6 @@ input {
 }
 
 #statRollTable {
-    /*border: 1px solid black;*/
-    /*width: 38% !important;*/
     font-size: 14px;
 }
 
@@ -308,7 +284,6 @@ input {
 }
 
 #statRollTable td {
-    /*width: 225px;*/
     width: 19%;
 }
 
@@ -317,24 +292,43 @@ input {
 }
 
 
-
 /* Begin Character Output */
+#fullCharOutput {
+    float: right;
+    /*position: fixed;*/
+    overflow: visible;
+    top: 0;
+    right: 0;
+    padding-right: 10px;
+    padding-left: 3px;
+    width: 48%;
+    border: 3px solid black;
+    background-color: white;
+    margin-top: 5px;
+    margin-right: 5px;
+    /*min-height: 185%;*/
+}
+
 #charNameOutput {
     border: 1px solid black;
     font-weight: bold;
     display: inline-block;
     width: 300px;
     height: 18px;
-    margin-left: 5px;
-    padding: 2px;
+   /* margin-left: 5px;*/
+    padding: 2px 5px;
+/*
+    padding-bottom: 5px;
+*/
 }
 
 #charNameOutput_label {
+    display: inline-block;
     background-color: black;
     color: white;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 3px;
+    padding: 5px 5px;
 }
 
 #charRoleOutput {
@@ -344,20 +338,21 @@ input {
     width: 100px;
     height: 18px;
     margin-left: 5px;
-    margin-top: 4px;
     padding: 2px;
 }
 
 #charRoleOutput_label {
+    display: inline-block;
     background-color: black;
     color: white;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 4px;
+    padding: 5px 5px;
+    margin-top: 5px;
 }
 
 .charStatOutput {
-    padding: 4px;
+    /*padding: 4px;*/
     text-transform: uppercase;
     font-weight: bold;
     font-size: 17px;
@@ -396,16 +391,14 @@ input {
     text-transform: uppercase;
     font-weight: bold;
     padding: 4px;
+    display: inline-block;
 }
 
 .savebtm {
-    /*border: 3px solid black;*/
-    /*float: left;*/
     display: inline-block;
     border-spacing: 0;
     border: 2px solid black;
     margin: 4px;
-    /*font-size: 13px;*/
 }
 
 .savebtm td {
@@ -431,6 +424,7 @@ input {
 
 #charOutputStats {
     margin-top: 7px;
+    padding-left: 5px;
 }
 
 /* Skills */
