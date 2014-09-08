@@ -1692,6 +1692,8 @@ function randLifeEvent(age) {
 
     var charOutputAge = "";
     var charOutputEvent = "";
+    var charOutputResult = "";
+    var charOutputDetail = "";
 
     for (var i = 1; i < lifeTable.rows.length; i++) {
         //console.log(lifeTable.rows[i]);
@@ -1708,11 +1710,20 @@ function randLifeEvent(age) {
             charOutputEvent = lifeTable.rows[i].cells[1].innerHTML; //Event
             console.log(charOutputEvent);
 
+            if (charOutputEvent !== "Make an Enemy") {
+                charOutputResult = lifeTable.rows[i].cells[2].innerHTML;
+                console.log(charOutputResult);
+
+                charOutputDetail = lifeTable.rows[i].cells[3].innerHTML;
+                console.log(charOutputDetail);
+            }
+
             //console.log(currCell.childNodes)
             for (var k = 0; k < currCell.childNodes.length; k++) {
                 //console.log(currCell.childNodes[k].localName);
                 if (currCell.childNodes[k].localName === "table" && currCell.childNodes[k].localName !== "null") {
                     console.log("enemy Detail Table found");
+                    //charOutputResult = "enemey!!!";
                     console.log(currCell.childNodes[k]);
                     var tempEnemyTable = currCell.childNodes[k];
                     console.log(tempEnemyTable.rows.length);
@@ -1722,6 +1733,15 @@ function randLifeEvent(age) {
                         console.log(targetRows.cells.length);
                         for (var m = 0; m < targetRows.cells.length; m++) {
                             console.log(targetRows.cells[m].innerHTML);
+                            console.log("m is: ", m);
+                            if (m === 0) {
+                                charOutputResult += targetRows.cells[m].innerHTML.concat(", "); //Result of life event
+                            } else if (m >= 1 && m <= 4) {
+                                charOutputResult += targetRows.cells[m].innerHTML.concat(", ");
+                            } else if (m === 5) {
+                                charOutputResult += targetRows.cells[m].innerHTML.concat(".");
+                            }
+
                         }
                     }
                 }
@@ -1731,13 +1751,37 @@ function randLifeEvent(age) {
         //charLifeEvents.appendChild(span01);
     }
 
-    var span01 = document.createElement("span");
-    span01.innerHTML = charOutputAge.concat(") ");
+    var span01 = document.createElement("span"); //Age
+    span01.innerHTML = charOutputAge.concat(". ");
     charLifeEvents.appendChild(span01);
 
     var span02 = document.createElement("span");
     span02.innerHTML = charOutputEvent.concat(", ");
     charLifeEvents.appendChild(span02);
+
+    var span03 = document.createElement("span");
+    if (charOutputEvent !== "Make an Enemy") {
+        span03.innerHTML = charOutputResult.concat(", ");
+    } else {
+        span03.innerHTML = charOutputResult;
+    }
+
+    if (charOutputEvent.innerHTML !== "n/a") { //Don't append n/a results/details
+        //console.log()
+        charLifeEvents.appendChild(span03);
+    }
+
+    if (charOutputDetail !== "Make an Enemy") {
+        var span04 = document.createElement("span");
+        span04.innerHTML = charOutputDetail;
+
+        if (charOutputDetail.innerHTML !== "n/a") {
+            //console.log("charOutputDetail", charOutputDetail);
+            charLifeEvents.appendChild(span04);
+        }
+    }
+
+
 
     appendBR(charLifeEvents);
 }
