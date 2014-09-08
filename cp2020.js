@@ -1351,7 +1351,13 @@ function randAgeClick() {
     ageField.value = age;
     var lifeEventStart = 17;
 
-    //Life Events
+    //Clean out the previous (if applicable) charLifeEvents div
+    var charLifeEvents = document.getElementById("charLifeEvents");
+    while(charLifeEvents.firstChild) {
+        charLifeEvents.removeChild(charLifeEvents.firstChild);
+    }
+
+    //Create Life Events
     for (var j = lifeEventStart; j <= age; j++) {
         //console.log(j);
         randLifeEvent(j);
@@ -1371,6 +1377,12 @@ function manAgeClick() {
     var rowCount = lifeTable.rows.length;
     for (var i = rowCount -1; i > 0 ;i--) {
         lifeTable.deleteRow(i);
+    }
+
+    //Clean out the previous (if applicable) charLifeEvents div
+    var charLifeEvents = document.getElementById("charLifeEvents");
+    while(charLifeEvents.firstChild) {
+        charLifeEvents.removeChild(charLifeEvents.firstChild);
     }
 
 }
@@ -1485,6 +1497,8 @@ function randLifeEvent(age) {
     var eventType = "";
     var connection = "";
     var amount = "";
+
+    //charOutput Life Events
     var charLifeEvents = document.getElementById("charLifeEvents");
 
     if (lifeEventRoll <= 3) {
@@ -1675,6 +1689,10 @@ function randLifeEvent(age) {
     var lifeTable = document.getElementById("lifeTable");
     //var charLifeEvents = document.getElementById("charLifeEvents");
     //console.log("lifeTable.rows", lifeTable.rows.length);
+
+    var charOutputAge = "";
+    var charOutputEvent = "";
+
     for (var i = 1; i < lifeTable.rows.length; i++) {
         //console.log(lifeTable.rows[i]);
         //console.log("lifeTable.rows[i].cells.length", lifeTable.rows[i].cells.length);
@@ -1684,11 +1702,11 @@ function randLifeEvent(age) {
             var currCell = lifeTable.rows[i].cells[j];
             console.log("currCell.innerHTML: ", currCell.innerHTML);
 
-            var charOutputAge = lifeTable.rows[i].cells[0].innerHTML;
+            charOutputAge = lifeTable.rows[i].cells[0].innerHTML; //Age
             console.log(charOutputAge);
-            var span01 = document.createElement("span");
-            span01.innerHTML = charOutputAge.concat("<br>");
 
+            charOutputEvent = lifeTable.rows[i].cells[1].innerHTML; //Event
+            console.log(charOutputEvent);
 
             //console.log(currCell.childNodes)
             for (var k = 0; k < currCell.childNodes.length; k++) {
@@ -1712,7 +1730,16 @@ function randLifeEvent(age) {
         }
         //charLifeEvents.appendChild(span01);
     }
+
+    var span01 = document.createElement("span");
+    span01.innerHTML = charOutputAge.concat(") ");
     charLifeEvents.appendChild(span01);
+
+    var span02 = document.createElement("span");
+    span02.innerHTML = charOutputEvent.concat(", ");
+    charLifeEvents.appendChild(span02);
+
+    appendBR(charLifeEvents);
 }
 
 function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
