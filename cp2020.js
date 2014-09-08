@@ -1,7 +1,6 @@
 /*
- > cleanup the noJS.html file to have a reference back
+ > Cleanup the noJS.html file to have a reference back
  Items to add?
- > test for Javascript in browser
  > Way to report issues / problems / feedback
  > Tie to a database?
  > Option to randomize everything
@@ -22,6 +21,7 @@
  > Life Events: fix "make an enemy" row .. <td colspan="2"> ?
  > Make updating stats fields affect rolls remaining?
  > What this doesn't do: ie, cyberware, gear,
+ > Allow "turn off 'nothing happened' events"
  */
 
 function getRandomInt(min,max) {
@@ -117,8 +117,6 @@ function updateBodyDerived() {
             btm.value = -5;
         }
     }
-
-
 }
 
 function rollStyleClick() {
@@ -159,8 +157,6 @@ function rollStyleClick() {
 
 function manualStyleClick() {
     "use strict";
-
-
     //Clothes, Hair, Affectations Selection Dropdowns
     var manualClothesSelect = document.getElementById("manualClothesSelect");
     var manualHairSelect = document.getElementById("manualHairSelect");
@@ -170,7 +166,6 @@ function manualStyleClick() {
     while (manualClothesSelect.firstChild) {
         manualClothesSelect.removeChild(manualClothesSelect.firstChild);
     }
-
     while (manualHairSelect.firstChild) {
         manualHairSelect.removeChild(manualHairSelect.firstChild);
     }
@@ -702,9 +697,11 @@ function randChildEnvClick() {
     manualChildSelect.style.display = "none";
     var randChildRoll = getRandomInt(1,10);
     childEnvOutput.value = childEnv[randChildRoll];
+
+    var childEnvCharOutput = document.getElementById("childEnvCharOutput");
+    childEnvCharOutput.innerHTML = childEnvOutput.value;
 }
 
-//MANUAL CHILDHOOD ENVIRONMENT
 function manualChildEnvClick() {
     "use strict";
     var childEnvOutput = document.getElementById("childEnvOutput");
@@ -716,8 +713,6 @@ function manualChildEnvClick() {
         manualChildSelect.removeChild(manualChildSelect.firstChild);
     }
 
-    //childEnvOutput.value = "";
-    //Build the manual child select dropdown
     for (var i = 1; i <= Object.keys(childEnv).length; i++) {
         var opt = document.createElement("option");
         opt.value = i;
@@ -725,6 +720,8 @@ function manualChildEnvClick() {
         manualChildSelect.appendChild(opt);
     }
     manualChildSelectChange();
+    var childEnvCharOutput = document.getElementById("childEnvCharOutput");
+    childEnvCharOutput.innerHTML = childEnvOutput.value;
 }
 
 function manualChildSelectChange() {
@@ -732,6 +729,9 @@ function manualChildSelectChange() {
     var childEnvOutput = document.getElementById("childEnvOutput");
     var manualChildSelect = document.getElementById("manualChildSelect");
     childEnvOutput.value = manualChildSelect[manualChildSelect.selectedIndex].text;
+
+    var childEnvCharOutput = document.getElementById("childEnvCharOutput");
+    childEnvCharOutput.innerHTML = childEnvOutput.value;
 }
 
 function killChildren(myNode) {
@@ -768,12 +768,11 @@ function randSiblingsClick() {
 
 
         for (var i = 1; i <= numSiblings; i++) {
-
             var siblingGender = getRandomInt(1,2);
             var siblingAge = getRandomInt(1,10);
             var siblingFeel = getRandomInt(1,10);
 
-            var siblingLabelPar = document.createElement("p");
+            var siblingLabelPar = document.createElement("span");
             var siblingLabelText = "Sibling ";
             siblingLabelText = siblingLabelText + i.toString();
             var siblingLabel = document.createTextNode(siblingLabelText);
@@ -797,9 +796,6 @@ function randSiblingsClick() {
             siblingsOutput.appendChild(textBox);
 
             appendBR(siblingsOutput);
-            //var br = document.createElement("br");
-            //br.setAttribute("class", "dynamicBR");
-            //siblingsContainer.appendChild(br);
 
             var label2 = document.createElement("label");
             label2.innerHTML = "age";
@@ -815,7 +811,6 @@ function randSiblingsClick() {
             } else if (siblingAge === 10) {
                 textBox2.value = siblingAges[3];
             }
-            //textBox2.value = siblingGenders[siblingGender];
 
             siblingsOutput.appendChild(label2);
             siblingsOutput.appendChild(textBox2);
@@ -829,7 +824,7 @@ function randSiblingsClick() {
             textBox3.type = "text";
             textBox3.setAttribute("disabled", "true");
             textBox3.setAttribute("class", "dynamicFeeling");
-            //textBox3.value = siblingGenders[siblingGender];
+
             if (siblingFeel <= 2) {
                 textBox3.value = siblingFeelings[1];
             } else if (siblingFeel >= 3 && siblingFeel <= 4) {
@@ -844,7 +839,6 @@ function randSiblingsClick() {
 
             siblingsOutput.appendChild(label3);
             siblingsOutput.appendChild(textBox3);
-
 
             var span01 = document.createElement("span");
             span01.innerHTML = textBox2.value.concat(", ").concat(textBox.value).concat("; ").concat(textBox3.value);
@@ -871,7 +865,6 @@ function manualSiblingsClick () {
     "use strict";
     var siblingsOutput = document.getElementById("siblingsOutput");
     killChildren(siblingsOutput);
-    //removeElementById("manualSiblingSelect");
     var haveSiblings = document.getElementById("haveSiblings");
     var manualSiblingSelect = document.getElementById("manualSiblingSelect");
     manualSiblingSelect.style.display = "block";
@@ -934,8 +927,7 @@ function manualSiblingSelectChange() {
         //console.log("numSiblings: " + numSiblings);
         //console.log("typeof numSiblings " + typeof numSiblings);
         for (var i = 1; i <= numSiblings; i++ ) {
-
-            var siblingLabelPar = document.createElement("p");
+            var siblingLabelPar = document.createElement("span");
             var siblingLabelText = "Sibling ";
             siblingLabelText = siblingLabelText + i.toString();
             var siblingLabel = document.createTextNode(siblingLabelText);
@@ -943,6 +935,7 @@ function manualSiblingSelectChange() {
             //console.log(siblingLabelPar);
             var labelID = "sibling" + i.toString();
             siblingLabelPar.setAttribute("id", labelID);
+            siblingLabelPar.setAttribute("class", "dynamicPar");
             //var siblingsOutput = document.getElementById("siblingsOutput");
             siblingsOutput.appendChild(siblingLabelPar);
 
@@ -1401,18 +1394,7 @@ function ageCheck() {
     errorOut.setAttribute("class", "red");
     var errorDetailText = "";
     var ageField_label = document.getElementById("ageField_label");
-    //errorOut.appendChild(document.createTextNode(errorDetailText));
-    /*
-    if (isNaN(parseInt(ageFieldValue))) {
-        console.log("Not a number");
-        ageField.className = "redBack";
-        ageField.focus();
-        errorDetailText = "Must enter a number between 17 and 99.";
-        errorOut.appendChild(document.createTextNode(errorDetailText));
-        //ageField.parentNode.appendChild(errorOut);
-        ageField.parentNode.appendChild(errorOut);
 
-    }*/
     if ((ageFieldValue < 17 || ageFieldValue > 99) || (isNaN(parseInt(ageFieldValue)))) {
         console.log("cant be < 17 or > 99");
         ageField.className = "redBack";
@@ -1433,7 +1415,7 @@ function ageCheck() {
         var numEvents = age - lifeEventStart;
         //Life Events
         for (var j = lifeEventStart; j <= age; j++) {
-            console.log(j);
+            //console.log(j);
             randLifeEvent(j);
         }
     }
@@ -1464,17 +1446,9 @@ function addLifeRowEnemy(td1Val, td2Val, td3Val) {
 }
 
 function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
-    //example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
     "use strict";
     //Adds the row for the lifeTable table
-    /*
-    if (!td1Val || !td2Val || !td3Val || !td4Val) {
-        throw new Error("addLifeRow() missing a required parameter!");
-    }
-    */
-
-    //console.log(td1Val, td2Val, td3Val, td4Val);
-    //console.log(typeof td1Val, typeof td2Val, typeof td3Val, typeof td4Val);
+    //example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
 
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
@@ -1497,31 +1471,21 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     newRow.appendChild(td4);
 
     tBody[0].appendChild(newRow);
-
 }
 
 function randLifeEvent(age) {
     "use strict";
-
     //Main Life Event: Problem/Win, Friend/Enemy, Romance, Nothing
     var lifeEventRoll = getRandomInt(1,10);
-    //var lifeEventRoll = 7; //
-
     var secondLifeRoll = getRandomInt(1,10);
-    //var secondLifeRoll = 8;
-
     var thirdLifeRoll = getRandomInt(1,10);
-    //var thirdLifeRoll = 1;
-
     var fourthLifeRoll = getRandomInt(1,10);
-    //var fourthLifeRoll = 1;
 
     //console.log(secondLifeRoll);
-
-
     var eventType = "";
     var connection = "";
     var amount = "";
+    var charLifeEvents = document.getElementById("charLifeEvents");
 
     if (lifeEventRoll <= 3) {
         //console.log("secondLifeRoll: " + secondLifeRoll);
@@ -1546,6 +1510,7 @@ function randLifeEvent(age) {
                 connection = "You made a connection " + connection;
                 //console.log("connection: " + connection);
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, connection);
+
             } else if (thirdLifeRoll === 2) {
                 //console.log(getLucky[thirdLifeRoll].title);
                 //console.log(getLucky[thirdLifeRoll].detail);
@@ -1663,7 +1628,7 @@ function randLifeEvent(age) {
                 enemy.enemyWhatDo[age],
                 enemy.enemyWhatThrow[age]
             );
-            console.log(enemyDetailTable);
+            //console.log(enemyDetailTable);
             enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
             //console.log(typeof enemyDetailTable);
@@ -1706,11 +1671,53 @@ function randLifeEvent(age) {
         addLifeRow(age, eventType, nothing.nothingDetail[age], nothing.nothingDetail[age]);
 
     }
+
+    var lifeTable = document.getElementById("lifeTable");
+    //var charLifeEvents = document.getElementById("charLifeEvents");
+    //console.log("lifeTable.rows", lifeTable.rows.length);
+    for (var i = 1; i < lifeTable.rows.length; i++) {
+        //console.log(lifeTable.rows[i]);
+        //console.log("lifeTable.rows[i].cells.length", lifeTable.rows[i].cells.length);
+        for (var j = 0; j < lifeTable.rows[i].cells.length; j++) {
+            console.log("j: ", j);
+            console.log(lifeTable.rows[i].cells[j]);
+            var currCell = lifeTable.rows[i].cells[j];
+            console.log("currCell.innerHTML: ", currCell.innerHTML);
+
+            var charOutputAge = lifeTable.rows[i].cells[0].innerHTML;
+            console.log(charOutputAge);
+            var span01 = document.createElement("span");
+            span01.innerHTML = charOutputAge.concat("<br>");
+
+
+            //console.log(currCell.childNodes)
+            for (var k = 0; k < currCell.childNodes.length; k++) {
+                //console.log(currCell.childNodes[k].localName);
+                if (currCell.childNodes[k].localName === "table" && currCell.childNodes[k].localName !== "null") {
+                    console.log("enemy Detail Table found");
+                    console.log(currCell.childNodes[k]);
+                    var tempEnemyTable = currCell.childNodes[k];
+                    console.log(tempEnemyTable.rows.length);
+                    for (var l = 1; l < tempEnemyTable.rows.length; l++) {
+                        console.log(tempEnemyTable.rows[l]);
+                        var targetRows = tempEnemyTable.rows[l];
+                        console.log(targetRows.cells.length);
+                        for (var m = 0; m < targetRows.cells.length; m++) {
+                            console.log(targetRows.cells[m].innerHTML);
+                        }
+                    }
+                }
+            }
+
+        }
+        //charLifeEvents.appendChild(span01);
+    }
+    charLifeEvents.appendChild(span01);
 }
 
 function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     "use strict";
-    console.log(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6);
+    //console.log(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6);
 
     var enemyDetailTable = document.createElement("table");
 
@@ -1730,16 +1737,13 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     head5.innerHTML = "Reaction If You See Them?";
     head6.innerHTML = "What Can They Throw At You?";
 
-
     enemyDetailHeader.appendChild(head1);
     enemyDetailHeader.appendChild(head2);
     enemyDetailHeader.appendChild(head3);
     enemyDetailHeader.appendChild(head4);
     enemyDetailHeader.appendChild(head5);
     enemyDetailHeader.appendChild(head6);
-
     enemyDetailTable.appendChild(enemyDetailHeader);
-
 
     var enemyDetailRow = document.createElement("tr");
     var enemyTD1 = document.createElement("td");
@@ -1749,7 +1753,6 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     var enemyTD5 = document.createElement("td");
     var enemyTD6 = document.createElement("td");
 
-
     enemyTD1.innerHTML = tdVal1;
     enemyTD2.innerHTML = tdVal2;
     enemyTD3.innerHTML = tdVal3;
@@ -1758,7 +1761,6 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     enemyTD6.innerHTML = tdVal6;
 
     //console.log(enemyTD1, enemyTD2, enemyTD3, enemyTD4, enemyTD5);
-
     enemyDetailRow.appendChild(enemyTD1);
     enemyDetailRow.appendChild(enemyTD2);
     enemyDetailRow.appendChild(enemyTD3);
@@ -1770,8 +1772,6 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     //enemyDetailTable.setAttribute("id", )
     return enemyDetailTable;
 }
-
-
 
 var clothes = {
     1: "Biker leathers",
@@ -1855,7 +1855,7 @@ var parentTragedy = {
     7: "You were left with relatives for safekeeping",
     8: "You grew up on the street and never had parents",
     9: "Your parent(s) gave you up for adoption",
-    10: "Your parent(s) sold your for money"
+    10: "Your parent(s) sold you for money"
 };
 
 var familyStatusOptions = {
@@ -1877,16 +1877,16 @@ var familyTragedy = {
 };
 
 var childEnv = {
-    1: "Spent on the Street, with no adult supervision",
-    2: "Spent in a safe Corporate Suburbia",
+    1: "Spent on the street, with no adult supervision",
+    2: "Spent in a safe corporate suburbia",
     3: "In a Nomad Pack moving from town to town",
     4: "In a decarying, once upscale neighborhood",
-    5: "In a defended Corporate Zone in the central City",
-    6: "In the heart of the Combat Zone",
-    7: "In a small village or town far from the City",
+    5: "In a defended corporate zone in the central City",
+    6: "In the heart of the combat zone",
+    7: "In a small village or town far from the city",
     8: "In a large archology city",
-    9: "In an aquatic Pirate Pack",
-    10: "On a Corporate controlled Farm or Research Facility"
+    9: "In an aquatic pirate pack",
+    10: "On a corporate controlled farm or research facility"
 };
 
 var siblingGenders = {
@@ -1991,7 +1991,6 @@ var lifeEvent = {
     4: "Nothing Happened This Year"
 };
 
-//so disaster is designed to hold data earlier things aren't, should they
 var disaster = {
     debtAmount: 0,
     debtHistory: {},
@@ -2086,7 +2085,7 @@ var disaster = {
         } else if (fourthLifeRoll >= 9) {
             this.lawHuntedDetail[age] = "the FBI or equivalent national police force wants you.";
         }
-        console.log(this.lawHuntedAmount, this.lawHuntedHistory[age], this.lawHuntedDetail[age]);
+        //console.log(this.lawHuntedAmount, this.lawHuntedHistory[age], this.lawHuntedDetail[age]);
     },
     corpHuntedAmount: 0,
     corpHuntedHistory: {},
@@ -3024,6 +3023,10 @@ function roleSelectPopulate() {
 
 function randRoleClick() {
     "use strict";
+    var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
+    while (pickupSkillCharOutput.firstChild) {
+        pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
+    }
     var roleSelect = document.getElementById("roleSelect");
     var roleSelect_label = document.getElementById("roleSelect_label");
     roleSelect.style.display = "none";
@@ -3096,7 +3099,7 @@ function createPickupSkills() {
     pickupSkillsTable.appendChild(createSkillButton);
     createSkillButton.onclick = createPickupOpt;
     appendBR(pickupSkillsTable);
-    createPickupOpt(); //temp for testing, REMOVE!
+    //createPickupOpt(); //temp for testing, REMOVE!
 }
 
 function createPickupOpt() {
@@ -3185,7 +3188,6 @@ function pickupOptSelectChange(eventObj) {
     var theValue = theSelect.value;
     console.log("theValue is: " + theValue, typeof theValue);
 
-
     var subCategory;
     if (theValue === "1") {
         subCategory = "attr";
@@ -3226,30 +3228,31 @@ function pickupOptSelectChange(eventObj) {
             opt.textContent = skills[subCategory][optText];
         }
         theSubSelect.appendChild(opt);
-
     }
-
-
 }
 
 function pickupSkillInputChange(eventObj) {
     "use strict";
+    console.log("pickupSkillInputChange() fired");
     console.log(eventObj);
     var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+
     while (pickupSkillCharOutput.firstChild) { //Remove all children from pickupSkillCharOutput
         pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
     }
     var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
-    console.log(pickupSkillArray);
+    console.log("pickupSkillArray: ", pickupSkillArray, "pickupSkillArray length: ", pickupSkillArray.length);
+
     for (var i = 0; i < pickupSkillArray.length; i++) {
         if (pickupSkillArray[i].value !== "") {
             console.log(pickupSkillArray[i].value);
             console.log(pickupSkillArray[i].id);
             var skillLevel = pickupSkillArray[i].value;
             var skillLabelID = "subPickup".concat((i + 1).toString()).concat("Select");
-            console.log(skillLabelID);
+            console.log("skillLabelID: ", skillLabelID);
             var currentSkill = document.getElementById(skillLabelID);
+            console.log("currentSkill", currentSkill);
             var skillLabel = currentSkill[currentSkill.selectedIndex].text;
             //console.log(currentSkill.innerHTML);
             //var skillLabel = document.getElementById()
@@ -3262,38 +3265,7 @@ function pickupSkillInputChange(eventObj) {
             pickupSkillCharOutput.appendChild(newTextNode);
             pickupSkillCharOutput.appendChild(br);
         }
-
     }
-
-    /*console.log(eventObj, eventObj.target.id);
-    var skillCharOutput = document.getElementById("skillCharOutput");
-    //skillCharOutput.appendChild()
-    var careerSkillTable = document.getElementById("careerSkillTable");
-    var careerSkillArray = careerSkillTable.getElementsByTagName("input");
-
-    while (skillCharOutput.firstChild) { //Remove all children from skillCharOutput
-        skillCharOutput.removeChild(skillCharOutput.firstChild);
-    }
-
-    for (var i = 0; i < careerSkillArray.length; i++) {
-        //if (careerSkillArray[i])
-
-        if (careerSkillArray[i].value !== "") {
-            console.log(careerSkillArray[i].value);
-            console.log(careerSkillArray[i].id);
-            var skillLevel = careerSkillArray[i].value;
-            var skillLabel = careerSkillArray[i].id;
-            var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
-            var br = document.createElement("br");
-            console.log(skillOutString);
-            var newTextNode = document.createTextNode(skillOutString);
-            skillCharOutput.appendChild(newTextNode);
-            skillCharOutput.appendChild(br);
-
-            *//*var siblingLabel = document.createTextNode(siblingLabelText);
-             siblingLabelPar.appendChild(siblingLabel);*//*
-        }
-    }*/
 }
 
 function createCareerSkills(role) {
@@ -3404,11 +3376,6 @@ function handleChange() {
 window.onload = init;
 function init() {
     "use strict";
-
-    //randRoleClick();
-    //Temp scroll to bottom for dev
-    window.scrollTo(0, document.body.scrollHeight);
-
     //Handle
     var handle = document.getElementById("handle");
     handle.onchange = handleChange;
@@ -3417,7 +3384,7 @@ function init() {
     var rollMethod = document.getElementById("rollMethod");
     rollMethod.onclick = rollMethodClick;
 
-    updateBodyDerived();
+    //updateBodyDerived();
     //ma.onchange = updateRun;
     //bt.onchange = updateBodyDerived;
 
@@ -3425,20 +3392,10 @@ function init() {
     var manRole = document.getElementById("manRole");
     var roleSelect = document.getElementById("roleSelect");
 
+    //Role event handlers
     randRole.onclick = randRoleClick;
     manRole.onclick = manRoleclick;
     roleSelect.onchange = manualRoleSelectChange;
-
-    //roleSelectPopulate();
-    randRoleClick();
-/*
-    //Add event handler to pickup skill inputs
-    var pickupSkillsTable = document.getElementById("pickupSkillsTable");
-    var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
-    console.log(pickupSkillArray);
-    for (var j = 0; j < pickupSkillArray.length; j++) {
-        pickupSkillArray[j].onchange = pickupSkillInputChange;
-    }*/
 
     //Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random
@@ -3448,7 +3405,6 @@ function init() {
     var manualClothesSelect = document.getElementById("manualClothesSelect");
     var manualHairSelect = document.getElementById("manualHairSelect");
     var manualAffecSelect = document.getElementById("manualAffecSelect");
-
 
     //Style event handlers
     rollStyle.onclick = rollStyleClick; //Choose styles randomly
@@ -3496,7 +3452,6 @@ function init() {
     //Parents event handlers
     randParents.onclick = randParentsClick;
     manualParents.onclick = manualParentsClick;
-
     parentsOkayRadio.onclick = parentsOkayRadioClick;
     parentsIssuesRadio.onclick = parentsIssuesRadioClick;
     manualParentSelect.onoclick = manualParentSelectClick;
@@ -3570,11 +3525,9 @@ function init() {
     var randAge = document.getElementById("randAge");
     var manAge = document.getElementById("manAge");
     var ageField = document.getElementById("ageField");
-
     //Age event handlers
     randAge.onclick = randAgeClick;
     manAge.onclick = manAgeClick;
     ageField.onchange = ageCheck;
-    //ageField.onblur = ageCheck;
 
 }
