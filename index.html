@@ -10,8 +10,8 @@
 </head>
 
 <body>
-<div id="fullCharOutput">
 
+<div id="fullCharOutput">
         <div id="charOutputStats">
             <label for="charNameOutput" id="charNameOutput_label">
                 Handle
@@ -30,9 +30,11 @@
             </label>
             <span id="charPointsOutput">&nbsp;</span>
             <br>
+
             <label for="stats" id="stats_label">
                 <span id="stats">Stats</span>
             </label>
+
             <br>
             <label for="charINTOutput" id="charINTOutput_label" class="charStatOutput">
                 INT [<span id="charINTOutput">&nbsp;&nbsp;&nbsp;</span>]
@@ -110,12 +112,11 @@
         <div id="pickupSkillCharOutput">
 
     </div>
-    <div id="charStyleOutput">
-        <label for="styleCharOutput" id="styleCharOutput_label">
-            <span id="styleCharOutput">Style</span>
-        </label>
 
-        <br>
+    <label for="styleCharOutput" id="styleCharOutput_label">
+        <span id="styleCharOutput">Style</span>
+    </label>
+    <div id="charStyleOutput">
         <label for="clothesCharOutput" id="clothesCharOutput_label">
             Clothes:
         </label>
@@ -232,6 +233,14 @@
 <div id="calcChar">
     <h2 class="sub2Head">Cyberpunk 2020 Character Generator</h2>
     <br>
+    <span class="instructSmall">
+        Any radio button can be clicked again (even if already selected) to
+        re-roll (random options) or reset selections (manual options).
+        Once you've finished choosing all your character details below,
+        copy your character to the clipboard:
+    </span>
+    <br>
+     Copy this Character To Clipboard <button id="copyButton">Copy</button>
     <br>
     <h3 class="sub3Head">Handle</h3>
     <br>
@@ -326,6 +335,10 @@
         <br>
         <h4 class="sub4Head">Role</h4>
         <br>
+        <span class="instructSmall">
+            Click radio button again to re-roll / reselect
+        </span>
+        <br>
         <label for="randRole" id="randRole_label">
             <input type="radio" name="roleRadios" id="randRole"> Randomly Choose Role
         </label>
@@ -367,6 +380,10 @@
     <br>
     <h4 class="sub4Head">Dress & Personal Style</h4>
     <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
+    <br>
     <form>
         <input type="radio" name="persStyle" id="rollStyle"> Randomly Choose Style
         <br> <input type="radio" name="persStyle" id="manualStyle"> Manually Choose Style
@@ -382,6 +399,10 @@
     </form>
     <br>
     <h4 class="sub4Head">Ethnic Origins</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <form>
         <input type="radio" name="ethnic" id="rollEth"> Randomly Choose Origin
@@ -400,6 +421,11 @@
     <br>
     <h4 class="sub4Head">Family Ranking</h4>
     <br>
+
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
+    <br>
     <form>
         <input type="radio" name="famRank" id="randFam"> Randomly Choose Family Ranking
         <br>
@@ -412,6 +438,10 @@
 
     <br>
     <h4 class="sub4Head">Parents</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <form>
         <label for="randParents">
@@ -445,6 +475,10 @@
     <br>
     <h4 class="sub4Head">Family Status</h4>
     <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
+    <br>
     <form>
         <label for="randFamilyStatus" id="randFamilyStatus_label">
             <input type="radio" name="familyStatus" id="randFamilyStatus"> Randomly Choose Family Status
@@ -477,8 +511,13 @@
             </label>
     </form>
 
+
     <br>
     <h4 class="sub4Head">Childhood Environment</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <label for="randChildEnv" id="randChildEnv_label">
         <input type="radio" name="childRadios" id="randChildEnv"> Randomly Choose Childhood Environment
@@ -500,6 +539,10 @@
     <br>
     <br>
     <h4 class="sub4Head">Siblings</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <div id="siblingsContainer">
         <label for="randSiblings" id="randSiblings_label">
@@ -526,6 +569,10 @@
     <br>
     <h4 class="sub4Head">Personality Traits</h4>
     <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
+    <br>
     <label for="randPersTraits" id="randPersTraits_label">
         <input type="radio" name="persRadios" id="randPersTraits"> Randomly Choose Personality Traits
     </label>
@@ -541,6 +588,10 @@
     <br>
     <br>
     <h4 class="sub4Head">Person You Value Most</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <label for="randPersValue" id="randPersValue_label">
         <input type="radio" name="valRadios" id="randPersValue"> Randomly Choose Person Valued
@@ -559,6 +610,10 @@
     <br>
     <h4 class="sub4Head">What Do You Value Most?</h4>
     <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
+    <br>
     <label for="randYouValue" id="randYouValue_label">
         <input type="radio" name="youRadios" id="randYouValue"> Randomly Choose What You Value
     </label>
@@ -575,6 +630,10 @@
 
     <br>
     <h4 class="sub4Head">How Do You Feel About Most People?</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <label for="randYouFeel" id="randYouFeel_label">
         <input type="radio" name="feelRadios" id="randYouFeel"> Randomly Choose How You Feel About People
@@ -594,6 +653,10 @@
     <br>
     <h4 class="sub4Head">What Is Your Most Valued Possession?</h4>
     <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
+    <br>
     <label for="randPos" id="randPos_label">
         <input type="radio" name="posRadios" id="randPos"> Randomly Choose Most Valued Possession
     </label>
@@ -612,6 +675,10 @@
     <h3 class="sub3Head">Life Events</h3>
     <br>
     <h4 class="sub4Head">Age</h4>
+    <br>
+    <span class="instructSmall">
+        Click radio button again to re-roll / reselect
+    </span>
     <br>
     <label for="randAge" id="randAge_label">
         <input type="radio" name="ageRadios" id="randAge"> Randomly Choose Your Age

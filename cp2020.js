@@ -1641,7 +1641,7 @@ function randLifeEvent(age) {
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
         //Romantic involvement
         //console.log("Romantic involvement: ");
-        var metaEventType = "Romance: ";
+        var metaEventType = "Romance";
         if (secondLifeRoll <= 4) {
             eventType = metaEventType;//.concat("Happy Love Affair");
             //console.log("happy");
@@ -1649,13 +1649,13 @@ function randLifeEvent(age) {
             //console.log(romance);
             addLifeRow(age, eventType, romance.happyHistory[age], romance.happyDetail[age]);
         } else if (secondLifeRoll === 5) {
-            eventType = metaEventType.concat("Tragic Love Affair");
+            eventType = metaEventType;//.concat("Tragic Love Affair");
             //console.log("tragic");
             romance.addTragic(age, thirdLifeRoll);
             //console.log(romance);
             addLifeRow(age, eventType, romance.tragicHistory[age], romance.tragicDetail[age]);
         } else if (secondLifeRoll >= 6 && secondLifeRoll <= 7) {
-            eventType = metaEventType.concat("Love Affair With Problems");
+            eventType = metaEventType.concat(". Love Affair With Problems");
             //console.log("love affair with problems");
             romance.addProblem(age, thirdLifeRoll, fourthLifeRoll);
             //console.log(romance);
@@ -1709,9 +1709,7 @@ function randLifeEvent(age) {
                 console.log(charOutputDetail);
             }
 
-            //console.log(currCell.childNodes)
             for (var k = 0; k < currCell.childNodes.length; k++) {
-                //console.log(currCell.childNodes[k].localName);
                 if (currCell.childNodes[k].localName === "table" && currCell.childNodes[k].localName !== "null") {
                     console.log("enemy Detail Table found");
                     console.log(currCell.childNodes[k]);
@@ -1727,9 +1725,9 @@ function randLifeEvent(age) {
                             console.log(targetRows.cells[m].innerHTML);
                             console.log("m is: ", m);
                             if (m === 0) {
-                                charOutputResult += targetRows.cells[m].innerHTML.concat(", "); //Result of life event
+                                charOutputResult += targetRows.cells[m].innerHTML.concat(". "); //Result of make enemy life event
                             } else if (m >= 1 && m <= 4) {
-                                charOutputResult += targetRows.cells[m].innerHTML.concat(", ");
+                                charOutputResult += targetRows.cells[m].innerHTML.concat(". ");
                             } else if (m === 5) {
                                 charOutputResult += targetRows.cells[m].innerHTML.concat(".");
                             }
@@ -1759,8 +1757,10 @@ function randLifeEvent(age) {
     var span03 = document.createElement("span");
     if (charOutputEvent !== "Make an Enemy") {
         span03.innerHTML = charOutputResult.concat(". ");
+        console.log(span03);
     } else {
         span03.innerHTML = charOutputResult;
+        console.log(span03);
     }
 
     if (charOutputResult !== "n/a") {// || charOutputResult.innerHTML !== "n/a") { //Don't append n/a results
@@ -1775,10 +1775,6 @@ function randLifeEvent(age) {
             charLifeEvents.appendChild(span04);
         }
     }
-
-
-
-
     appendBR(charLifeEvents);
 }
 
@@ -2285,7 +2281,7 @@ var getLucky = {
     8: {title: "Make Friend on Police Force", detail: "You may use them for information at".concat(/*+*/
         " a level of +2 Streetwise on any police related situation.")},
     9: {title: "Local Boostergang likes you", detail: "Who knows why. You can call on them for" +
-        " one favor a month, equivalent to Family specialy ability of +2. Don't push it"},
+        " one favor a month, equivalent to Family special ability of +2. Don't push it"},
     10: {title: "Find a combat teacher", detail: "Add +1 to any weapon skill w/ exception" +
         " of Martial Arts or Brawling, or begin a new combat skill at +2"}
 };
@@ -2420,9 +2416,6 @@ var enemy = {
             this.enemyWhatThrow[age] = this.whatThrow[6];
         }
 
-        //this.enemyWhatDo[age] = this.whatDo[whatDoRoll]; //what they gonna do about it
-        //this.enemyWhatThrow[age] = this.whatThrow[whatThrowRoll]; //what can they throw against you
-
     },
     enemyMade: {
         1: "Ex friend",
@@ -2476,7 +2469,7 @@ var friendMade = {
     3: "A teacher or mentor",
     4: "A partner or coworker",
     5: "An old lover (choose which one)",
-    6: "An old enemy (choose which one",
+    6: "An old enemy (choose which one)",
     7: "Like a foster parent to you",
     8: "A relative",
     9: "Reconnect with an old childhood friend",
@@ -2489,9 +2482,9 @@ var friendMade = {
         this.friendMadeAmount += 1;
         this.friendMadeHistory[age] = this[thirdLifeRoll];
         if ((fourthLifeRoll % 2 === 0) === true) {
-            this.friendMadeGender[age] = "Gender: male";
+            this.friendMadeGender[age] = "Gender of friend: male";
         } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.friendMadeGender[age] = "Gender: female";
+            this.friendMadeGender[age] = "Gender of friend: female";
         }
 
     }
@@ -2971,7 +2964,7 @@ var characterMeta = {
         var charPointsOutput = document.getElementById("charPointsOutput");
         charPointsOutput.innerHTML = this.charPoints;
     },
-    statChange: function() { //Flush this out if verifying rolls/totals when stats updated
+    statChange: function() {
         "use strict";
         console.log("stat changed");
         var rollMethod = document.getElementById("rollMethod");
@@ -2979,9 +2972,7 @@ var characterMeta = {
         //console.log(whatClicked);
 
         var int = document.getElementById("int");
-        //console.log("int: ", int, int.value);
         var ref = document.getElementById("ref");
-        //console.log("ref: ", ref, ref.value);
         var tech = document.getElementById("tech");
         var cl = document.getElementById("cl");
         var att = document.getElementById("att");
@@ -3009,56 +3000,56 @@ var characterMeta = {
         }
         var charINTOutput = document.getElementById("charINTOutput");
         if (int.value !== "") {
-            charINTOutput.innerHTML = int.value;
+            charINTOutput.innerHTML = " ".concat(int.value).concat(" ");
         }
         var charREFOutput = document.getElementById("charREFOutput");
         if (ref.value !== "") {
-            charREFOutput.innerHTML = ref.value;
+            charREFOutput.innerHTML = " ".concat(ref.value).concat(" ");
         }
         var charTECHOutput = document.getElementById("charTECHOutput");
         if (tech.value !== "") {
-            charTECHOutput.innerHTML = tech.value;
+            charTECHOutput.innerHTML = " ".concat(tech.value).concat(" ");
         }
         var charCOOLOutput = document.getElementById("charCOOLOutput");
         if (cl.value !== "") {
-            charCOOLOutput.innerHTML = cl.value;
+            charCOOLOutput.innerHTML = " ".concat(cl.value).concat(" ");
         }
         var charATTROutput = document.getElementById("charATTROutput");
         if (att.value !== "") {
-            charATTROutput.innerHTML = att.value;
+            charATTROutput.innerHTML = " ".concat(att.value).concat(" ");
         }
         var charLUCKOutput = document.getElementById("charLUCKOutput");
         if (lk.value !== "") {
-            charLUCKOutput.innerHTML = lk.value;
+            charLUCKOutput.innerHTML = " ".concat(lk.value).concat(" ");
         }
         var charMAOutput = document.getElementById("charMAOutput");
         if (ma.value !== "") {
-            charMAOutput.innerHTML = ma.value;
+            charMAOutput.innerHTML = " ".concat(ma.value).concat(" ");
             //console.log("run and leap: " + run.value, leap.value);
             //Fill out Run on char sheet
             var charRunOutput = document.getElementById("charRunOutput");
-            charRunOutput.innerHTML = run.value;
+            charRunOutput.innerHTML = " ".concat(run.value).concat(" ");
             //Fill out Leap on char sheet
             var charLeapOutput = document.getElementById("charLeapOutput");
-            charLeapOutput.innerHTML = leap.value;
+            charLeapOutput.innerHTML = " ".concat(leap.value).concat(" ");
         }
         var charBODYOutput = document.getElementById("charBODYOutput");
         if (bt.value !== "") {
-            charBODYOutput.innerHTML = bt.value;
+            charBODYOutput.innerHTML = " ".concat(bt.value).concat(" ");
             //Fill out Lift on char sheet
             var charLiftOutput = document.getElementById("charLiftOutput");
-            charLiftOutput.innerHTML = lift.value;
+            charLiftOutput.innerHTML = " ".concat(lift.value).concat(" ");
             var charLiftLBsOutput = document.getElementById("charLiftLBsOutput");
-            charLiftLBsOutput.innerHTML = liftLBs.value;
+            charLiftLBsOutput.innerHTML = " ".concat(liftLBs.value).concat(" ");
             //Fill out Carry on char sheet
             var charCarryOutput = document.getElementById("charCarryOutput");
-            charCarryOutput.innerHTML = carry.value;
+            charCarryOutput.innerHTML = " ".concat(carry.value).concat(" ");
             var charCarryLBsOutput = document.getElementById("charCarryLBsOutput");
-            charCarryLBsOutput.innerHTML = carryLBS.value;
+            charCarryLBsOutput.innerHTML = " ".concat(carryLBS.value).concat(" ");
         }
         var charEMPOutput = document.getElementById("charEMPOutput");
         if (emp.value !== "") {
-            charEMPOutput.innerHTML = emp.value;
+            charEMPOutput.innerHTML = " ".concat(emp.value).concat(" ");
         }
         var saveCharOutput = document.getElementById("saveCharOutput");
         if (save.value !== "") {
@@ -3321,10 +3312,6 @@ function pickupSkillInputChange(eventObj) {
             var currentSkill = document.getElementById(skillLabelID);
             console.log("currentSkill", currentSkill);
             var skillLabel = currentSkill[currentSkill.selectedIndex].text;
-            //console.log(currentSkill.innerHTML);
-            //var skillLabel = document.getElementById()
-            //var skillCategorySelected = pickupOptSelect[pickupOptSelect.selectedIndex].value;
-            //var skillLabel = pickupSkillArray[i].id;
             var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
             var br = document.createElement("br");
             console.log(skillOutString);
@@ -3345,7 +3332,6 @@ function createCareerSkills(role) {
     }
 
     var skills;
-
     if (role === "Solo") {
         skills = career.solo;
     } else if (role === "Corp") {
@@ -3374,7 +3360,6 @@ function createCareerSkills(role) {
         var tr = document.createElement("tr");
         var td = document.createElement("td");
         var td2 = document.createElement("td");
-//        var td2ID = "careerSkill"
 
         var textField = document.createElement("input");
         textField.setAttribute("id", skills[i]);
@@ -3382,7 +3367,6 @@ function createCareerSkills(role) {
         var label = document.createElement("label");
         label.innerHTML = skills[i];
 
-        //appendBR(careerSkills);
         td.appendChild(label);
         td2.appendChild(textField);
         tr.appendChild(td);
@@ -3400,7 +3384,6 @@ function careerSkillInputChange(eventObj) {
     "use strict";
     console.log(eventObj, eventObj.target.id);
     var skillCharOutput = document.getElementById("skillCharOutput");
-    //skillCharOutput.appendChild()
     var careerSkillTable = document.getElementById("careerSkillTable");
     var careerSkillArray = careerSkillTable.getElementsByTagName("input");
 
@@ -3409,8 +3392,6 @@ function careerSkillInputChange(eventObj) {
     }
 
     for (var i = 0; i < careerSkillArray.length; i++) {
-        //if (careerSkillArray[i])
-
         if (careerSkillArray[i].value !== "") {
             console.log(careerSkillArray[i].value);
             console.log(careerSkillArray[i].id);
@@ -3422,9 +3403,6 @@ function careerSkillInputChange(eventObj) {
             var newTextNode = document.createTextNode(skillOutString);
             skillCharOutput.appendChild(newTextNode);
             skillCharOutput.appendChild(br);
-
-            /*var siblingLabel = document.createTextNode(siblingLabelText);
-            siblingLabelPar.appendChild(siblingLabel);*/
         }
     }
 }
@@ -3440,25 +3418,71 @@ function handleChange() {
     }
 }
 
+function copyToClipboard() {
+    "use strict";
+    var charNameOutput = document.getElementById("charNameOutput");
+    var outName = charNameOutput.innerHTML;
+    var outRole = document.getElementById("charRoleOutput").innerHTML;
+    var outPoints = document.getElementById("charPointsOutput").innerHTML;
+    var outINT = document.getElementById("charINTOutput").innerHTML;
+    var outREF = document.getElementById("charREFOutput").innerHTML;
+    var outTECH = document.getElementById("charTECHOutput").innerHTML;
+    var outCOOL = document.getElementById("charCOOLOutput").innerHTML;
+    var outATTR = document.getElementById("charATTROutput").innerHTML;
+    var outLUCK = document.getElementById("charLUCKOutput").innerHTML;
+    var outMA = document.getElementById("charMAOutput").innerHTML;
+    var outBODY = document.getElementById("charBODYOutput").innerHTML;
+    var outEMP = document.getElementById("charEMPOutput").innerHTML;
+    var outRun = document.getElementById("charRunOutput").innerHTML;
+    var outLeap = document.getElementById("charLeapOutput").innerHTML;
+    var outKGLift = document.getElementById("charLiftOutput").innerHTML;
+    var outLBSLift = document.getElementById("charLiftLBsOutput").innerHTML;
+    var outKGCarry = document.getElementById("charCarryOutput").innerHTML;
+    var outLBCarry = document.getElementById("charCarryLBsOutput").innerHTML;
+    var outSave = document.getElementById("saveCharOutput").innerHTML;
+
+    var text = "";
+    text += "HANDLE: " + outName + "\n";
+    text += "ROLE: " + outRole + "\n";
+    text += "CHARACTER POINTS: " + outPoints + "\n";
+    text += "INT [" + outINT + "]";
+    text += " REF [" + outREF + "]";
+    text += " TECH [" + outTECH + "]";
+    text += " COOL [" + outCOOL + "]" + "\n";
+    text += "ATTR [" + outATTR + "]";
+    text += " LUCK [" + outLUCK + "]";
+    text += " MA [" + outMA + "]";
+    text += " BODY [" + outBODY + "]" + "\n";
+    text += "EMP [" + outEMP + "]";
+    text += " Run [" + outRun + "]";
+    text += " Leap [" + outLeap + "]" + "\n";
+    text += "Lift (kgs) [" + outKGLift + "]";
+    text += " Lift (lbs) [" + outLBSLift + "]" + "\n";
+    text += "Carry (kgs) [" + outKGCarry + "]";
+    text += " Carry (lbs) [" + outLBCarry + "]" + "\n";
+
+
+    console.log(text);
+    window.prompt("Copy to clipboard: Ctrl+C or Command+C, then hit Enter", text);
+    return false;
+}
+
 window.onload = init;
 function init() {
     "use strict";
-    //Handle
+    var copyButton = document.getElementById("copyButton");
+    copyButton.onclick = copyToClipboard;
+
+    //Handle (character name)
     var handle = document.getElementById("handle");
     handle.onchange = handleChange;
 
     //Roll method elements
     var rollMethod = document.getElementById("rollMethod");
     rollMethod.onclick = rollMethodClick;
-
-    //updateBodyDerived();
-    //ma.onchange = updateRun;
-    //bt.onchange = updateBodyDerived;
-
     var randRole = document.getElementById("randRole");
     var manRole = document.getElementById("manRole");
     var roleSelect = document.getElementById("roleSelect");
-
     //Role event handlers
     randRole.onclick = randRoleClick;
     manRole.onclick = manRoleclick;
@@ -3467,12 +3491,10 @@ function init() {
     //Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random
     var manualStyle = document.getElementById("manualStyle"); //manual
-
     //Clothes, Hair, Affectations Selection Dropdowns
     var manualClothesSelect = document.getElementById("manualClothesSelect");
     var manualHairSelect = document.getElementById("manualHairSelect");
     var manualAffecSelect = document.getElementById("manualAffecSelect");
-
     //Style event handlers
     rollStyle.onclick = rollStyleClick; //Choose styles randomly
     manualStyle.onclick = manualStyleClick; //Choose styles manually
@@ -3483,11 +3505,9 @@ function init() {
     //Origin (random or manual) radio buttons
     var rollEth = document.getElementById("rollEth");
     var manualEth = document.getElementById("manualEth");
-
     //Origin selects / dropdowns
     var manualEthSelect = document.getElementById("manualEthSelect");
     var manualLangSelect = document.getElementById("manualLangSelect");
-
     //Origin event handlers
     rollEth.onclick = rollEthClick; //Choose ethnic origins randomly
     manualEth.onclick = manualEthClick; //Choose ethnic origins manually
@@ -3498,7 +3518,6 @@ function init() {
     var randFam = document.getElementById("randFam");
     var manualFam = document.getElementById("manualFam");
     var manualFamSelect = document.getElementById("manualFamSelect");
-
     //Family ranking event handlers
     randFam.onclick = randFamClick;
     manualFam.onclick = manualFamClick;
@@ -3510,12 +3529,10 @@ function init() {
     var parentStatusField = document.getElementById("parentStatusField");
     var manualParentSelect = document.getElementById("manualParentSelect");
     var parentSomethingHappened = document.getElementById("parentSomethingHappened");
-
     var parentsOkayRadio = document.getElementById("parentsOkayRadio");
     var parentsIssuesRadio = document.getElementById("parentsIssuesRadio");
     var parentsOkayRadio_label = document.getElementById("parentsOkayRadio_label");
     var parentsIssuesRadio_label = document.getElementById("parentsIssuesRadio_label");
-
     //Parents event handlers
     randParents.onclick = randParentsClick;
     manualParents.onclick = manualParentsClick;
@@ -3596,5 +3613,4 @@ function init() {
     randAge.onclick = randAgeClick;
     manAge.onclick = manAgeClick;
     ageField.onchange = ageCheck;
-
 }
