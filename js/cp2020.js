@@ -1,9 +1,7 @@
 /*
- todo Way to report issues / problems / feedback
- todo Tie to a database?
+ todo DB?
  todo Option to randomize everything
  todo Run; add a convert to feet field
- todo Cleanup console.log debugging
  todo Don't allow zero values in statistics fields
  todo After get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
  todo Make the disaster strikes stuff affect main statistics
@@ -64,10 +62,9 @@ function updateLeap() {
 
 function updateBodyDerived() {
     "use strict";
-    console.log("updateBodyDerived() fired");
     var bt = document.getElementById("bt"); //body type stat
     var bodyTypeInt = parseInt(bt.value); //Convert body type string from field to int
-    //console.log(bodyTypeInt + " " + typeof bodyTypeInt);
+    //
     var lift = document.getElementById("lift");
     var carry = document.getElementById("carry");
     var liftLBs = document.getElementById("liftLBs");
@@ -76,9 +73,7 @@ function updateBodyDerived() {
     var btm = document.getElementById("btm"); //body type modifier
     var save = document.getElementById("save"); //save number
 
-    //console.log("bt.value: " + bt.value);
     if (bt.value !== "") {
-        //console.log("its blank");
         lift.value = bodyTypeInt * 40;
         carry.value = bodyTypeInt * 10;
         liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
@@ -239,11 +234,8 @@ function rollEthClick() {
     manualLangSelect.style.display = "none";
 
     var ethRoll = (getRandomInt(1,10) - 1);
-    //console.log("\nethRoll: " + ethRoll);
     var langLength = ethnic.origins[ethRoll].languages.length;
     var langChoice = Math.floor(Math.random() * langLength);
-    //console.log("langChoice: " + langChoice);
-    //console.log("langLength: " + langLength);
     var ethField = document.getElementById("ethField");
     var ethLang = document.getElementById("ethLang");
 
@@ -260,7 +252,6 @@ function rollEthClick() {
 
 function manualEthClick() { //Manual ethnicity radio button clicked
     "use strict";
-    //console.log("manualEthClick() fired");
     var manualEthSelect = document.getElementById("manualEthSelect");
     var manualLangSelect = document.getElementById("manualLangSelect");
 
@@ -276,8 +267,6 @@ function manualEthClick() { //Manual ethnicity radio button clicked
     //Build the Ethnicity dropdown
     for (var i = 1; i <= ethLength; i++) {
         var counter = i -1;
-        //console.log("i is: " + i);
-        //console.log("counter: " + counter);
         var opt = document.createElement("option");
         opt.value = i;
         opt.textContent = ethnic.origins[counter].origin;
@@ -310,16 +299,13 @@ function updateLang() { //update the languages dropdown based on ethnicity selec
     //Get the index value of selected Ethnicity dropdown
     var ethCurrIndex = manualEthSelect.options[manualEthSelect.selectedIndex].value;
     ethCurrIndex = ethCurrIndex - 1; //offset by -1 for ref. length of languages array
-    //console.log(ethCurrIndex);
     var currLangLength = ethnic.origins[ethCurrIndex].languages.length;
-    //console.log(currLangLength);
 
     //Build the languages dropdown
     for (var i = 1; i <= currLangLength; i++) {
         var opt = document.createElement("option");
         opt.value = i;
         opt.textContent = ethnic.origins[ethCurrIndex].languages[i - 1];
-        //console.log("opt.textContent: " + opt.textContent);
         manualLangSelect.appendChild(opt);
     }
 
@@ -359,7 +345,6 @@ function manualLangSelectChange() {
 
 function randFamClick() {
     "use strict";
-    //console.log("randFamClick() fired");
     var manualFamSelect = document.getElementById("manualFamSelect");
     manualFamSelect.style.display = "none";
 
@@ -373,7 +358,6 @@ function randFamClick() {
 
 function manualFamClick() {
     "use strict";
-    //console.log("manualFamClick() fired");
     var manualFamSelect = document.getElementById("manualFamSelect");
     manualFamSelect.style.display = "block";
     while (manualFamSelect.firstChild) { //Remove all children (options) from manualLangSelect
@@ -382,7 +366,6 @@ function manualFamClick() {
 
     var famRankLength = Object.keys(famRank).length;
     //Build the Family Rank dropdown
-    //console.log("famRank.length: " + famRankLength);
     for (var i=1; i <= famRankLength; i++) {
         var opt = document.createElement("option");
         opt.value = i;
@@ -429,9 +412,7 @@ function randParentsClick() {
     parentSomethingHappened.style.display = "none";
     parentSomethingHappenedField.style.display = "none"; //hide this initially
 
-    console.log("randParentsClick() fired");
     var randParentRoll = getRandomInt(1,10);
-    console.log("randParentRoll: " + randParentRoll);
 
     var parentStatusCharOutput = document.getElementById("parentStatusCharOutput");
 
@@ -472,7 +453,6 @@ function manualParentsClick() {
     parentsIssuesRadio_label.style.display = "block";
     parentSomethingHappened.style.display = "none";
     parentSomethingHappenedField.style.display = "none"; //hide this initially
-    console.log("manualParentsClick() fired");
     //Build the manual parent select
     while (manualParentSelect.firstChild) {
         manualParentSelect.removeChild(manualParentSelect.firstChild);
@@ -553,7 +533,6 @@ function randFamilyStatusClick() {
     //var familyStatus_label = document.getElementById("familyStatus_label");
     var familyStatusCharOutput = document.getElementById("familyStatusCharOutput");
 
-    //console.log(manualFamDanger);
     manualFamDanger.style.display = "none";
     manualFamDanger_label.style.display = "none";
     manualFamOkay.style.display = "none";
@@ -587,7 +566,6 @@ function randFamilyStatusClick() {
 
 function manualFamilyStatusClick() {
     "use strict";
-    console.log("manualFamilyStatusClick fired");
     var familyStatus = document.getElementById("familyStatus");
     var familyTragedyOutput = document.getElementById("familyTragedyOutput");
     var manualFamDanger = document.getElementById("manualFamDanger");
@@ -636,7 +614,6 @@ function manualFamDangerClick() {
         familyTragedySelect.appendChild(opt);
     }
     var famTragedyTemp = familyTragedySelect[familyTragedySelect.selectedIndex].value;
-    //console.log(famTragedyTemp);
     familyTragedyOutput.value = familyTragedy[famTragedyTemp];
     familyStatusCharOutput.innerHTML = familyStatus.value.concat("; ").concat(familyTragedyOutput.value.toLowerCase());
     familyTragedySelectChange(); //push to familyTragedyOutput on first choosing
@@ -669,7 +646,6 @@ function familyTragedySelectChange() {
 
     famTragedyHeader.style.display = "block";
     var famTragedyTemp = familyTragedySelect[familyTragedySelect.selectedIndex].value;
-    //console.log(famTragedyTemp);
     var familyStatus = document.getElementById("familyStatus");
 
     familyTragedyOutput.value = familyTragedy[famTragedyTemp];
@@ -749,7 +725,6 @@ function randSiblingsClick() {
 
     //var numSiblings = 3;
     var haveSiblings = document.getElementById("haveSiblings");
-    //console.log("numSiblings: " + numSiblings);
     if (numSiblings <= 7) {
         haveSiblings.value = "You have ".concat(numSiblings.toString()).concat(" siblings");
 
@@ -765,7 +740,6 @@ function randSiblingsClick() {
             siblingLabelText = siblingLabelText + i.toString();
             var siblingLabel = document.createTextNode(siblingLabelText);
             siblingLabelPar.appendChild(siblingLabel);
-            console.log(siblingLabelPar);
             siblingLabelPar.setAttribute("class", "dynamicPar");
 
             //var siblingsOutput = document.getElementById("siblingsOutput");
@@ -870,7 +844,6 @@ function manualSiblingsClick () {
     //Populate the manual siblings selection dropdown
     for (var i = 1; i <= Object.keys(manualSiblingsList).length; i ++) {
         var opt = document.createElement("option");
-        //console.log(manualSiblingsList[i])
         opt.value = i;
         opt.textContent = manualSiblingsList[i];
         manualSiblingSelect.appendChild(opt);
@@ -883,7 +856,6 @@ function manualSiblingSelectChange() {
     "use strict";
     var siblingsOutput = document.getElementById("siblingsOutput");
     killChildren(siblingsOutput);
-    console.log("manualSiblingSelectChange() fired");
     var manualSiblingSelect = document.getElementById("manualSiblingSelect");
     var haveSiblings = document.getElementById("haveSiblings");
 
@@ -895,8 +867,6 @@ function manualSiblingSelectChange() {
 
     //haveSiblings.value = manualSiblingSelect[manualSiblingSelect.selectedIndex].text;
     var numSiblings = manualSiblingSelect[manualSiblingSelect.selectedIndex].text;
-    //console.log("type of numSiblings is: " + typeof numSiblings);
-    //console.log("type of numSiblings is: " + typeof parseInt(numSiblings));
     var charSiblingOutputNum = document.getElementById("charSiblingOutputNum");
 
 
@@ -912,15 +882,12 @@ function manualSiblingSelectChange() {
     if (numSiblings !== "only child") {
         numSiblings = parseInt(numSiblings);
         charSiblingOutputNum.innerHTML = numSiblings;
-        //console.log("numSiblings: " + numSiblings);
-        //console.log("typeof numSiblings " + typeof numSiblings);
         for (var i = 1; i <= numSiblings; i++ ) {
             var siblingLabelPar = document.createElement("span");
             var siblingLabelText = "Sibling ";
             siblingLabelText = siblingLabelText + i.toString();
             var siblingLabel = document.createTextNode(siblingLabelText);
             siblingLabelPar.appendChild(siblingLabel);
-            //console.log(siblingLabelPar);
             var labelID = "sibling" + i.toString();
             siblingLabelPar.setAttribute("id", labelID);
             siblingLabelPar.setAttribute("class", "dynamicPar");
@@ -943,12 +910,8 @@ function manualSiblingSelectChange() {
 
             var genderSelect = document.createElement("select");
             var genderSelectID = "gender" + i.toString() + "Select";
-            //console.log("genderSelectID is: " + genderSelectID);
-            //console.log(siblingGenders.length);
             genderSelect.setAttribute("id", genderSelectID);
-            //console.log(siblingGenders.length);
             for (var j = 1; j <= Object.keys(siblingGenders).length; j++) {
-                //console.log(siblingGenders[j]);
                 var opt = document.createElement("option");
                 opt.value = j;
                 opt.textContent = siblingGenders[j];
@@ -976,9 +939,7 @@ function manualSiblingSelectChange() {
             var ageSelect = document.createElement("select");
             var ageSelectID = "age" + i.toString() + "Select";
             ageSelect.setAttribute("id", ageSelectID);
-            //console.log(siblingGenders.length);
             for (var k = 1; k <= Object.keys(siblingAges).length; k++) {
-                //console.log(siblingAges[k]);
                 var opt2 = document.createElement("option");
                 opt2.value = k;
                 opt2.textContent = siblingAges[k];
@@ -1006,9 +967,7 @@ function manualSiblingSelectChange() {
             var feelsSelect = document.createElement("select");
             var feelsSelectID = "feels" + i.toString() + "Select";
             feelsSelect.setAttribute("id", feelsSelectID);
-            //console.log(siblingGenders.length);
             for (var l = 1; l <= Object.keys(siblingFeelings).length; l++) {
-                //console.log(siblingFeelings[l]);
                 var opt3 = document.createElement("option");
                 opt3.value = l;
                 opt3.textContent = siblingFeelings[l];
@@ -1033,7 +992,6 @@ function manualSiblingSelectChange() {
         // gender1Select, age1Select, feels1Select, etc.
         var siblingOutputSelects = siblingsOutput.getElementsByTagName("select");
         for (var m = 0; m < siblingOutputSelects.length; m++) {
-            //console.log(siblingOutputSelects[m].id);
             siblingOutputSelects[m].onchange = siblingOutputSelectsChange;
         }
 
@@ -1043,14 +1001,9 @@ function manualSiblingSelectChange() {
 //Dynamically get the changed select option and apply it's text to the text field
 function siblingOutputSelectsChange(eventObj) {
     "use strict";
-    //console.log("siblingOutputSelectsChange() fired");
     var theSelect = eventObj.target;
     var name = theSelect.id;
-    console.log(name);
     var theID = name.replace("Select", "");
-    console.log("clicked ID: ".concat(theID));
-    //console.log(eventObj.id);
-    //console.log(eventObj.target);
     var theField = document.getElementById(theID);
     theField.value = theSelect[theSelect.selectedIndex].text;
 
@@ -1061,21 +1014,14 @@ function siblingOutputSelectsChange(eventObj) {
 
     var siblingsOutput = document.getElementById("siblingsOutput");
     var siblingOutputSelects = siblingsOutput.getElementsByTagName("select");
-    console.log("siblingOutputSelects.length: " + siblingOutputSelects.length / 3);
     for (var m = 1; m <= (siblingOutputSelects.length / 3); m++) {
-        //console.log(siblingOutputSelects[m].id);
-        console.log("m: " + m);
-        //siblingOutputSelects[m].onchange = siblingOutputSelectsChange;
-
         var currID = siblingOutputSelects[m].id.replace("Select", "");
         currID = currID[currID.length-1];
-        //console.log(currID);
 
         var span01 = document.createElement("span");
         var tempField01 = document.getElementById("gender".concat(m.toString()));
         var tempField02 = document.getElementById("age".concat(m.toString()));
         var tempField03 = document.getElementById("feels".concat(m.toString()));
-        console.log(tempField01, tempField02, tempField03);
 
         span01.innerHTML = tempField02.value.concat(", ").concat(tempField01.value).concat(": ").concat(tempField03.value);
         span01.setAttribute("class", "charSiblingOutputItems");
@@ -1086,7 +1032,6 @@ function siblingOutputSelectsChange(eventObj) {
 
 function randPersTraitsClick() {
     "use strict";
-    console.log("randPersTraitsClick fired");
     var persTraitsSelect = document.getElementById("persTraitsSelect");
     persTraitsSelect.style.display = "none";
 
@@ -1332,9 +1277,7 @@ function randAgeClick() {
     ageField.setAttribute("disabled", "true");
     var ageRoll1 = getRandomInt(1,6);
     var ageRoll2 = getRandomInt(1,6);
-    //console.log(ageRoll1, ageRoll2);
     var numEvents = ageRoll1 + ageRoll2;
-    //console.log("numEvents: " + typeof numEvents, numEvents);
     var age = numEvents + 16;
     ageField.value = age;
     var lifeEventStart = 17;
@@ -1347,7 +1290,6 @@ function randAgeClick() {
 
     //Create Life Events
     for (var j = lifeEventStart; j <= age; j++) {
-        //console.log(j);
         randLifeEvent(j);
     }
 }
@@ -1384,11 +1326,9 @@ function ageCheck() {
         lifeTable.deleteRow(i);
     }
 
-    console.log("ageCheck() fired");
     var ageField = document.getElementById("ageField");
     ageField.className = "";
     var ageFieldValue = ageField.value;
-    //console.log(parseInt(ageFieldValue));
     var errorOut = document.createElement("span");
     errorOut.setAttribute("id", "errorOut");
     errorOut.setAttribute("class", "red");
@@ -1396,7 +1336,6 @@ function ageCheck() {
     var ageField_label = document.getElementById("ageField_label");
 
     if ((ageFieldValue < 17 || ageFieldValue > 99) || (isNaN(parseInt(ageFieldValue)))) {
-        console.log("cant be < 17 or > 99");
         ageField.className = "redBack";
         ageField.focus();
         errorDetailText = "Must enter a number between 17 and 99.";
@@ -1415,7 +1354,6 @@ function ageCheck() {
         var numEvents = age - lifeEventStart;
         //Life Events
         for (var j = lifeEventStart; j <= age; j++) {
-            //console.log(j);
             randLifeEvent(j);
         }
     }
@@ -1452,7 +1390,6 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
 
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
-    //console.log(tBody);
 
     var newRow = document.createElement("tr");
     var td1 = document.createElement("td");
@@ -1481,7 +1418,6 @@ function randLifeEvent(age) {
     var thirdLifeRoll = getRandomInt(1,10);
     var fourthLifeRoll = getRandomInt(1,10);
 
-    //console.log(secondLifeRoll);
     var eventType = "";
     var connection = "";
     var amount = "";
@@ -1490,13 +1426,10 @@ function randLifeEvent(age) {
     var charLifeEvents = document.getElementById("charLifeEvents");
 
     if (lifeEventRoll <= 3) {
-        //console.log("secondLifeRoll: " + secondLifeRoll);
         //Big Problem or Win
         if ((secondLifeRoll % 2 === 0) === true) {
             //Even, Big Score
             eventType = "You Get Lucky";
-            //console.log(getLucky[thirdLifeRoll].title);
-            //console.log(getLucky[thirdLifeRoll].detail);
 
             //Arguments that are duplicated a lot / used a lot, passed by .apply(null, dupAgrs) to functions
             var dupArgs = [age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail];
@@ -1510,51 +1443,39 @@ function randLifeEvent(age) {
                     connection = getLuckyConnection[3];
                 }
                 connection = "You made a connection " + connection;
-                //console.log("connection: " + connection);
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, connection);
 
             } else if (thirdLifeRoll === 2) {
                 addWindfall(getLucky, age);
-                //console.log(getLucky.windfallAmount);
                 amount = "Amount: " + getLucky.windfallHistory[age] + " eb";
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 3) {
-                //console.log(getLucky.scoreHistory);
                 addScore(getLucky, age);
                 //var amount = "Score Amount: " +
                 amount = amount.concat("Amount: ", getLucky.scoreHistory[age], " eb");
-                //console.log(getLucky.scoreHistory);
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 4) {
-                //console.log(getLucky);
                 addSensei(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
-                //console.log(getLucky);
             } else if (thirdLifeRoll === 5) {
-                //console.log(getLucky);
                 addTeacher(getLucky, age);
-                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 6) {
                 addCorpFavor(getLucky, age);
-                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 7) {
                 addNomadFavor(getLucky, age);
-                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 8) {
                 addPoliceFriend(getLucky, age);
-                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 9) {
                 addBoosterFriend(getLucky, age);
-                //console.log(getLucky);
                 addLifeRow.apply(null, dupArgs);
                 //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 10) {
@@ -1564,7 +1485,6 @@ function randLifeEvent(age) {
             }
         } else if ((secondLifeRoll % 2 ===0) === false) {
             //Uneven,  Disaster
-            //console.log("disaster");
             eventType = "Disaster Strikes";
             if (thirdLifeRoll === 1) {
                 //Financial loss
@@ -1606,16 +1526,13 @@ function randLifeEvent(age) {
         }
     } else if (lifeEventRoll >= 4 && lifeEventRoll <= 6) {
         //Friend / enemy
-        //console.log("Friends & Enemies");
         if (secondLifeRoll <= 5) {
             //Make a friend
-            console.log("make friend");
             eventType = "Make a Friend";
             friendMade.addFriend(age, thirdLifeRoll, fourthLifeRoll);
             addLifeRow(age, eventType, friendMade[thirdLifeRoll], friendMade.friendMadeGender[age]);
         } else if (secondLifeRoll >= 6) {
             //Make an enemy
-            console.log("Make enemy");
             eventType = "Make an Enemy";
             enemy.addEnemy(age, thirdLifeRoll, fourthLifeRoll);
             var enemyDetailTable = addEnemyTable(
@@ -1626,53 +1543,41 @@ function randLifeEvent(age) {
                 enemy.enemyWhatDo[age],
                 enemy.enemyWhatThrow[age]
             );
-            //console.log(enemyDetailTable);
             enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
-            //console.log(typeof enemyDetailTable);
             //addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
             addLifeRowEnemy(age, eventType, enemyDetailTable);
         }
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
         //Romantic involvement
-        //console.log("Romantic involvement: ");
         var metaEventType = "Romance";
         if (secondLifeRoll <= 4) {
             eventType = metaEventType;//.concat("Happy Love Affair");
-            //console.log("happy");
             romance.addHappyAffair(age);
-            //console.log(romance);
             addLifeRow(age, eventType, romance.happyHistory[age], romance.happyDetail[age]);
         } else if (secondLifeRoll === 5) {
             eventType = metaEventType;//.concat("Tragic Love Affair");
-            //console.log("tragic");
             romance.addTragic(age, thirdLifeRoll);
-            //console.log(romance);
             addLifeRow(age, eventType, romance.tragicHistory[age], romance.tragicDetail[age]);
         } else if (secondLifeRoll >= 6 && secondLifeRoll <= 7) {
             eventType = metaEventType.concat(". Love Affair With Problems");
-            //console.log("love affair with problems");
             romance.addProblem(age, thirdLifeRoll, fourthLifeRoll);
-            //console.log(romance);
             addLifeRow(age, eventType, romance.problemHistory[age], romance.problemDetail[age]);
         } else if (secondLifeRoll >= 8) {
             eventType = metaEventType;//.concat("Fast Affairs / Hot Dates");
-            //console.log("fast affairs");
             romance.addFast(age);
             addLifeRow(age, eventType, romance.fastHistory[age], romance.fastDetail[age]);
         }
     } else if (lifeEventRoll >= 9) {
         //Nothing
         eventType = nothing.nothingResult;
-        //console.log("nothing");
         nothing.addNothing(age);
         addLifeRow(age, eventType, nothing.nothingDetail[age], nothing.nothingDetail[age]);
 
     }
-
+    //
     var lifeTable = document.getElementById("lifeTable");
     //var charLifeEvents = document.getElementById("charLifeEvents");
-    //console.log("lifeTable.rows", lifeTable.rows.length);
 
     var charOutputAge = "";
     var charOutputEvent = "";
@@ -1680,45 +1585,28 @@ function randLifeEvent(age) {
     var charOutputDetail = "";
 
     for (var i = 1; i < lifeTable.rows.length; i++) {
-        //console.log(lifeTable.rows[i]);
-        //console.log("lifeTable.rows[i].cells.length", lifeTable.rows[i].cells.length);
+        //
         for (var j = 0; j < lifeTable.rows[i].cells.length; j++) {
-            console.log("j: ", j);
-            console.log(lifeTable.rows[i].cells[j]);
             var currCell = lifeTable.rows[i].cells[j];
-            console.log("currCell.innerHTML: ", currCell.innerHTML);
 
             charOutputAge = lifeTable.rows[i].cells[0].innerHTML; //Age
-            console.log(charOutputAge);
 
             charOutputEvent = lifeTable.rows[i].cells[1].innerHTML; //Event
-            console.log(charOutputEvent);
 
             if (charOutputEvent !== "Make an Enemy") {
                 charOutputResult = lifeTable.rows[i].cells[2].innerHTML;
-                console.log("line 1704 charOutputResult", charOutputResult);
-                console.log(charOutputResult);
 
                 charOutputDetail = lifeTable.rows[i].cells[3].innerHTML;
-                console.log("line 1708 charOutputDetail", charOutputDetail);
-                console.log(charOutputDetail);
             }
 
             for (var k = 0; k < currCell.childNodes.length; k++) {
                 if (currCell.childNodes[k].localName === "table" && currCell.childNodes[k].localName !== "null") {
-                    console.log("enemy Detail Table found");
-                    console.log(currCell.childNodes[k]);
                     var tempEnemyTable = currCell.childNodes[k];
-                    console.log(tempEnemyTable.rows.length);
                     for (var l = 1; l < tempEnemyTable.rows.length; l++) {
-                        console.log(tempEnemyTable.rows[l]);
                         var targetRows = tempEnemyTable.rows[l];
-                        console.log(targetRows.cells.length);
                         charOutputResult = "";
                         charOutputDetail = "";
                         for (var m = 0; m < targetRows.cells.length; m++) {
-                            console.log(targetRows.cells[m].innerHTML);
-                            console.log("m is: ", m);
                             if (m === 0) {
                                 charOutputResult += targetRows.cells[m].innerHTML.concat(". "); //Result of make enemy life event
                             } else if (m >= 1 && m <= 4) {
@@ -1752,10 +1640,8 @@ function randLifeEvent(age) {
     var span03 = document.createElement("span");
     if (charOutputEvent !== "Make an Enemy") {
         span03.innerHTML = charOutputResult.concat(". ");
-        console.log(span03);
     } else {
         span03.innerHTML = charOutputResult;
-        console.log(span03);
     }
 
     if (charOutputResult !== "n/a") {// || charOutputResult.innerHTML !== "n/a") { //Don't append n/a results
@@ -1775,7 +1661,7 @@ function randLifeEvent(age) {
 
 function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     "use strict";
-    //console.log(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6);
+    //
 
     var enemyDetailTable = document.createElement("table");
 
@@ -1818,7 +1704,7 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     enemyTD5.innerHTML = tdVal5;
     enemyTD6.innerHTML = tdVal6;
 
-    //console.log(enemyTD1, enemyTD2, enemyTD3, enemyTD4, enemyTD5);
+    //
     enemyDetailRow.appendChild(enemyTD1);
     enemyDetailRow.appendChild(enemyTD2);
     enemyDetailRow.appendChild(enemyTD3);
@@ -2076,7 +1962,7 @@ var disaster = {
     accidentDetail: {},
     addAccident: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
-        //console.log(age, thirdLifeRoll, fourthLifeRoll);
+        //
         this.accidentHistory[age] = this[thirdLifeRoll].title;
         this.accidentAmount += 1;
         var randInt = getRandomInt(1,10);
@@ -2141,27 +2027,26 @@ var disaster = {
         } else if (fourthLifeRoll >= 9) {
             this.lawHuntedDetail[age] = "the FBI or equivalent national police force wants you.";
         }
-        //console.log(this.lawHuntedAmount, this.lawHuntedHistory[age], this.lawHuntedDetail[age]);
+        //
     },
     corpHuntedAmount: 0,
     corpHuntedHistory: {},
     corpHuntedDetail: {},
     addCorpHunted: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
-        //console.log(typeof fourthLifeRoll, fourthLifeRoll);
+        //
         this.corpHuntedAmount += 1;
         this.corpHuntedHistory[age] = this[thirdLifeRoll].title;
         if (fourthLifeRoll <= 3) {
             this.corpHuntedDetail[age] = "Small local firm is hunting you";
         } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 6) {
-            console.log("4 to 6");
             this.corpHuntedDetail[age] = "Larger corporation with offices statewide hunting you";
         } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
             this.corpHuntedDetail[age] = "Big, national corporation with agents in major cities nationwide hunting you";
         } else if (fourthLifeRoll >= 9) {
             this.corpHuntedDetail[age] = "Huge multinational corporation hunting you; they have armies, ninjas and spies everywhere";
         }
-        //console.log(this.corpHuntedAmount, this.corpHuntedHistory[age], this.corpHuntedDetail[age]);
+        //
     },
     incapAmount: 0,
     incapHistory: {},
@@ -2179,7 +2064,6 @@ var disaster = {
             this.incapDetail[age] = "It's a major psychosis. You hear voices, are violent,".concat(
                 "irrational, depressive. Lose 1pt from CL, 1pt from REF");
         }
-        console.log(this.incapAmount, this.incapHistory[age], this.incapDetail[age]);
     },
     1: {title: "Financial Loss or Debt", detail: "Roll 1D10x100." +
         "You have lost this much in Eurodollars. If you can't pay this now," +
@@ -2366,8 +2250,6 @@ var enemy = {
         var whoIsMadRoll = getRandomInt(1,10);
         var whatDoRoll = getRandomInt(1,10);
         var whatThrowRoll = getRandomInt(1,10);
-
-        //var enGender = "Enemy gender: ";
 
         if ((fourthLifeRoll % 2 === 0) === true) {
             this.enemyGender[age] = "Male";
@@ -2825,10 +2707,9 @@ var career = {
 
 function rollMethodClick() {
     "use strict";
-    console.log("rollMethodClick() fired");
     var rollMethod = document.getElementById("rollMethod");
     var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
-    //console.log(whatClicked);
+    //
     characterMeta.rollStyle = whatClicked;
     enableForms();
     if (whatClicked === "random") {
@@ -2866,7 +2747,6 @@ var characterMeta = {
             roll = getRandomInt(1,10);
             this.randRolls.push(roll);
         }
-        console.log(this.randRolls);
         var rollOutput = document.getElementById("rollOutput");
         while (rollOutput.firstChild) { //Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
@@ -2879,9 +2759,8 @@ var characterMeta = {
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Roll Total: ".concat(this.randTotal.toString())));
         this.charPoints = this.randTotal;
-        //console.log("this.charPoints is....:" + this.charPoints);
+        //
         var charPointsOutput = document.getElementById("charPointsOutput");
-        console.log(charPointsOutput);
         charPointsOutput.innerHTML = this.charPoints;
     },
     fastRolls: [],
@@ -2897,7 +2776,6 @@ var characterMeta = {
             roll = getRandomInt(2,10);
             this.fastRolls.push(roll);
         }
-        console.log(this.fastRolls);
         var rollOutput = document.getElementById("rollOutput");
         while (rollOutput.firstChild) { //Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
@@ -2906,19 +2784,16 @@ var characterMeta = {
         rollOutput.appendChild(document.createTextNode("Roll Method: Fast"));
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls)));
-        //console.log("fffffff " + this.fastRolls.length);
+        //
 
         for (var j = 0; j < this.fastRolls.length; j++) {
             this.fastTotal += this.fastRolls[j];
-            console.log(this.fastRolls[j]);
         }
-        console.log(this.fastTotal);
 
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Rolls Total: ".concat(this.fastTotal.toString())));
 
         this.charPoints = this.fastTotal;
-        console.log("this.charPoints is....:" + this.charPoints);
         var charPointsOutput = document.getElementById("charPointsOutput");
         charPointsOutput.innerHTML = this.charPoints;
     },
@@ -2929,7 +2804,6 @@ var characterMeta = {
         while (rollOutput.firstChild) { //Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
         }
-        console.log(whatClicked);
         var points = 0;
         var cine = "";
         if (whatClicked === "cineMajorHero") {
@@ -2953,16 +2827,14 @@ var characterMeta = {
         rollOutput.appendChild(document.createTextNode("Points: ".concat(points.toString())));
 
         this.charPoints = points;
-        console.log("this.charPoints is....:" + this.charPoints);
         var charPointsOutput = document.getElementById("charPointsOutput");
         charPointsOutput.innerHTML = this.charPoints;
     },
     statChange: function() {
         "use strict";
-        console.log("stat changed");
         var rollMethod = document.getElementById("rollMethod");
         var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
-        //console.log(whatClicked);
+        //
 
         var int = document.getElementById("int");
         var ref = document.getElementById("ref");
@@ -2987,7 +2859,6 @@ var characterMeta = {
 
         if (int.value !== "" && ref.value !== "") {
             this.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
-            console.log("this.pickupSkillPoints: " + this.pickupSkillPoints);
             var pickupSkillPointField = document.getElementById("pickupSkillPointField");
             pickupSkillPointField.value = this.pickupSkillPoints;
         }
@@ -3018,7 +2889,7 @@ var characterMeta = {
         var charMAOutput = document.getElementById("charMAOutput");
         if (ma.value !== "") {
             charMAOutput.innerHTML = " ".concat(ma.value).concat(" ");
-            //console.log("run and leap: " + run.value, leap.value);
+            //
             //Fill out Run on char sheet
             var charRunOutput = document.getElementById("charRunOutput");
             charRunOutput.innerHTML = " ".concat(run.value).concat(" ");
@@ -3033,12 +2904,12 @@ var characterMeta = {
             var charLiftOutput = document.getElementById("charLiftOutput");
             charLiftOutput.innerHTML = " ".concat(lift.value).concat(" ");
             var charLiftLBsOutput = document.getElementById("charLiftLBsOutput");
-            charLiftLBsOutput.innerHTML = " ".concat(liftLBs.value).concat(" ");
+            charLiftLBsOutput.innerHTML = " ".concat(Math.abs(parseInt(liftLBs.value)).toString()).concat(" ");
             //Fill out Carry on char sheet
             var charCarryOutput = document.getElementById("charCarryOutput");
             charCarryOutput.innerHTML = " ".concat(carry.value).concat(" ");
             var charCarryLBsOutput = document.getElementById("charCarryLBsOutput");
-            charCarryLBsOutput.innerHTML = " ".concat(carryLBS.value).concat(" ");
+            charCarryLBsOutput.innerHTML = " ".concat(Math.abs(parseInt(carryLBS.value)).toString()).concat(" ");
         }
         var charEMPOutput = document.getElementById("charEMPOutput");
         if (emp.value !== "") {
@@ -3061,14 +2932,12 @@ function roleSelectPopulate() {
     var roleSelect = document.getElementById("roleSelect");
     var rolesLength = Object.keys(skills.special).length;
     var roles = Object.keys(skills.special);
-    console.log(rolesLength);
     for (var i = 1; i < rolesLength; i++) {
         var option = document.createElement("option");
-        console.log(roles[i]);
         option.value = i;
         option.textContent = roles[i];
         roleSelect.appendChild(option);
-        //console.log(Object.keys(skills.special[i]));
+        //
     }
 }
 
@@ -3086,7 +2955,7 @@ function randRoleClick() {
     var randRoll = getRandomInt(1,10);
     var roleField = document.getElementById("roleField");
     var roles = Object.keys(skills.special);
-    //console.log(roles);
+    //
     roleField.value = roles[randRoll];
 
     createCareerSkills(roleField.value);
@@ -3138,7 +3007,6 @@ function manualRoleSelectChange() {
 
 function createPickupSkills() {
     "use strict";
-    console.log("createPickupSkills() fired");
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
     while (pickupSkillsTable.firstChild) { //Remove all children (options) from pickupSkillsTable
         pickupSkillsTable.removeChild(pickupSkillsTable.firstChild);
@@ -3155,11 +3023,9 @@ function createPickupSkills() {
 
 function createPickupOpt() {
     "use strict";
-    console.log("createPickupOpt fired");
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
     var pickupOptSelect = document.createElement("select");
     characterMeta.pickupSkillsAdded += 1;
-    console.log("charcterMeta.pickupSkillsAdded: " + characterMeta.pickupSkillsAdded);
     var pickupOptID = "pickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
     pickupOptSelect.setAttribute("id", pickupOptID);
 
@@ -3185,7 +3051,7 @@ function createPickupOpt() {
         opt2.value = j;
         var opt2Temp;
         opt2Temp = "attr".concat("0").concat(j.toString());
-        //console.log(opt2Temp);
+        //
         opt2.textContent = skills.attr[opt2Temp];
         subSkillSelect.appendChild(opt2);
     }
@@ -3199,14 +3065,12 @@ function createPickupOpt() {
 
     //Assign event handler for the pickup skill fields on change
     var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
-    console.log(pickupSkillArray);
     for (var k = 0; k < pickupSkillArray.length; k++) {
         pickupSkillArray[k].onchange = pickupSkillInputChange;
     }
 
     //Assign event handler for the pickup skill two dropdowns (pickup2Select and subPickup2Select)
     var pickupSelectArray = pickupSkillsTable.getElementsByTagName("select");
-    console.log("pickupSelectArray" + pickupSelectArray);
     for (var l = 0; l < pickupSelectArray.length; l++) {
         //pickupSelectArray[l].onchange = pickupSkillInputChange;
         pickupSelectArray[l].addEventListener("change", pickupSkillInputChange);// = pickupSkillInputChange;
@@ -3218,22 +3082,19 @@ function createPickupOpt() {
 
 function pickupOptSelectChange(eventObj) {
     "use strict";
-    console.log("eventObj: " + eventObj);
 
     var theSelect = eventObj.target;
-    //console.log(theSelect);
+    //
 
     var theID = theSelect.id;
-    console.log("theID: " + theID, typeof theID);
 
     var whichPickup = theID;
-    //console.log("whichPickup: " + whichPickup);
+    //
     whichPickup = whichPickup.replace("pickup", "");
     whichPickup = whichPickup.replace("Select", "");
-    //console.log("whichPickup: " + whichPickup);
+    //
 
     var theValue = theSelect.value;
-    console.log("theValue is: " + theValue, typeof theValue);
 
     var subCategory;
     if (theValue === "1") {
@@ -3251,19 +3112,16 @@ function pickupOptSelectChange(eventObj) {
     } else if (theValue === "7") {
         subCategory = "tech";
     }
-    console.log("subCateogry is: " + subCategory);
 
     //var skillCategorySelected = pickupOptSelect[pickupOptSelect.selectedIndex].value;
     var theSubSelectID = "subPickup".concat(whichPickup.toString()).concat("Select");
-    console.log("theSubSelectID: " + theSubSelectID);
     var theSubSelect = document.getElementById(theSubSelectID);
-    console.log("theSubSelect: " + theSubSelect);
     while (theSubSelect.firstChild) { //Remove all children (options) from theSubSelect
         theSubSelect.removeChild(theSubSelect.firstChild);
     }
 
     for (var i = 1; i < Object.keys(skills[subCategory]).length; i++) {
-        //console.log("derp");
+        //
         var opt = document.createElement("option");
         opt.value = i;
         var optText;
@@ -3280,8 +3138,6 @@ function pickupOptSelectChange(eventObj) {
 
 function pickupSkillInputChange(eventObj) {
     "use strict";
-    console.log("pickupSkillInputChange() fired");
-    console.log(eventObj);
     var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
 
@@ -3289,21 +3145,15 @@ function pickupSkillInputChange(eventObj) {
         pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
     }
     var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
-    console.log("pickupSkillArray: ", pickupSkillArray, "pickupSkillArray length: ", pickupSkillArray.length);
 
     for (var i = 0; i < pickupSkillArray.length; i++) {
         if (pickupSkillArray[i].value !== "") {
-            console.log(pickupSkillArray[i].value);
-            console.log(pickupSkillArray[i].id);
             var skillLevel = pickupSkillArray[i].value;
             var skillLabelID = "subPickup".concat((i + 1).toString()).concat("Select");
-            console.log("skillLabelID: ", skillLabelID);
             var currentSkill = document.getElementById(skillLabelID);
-            console.log("currentSkill", currentSkill);
             var skillLabel = currentSkill[currentSkill.selectedIndex].text;
             var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
             var br = document.createElement("br");
-            console.log(skillOutString);
             var newTextNode = document.createTextNode(skillOutString);
             pickupSkillCharOutput.appendChild(newTextNode);
             pickupSkillCharOutput.appendChild(br);
@@ -3313,7 +3163,6 @@ function pickupSkillInputChange(eventObj) {
 
 function createCareerSkills(role) {
     "use strict";
-    console.log(role);
 
     var careerSkillTable = document.getElementById("careerSkillTable");
     while (careerSkillTable.firstChild) { //Remove all children (options) from careerSkillTable
@@ -3344,7 +3193,6 @@ function createCareerSkills(role) {
     }
 
     var numSkills = Object.keys(skills).length;
-    console.log(numSkills);
     for (var i = 1; i <= numSkills; i++) {
         var tr = document.createElement("tr");
         var td = document.createElement("td");
@@ -3363,7 +3211,6 @@ function createCareerSkills(role) {
         careerSkillTable.appendChild(tr);
     }
     var careerSkillArray = careerSkillTable.getElementsByTagName("input");
-    console.log(careerSkillArray);
     for (var j = 0; j < careerSkillArray.length; j++) {
         careerSkillArray[j].onchange = careerSkillInputChange;
     }
@@ -3371,7 +3218,6 @@ function createCareerSkills(role) {
 
 function careerSkillInputChange(eventObj) {
     "use strict";
-    console.log(eventObj, eventObj.target.id);
     var skillCharOutput = document.getElementById("skillCharOutput");
     var careerSkillTable = document.getElementById("careerSkillTable");
     var careerSkillArray = careerSkillTable.getElementsByTagName("input");
@@ -3382,13 +3228,10 @@ function careerSkillInputChange(eventObj) {
 
     for (var i = 0; i < careerSkillArray.length; i++) {
         if (careerSkillArray[i].value !== "") {
-            console.log(careerSkillArray[i].value);
-            console.log(careerSkillArray[i].id);
             var skillLevel = careerSkillArray[i].value;
             var skillLabel = careerSkillArray[i].id;
             var skillOutString = skillLabel.concat(" ").concat("[ ").concat(skillLevel).concat(" ]");
             var br = document.createElement("br");
-            console.log(skillOutString);
             var newTextNode = document.createTextNode(skillOutString);
             skillCharOutput.appendChild(newTextNode);
             skillCharOutput.appendChild(br);
@@ -3398,10 +3241,8 @@ function careerSkillInputChange(eventObj) {
 
 function handleChange() {
     "use strict";
-    console.log("handleChange fired");
     var charNameOutput = document.getElementById("charNameOutput");
     var handle = document.getElementById("handle");
-    console.log(handle.value);
     if (handle.value !== "") {
         charNameOutput.innerHTML = handle.value;
     }
@@ -3488,11 +3329,11 @@ function copyToClipboard() {
     ];
 
     for (var i = 0; i < allFields.length; i++) {
-        //console.log(allFields[i]);
+        //
         allFields[i] = allFields[i].replace(/&nbsp;/g, "");
         //allFields[i] = allFields[i].replace(/<br>/g, "\n");
         allFields[i] = allFields[i].replace(/&amp;/g, "&");
-        //console.log(allFields[i]);
+        //
     }
 
     var text = "";
@@ -3538,9 +3379,6 @@ function copyToClipboard() {
     text += "Valued Possession: " + allFields[35] + "\n";
     text += "LIFE EVENTS";
     text += "\n" + allFields[36];
-
-
-    console.log(text);
     window.prompt("Copy character to clipboard: Ctrl+C (Windows) or Command+C (Mac), then hit Enter " +
         "(this window only shows the first line, but the entire character sheet is copied).", text);
     return false;
