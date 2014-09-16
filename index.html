@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <noscript>
         <meta http-equiv="refresh" content="0; URL=noJS.html">
     </noscript>
-    <link rel="stylesheet" href="cp2020.css">
-    <script src="cp2020.js"></script>
+    <link rel="stylesheet" href="css/cp2020.css">
+    <script src="js/cp2020.js"></script>
 </head>
 
 <body>
-
 <div id="fullCharOutput">
         <div id="charOutputStats">
             <label for="charNameOutput" id="charNameOutput_label">
@@ -230,18 +228,28 @@
 </div>
 
 <!-- Calculate Character -->
-<div id="calcChar">
+<div id="aboutInstruct">
     <h2 class="sub2Head">Cyberpunk 2020 Character Generator</h2>
     <br>
     <span class="instructSmall">
+        Use the controls and fields below to create your character.
         Any radio button can be clicked again (even if already selected) to
         re-roll (random options) or reset selections (manual options).
         Once you've finished choosing all your character details below,
         copy your character to the clipboard:
     </span>
-    <br>
-     Copy this Character To Clipboard <button id="copyButton">Copy</button>
-    <br>
+    <p>
+        <label id="copyButton_label">
+            Copy this Character To Clipboard: <button id="copyButton">Copy</button>
+        </label>
+    </p>
+    <p>
+        <a href="about.html" id="about">Click here to leave feedback, ask a question, or report a problem.</a>
+    </p>
+</div>
+
+
+<div id="calcChar">
     <h3 class="sub3Head">Handle</h3>
     <br>
     <label for="handle" id="handle_label">
@@ -677,7 +685,8 @@
     <h4 class="sub4Head">Age</h4>
     <br>
     <span class="instructSmall">
-        Click radio button again to re-roll / reselect
+        Click radio button again to re-roll / reselect. When manually entering age, it must be a value
+        between 17 and 99.
     </span>
     <br>
     <label for="randAge" id="randAge_label">

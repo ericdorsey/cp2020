@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="js/about.js"></script>
+    <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+<form method="POST" action="php/about.php">
+    <label>
+        Category:
+        <br>
+        <select name="feedback" size="3" id="feedback">
+            <option value="feedback" selected>Comment / Feedback</option>
+            <option value="question">Ask A Question</option>
+            <option value="problem">Report a Problem</option>
+            <!-- <option value="derp">derp</option>-->
+        </select>
+    </label>
+
+    <p>
+        <label>
+            Comments:
+            <br>
+            <textarea id="comments" rows="5" cols="50" name="comments"></textarea>
+        </label>
+
+    </p>
+    <p>
+        <label>
+            If you would like a reply, enter your email:
+            <br>
+            <input type="text" size="30" id= "email" name="email">
+        </label>
+    </p>
+
+    <input type="hidden" id="selection" name="selection">
+    <input type="submit" id="submitnow">
+</form>
+</body>
+</html>

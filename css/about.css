@@ -1,0 +1,35 @@
+body {
+    font-family: Arial;
+}
+
+input#submitnow {
+    font-size: 16px;
+    background-color: black;
+    color: white;
+}
+
+#feedback {
+    border: #797979 2px solid;
+    font-family: Arial;
+    font-size: 14px;
+    height: 55px;
+    width: 165px;
+}
+
+#comments {
+    border: #797979 2px solid;
+    font-size: 14px;
+}
+
+#email {
+    border: #797979 2px solid;
+    font-size: 14px;
+}
+
+#thankYou {
+    font-size: 14px;
+}
+
+#around {
+    border: #000 1px solid;
+}
