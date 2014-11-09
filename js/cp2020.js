@@ -1,5 +1,5 @@
 /*
- todo DB?
+ todo Database (save char?)
  todo Option to randomize everything
  todo Run; add a convert to feet field
  todo Don't allow zero values in statistics fields
@@ -8,6 +8,7 @@
  todo Track money gained / lost from life events
  todo Make updating stats fields affect rolls remaining?
  todo Allow "turn off 'nothing happened' events"?
+ todo Solo, skills - Combat sense, awarenress notice, handgun, brawling, then "undefined"? <-- what isn't mapped?
  */
 
 function getRandomInt(min,max) {
@@ -1767,7 +1768,7 @@ var ethnic = {
         {origin: "Black American", languages: ["English", "Blackfolk"]},
         {origin: "Hispanic/American", languages: ["Spanish", "English"]},
         {origin: "Central/South American", languages: ["Spanish", "Portuguese"]},
-        {origin: "Eurpean", languages: ["French", "German", "Enlgish", "Spanish", "Italian", "Greek", "Danish", "Dutch", "Norwegian", "Swedish"]}
+        {origin: "European", languages: ["French", "German", "Enlgish", "Spanish", "Italian", "Greek", "Danish", "Dutch", "Norwegian", "Swedish"]}
     ]
 };
 
@@ -2586,7 +2587,7 @@ var career = {
         2: skills.int.int03,
         3: skills.ref.ref08,
         4: skills.ref.ref03,
-        5: skills.ref.ref10.main,
+        5: skills.ref.ref10,
         6: skills.ref.ref11,
         7: skills.tech.tech20,
         8: skills.ref.ref18,
