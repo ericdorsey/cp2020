@@ -6,9 +6,7 @@
  todo After get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
  todo Make the disaster strikes stuff affect main statistics
  todo Track money gained / lost from life events
- todo Make updating stats fields affect rolls remaining?
  todo Allow "turn off 'nothing happened' events"?
- todo Solo, skills - Combat sense, awarenress notice, handgun, brawling, then "undefined"? <-- what isn't mapped?
  */
 
 function getRandomInt(min, max) {
