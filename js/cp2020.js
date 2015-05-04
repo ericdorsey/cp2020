@@ -11,7 +11,7 @@
  todo Solo, skills - Combat sense, awarenress notice, handgun, brawling, then "undefined"? <-- what isn't mapped?
  */
 
-function getRandomInt(min,max) {
+function getRandomInt(min, max) {
     "use strict";
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -20,7 +20,7 @@ function enableForms() {
     "use strict";
     /*
     Only enable forms after choosing Character Point roll method (random, manual, hero)
-    We don't disable Run, Leap & Lift because they are derived
+    Don't disable Run, Leap & Lift because they are derived
     */
     //Statistics fields
     var int = document.getElementById("int");
@@ -36,74 +36,15 @@ function enableForms() {
     var formArr = [int, ref, tech, cl, att, lk, ma, bt, emp];
     for (var i = 0; i < formArr.length; i++) {
         formArr[i].removeAttribute("disabled");
-        formArr[i].onchange = characterMeta.statChange; //re-enable to implement checking stats against roll remaining
+        //re-enable to implement checking stats against roll remaining
+        formArr[i].onchange = characterMeta.statChange;
     }
 }
 
-function updateRun() {
-    //set the Run derived field
-    "use strict";
-    var ma = document.getElementById("ma");
-    if (ma.value !== "") {
-        var runDerived = parseInt(ma.value) * 3;
-        var run = document.getElementById("run");
-        run.value = runDerived;
-        updateLeap();
-    }
-}
 
-function updateLeap() {
-    //update the Leap derived field
-    "use strict";
-    var run = document.getElementById("run");
-    var leapDerived = parseInt(run.value) / 4;
-    var leap = document.getElementById("leap");
-    leap.value = leapDerived;
-}
 
-function updateBodyDerived() {
-    "use strict";
-    var bt = document.getElementById("bt"); //body type stat
-    var bodyTypeInt = parseInt(bt.value); //Convert body type string from field to int
-    //
-    var lift = document.getElementById("lift");
-    var carry = document.getElementById("carry");
-    var liftLBs = document.getElementById("liftLBs");
-    var carryLBs = document.getElementById("carryLBs");
-    var bodyType = document.getElementById("bodyType"); //derived body type
-    var btm = document.getElementById("btm"); //body type modifier
-    var save = document.getElementById("save"); //save number
 
-    if (bt.value !== "") {
-        lift.value = bodyTypeInt * 40;
-        carry.value = bodyTypeInt * 10;
-        liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
-        carryLBs.value = parseInt(carry.value) * 2.2046;
-        save.value = bodyTypeInt;
-
-        if (bodyTypeInt <= 2) {
-            bodyType.value = "Very Weak";
-            btm.value = -0;
-        } else if (bodyTypeInt >= 3 && bodyTypeInt <= 4) {
-            bodyType.value = "Weak";
-            btm.value = -1;
-        } else if (bodyTypeInt >= 5 && bodyTypeInt <= 7) {
-            bodyType.value = "Average";
-            btm.value = -2;
-        } else if (bodyTypeInt >= 8 && bodyTypeInt <= 9) {
-            bodyType.value = "Strong";
-            btm.value = -3;
-        } else if (bodyTypeInt === 10) {
-            bodyType.value = "Very Strong";
-            btm.value = -4;
-        } else if (bodyTypeInt >= 11) {
-            bodyType.value = "Cybernetically Enhanced";
-            btm.value = -5;
-        }
-    }
-}
-
-function rollStyleClick() {
+function randomStyleClick() {
     "use strict";
     //Clothes, Hair, Affectations Selection Dropdowns
     var manualClothesSelect = document.getElementById("manualClothesSelect");
@@ -114,9 +55,9 @@ function rollStyleClick() {
     manualHairSelect.style.display = "none";
     manualAffecSelect.style.display = "none";
 
-    var clothesRoll = getRandomInt(1,10); //clothes Object
-    var hairRoll = getRandomInt(1,10); //hairStyle Object
-    var affecRoll = getRandomInt(1,10); //affectations Object
+    var clothesRoll = getRandomInt(1,10); // Clothes Object
+    var hairRoll = getRandomInt(1,10); // HairStyle Object
+    var affecRoll = getRandomInt(1,10); // Affectations Object
 
     //Output fields for Clothes, Hair, Affectations
     var clothesField = document.getElementById("clothesField");
@@ -310,7 +251,7 @@ function updateLang() { //update the languages dropdown based on ethnicity selec
         manualLangSelect.appendChild(opt);
     }
 
-    //Update the ethnicity and language output
+    // Update the ethnicity and language output
     manualEthSelectChange();
     manualLangSelectChange();
 
@@ -366,7 +307,7 @@ function manualFamClick() {
     }
 
     var famRankLength = Object.keys(famRank).length;
-    //Build the Family Rank dropdown
+    // Build the Family Rank dropdown
     for (var i=1; i <= famRankLength; i++) {
         var opt = document.createElement("option");
         opt.value = i;
@@ -454,7 +395,7 @@ function manualParentsClick() {
     parentsIssuesRadio_label.style.display = "block";
     parentSomethingHappened.style.display = "none";
     parentSomethingHappenedField.style.display = "none"; //hide this initially
-    //Build the manual parent select
+    // Build the manual parent select
     while (manualParentSelect.firstChild) {
         manualParentSelect.removeChild(manualParentSelect.firstChild);
     }
@@ -465,7 +406,7 @@ function manualParentsClick() {
         opt.textContent = parentTragedy[i];
         manualParentSelect.appendChild(opt);
     }
-    //Un"check" the two other manual option radio buttons
+    // Un"check" the two other manual option radio buttons
     document.getElementById("parentsOkayRadio").checked = false;
     document.getElementById("parentsIssuesRadio").checked = false;
 }
@@ -546,7 +487,7 @@ function randFamilyStatusClick() {
 
     var famStatusRoll = getRandomInt(1,10);
     if (famStatusRoll <= 6) {
-        //Family is in danger
+        // Family is in danger
         famTragedyHeader.style.display = "inline-block";
         familyStatus.style.display = "block";
         familyStatus.value = familyStatusOptions.danger;
@@ -556,12 +497,11 @@ function randFamilyStatusClick() {
         familyTragedyOutput.value = familyTragedy[famTragedyRoll];
         familyStatusCharOutput.innerHTML = familyStatus.value.concat("; ").concat(familyTragedyOutput.value.toLowerCase());
     } else if (famStatusRoll >= 7) {
-        //Family is okay
+        // Family is okay
         familyStatus.value = familyStatusOptions.okay;
         familyTragedyOutput.style.display = "none";
         familyTragedyOutput_label.style.display = "none";
         familyStatusCharOutput.innerHTML = familyStatus.value;
-        //familyTragedySelect.style.display = "none";
     }
 }
 
@@ -2710,21 +2650,22 @@ function rollMethodClick() {
     "use strict";
     var rollMethod = document.getElementById("rollMethod");
     var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
-    //
     characterMeta.rollStyle = whatClicked;
     enableForms();
     if (whatClicked === "random") {
         characterMeta.randomPoints();
     } else if (whatClicked === "fast") {
         characterMeta.fastPoints();
-    } else if (whatClicked === "cineMajorHero" ||
-    whatClicked ===  "cineMajorSupp" ||
-    whatClicked === "cineMinorHero" ||
-    whatClicked === "cineMinorSupp" ||
-    whatClicked === "Average")  {
+    } else if (
+        whatClicked === "cineMajorHero" ||
+        whatClicked ===  "cineMajorSupp" ||
+        whatClicked === "cineMinorHero" ||
+        whatClicked === "cineMinorSupp" ||
+        whatClicked === "Average")  {
         characterMeta.cinematicChar(whatClicked);
+    } else if (whatClicked === "manual") {
+        characterMeta.manualPoints();
     }
-
 }
 
 var characterMeta = {
@@ -2733,23 +2674,88 @@ var characterMeta = {
     careerSkillPointsRemain: 0,
     pickupSkillPoints: 0,
     pickupSkillPointsRemain: 0,
-    pickupSkillsAdded: 0, //each dropdown box created to add a skill
+    pickupSkillsAdded: 0, // Each dropdown box created to add a skill
     rollStyle: "",
     randRolls: [],
     randTotal: 0,
     randRemain: 0,
-    randomPoints: function() { //Random Method clicked
+
+    updateBodyDerived: function() {
+        "use strict";
+        var bt = document.getElementById("bt"); // Body type stat
+        var bodyTypeInt = parseInt(bt.value);
+        var lift = document.getElementById("lift");
+        var carry = document.getElementById("carry");
+        var liftLBs = document.getElementById("liftLBs");
+        var carryLBs = document.getElementById("carryLBs");
+        var bodyType = document.getElementById("bodyType"); // Derived body type
+        var btm = document.getElementById("btm"); // Body Type Modifier
+        var save = document.getElementById("save"); // Save number
+
+        if (bt.value !== "") {
+            lift.value = bodyTypeInt * 40;
+            carry.value = bodyTypeInt * 10;
+            liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
+            carryLBs.value = parseInt(carry.value) * 2.2046;
+            save.value = bodyTypeInt;
+
+            if (bodyTypeInt <= 2) {
+                bodyType.value = "Very Weak";
+                btm.value = -0;
+            } else if (bodyTypeInt >= 3 && bodyTypeInt <= 4) {
+                bodyType.value = "Weak";
+                btm.value = -1;
+            } else if (bodyTypeInt >= 5 && bodyTypeInt <= 7) {
+                bodyType.value = "Average";
+                btm.value = -2;
+            } else if (bodyTypeInt >= 8 && bodyTypeInt <= 9) {
+                bodyType.value = "Strong";
+                btm.value = -3;
+            } else if (bodyTypeInt === 10) {
+                bodyType.value = "Very Strong";
+                btm.value = -4;
+            } else if (bodyTypeInt >= 11) {
+                bodyType.value = "Cybernetically Enhanced";
+                btm.value = -5;
+            }
+        }
+    },
+
+    updateLeap: function() {
+        "use strict";
+        // Update the Leap derived field
+        var run = document.getElementById("run");
+        var leapDerived = parseInt(run.value) / 4;
+        var leap = document.getElementById("leap");
+        leap.value = leapDerived;
+    },
+
+    updateRun: function() {
+        "use strict";
+        // Update the Run derived field
+        var ma = document.getElementById("ma");
+        if (ma.value !== "") {
+            var runDerived = parseInt(ma.value) * 3;
+            var run = document.getElementById("run");
+            run.value = runDerived;
+            this.updateLeap();
+        }
+    },
+
+    // Random Method clicked
+    randomPoints: function() {
         "use strict";
         this.randRolls.length = 0;
-        this.randTotal = 0;
+        this.randTotal = 0; // Total of all the Random rolls
         this.charPoints = 0;
         var roll = 0;
         for (var i = 1; i <= 9; i++) {
-            roll = getRandomInt(1,10);
+            roll = getRandomInt(2, 10);
+            // Append each roll to randRolls
             this.randRolls.push(roll);
         }
         var rollOutput = document.getElementById("rollOutput");
-        while (rollOutput.firstChild) { //Remove all children from rollOutput
+        while (rollOutput.firstChild) { // Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
         }
 
@@ -2762,30 +2768,34 @@ var characterMeta = {
         this.charPoints = this.randTotal;
         //
         var charPointsOutput = document.getElementById("charPointsOutput");
-        charPointsOutput.innerHTML = this.charPoints;
+        charPointsOutput.innerHTML = this.charPoints.toString();
+
+        characterMeta.getCharacterPoints();
+        characterMeta.updateCharacterPointsRemaining();
     },
     fastRolls: [],
     fastTotal: 0,
-    fastPoints: function() { //Fast Method clicked
+
+    // Fast Method clicked
+    fastPoints: function() {
         "use strict";
 
         this.fastTotal = 0;
         this.fastRolls.length = 0;
         this.charPoints = 0;
         var roll = 0;
-        for (var i = 0; i <= 9; i++) {
-            roll = getRandomInt(2,10);
+        for (var i = 0; i < 9; i++) {
+            roll = getRandomInt(2, 10);
             this.fastRolls.push(roll);
         }
         var rollOutput = document.getElementById("rollOutput");
-        while (rollOutput.firstChild) { //Remove all children from rollOutput
+        while (rollOutput.firstChild) { // Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
         }
 
         rollOutput.appendChild(document.createTextNode("Roll Method: Fast"));
         rollOutput.appendChild(document.createElement("br"));
-        rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls)));
-        //
+        rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls.join(", "))));
 
         for (var j = 0; j < this.fastRolls.length; j++) {
             this.fastTotal += this.fastRolls[j];
@@ -2796,13 +2806,18 @@ var characterMeta = {
 
         this.charPoints = this.fastTotal;
         var charPointsOutput = document.getElementById("charPointsOutput");
-        charPointsOutput.innerHTML = this.charPoints;
+        charPointsOutput.innerHTML = this.charPoints.toString();
+
+        characterMeta.getCharacterPoints();
+        characterMeta.updateCharacterPointsRemaining();
     },
+
+    // Cinematic Method clicked
     cinematicChar: function(whatClicked) {
         "use strict";
         this.charPoints = 0;
         var rollOutput = document.getElementById("rollOutput");
-        while (rollOutput.firstChild) { //Remove all children from rollOutput
+        while (rollOutput.firstChild) { // Remove all children from rollOutput
             rollOutput.removeChild(rollOutput.firstChild);
         }
         var points = 0;
@@ -2829,14 +2844,82 @@ var characterMeta = {
 
         this.charPoints = points;
         var charPointsOutput = document.getElementById("charPointsOutput");
-        charPointsOutput.innerHTML = this.charPoints;
+        charPointsOutput.innerHTML = this.charPoints.toString();
+
+        characterMeta.getCharacterPoints();
+        characterMeta.updateCharacterPointsRemaining();
     },
-    statChange: function() {
+
+    // Manually Enter Value clicked
+    manualPoints: function() {
+        "use strict";
+        var rollOutput = document.getElementById("rollOutput");
+        while (rollOutput.firstChild) { //Remove all children from rollOutput
+            rollOutput.removeChild(rollOutput.firstChild);
+        }
+        var manualInput = document.createElement("input");
+        manualInput.setAttribute("id", "manualInput");
+        manualInput.setAttribute("size", "6");
+        rollOutput.appendChild(document.createTextNode("Roll Method: Manual Entry"));
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Points: "));
+        rollOutput.appendChild(manualInput);
+        // Stat Manual Input
+        var manualInputValue = document.getElementById("manualInput");
+        manualInputValue.onchange = characterMeta.manualInputChange;
+
+        // Clear out the Stat Points Remaining until a value is manually entered
+        var statPointsRemainingOutput = document.getElementById("statPointsRemaining");
+        statPointsRemainingOutput.innerHTML = "";
+
+    },
+
+    manualInputChange: function() {
+        "use strict";
+        var charPointsOutput = document.getElementById("charPointsOutput");
+        var manualInput = document.getElementById("manualInput");
+        if (manualInput.value !== "") {
+            charPointsOutput.innerHTML = manualInput.value;
+        }
+        characterMeta.getCharacterPoints();
+        characterMeta.updateCharacterPointsRemaining();
+    },
+
+    getCharacterPoints: function() {
         "use strict";
         var rollMethod = document.getElementById("rollMethod");
         var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
-        //
+        if (whatClicked === "manual") {
+            var manualInputValue = document.getElementById("manualInput");
+            characterMeta.charPoints = manualInputValue.value;
+        }
+    },
 
+    updateCharacterPointsRemaining: function() {
+        "use strict";
+        var statPointsRemainingOutput = document.getElementById("statPointsRemaining");
+        var statPointsToDeduct = 0;
+        var int = document.getElementById("int");
+        var ref = document.getElementById("ref");
+        var tech = document.getElementById("tech");
+        var cl = document.getElementById("cl");
+        var att = document.getElementById("att");
+        var lk = document.getElementById("lk");
+        var ma = document.getElementById("ma");
+        var bt = document.getElementById("bt"); //body type stat
+        var emp = document.getElementById("emp");
+        var statElements = [int, ref, tech, cl, att, lk, ma, bt, emp];
+        for (var i = 0; i < statElements.length; i++) {
+            if ((statElements[i].value !== "") && (typeof parseFloat(statElements[i].value) === "number")) {
+                statPointsToDeduct += parseFloat(statElements[i].value);
+                //console.log("statPointsToDeduct currently:" + statPointsToDeduct);
+            }
+        }
+        var remainingStatPoints = characterMeta.charPoints - statPointsToDeduct;
+        statPointsRemainingOutput.innerHTML = remainingStatPoints.toString();
+    },
+    statChange: function() {
+        "use strict";
         var int = document.getElementById("int");
         var ref = document.getElementById("ref");
         var tech = document.getElementById("tech");
@@ -2855,8 +2938,11 @@ var characterMeta = {
         var save = document.getElementById("save");
         var btm = document.getElementById("btm");
 
-        updateBodyDerived();
-        updateRun();
+        characterMeta.getCharacterPoints();
+        characterMeta.updateCharacterPointsRemaining();
+
+        characterMeta.updateBodyDerived();
+        characterMeta.updateRun();
 
         if (int.value !== "" && ref.value !== "") {
             this.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
@@ -2890,23 +2976,22 @@ var characterMeta = {
         var charMAOutput = document.getElementById("charMAOutput");
         if (ma.value !== "") {
             charMAOutput.innerHTML = " ".concat(ma.value).concat(" ");
-            //
-            //Fill out Run on char sheet
+            // Fill out Run on char sheet
             var charRunOutput = document.getElementById("charRunOutput");
             charRunOutput.innerHTML = " ".concat(run.value).concat(" ");
-            //Fill out Leap on char sheet
+            // Fill out Leap on char sheet
             var charLeapOutput = document.getElementById("charLeapOutput");
             charLeapOutput.innerHTML = " ".concat(leap.value).concat(" ");
         }
         var charBODYOutput = document.getElementById("charBODYOutput");
         if (bt.value !== "") {
             charBODYOutput.innerHTML = " ".concat(bt.value).concat(" ");
-            //Fill out Lift on char sheet
+            // Fill out Lift on char sheet
             var charLiftOutput = document.getElementById("charLiftOutput");
             charLiftOutput.innerHTML = " ".concat(lift.value).concat(" ");
             var charLiftLBsOutput = document.getElementById("charLiftLBsOutput");
             charLiftLBsOutput.innerHTML = " ".concat(Math.abs(parseInt(liftLBs.value)).toString()).concat(" ");
-            //Fill out Carry on char sheet
+            // Fill out Carry on char sheet
             var charCarryOutput = document.getElementById("charCarryOutput");
             charCarryOutput.innerHTML = " ".concat(carry.value).concat(" ");
             var charCarryLBsOutput = document.getElementById("charCarryLBsOutput");
@@ -2938,12 +3023,12 @@ function roleSelectPopulate() {
         option.value = i;
         option.textContent = roles[i];
         roleSelect.appendChild(option);
-        //
     }
 }
 
 function randRoleClick() {
     "use strict";
+    //console.log("randRoleClick() fired");
     var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
     while (pickupSkillCharOutput.firstChild) {
         pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
@@ -2967,8 +3052,9 @@ function randRoleClick() {
     charRoleOutput.innerHTML = roleField.value;
 }
 
-function manRoleclick() {
+function manualRoleClick() {
     "use strict";
+    console.log("manualRoleClick() fired");
     var roleSelect = document.getElementById("roleSelect");
     var roleField = document.getElementById("roleField");
     var roleSelect_label = document.getElementById("roleSelect_label");
@@ -2979,12 +3065,7 @@ function manRoleclick() {
     while (roleSelect.firstChild) { //Remove all children (options) from roleSelect
         roleSelect.removeChild(roleSelect.firstChild);
     }
-    //var roleSelect_label = document.getElementById("roleSelect_label");
-    //appendBR(roleSelect_label);
-
-    //rollOutput.appendChild(document.createElement("br"));
     roleSelectPopulate();
-
     roleField.value = roleSelect.options[roleSelect.selectedIndex].text;
     createCareerSkills(roleField.value);
     createPickupSkills();
@@ -3058,7 +3139,6 @@ function createPickupOpt() {
     }
 
     var subSkillField = document.createElement("input");
-    //var pickupOptID = "pickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
     var subSkillFieldID = "subSkillField".concat(characterMeta.pickupSkillsAdded.toString());
     subSkillField.setAttribute("id", subSkillFieldID);
     subSkillField.setAttribute("size", "3");
@@ -3073,12 +3153,9 @@ function createPickupOpt() {
     //Assign event handler for the pickup skill two dropdowns (pickup2Select and subPickup2Select)
     var pickupSelectArray = pickupSkillsTable.getElementsByTagName("select");
     for (var l = 0; l < pickupSelectArray.length; l++) {
-        //pickupSelectArray[l].onchange = pickupSkillInputChange;
-        pickupSelectArray[l].addEventListener("change", pickupSkillInputChange);// = pickupSkillInputChange;
+        pickupSelectArray[l].addEventListener("change", pickupSkillInputChange);
 
     }
-    //pickupSkillInputChange
-
 }
 
 function pickupOptSelectChange(eventObj) {
@@ -3114,7 +3191,6 @@ function pickupOptSelectChange(eventObj) {
         subCategory = "tech";
     }
 
-    //var skillCategorySelected = pickupOptSelect[pickupOptSelect.selectedIndex].value;
     var theSubSelectID = "subPickup".concat(whichPickup.toString()).concat("Select");
     var theSubSelect = document.getElementById(theSubSelectID);
     while (theSubSelect.firstChild) { //Remove all children (options) from theSubSelect
@@ -3249,6 +3325,216 @@ function handleChange() {
     }
 }
 
+// from http://stackoverflow.com/a/12646864/853178
+function shuffleArray(array) {
+    "use strict";
+    for (var i = array.length - 1; i > 0; i --) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+
+function randEverythingClick() {
+    "use strict";
+    enableForms();
+
+    var int = document.getElementById("int");
+    var ref = document.getElementById("ref");
+    var tech = document.getElementById("tech");
+    var cl = document.getElementById("cl");
+    var att = document.getElementById("att");
+    var lk = document.getElementById("lk");
+    var ma = document.getElementById("ma");
+    var bt = document.getElementById("bt"); // Body type stat
+    var emp = document.getElementById("emp");
+
+    function randomlyAssignValueToStat(rolls) {
+        var theStats = [int, ref, tech, cl, att, lk, ma, bt, emp];
+        for (var i = 0; i < rolls.length; i++) {
+            theStats[i].value = rolls[i];
+        }
+    }
+
+    function generateCinematicArrayRolls(cineTotal) {
+        /*
+        cineTotal: integer for that cinematic class, ie, avg == 50
+         */
+        var currRoll = 0;
+        var generatedCinematicRolls = [];
+        var newTotal = cineTotal;
+        for (var i = 0; i < 8; i++ ) {
+            currRoll = getRandomInt(2, 10);
+            generatedCinematicRolls.push(currRoll);
+            newTotal -= currRoll;
+            //console.log("newTotal is:".concat(newTotal));
+        }
+        var totalOfGeneratedValues = 0;
+        for (var j = 0; j < generatedCinematicRolls.length; j++) {
+            totalOfGeneratedValues += generatedCinematicRolls[j];
+        }
+        var lastValue = cineTotal - totalOfGeneratedValues;
+        //console.log(generatedCinematicRolls);
+        //console.log("lastValue is "  + lastValue);
+
+        var subtractValue = 0;
+        var tempModifyIndexValue = 0;
+
+        while (lastValue > 10) {
+            subtractValue = getRandomInt(1, 3);
+            tempModifyIndexValue = getRandomInt(0, 7);
+            var tempValue;
+            //console.log(tempModifyIndexValue);
+            //console.log("index " + tempModifyIndexValue + " before: " + generatedCinematicRolls[tempModifyIndexValue]);
+            if (generatedCinematicRolls[tempModifyIndexValue] < 10) {
+                tempValue = generatedCinematicRolls[tempModifyIndexValue] + subtractValue;
+                //console.log("tempValue: " + tempValue);
+                //tempValue -= subtractValue;
+                //lastValue -= subtractValue;
+                if (tempValue <= 10) {
+                    generatedCinematicRolls[tempModifyIndexValue] += subtractValue;
+                    //console.log("after: " + generatedCinematicRolls[tempModifyIndexValue]);
+                    lastValue -= subtractValue;
+                    //console.log("lastValue is "  + lastValue);
+                    //console.log(generatedCinematicRolls);
+                }
+
+            }
+        }
+        generatedCinematicRolls.push(lastValue);
+        //console.log(generatedCinematicRolls);
+        return generatedCinematicRolls;
+    }
+
+
+    var randomizedRollMethod = getRandomInt(1, 7);
+    var rollPossibleChoices = {
+        1: "random",
+        2: "fast",
+        3: "cineMajorHero",
+        4: "cineMajorSupp",
+        5: "cineMinorHero",
+        6: "cineMinorSupp",
+        7: "Average"
+    };
+
+    //randomizedRollMethod = 3;
+    var rollMethod = document.getElementById("rollMethod");
+    rollMethod.value = rollPossibleChoices[randomizedRollMethod];
+    if (randomizedRollMethod === 1) {
+        characterMeta.randomPoints();
+        console.log(characterMeta.randRolls);
+        randomlyAssignValueToStat(shuffleArray(characterMeta.randRolls));
+    } else if (randomizedRollMethod === 2) {
+        characterMeta.fastPoints();
+        console.log(characterMeta.fastRolls);
+        randomlyAssignValueToStat(shuffleArray(characterMeta.fastRolls));
+    } else if (randomizedRollMethod >= 3) {
+        var generatedCinematicRolls;
+        characterMeta.cinematicChar(rollPossibleChoices[randomizedRollMethod]);
+        if (randomizedRollMethod === 3) {
+            generatedCinematicRolls = generateCinematicArrayRolls(80);
+        } else if (randomizedRollMethod === 4) {
+            generatedCinematicRolls = generateCinematicArrayRolls(75);
+        } else if (randomizedRollMethod === 5) {
+            generatedCinematicRolls = generateCinematicArrayRolls(70);
+        } else if (randomizedRollMethod === 6) {
+            generatedCinematicRolls = generateCinematicArrayRolls(60);
+        } else if (randomizedRollMethod === 7) {
+            generatedCinematicRolls = generateCinematicArrayRolls(50);
+        }
+        //randomlyAssignValueToStat(generatedCinematicRolls);
+        randomlyAssignValueToStat(shuffleArray(generatedCinematicRolls));
+    }
+    characterMeta.statChange();
+    //characterMeta.updateCharacterPointsRemaining();
+
+    // Randomize Role
+    randRoleClick();
+    // Check the Random Role radio button
+    var randRole = document.getElementById("randRole");
+    randRole.checked = true;
+
+    // Randomize Style
+    randomStyleClick();
+    // Check the Random Style radio button
+    var rollStyle = document.getElementById("rollStyle");
+    rollStyle.checked = true;
+
+    // Randomize Ethnicity
+    rollEthClick();
+    // Check the Random Ethnicity radio button
+    var rollEth = document.getElementById("rollEth");
+    rollEth.checked = true;
+
+    // Randomize Family Origins
+    randFamClick();
+    // Check the Random Family Origins radio button
+    var randFam = document.getElementById("randFam");
+    randFam.checked = true;
+
+    // Randomize Parents History
+    randParentsClick();
+    // Check the Random Parents Status radio button
+    var randParents = document.getElementById("randParents");
+    randParents.checked = true;
+
+    // Randomize Family Status
+    randFamilyStatusClick();
+    // Check the Random Family status radio button
+    var randFamilyStatus = document.getElementById("randFamilyStatus");
+    randFamilyStatus.checked = true;
+
+    // Randomize Childhood Env
+    randChildEnvClick();
+    var randChildEnv = document.getElementById("randChildEnv");
+    randChildEnv.checked = true;
+
+    // Randomize Siblings
+    randSiblingsClick();
+    var randSiblings = document.getElementById("randSiblings");
+    randSiblings.checked = true;
+
+    // Randomize Personality Traits
+    randPersTraitsClick();
+    var randPersTraits = document.getElementById("randPersTraits");
+    randPersTraits.checked = true;
+
+    // Randomize Person You Value Most
+    randPersValueClick();
+    var randPersValue = document.getElementById("randPersValue");
+    randPersValue.checked = true;
+
+    // Randomize What You Value Most
+    randYouValueClick();
+    var randYouValue = document.getElementById("randYouValue");
+    randYouValue.checked = true;
+
+    // Randomize Feel about Most People
+    randYouFeelClick();
+    var randYouFeel = document.getElementById("randYouFeel");
+    randYouFeel.checked = true;
+
+    // Randomize valued posession
+    randPosClick();
+    var randPos = document.getElementById("randPos");
+    randPos.checked = true;
+
+    // Randomize Age
+    randAgeClick();
+    var randAge = document.getElementById("randAge");
+    randAge.checked = true;
+}
+
+function manualEverythingClick() {
+    "use strict";
+    console.log("manual Everything clicked");
+}
+
+
 function copyToClipboard() {
     "use strict";
     var outName = document.getElementById("charNameOutput").innerText;
@@ -3332,7 +3618,6 @@ function copyToClipboard() {
     for (var i = 0; i < allFields.length; i++) {
         //
         allFields[i] = allFields[i].replace(/&nbsp;/g, "");
-        //allFields[i] = allFields[i].replace(/<br>/g, "\n");
         allFields[i] = allFields[i].replace(/&amp;/g, "&");
         //
     }
@@ -3385,28 +3670,38 @@ function copyToClipboard() {
     return false;
 }
 
-window.onload = init;
+
 function init() {
     "use strict";
     var copyButton = document.getElementById("copyButton");
     copyButton.onclick = copyToClipboard;
 
-    //Handle (character name)
+    // Handle (character name)
     var handle = document.getElementById("handle");
     handle.onchange = handleChange;
 
-    //Roll method elements
+    // Randomize Everything Elements
+    var randomizeEverything = document.getElementById("randomizeEverything");
+    var manualEverything = document.getElementById("manualEverything");
+
+    randomizeEverything.onclick = randEverythingClick;
+    manualEverything.onclick = manualEverythingClick;
+
+    // Roll method elements
     var rollMethod = document.getElementById("rollMethod");
     rollMethod.onclick = rollMethodClick;
+
+    // Role elements
     var randRole = document.getElementById("randRole");
     var manRole = document.getElementById("manRole");
     var roleSelect = document.getElementById("roleSelect");
-    //Role event handlers
+
+    // Role event handlers
     randRole.onclick = randRoleClick;
-    manRole.onclick = manRoleclick;
+    manRole.onclick = manualRoleClick;
     roleSelect.onchange = manualRoleSelectChange;
 
-    //Personal Style (Random or manual) radio buttons
+    // Personal Style (Random or manual) radio buttons
     var rollStyle = document.getElementById("rollStyle"); //random
     var manualStyle = document.getElementById("manualStyle"); //manual
     //Clothes, Hair, Affectations Selection Dropdowns
@@ -3414,7 +3709,7 @@ function init() {
     var manualHairSelect = document.getElementById("manualHairSelect");
     var manualAffecSelect = document.getElementById("manualAffecSelect");
     //Style event handlers
-    rollStyle.onclick = rollStyleClick; //Choose styles randomly
+    rollStyle.onclick = randomStyleClick; //Choose styles randomly
     manualStyle.onclick = manualStyleClick; //Choose styles manually
     manualClothesSelect.onchange = manualClothesSelectChange;
     manualHairSelect.onchange = manualHairSelectChange;
@@ -3532,3 +3827,4 @@ function init() {
     manAge.onclick = manAgeClick;
     ageField.onchange = ageCheck;
 }
+window.onload = init;
