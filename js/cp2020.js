@@ -1,14 +1,3 @@
-/*
- todo Database (save char?)
- todo Option to randomize everything
- todo Run; add a convert to feet field
- todo Don't allow zero values in statistics fields
- todo After get lucky stuff, in disaster, on betray started using methods there.. go back and fix the rest
- todo Make the disaster strikes stuff affect main statistics
- todo Track money gained / lost from life events
- todo Allow "turn off 'nothing happened' events"?
- */
-
 function getRandomInt(min, max) {
     "use strict";
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -1200,11 +1189,9 @@ function ManPosSelectChange() {
     valPosessionCharOutput.innerHTML = posField.value;
 }
 
-function randAgeClick() {
+function randAgeClick(preventNothing) {
     "use strict";
-    //var age = 0;
-
-    //Remove all children from lifeTable
+    // Remove all children from lifeTable
     var lifeTable = document.getElementById("lifeTable");
     lifeTable.style.display = "block";
     var rowCount = lifeTable.rows.length;
@@ -1221,15 +1208,15 @@ function randAgeClick() {
     ageField.value = age;
     var lifeEventStart = 17;
 
-    //Clean out the previous (if applicable) charLifeEvents div
+    // Clean out the previous (if applicable) charLifeEvents div
     var charLifeEvents = document.getElementById("charLifeEvents");
     while(charLifeEvents.firstChild) {
         charLifeEvents.removeChild(charLifeEvents.firstChild);
     }
 
-    //Create Life Events
+    // Create Life Events
     for (var j = lifeEventStart; j <= age; j++) {
-        randLifeEvent(j);
+        randLifeEvent(j, preventNothing);
     }
 }
 
@@ -1253,12 +1240,11 @@ function manAgeClick() {
     while(charLifeEvents.firstChild) {
         charLifeEvents.removeChild(charLifeEvents.firstChild);
     }
-
 }
 
 function ageCheck() {
     "use strict";
-    //Remove all children from lifeTable
+    // Remove all children from lifeTable
     var lifeTable = document.getElementById("lifeTable");
     var rowCount = lifeTable.rows.length;
     for (var i = rowCount -1; i > 0 ;i--) {
@@ -1291,7 +1277,7 @@ function ageCheck() {
         var lifeEventStart = 17;
         var age = ageField.value;
         var numEvents = age - lifeEventStart;
-        //Life Events
+        // Life Events
         for (var j = lifeEventStart; j <= age; j++) {
             randLifeEvent(j);
         }
@@ -1324,9 +1310,10 @@ function addLifeRowEnemy(td1Val, td2Val, td3Val) {
 
 function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     "use strict";
-    //Adds the row for the lifeTable table
-    //example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
-
+    /*
+    Adds the row for the lifeTable table
+     example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
+     */
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
 
@@ -1351,26 +1338,34 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
 
 function randLifeEvent(age) {
     "use strict";
-    //Main Life Event: Problem/Win, Friend/Enemy, Romance, Nothing
-    var lifeEventRoll = getRandomInt(1,10);
-    var secondLifeRoll = getRandomInt(1,10);
-    var thirdLifeRoll = getRandomInt(1,10);
-    var fourthLifeRoll = getRandomInt(1,10);
+    var preventNothing = document.getElementById("preventNothing");
+    // Main Life Event: Problem/Win, Friend/Enemy, Romance, Nothing
+    var lifeEventRoll;
+    if(preventNothing.checked) {
+        lifeEventRoll = getRandomInt(1, 8);
+        console.log("checked");
+    } else {
+        lifeEventRoll = getRandomInt(1, 10);
+        console.log("not checked");
+    }
+    var secondLifeRoll = getRandomInt(1, 10);
+    var thirdLifeRoll = getRandomInt(1, 10);
+    var fourthLifeRoll = getRandomInt(1, 10);
 
     var eventType = "";
     var connection = "";
     var amount = "";
 
-    //charOutput Life Events
+    // charOutput Life Events
     var charLifeEvents = document.getElementById("charLifeEvents");
 
     if (lifeEventRoll <= 3) {
-        //Big Problem or Win
+        // Big Problem or Win
         if ((secondLifeRoll % 2 === 0) === true) {
-            //Even, Big Score
+            // Even, Big Score
             eventType = "You Get Lucky";
 
-            //Arguments that are duplicated a lot / used a lot, passed by .apply(null, dupAgrs) to functions
+            // Arguments that are duplicated a lot or used a lot, passed by .apply(null, dupAgrs) to functions
             var dupArgs = [age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail];
 
             if (thirdLifeRoll === 1) {
@@ -1390,57 +1385,49 @@ function randLifeEvent(age) {
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 3) {
                 addScore(getLucky, age);
-                //var amount = "Score Amount: " +
                 amount = amount.concat("Amount: ", getLucky.scoreHistory[age], " eb");
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 4) {
                 addSensei(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 5) {
                 addTeacher(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 6) {
                 addCorpFavor(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 7) {
                 addNomadFavor(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 8) {
                 addPoliceFriend(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 9) {
                 addBoosterFriend(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 10) {
                 addCombatTeacher(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
-                //addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail);
             }
         } else if ((secondLifeRoll % 2 ===0) === false) {
-            //Uneven,  Disaster
+            // Uneven,  Disaster
             eventType = "Disaster Strikes";
             if (thirdLifeRoll === 1) {
-                //Financial loss
+                // Financial loss
                 addDebt(disaster, age);
                 amount = "Amount: ".concat(disaster.debtHistory[age], " eb");
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 2) {
-                //Imprisonment
+                // Imprisonment
                 addPrison(disaster, age);
                 amount = "Time imprisoned / held hostage: ".concat(disaster.prisonHistory[age], " months");
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 3) {
-                //Illness / addiction
+                // Illness / addiction
                 addIllness(disaster, age);
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, disaster[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 4) {
-                //Betrayal
+                // Betrayal
                 disaster.addBetray(age, thirdLifeRoll, fourthLifeRoll);
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, disaster.betrayDetail[age]);
             } else if (thirdLifeRoll === 5) {
@@ -1464,14 +1451,14 @@ function randLifeEvent(age) {
             }
         }
     } else if (lifeEventRoll >= 4 && lifeEventRoll <= 6) {
-        //Friend / enemy
+        // Friend or Enemy
         if (secondLifeRoll <= 5) {
-            //Make a friend
+            // Make a friend
             eventType = "Make a Friend";
             friendMade.addFriend(age, thirdLifeRoll, fourthLifeRoll);
             addLifeRow(age, eventType, friendMade[thirdLifeRoll], friendMade.friendMadeGender[age]);
         } else if (secondLifeRoll >= 6) {
-            //Make an enemy
+            // Make an enemy
             eventType = "Make an Enemy";
             enemy.addEnemy(age, thirdLifeRoll, fourthLifeRoll);
             var enemyDetailTable = addEnemyTable(
@@ -1484,18 +1471,18 @@ function randLifeEvent(age) {
             );
             enemyDetailTable.setAttribute("class", "enemyDetailTable");
 
-            //addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
+            // addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
             addLifeRowEnemy(age, eventType, enemyDetailTable);
         }
     } else if (lifeEventRoll >= 7 && lifeEventRoll <= 8) {
-        //Romantic involvement
+        // Romantic involvement
         var metaEventType = "Romance";
         if (secondLifeRoll <= 4) {
-            eventType = metaEventType;//.concat("Happy Love Affair");
+            eventType = metaEventType;
             romance.addHappyAffair(age);
             addLifeRow(age, eventType, romance.happyHistory[age], romance.happyDetail[age]);
         } else if (secondLifeRoll === 5) {
-            eventType = metaEventType;//.concat("Tragic Love Affair");
+            eventType = metaEventType;
             romance.addTragic(age, thirdLifeRoll);
             addLifeRow(age, eventType, romance.tragicHistory[age], romance.tragicDetail[age]);
         } else if (secondLifeRoll >= 6 && secondLifeRoll <= 7) {
@@ -1503,12 +1490,12 @@ function randLifeEvent(age) {
             romance.addProblem(age, thirdLifeRoll, fourthLifeRoll);
             addLifeRow(age, eventType, romance.problemHistory[age], romance.problemDetail[age]);
         } else if (secondLifeRoll >= 8) {
-            eventType = metaEventType;//.concat("Fast Affairs / Hot Dates");
+            eventType = metaEventType;
             romance.addFast(age);
             addLifeRow(age, eventType, romance.fastHistory[age], romance.fastDetail[age]);
         }
     } else if (lifeEventRoll >= 9) {
-        //Nothing
+        // Nothing Happened
         eventType = nothing.nothingResult;
         nothing.addNothing(age);
         addLifeRow(age, eventType, nothing.nothingDetail[age], nothing.nothingDetail[age]);
@@ -1516,8 +1503,6 @@ function randLifeEvent(age) {
     }
     //
     var lifeTable = document.getElementById("lifeTable");
-    //var charLifeEvents = document.getElementById("charLifeEvents");
-
     var charOutputAge = "";
     var charOutputEvent = "";
     var charOutputResult = "";
@@ -1534,7 +1519,6 @@ function randLifeEvent(age) {
 
             if (charOutputEvent !== "Make an Enemy") {
                 charOutputResult = lifeTable.rows[i].cells[2].innerHTML;
-
                 charOutputDetail = lifeTable.rows[i].cells[3].innerHTML;
             }
 
@@ -1547,7 +1531,8 @@ function randLifeEvent(age) {
                         charOutputDetail = "";
                         for (var m = 0; m < targetRows.cells.length; m++) {
                             if (m === 0) {
-                                charOutputResult += targetRows.cells[m].innerHTML.concat(". "); //Result of make enemy life event
+                                //Result of make enemy life event
+                                charOutputResult += targetRows.cells[m].innerHTML.concat(". ");
                             } else if (m >= 1 && m <= 4) {
                                 charOutputResult += targetRows.cells[m].innerHTML.concat(". ");
                             } else if (m === 5) {
@@ -1560,15 +1545,9 @@ function randLifeEvent(age) {
             }
 
         }
-        //charLifeEvents.appendChild(span01);
     }
 
-    /*var charOutputAge = "";
-    var charOutputEvent = "";
-    var charOutputResult = "";
-    var charOutputDetail = "";*/
-
-    var span01 = document.createElement("span"); //Age
+    var span01 = document.createElement("span"); // Age
     span01.innerHTML = charOutputAge.concat(". ");
     charLifeEvents.appendChild(span01);
 
@@ -1583,7 +1562,7 @@ function randLifeEvent(age) {
         span03.innerHTML = charOutputResult;
     }
 
-    if (charOutputResult !== "n/a") {// || charOutputResult.innerHTML !== "n/a") { //Don't append n/a results
+    if (charOutputResult !== "n/a") {
         charLifeEvents.appendChild(span03);
     }
 
@@ -1591,7 +1570,7 @@ function randLifeEvent(age) {
         var span04 = document.createElement("span");
         span04.innerHTML = charOutputDetail;
 
-        if (charOutputDetail !== "n/a") {// || charOutputDetail.innerHTML !== "n/a") {
+        if (charOutputDetail !== "n/a") {
             charLifeEvents.appendChild(span04);
         }
     }
@@ -1652,7 +1631,6 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     enemyDetailRow.appendChild(enemyTD6);
 
     enemyDetailTable.appendChild(enemyDetailRow);
-    //enemyDetailTable.setAttribute("id", )
     return enemyDetailTable;
 }
 
@@ -1867,13 +1845,6 @@ var valuedPos = {
     10: "A letter"
 };
 
-/*var lifeEvent = {
-    1: "Big Problems, Big wins",
-    2: "Friends & Enemies",
-    3: "Romantic Involvement",
-    4: "Nothing Happened This Year"
-};*/
-
 var disaster = {
     debtAmount: 0,
     debtHistory: {},
@@ -2012,7 +1983,7 @@ var disaster = {
     3: {title: "Illness or addiction", detail: "You have contracted either an illness or" +
         " drug habit in this time. Lose 1 point of REF permanently as a result."},
     4: {title: "Betrayal. You have been backstabbed in some manner", detail:
-        "Roll another 1D10. 1-3, you are being blackmailed. 4-7 a secret was".concat( /*+*/
+        "Roll another 1D10. 1-3, you are being blackmailed. 4-7 a secret was".concat(
         " exposed. 8-10, you were betrayed by a close friend in either romance",
         " or career (your choice).")},
     5: {title: "Accident", detail: "You were in some kind of terrible accident. Roll" +
@@ -2184,7 +2155,6 @@ var enemy = {
     addEnemy: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
         this.enemyAmount += 1;
-        //var gender = getRandomInt(1,10);
         var causeRoll = getRandomInt(1,10);
         var whoIsMadRoll = getRandomInt(1,10);
         var whatDoRoll = getRandomInt(1,10);
@@ -2195,9 +2165,8 @@ var enemy = {
         } else if ((fourthLifeRoll % 2 === 0) === false) {
             this.enemyGender[age] = "Female";
         }
-        //this.enemyGender
-        this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; //who are they
-        this.enemyCauseIs[age] = this.enemyCause[causeRoll]; //what is the cause
+        this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; // Who are they
+        this.enemyCauseIs[age] = this.enemyCause[causeRoll]; // What is the cause
         if (whoIsMadRoll <= 4) { //Who's mad
             this.enemyWhoMad[age] = this.whoIsAngry[1];
         } else if (whoIsMadRoll >= 5 && whoIsMadRoll <= 7) {
@@ -2205,7 +2174,7 @@ var enemy = {
         } else if (whoIsMadRoll >= 8 && whoIsMadRoll <= 10) {
             this.enemyWhoMad[age] = this.whoIsAngry[3];
         }
-        if (whatDoRoll <= 2) { //Whatcha gonna do about it
+        if (whatDoRoll <= 2) { // Whatcha gonna do about it
             this.enemyWhatDo[age] = this.whatDo[1];
         } else if (whatDoRoll >= 3 && whatDoRoll <= 4) {
             this.enemyWhatDo[age] = this.whatDo[2];
@@ -2216,7 +2185,7 @@ var enemy = {
         } else if (whatDoRoll >= 9 && whatDoRoll <= 10) {
             this.enemyWhatDo[age] = this.whatDo[5];
         }
-        if (whatThrowRoll <=3) { //What can they trhow against you
+        if (whatThrowRoll <=3) { // What can they throw against you
             this.enemyWhatThrow[age] = this.whatThrow[1];
         } else if (whatThrowRoll >= 4 && whatThrowRoll <= 5) {
             this.enemyWhatThrow[age] = this.whatThrow[2];
@@ -2246,7 +2215,7 @@ var enemy = {
     enemyCause: {
         1: "Caused the other to lose face or status",
         2: "Caused the loss of a lover, friend or relative",
-        3: "Caused a major humliation",
+        3: "Caused a major humiliation",
         4: "Accused the other of cowardice or other personal flaw",
         5: "Caused a physical disability",
         6: "Deserted or betrayed the other",
@@ -2264,7 +2233,7 @@ var enemy = {
         1: "Go into a murderous killing rage",
         2: "Avoid the scum",
         3: "Backstab them indirectly",
-        4: "Ingore them",
+        4: "Ignore them",
         5: "Rip into them verbally"
     },
     whatThrow: {
@@ -2397,7 +2366,6 @@ var nothing = {
         this.nothingDetail[age] = "n/a";
     },
     nothingResult: "Nothing Happened This Year"
-    //nothingResult: "n/a"
 };
 
 var skills = {
@@ -2454,21 +2422,21 @@ var skills = {
         int07: "Composition",
         int08: "Diagnose Illness",
         int09: "Ed./General Knowledge",
-        int10: "Expert",//{main: "Expert", sub: ""},
+        int10: "Expert",
         int11: "Gamble",
         int12: "Geology",
         int13: "Hide/Evade",
         int14: "History",
-        int15: "Know Language",//{main: "Know Language: ", sub: ""},
+        int15: "Know Language",
         int16: "Library Search",
         int17: "Mathematics",
         int18: "Physics",
-        int19: "Programming",//{main: "Programming: ", sub: ""},
+        int19: "Programming",
         int20: "Shadow/Track",
         int21: "Stock Market",
         int22: "System Knowledge",
         int23: "Teaching",
-        int24: "Wildnerness Survival",
+        int24: "Wilderness Survival",
         int25: "Zoology"
     },
     ref: {
@@ -2480,9 +2448,9 @@ var skills = {
         ref05: "Dodge & Escape",
         ref06: "Driving",
         ref07: "Fencing",
-        ref08: "Handgun", //Handgun
+        ref08: "Handgun",
         ref09: "Heavy Weapons",
-        ref10: "Martial Art",//{main: "Martial Art: ", sub: ""},
+        ref10: "Martial Art",
         ref11: "Melee",
         ref12: "Motorcycle",
         ref13: "Operate Heavy Machinery",
@@ -2693,8 +2661,8 @@ var characterMeta = {
         if (bt.value !== "") {
             lift.value = bodyTypeInt * 40;
             carry.value = bodyTypeInt * 10;
-            liftLBs.value = parseInt(lift.value) * 2.2046; //Convert kg to lbs
-            carryLBs.value = parseInt(carry.value) * 2.2046;
+            liftLBs.value = parseFloat(parseInt(lift.value) * 2.2046).toFixed(2); //Convert kg to lbs
+            carryLBs.value = parseFloat(parseInt(carry.value) * 2.2046).toFixed(2);
             save.value = bodyTypeInt;
 
             if (bodyTypeInt <= 2) {
@@ -3109,7 +3077,7 @@ function createPickupOpt() {
     var pickupOptID = "pickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
     pickupOptSelect.setAttribute("id", pickupOptID);
 
-    //Populate the "category" pickup skill option selet (ATTR, BODY, etc)
+    // Populate the "category" pickup skill option selet (ATTR, BODY, etc)
     for (var i = 1; i < Object.keys(skills).length; i ++) {
         var opt = document.createElement("option");
         opt.value = i;
@@ -3160,18 +3128,11 @@ function pickupOptSelectChange(eventObj) {
     "use strict";
 
     var theSelect = eventObj.target;
-    //
-
     var theID = theSelect.id;
-
     var whichPickup = theID;
-    //
     whichPickup = whichPickup.replace("pickup", "");
     whichPickup = whichPickup.replace("Select", "");
-    //
-
     var theValue = theSelect.value;
-
     var subCategory;
     if (theValue === "1") {
         subCategory = "attr";
@@ -3323,7 +3284,7 @@ function handleChange() {
     }
 }
 
-// from http://stackoverflow.com/a/12646864/853178
+// From http://stackoverflow.com/a/12646864/853178
 function shuffleArray(array) {
     "use strict";
     for (var i = array.length - 1; i > 0; i --) {
@@ -3368,16 +3329,12 @@ function randEverythingClick() {
             currRoll = getRandomInt(2, 10);
             generatedCinematicRolls.push(currRoll);
             newTotal -= currRoll;
-            //console.log("newTotal is:".concat(newTotal));
         }
         var totalOfGeneratedValues = 0;
         for (var j = 0; j < generatedCinematicRolls.length; j++) {
             totalOfGeneratedValues += generatedCinematicRolls[j];
         }
         var lastValue = cineTotal - totalOfGeneratedValues;
-        //console.log(generatedCinematicRolls);
-        //console.log("lastValue is "  + lastValue);
-
         var subtractValue = 0;
         var tempModifyIndexValue = 0;
 
@@ -3385,25 +3342,16 @@ function randEverythingClick() {
             subtractValue = getRandomInt(1, 3);
             tempModifyIndexValue = getRandomInt(0, 7);
             var tempValue;
-            //console.log(tempModifyIndexValue);
-            //console.log("index " + tempModifyIndexValue + " before: " + generatedCinematicRolls[tempModifyIndexValue]);
             if (generatedCinematicRolls[tempModifyIndexValue] < 10) {
                 tempValue = generatedCinematicRolls[tempModifyIndexValue] + subtractValue;
-                //console.log("tempValue: " + tempValue);
-                //tempValue -= subtractValue;
-                //lastValue -= subtractValue;
                 if (tempValue <= 10) {
                     generatedCinematicRolls[tempModifyIndexValue] += subtractValue;
-                    //console.log("after: " + generatedCinematicRolls[tempModifyIndexValue]);
                     lastValue -= subtractValue;
-                    //console.log("lastValue is "  + lastValue);
-                    //console.log(generatedCinematicRolls);
                 }
 
             }
         }
         generatedCinematicRolls.push(lastValue);
-        //console.log(generatedCinematicRolls);
         return generatedCinematicRolls;
     }
 
@@ -3444,11 +3392,9 @@ function randEverythingClick() {
         } else if (randomizedRollMethod === 7) {
             generatedCinematicRolls = generateCinematicArrayRolls(50);
         }
-        //randomlyAssignValueToStat(generatedCinematicRolls);
         randomlyAssignValueToStat(shuffleArray(generatedCinematicRolls));
     }
     characterMeta.statChange();
-    //characterMeta.updateCharacterPointsRemaining();
 
     // Randomize Role
     randRoleClick();

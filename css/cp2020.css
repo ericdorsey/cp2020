@@ -19,6 +19,10 @@ input {
     margin-left: 10px;
 }
 
+.feedback {
+    border-top: 1px solid black;
+}
+
 #aboutInstruct {
     border: 2px dashed black;
     padding: 5px;
@@ -28,13 +32,13 @@ input {
 
 a {
     font-weight: bold;
-    color: #234754;
+    color: #225166;
     margin-left: 10px;
 }
 
 a visited {
     font-weight: bold;
-    color: #234754;
+    color: #225166;
 }
 
 #calcChar {
@@ -69,6 +73,12 @@ a visited {
 
 .bold {
     font-weight: bold;
+}
+
+.statValueBoxes {
+    font-size: 14px;
+    color: black;
+    text-align: center;
 }
 
 #pickupSkillPointField_label {
@@ -295,6 +305,7 @@ a visited {
 
 #roleField {
     font-size: 16px;
+    color: black;
 }
 
 #careerSkills {

@@ -242,20 +242,30 @@
 <div id="aboutInstruct">
     <h2 class="sub2Head">Cyberpunk 2020 Character Generator</h2>
     <br>
+    <br>
     <span class="instructSmall">
         Use the controls and fields below to create your character.
         Any radio button can be clicked again (even if already selected) to
         re-roll (random options) or reset selections (manual options).
+        <br>
+        <br>
         Once you've finished choosing all your character details below,
-        copy your character to the clipboard:
+        you can copy your character to the clipboard:
     </span>
-    <p>
         <label id="copyButton_label">
-            Copy this Character To Clipboard: <button id="copyButton">Copy</button>
+            <button id="copyButton">Copy</button>
         </label>
+    <p>
+    <div class="feedback">
+        <br>
+        <a href="about.html" id="about">Click here</a> to leave feedback, ask a question, or report a problem.
+    </div>
     </p>
     <p>
-        <a href="about.html" id="about">Click here to leave feedback, ask a question, or report a problem.</a>
+    <div class="feedback">
+        <br>
+        <a href="https://github.com/ericdorsey/cp2020">View Source</a> on GitHub.
+    </div>
     </p>
 </div>
 
@@ -325,15 +335,15 @@
         <br>
         <span id="statPointsLine">Stats Points Remaining: <span id="statPointsRemaining"></span></span>
         <br>
-        <br>Intelligence (INT) <input type="text" id="int" size="2" disabled="true">
-        <br>Reflexes (REF) <input type="text" id="ref" size="2" disabled="true">
-        <br>Technical Ability (TECH) <input type="text" id="tech" size="2" disabled="true">
-        <br>Cool (CL) <input type="text" id="cl" size="2" disabled="true">
-        <br>Attractiveness (ATT) <input type="text" id="att" size="2" disabled="true">
-        <br>Luck (LK) <input type="text" id="lk" size="2" disabled="true">
-        <br>Movement Allowance (MA) <input type="text" id="ma" size="2" disabled="true">
-        <br>Body Type (BT) <input type="text" id="bt" size="2" disabled="true">
-        <br>Empathy (EMP) <input type="text" id="emp" size="2" disabled="true">
+        <br>Intelligence (INT): <input type="text" id="int" class="statValueBoxes" size="2" disabled="true">
+        <br>Reflexes (REF): <input type="text" id="ref"  class="statValueBoxes"size="2" disabled="true">
+        <br>Technical Ability (TECH): <input type="text" id="tech"  class="statValueBoxes"size="2" disabled="true">
+        <br>Cool (CL): <input type="text" id="cl"  class="statValueBoxes"size="2" disabled="true">
+        <br>Attractiveness (ATT): <input type="text" id="att"  class="statValueBoxes"size="2" disabled="true">
+        <br>Luck (LK): <input type="text" id="lk"  class="statValueBoxes"size="2" disabled="true">
+        <br>Movement Allowance (MA): <input type="text" id="ma"  class="statValueBoxes"size="2" disabled="true">
+        <br>Body Type (BT): <input type="text" id="bt"  class="statValueBoxes"size="2" disabled="true">
+        <br>Empathy (EMP): <input type="text" id="emp"  class="statValueBoxes"size="2" disabled="true">
     </p>
     <p>
         <span class="bold">Derived Stats (auto calculated -- not manually editable):</span>
@@ -350,18 +360,18 @@
             Lift <input type="text" id="lift" size="3" disabled="true"> <span class="instruction">in kgs</span>
         </label>
         <label for="liftLBs" id="liftLBs_label">
-            <input type="text" id="liftLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
+            <input type="text" id="liftLBs" size="6" disabled="true"> <span class="instruction">in lbs</span>
         </label>
         <br>
         <label for="carry" id="carry_label">
             Carry <input type="text" id="carry" size="3" disabled="true"> <span class="instruction">in kgs</span>
         </label>
         <label for="carryLBs" id="carryLBs_label">
-            <input type="text" id="carryLBs" size="3" disabled="true"> <span class="instruction">in lbs</span>
+            <input type="text" id="carryLBs" size="6" disabled="true"> <span class="instruction">in lbs</span>
         </label>
         <br>
         <label for="bodyType" id="bodyType_label">
-            Body Type <input type="text" id="bodyType" size="25" disabled="true">
+            Body Type <input type="text" id="bodyType" size="15" disabled="true">
         </label>
         <br>
         <label for="btm" id="btm_label">
@@ -719,6 +729,10 @@
     <br>
     <h4 class="sub4Head">Age</h4>
     <br>
+    <br>
+    <input type="checkbox" id="preventNothing"> Check to prevent "Nothing Happened This Year" events.
+    <br>
+    <br>
     <span class="instructSmall">
         Click radio button again to re-roll / reselect. When manually entering age, it must be a value
         between 17 and 99.
@@ -742,7 +756,6 @@
                 <td>Event Type</td>
                 <td>Result</td>
                 <td>Detail</td>
-                <!--<td>More Detail</td>-->
             </tr>
         </table>
     </div>
