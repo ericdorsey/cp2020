@@ -1343,10 +1343,8 @@ function randLifeEvent(age) {
     var lifeEventRoll;
     if(preventNothing.checked) {
         lifeEventRoll = getRandomInt(1, 8);
-        console.log("checked");
     } else {
         lifeEventRoll = getRandomInt(1, 10);
-        console.log("not checked");
     }
     var secondLifeRoll = getRandomInt(1, 10);
     var thirdLifeRoll = getRandomInt(1, 10);
@@ -3614,11 +3612,26 @@ function copyToClipboard() {
     return false;
 }
 
+function saveNewImage() {
+    "use strict";
+    var fullCharOutput = document.getElementById("fullCharOutput");
+    html2canvas(fullCharOutput, {
+        onrendered: function(canvas) {
+            var img = canvas.toDataURL()
+            window.open(img);
+        },
+        letterRendering: true
+    });
+}
+
 
 function init() {
     "use strict";
     var copyButton = document.getElementById("copyButton");
     copyButton.onclick = copyToClipboard;
+
+    var saveImage = document.getElementById("saveImage");
+    saveImage.onclick = saveNewImage;
 
     // Handle (character name)
     var handle = document.getElementById("handle");

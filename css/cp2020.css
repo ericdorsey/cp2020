@@ -15,7 +15,14 @@ input {
     margin: 2px;
     font-size: 14px;
 }
-#copyButton_label {
+
+#saveImage {
+    margin: 2px;
+    font-size: 14px;
+}
+
+
+.indent_label {
     margin-left: 10px;
 }
 
@@ -32,13 +39,13 @@ input {
 
 a {
     font-weight: bold;
-    color: #225166;
+    color: #2a507f;
     margin-left: 10px;
 }
 
 a visited {
     font-weight: bold;
-    color: #225166;
+    color: #2a507f;
 }
 
 #calcChar {
@@ -71,6 +78,10 @@ a visited {
     font-size: 15px;
 }
 
+.instructVerySmall {
+    font-size: 12px;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -88,6 +99,7 @@ a visited {
 /* Stats Points Remaining Output */
 #statPointsLine {
     font-size: 13px;
+    margin-left: 10px;
 }
 
 #statPointsRemaining {

@@ -5,6 +5,7 @@
         <meta http-equiv="refresh" content="0; URL=noJS.html">
     </noscript>
     <link rel="stylesheet" href="css/cp2020.css">
+    <script src="js/html2canvas.js"></script>
     <script src="js/cp2020.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -16,6 +17,7 @@
         ga('send', 'pageview');
 
     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -250,11 +252,21 @@
         <br>
         <br>
         Once you've finished choosing all your character details below,
-        you can copy your character to the clipboard:
+        you can:
+        <p>
+            Copy text version of your character to the clipboard:
+            <br>
+            <button id="copyButton">Copy Character as Text</button>
+        </p>
+        <p>
+            Save an image of your character:
+            <br>
+            <button id="saveImage">Save Character Sheet as Image</button>
+            <br>
+            <span class="instructVerySmall">(Opens in a new window / tab -- you may need to disable popup blocking)</span>
+        </p>
+
     </span>
-        <label id="copyButton_label">
-            <button id="copyButton">Copy</button>
-        </label>
     <p>
     <div class="feedback">
         <br>
@@ -328,9 +340,9 @@
         </tr>
     </table>
     <p>
-        <span class="bold">User Assigned Stats (editable):</span>
+        <span class="bold">User Assigned Stats</span>
         <br>
-        <span class="instructSmall">(You must choose a roll method above before you can edit these fields)</span>
+        You must choose a roll method above before you can edit these fields.
         <br>
         <br>
         <span id="statPointsLine">Stats Points Remaining: <span id="statPointsRemaining"></span></span>
@@ -346,7 +358,10 @@
         <br>Empathy (EMP): <input type="text" id="emp"  class="statValueBoxes"size="2" disabled="true">
     </p>
     <p>
-        <span class="bold">Derived Stats (auto calculated -- not manually editable):</span>
+        <span class="bold">Derived Stats</span>
+        <br>
+        Below fields are automatically calculated.
+        <br>
         <br>
         <label for="run" id="run_label">
             Run <input type="text" id="run" size="3" disabled="true"> <span class="instruction">in meters</span>
