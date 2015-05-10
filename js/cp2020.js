@@ -3281,7 +3281,6 @@ function shuffleArray(array) {
 function randEverythingClick() {
     "use strict";
     enableForms();
-
     // Reset because of the naming on "pickup{dynamic number}Select"
     characterMeta.pickupSkillsAdded = 0;
 
@@ -3454,6 +3453,7 @@ function randEverythingClick() {
             return generatedSkillPoints;
         }
 
+
         function generatePickupPointsArray(currentSkillSet) {
             var remainingPickupPoints = characterMeta.pickupSkillPoints;
             var whichSubSkill = {
@@ -3466,7 +3466,7 @@ function randEverythingClick() {
                 7: "tech"
             }
 
-            var numberAdded = 0; //Number of pickup skills added
+            var numberAdded = 0; // Number of pickup skills added
             var usedAlready = [];
             while (remainingPickupPoints > 0) {
                 var currentCandidateSkillLevel;
@@ -3478,28 +3478,37 @@ function randEverythingClick() {
                 if (remainingPickupPoints - currentCandidateSkillLevel >= 0) {
                     var currentSubSkill = getRandomInt(1, 7);
 
-                    //SubSkill category, attr, etc
-                    var currentCandidateSkillName = whichSubSkill[currentSubSkill];
-                    var fullCurrentCandidateSkillName = skills[currentCandidateSkillName];
-                    var lengthOfCurrentSubSkillSet = Object.keys(fullCurrentCandidateSkillName).length -1;
-                    var anotherInt = getRandomInt(1, lengthOfCurrentSubSkillSet);
-                    if (anotherInt < 10) {
-                        anotherInt.toString();
-                        anotherInt = "0" + anotherInt;
+                    // attr, body, cool, etc.
+                    var skillSubCategory = whichSubSkill[currentSubSkill];
+
+                    var allSkillsFromSubCategory = skills[skillSubCategory];
+                    var numberSkillsInSubCategory = Object.keys(allSkillsFromSubCategory).length -1;
+                    var randomSkillFromSubCategory = getRandomInt(1, numberSkillsInSubCategory);
+                    if (randomSkillFromSubCategory < 10) {
+                        randomSkillFromSubCategory.toString();
+                        randomSkillFromSubCategory = "0" + randomSkillFromSubCategory;
                     } else {
-                        anotherInt.toString();
+                        randomSkillFromSubCategory.toString();
                     }
-                    var theName = currentCandidateSkillName + anotherInt;
-                    if (((theName in usedAlready) === false) && ((skills[currentCandidateSkillName][theName] in currentSkillSet) === false)) {
-                        usedAlready.push(theName);
+                    var finalSkillName = skillSubCategory + randomSkillFromSubCategory;
+                    var proceed;
+                    for (var property in currentSkillSet) {
+                        if ((skills[skillSubCategory][finalSkillName] === currentSkillSet[property]) === true) {
+                            proceed = false;
+                            break;
+                        } else {
+                            proceed = true;
+                        }
+                    }
+                    if (((finalSkillName in usedAlready) === false) && (proceed === true)) {
+                        usedAlready.push(finalSkillName);
                         var addPickup = document.getElementById("createSkillButton");
                         addPickup.click();
-
                         numberAdded += 1;
                         var pickupCategory = document.getElementById("pickup" + numberAdded + "Select");
 
                         for (var k = 0; k < pickupCategory.options.length; k++) {
-                            if (pickupCategory.options[k].text === currentCandidateSkillName.toUpperCase()) {
+                            if (pickupCategory.options[k].text === skillSubCategory.toUpperCase()) {
                                 pickupCategory.selectedIndex = k;
                                 break;
                             }
@@ -3511,18 +3520,17 @@ function randEverythingClick() {
 
                         var pickupChoice = document.getElementById("subPickup" + numberAdded + "Select");
 
-                        for (var l = 0; l < pickupChoice.options.length; l ++) {
-                            if (pickupChoice.options[l].text === skills[currentCandidateSkillName][theName]) {
+                        for (var l = 0; l < pickupChoice.options.length; l++) {
+                            if (pickupChoice.options[l].text === skills[skillSubCategory][finalSkillName]) {
                                 pickupChoice.selectedIndex = l;
-                                break;
                             }
                         }
 
                         var pickupField = document.getElementById("subSkillField" + numberAdded);
                         pickupField.value = currentCandidateSkillLevel;
                         pickupSkillInputChange();
+                        remainingPickupPoints -= currentCandidateSkillLevel;
                     }
-                    remainingPickupPoints -= currentCandidateSkillLevel;
                 }
             }
         }
