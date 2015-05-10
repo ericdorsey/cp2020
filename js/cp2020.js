@@ -2989,7 +2989,6 @@ function randRoleClick() {
     var randRoll = getRandomInt(1,10);
     var roleField = document.getElementById("roleField");
     var roles = Object.keys(skills.special);
-    //
     roleField.value = roles[randRoll];
 
     createCareerSkills(roleField.value);
@@ -3137,7 +3136,6 @@ function pickupOptSelectChange(eventObj) {
     }
 
     for (var i = 1; i < Object.keys(skills[subCategory]).length; i++) {
-        //
         var opt = document.createElement("option");
         opt.value = i;
         var optText;
