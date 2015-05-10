@@ -3490,8 +3490,11 @@ function randEverythingClick() {
                     } else {
                         randomSkillFromSubCategory.toString();
                     }
+                    // example: tech04
                     var finalSkillName = skillSubCategory + randomSkillFromSubCategory;
                     var proceed;
+
+                    // Verify random candidate isn't part of career skills
                     for (var property in currentSkillSet) {
                         if ((skills[skillSubCategory][finalSkillName] === currentSkillSet[property]) === true) {
                             proceed = false;
@@ -3500,7 +3503,13 @@ function randEverythingClick() {
                             proceed = true;
                         }
                     }
-                    if (((finalSkillName in usedAlready) === false) && (proceed === true)) {
+
+                    // Verify random candidate isn't part of already chosen pickup skills
+                    if (usedAlready.indexOf(finalSkillName) !== -1) {
+                        proceed = false;
+                    }
+
+                    if (proceed === true) {
                         usedAlready.push(finalSkillName);
                         var addPickup = document.getElementById("createSkillButton");
                         addPickup.click();
