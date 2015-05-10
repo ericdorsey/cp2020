@@ -11,6 +11,10 @@ input {
     padding-left: 10px;
 }
 
+.centered {
+    text-align: center;
+}
+
 #copyButton {
     margin: 2px;
     font-size: 14px;
@@ -94,6 +98,12 @@ a visited {
 
 #pickupSkillPointField_label {
     font-size: 13px;
+}
+
+.skillValueBoxes {
+    font-size: 13px;
+    color: black;
+    text-align: center;
 }
 
 /* Stats Points Remaining Output */

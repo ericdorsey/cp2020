@@ -28,9 +28,6 @@ function enableForms() {
     }
 }
 
-
-
-
 function randomStyleClick() {
     "use strict";
     //Clothes, Hair, Affectations Selection Dropdowns
@@ -42,9 +39,9 @@ function randomStyleClick() {
     manualHairSelect.style.display = "none";
     manualAffecSelect.style.display = "none";
 
-    var clothesRoll = getRandomInt(1,10); // Clothes Object
-    var hairRoll = getRandomInt(1,10); // HairStyle Object
-    var affecRoll = getRandomInt(1,10); // Affectations Object
+    var clothesRoll = getRandomInt(1, 10); // Clothes Object
+    var hairRoll = getRandomInt(1, 10); // HairStyle Object
+    var affecRoll = getRandomInt(1, 10); // Affectations Object
 
     //Output fields for Clothes, Hair, Affectations
     var clothesField = document.getElementById("clothesField");
@@ -628,7 +625,6 @@ function manualChildSelectChange() {
 
 function killChildren(myNode) {
     "use strict";
-    //var myNode = document.getElementById("foo");
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
@@ -641,7 +637,6 @@ function randSiblingsClick() {
     killChildren(siblingsOutput);
     var manualSiblingSelect = document.getElementById("manualSiblingSelect");
     manualSiblingSelect.style.display = "none";
-    //removeElementById("manualSiblingSelect");
 
     var charSiblingOutputNum = document.getElementById("charSiblingOutputNum");
     charSiblingOutputNum.innerHTML = numSiblings;
@@ -651,7 +646,6 @@ function randSiblingsClick() {
         charSiblingOutput.removeChild(charSiblingOutput.firstChild);
     }
 
-    //var numSiblings = 3;
     var haveSiblings = document.getElementById("haveSiblings");
     if (numSiblings <= 7) {
         haveSiblings.value = "You have ".concat(numSiblings.toString()).concat(" siblings");
@@ -670,7 +664,6 @@ function randSiblingsClick() {
             siblingLabelPar.appendChild(siblingLabel);
             siblingLabelPar.setAttribute("class", "dynamicPar");
 
-            //var siblingsOutput = document.getElementById("siblingsOutput");
             siblingsOutput.appendChild(siblingLabelPar);
 
             var label = document.createElement("label");
@@ -791,9 +784,6 @@ function manualSiblingSelectChange() {
     while (charSiblingOutput.firstChild) {
         charSiblingOutput.removeChild(charSiblingOutput.firstChild);
     }
-    //manualSiblingSelect.onchange = manualSiblingSelectChange;
-
-    //haveSiblings.value = manualSiblingSelect[manualSiblingSelect.selectedIndex].text;
     var numSiblings = manualSiblingSelect[manualSiblingSelect.selectedIndex].text;
     var charSiblingOutputNum = document.getElementById("charSiblingOutputNum");
 
@@ -888,7 +878,6 @@ function manualSiblingSelectChange() {
             var feelsID = "feels" + i.toString();
             textBox3.setAttribute("disabled", "true");
             textBox3.setAttribute("id", feelsID);
-            //textBox.value = siblingGenders[siblingGender];
             siblingsOutput.appendChild(label3);
             siblingsOutput.appendChild(textBox3);
 
@@ -905,16 +894,13 @@ function manualSiblingSelectChange() {
             //Set the value of the sibling feelings field to the initial dropdown selection
             textBox3.value = feelsSelect[feelsSelect.selectedIndex].text;
 
-            //need event listener for changing each sibling detail
+            // Need event listener for changing each sibling detail
             var span01 = document.createElement("span");
             span01.innerHTML = textBox2.value.concat(", ").concat(textBox.value).concat("; ").concat(textBox3.value);
             span01.setAttribute("class", "charSiblingOutputItems");
             charSiblingOutput.appendChild(span01);
             appendBR(charSiblingOutput);
         }
-
-
-
 
         //Add siblingOutputSelectsChange event listener to all dynamic select dropdowns
         // gender1Select, age1Select, feels1Select, etc.
@@ -926,7 +912,7 @@ function manualSiblingSelectChange() {
     }
 }
 
-//Dynamically get the changed select option and apply it's text to the text field
+// Dynamically get the changed select option and apply it's text to the text field
 function siblingOutputSelectsChange(eventObj) {
     "use strict";
     var theSelect = eventObj.target;
@@ -964,7 +950,7 @@ function randPersTraitsClick() {
     persTraitsSelect.style.display = "none";
 
     var persTraitsField = document.getElementById("persTraitsField");
-    var persRoll = getRandomInt(1,10);
+    var persRoll = getRandomInt(1, 10);
     persTraitsField.value = persTraits[persRoll];
 
     var persTraitCharOutput = document.getElementById("persTraitCharOutput");
@@ -1007,7 +993,7 @@ function randPersValueClick() {
     "use strict";
     var persValSelect = document.getElementById("persValSelect");
     persValSelect.style.display = "none";
-    var persValRoll = getRandomInt(1,10);
+    var persValRoll = getRandomInt(1, 10);
     var persValField = document.getElementById("persValField");
     persValField.value = persValued[persValRoll];
 
@@ -1047,8 +1033,6 @@ function persValSelectChange() {
 
     var persValCharOutput = document.getElementById("persValCharOutput");
     persValCharOutput.innerHTML = persValField.value;
-
-
 }
 
 function randYouValueClick() {
@@ -1161,7 +1145,7 @@ function manPosClick() {
     posSelect.style.display = "block";
     var posField = document.getElementById("posField");
 
-    //Remove all children (options) from posSelect
+    // Remove all children (options) from posSelect
     while (posSelect.firstChild) {
         posSelect.removeChild(posSelect.firstChild);
     }
@@ -1303,7 +1287,6 @@ function addLifeRowEnemy(td1Val, td2Val, td3Val) {
     newRow.appendChild(td1);
     newRow.appendChild(td2);
     newRow.appendChild(td3);
-    //newRow.appendChild(td4);
 
     tBody[0].appendChild(newRow);
 }
@@ -1367,44 +1350,45 @@ function randLifeEvent(age) {
             var dupArgs = [age, eventType, getLucky[thirdLifeRoll].title, getLucky[thirdLifeRoll].detail];
 
             if (thirdLifeRoll === 1) {
+                var connectionMade = "";
                 if (fourthLifeRoll <= 4) {
-                    connection = getLuckyConnection[1];
+                    connectionMade = getLucky.addMakePowerfulConnection("police");
                 } else if (fourthLifeRoll >= 5 && fourthLifeRoll <= 7) {
-                    connection = getLuckyConnection[2];
+                    connectionMade = getLucky.addMakePowerfulConnection("da");
                 } else if (fourthLifeRoll >= 8) {
-                    connection = getLuckyConnection[3];
+                    connectionMade = getLucky.addMakePowerfulConnection("mayor");
                 }
-                connection = "You made a connection " + connection;
-                addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, connection);
+                connectionMade = "You made a connection " + connectionMade;
+                addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, connectionMade);
 
             } else if (thirdLifeRoll === 2) {
-                addWindfall(getLucky, age);
+                getLucky.addWindFall(age);
                 amount = "Amount: " + getLucky.windfallHistory[age] + " eb";
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 3) {
-                addScore(getLucky, age);
+                getLucky.addScore(age);
                 amount = amount.concat("Amount: ", getLucky.scoreHistory[age], " eb");
                 addLifeRow(age, eventType, getLucky[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 4) {
-                addSensei(getLucky, age);
+                getLucky.addSensei(age);
                 addLifeRow.apply(null, dupArgs);
             } else if (thirdLifeRoll === 5) {
-                addTeacher(getLucky, age);
+                getLucky.addTeacher(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
             } else if (thirdLifeRoll === 6) {
-                addCorpFavor(getLucky, age);
+                getLucky.addCorpFavor(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
             } else if (thirdLifeRoll === 7) {
-                addNomadFavor(getLucky, age);
+                getLucky.addNomadFavor(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
             } else if (thirdLifeRoll === 8) {
-                addPoliceFriend(getLucky, age);
+                getLucky.addPoliceFriend(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
             } else if (thirdLifeRoll === 9) {
-                addBoosterFriend(getLucky, age);
+                getLucky.addBoosterFriend(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
             } else if (thirdLifeRoll === 10) {
-                addCombatTeacher(getLucky, age);
+                getLucky.addCombatTeacher(getLucky, age);
                 addLifeRow.apply(null, dupArgs);
             }
         } else if ((secondLifeRoll % 2 ===0) === false) {
@@ -1412,17 +1396,17 @@ function randLifeEvent(age) {
             eventType = "Disaster Strikes";
             if (thirdLifeRoll === 1) {
                 // Financial loss
-                addDebt(disaster, age);
+                disaster.addDebt(age);
                 amount = "Amount: ".concat(disaster.debtHistory[age], " eb");
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 2) {
                 // Imprisonment
-                addPrison(disaster, age);
+                disaster.addPrison(age);
                 amount = "Time imprisoned / held hostage: ".concat(disaster.prisonHistory[age], " months");
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, amount);
             } else if (thirdLifeRoll === 3) {
                 // Illness / addiction
-                addIllness(disaster, age);
+                disaster.addIllness(age);
                 addLifeRow(age, eventType, disaster[thirdLifeRoll].title, disaster[thirdLifeRoll].detail);
             } else if (thirdLifeRoll === 4) {
                 // Betrayal
@@ -1511,9 +1495,9 @@ function randLifeEvent(age) {
         for (var j = 0; j < lifeTable.rows[i].cells.length; j++) {
             var currCell = lifeTable.rows[i].cells[j];
 
-            charOutputAge = lifeTable.rows[i].cells[0].innerHTML; //Age
+            charOutputAge = lifeTable.rows[i].cells[0].innerHTML; // Age
 
-            charOutputEvent = lifeTable.rows[i].cells[1].innerHTML; //Event
+            charOutputEvent = lifeTable.rows[i].cells[1].innerHTML; // Event
 
             if (charOutputEvent !== "Make an Enemy") {
                 charOutputResult = lifeTable.rows[i].cells[2].innerHTML;
@@ -1529,7 +1513,7 @@ function randLifeEvent(age) {
                         charOutputDetail = "";
                         for (var m = 0; m < targetRows.cells.length; m++) {
                             if (m === 0) {
-                                //Result of make enemy life event
+                                // Result of make enemy life event
                                 charOutputResult += targetRows.cells[m].innerHTML.concat(". ");
                             } else if (m >= 1 && m <= 4) {
                                 charOutputResult += targetRows.cells[m].innerHTML.concat(". ");
@@ -1577,8 +1561,6 @@ function randLifeEvent(age) {
 
 function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     "use strict";
-    //
-
     var enemyDetailTable = document.createElement("table");
 
     var enemyDetailHeader = document.createElement("tr");
@@ -1620,7 +1602,6 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     enemyTD5.innerHTML = tdVal5;
     enemyTD6.innerHTML = tdVal6;
 
-    //
     enemyDetailRow.appendChild(enemyTD1);
     enemyDetailRow.appendChild(enemyTD2);
     enemyDetailRow.appendChild(enemyTD3);
@@ -1762,7 +1743,7 @@ var siblingAges = {
 var siblingFeelings = {
     1: "sibling dislikes you",
     2: "sibling likes you",
-    3: "sibling neutral",
+    3: "sibling neutral towards you",
     4: "sibling hero worships you",
     5: "sibling hates you"
 };
@@ -1844,12 +1825,7 @@ var valuedPos = {
 };
 
 var disaster = {
-    debtAmount: 0,
-    debtHistory: {},
-    prisonTime: 0,
-    prisonHistory: {},
-    illnessTime: 0,
-    illnessHistory: {},
+    // Disaster Strikes table from Big Problems, Big Wins
     betrayalAmount: 0,
     betrayalHistory: {},
     betrayDetail: {},
@@ -1870,7 +1846,6 @@ var disaster = {
     accidentDetail: {},
     addAccident: function(age, thirdLifeRoll, fourthLifeRoll) {
         "use strict";
-        //
         this.accidentHistory[age] = this[thirdLifeRoll].title;
         this.accidentAmount += 1;
         var randInt = getRandomInt(1,10);
@@ -1897,7 +1872,7 @@ var disaster = {
         } else if (fourthLifeRoll >= 6 && fourthLifeRoll <= 8) {
             this.loverKilledDetail[age] = "They were murdered by unknown parties";
         } else if (fourthLifeRoll >=9) {
-            this.loverKilledDetail[age] = "They were murderd; you know who did it. You just need proof";
+            this.loverKilledDetail[age] = "They were murdered; you know who did it. You just need proof";
         }
     },
     falseAccuseAmount: 0,
@@ -1935,7 +1910,6 @@ var disaster = {
         } else if (fourthLifeRoll >= 9) {
             this.lawHuntedDetail[age] = "the FBI or equivalent national police force wants you.";
         }
-        //
     },
     corpHuntedAmount: 0,
     corpHuntedHistory: {},
@@ -1954,7 +1928,6 @@ var disaster = {
         } else if (fourthLifeRoll >= 9) {
             this.corpHuntedDetail[age] = "Huge multinational corporation hunting you; they have armies, ninjas and spies everywhere";
         }
-        //
     },
     incapAmount: 0,
     incapHistory: {},
@@ -1973,38 +1946,72 @@ var disaster = {
                 "irrational, depressive. Lose 1pt from CL, 1pt from REF");
         }
     },
-    1: {title: "Financial Loss or Debt", detail: "Roll 1D10x100." +
+    debtAmount: 0,
+    debtHistory: {},
+    addDebt: function(age) {
+        "use strict";
+        var newDebt = getRandomInt(1, 10) * 100;
+        this.debtHistory[age] = newDebt;
+        this.debtAmount += newDebt;
+    },
+    prisonTime: 0,
+    prisonHistory: {},
+    addPrison: function(age) {
+        "use strict";
+        var prisonTerm = getRandomInt(1,10);
+        this.prisonHistory[age] = prisonTerm;
+        this.prisonTime += prisonTerm;
+    },
+    illnessTime: 0,
+    illnessHistory: {},
+    addIllness: function(age) {
+        "use strict";
+        var illnessLength = getRandomInt(1, 10);
+        this.illnessHistory[age] = illnessLength;
+        this.illnessTime += illnessLength;
+    },
+    1: {title: "Financial Loss or Debt",
+        detail: "Roll 1D10x100." +
         "You have lost this much in Eurodollars. If you can't pay this now," +
         " you have a debt to pay, in cash--or blood."},
-    2: {title: "Imprisonment", detail: "You have been in prison, or possibly held hostage" +
+    2: {title: "Imprisonment",
+        detail: "You have been in prison, or possibly held hostage" +
         " (your choice). Roll 1D10 for length of imprisonment in months."},
-    3: {title: "Illness or addiction", detail: "You have contracted either an illness or" +
+    3: {title: "Illness or addiction",
+        detail: "You have contracted either an illness or" +
         " drug habit in this time. Lose 1 point of REF permanently as a result."},
-    4: {title: "Betrayal. You have been backstabbed in some manner", detail:
+    4: {title: "Betrayal. You have been backstabbed in some manner",
+        detail:
         "Roll another 1D10. 1-3, you are being blackmailed. 4-7 a secret was".concat(
         " exposed. 8-10, you were betrayed by a close friend in either romance",
         " or career (your choice).")},
-    5: {title: "Accident", detail: "You were in some kind of terrible accident. Roll" +
+    5: {title: "Accident",
+        detail: "You were in some kind of terrible accident. Roll" +
         " 1D10. 1-4, you were terribly disfigured and must subtract -5 from your ATT." +
         " 5-6 you were hospitalized for 1D10 months that year. 7-8, you have lost" +
         " 1D10 months of memory that year. 9-10, you constantly relive nightmares" +
         " (8 in 10 chance each night) of the accident and wake up screaming"},
-    6: {title: "Lover, friend or relative killed", detail: "You lost someone you" +
+    6: {title: "Lover, friend or relative killed",
+        detail: "You lost someone you" +
         " really cared about. 1-5, they died accidentally. 6-8 they were murdered" +
         " by unknown parties. 9-10, they were murdered and you know who did it. You" +
         " just need the proof."},
-    7: {title: "False Accusation", detail: "You were set up. Roll 1D10. 1-3, the" +
+    7: {title: "False Accusation",
+        detail: "You were set up. Roll 1D10. 1-3, the" +
         " accusation is theft. 4-5 it's cowardice. 6-8 it's murder. 9 it's rape" +
         " 10, it's lying or betrayal"},
-    8: {title: "Hunted by the law", detail: "You are hunted by the law for crimes" +
+    8: {title: "Hunted by the law",
+        detail: "You are hunted by the law for crimes" +
         " you may or may not have committed (your choice). Roll 1D10. 1-3 only" +
         " a couple cops want you. 4-6 it's the entire local force. 7-8, it's the" +
         " State police or Militia. 9-10 it's the FBI or equivalent national police force."},
-    9: {title: "Hunted by a Corporation", detail: "You have angered some corporate" +
+    9: {title: "Hunted by a Corporation",
+        detail: "You have angered some corporate" +
         " honcho. Roll 1D10. 1-3 it's a small, local firm. 4-6 it's a larger corp with offices" +
         "statewide. 7-8 it's a big, national corp with agents in major cities nationwide." +
         "9-10; it's a huge multinational with armies, ninja and spies everywhere."},
-    10: {title: "Mental or physical incapacitation", detail: "You have experienced" +
+    10: {title: "Mental or physical incapacitation",
+        detail: "You have experienced" +
         " some type of mental or physical breakdown. Roll 1D10. 1-3 it's some type"+
         " of nervous disorder, probably from a bioplague -- lose 1pt REF. 4-7 it's" +
         " some kind of mental problem; you suffer anxiety attacks and phobias. Lose" +
@@ -2012,135 +2019,111 @@ var disaster = {
         " are violent, irrational, depressive. Lose 1pt from CL, 1pt from REF"}
 };
 
-function addDebt(disaster, age) {
-    "use strict";
-    var newDebt = getRandomInt(1,10) * 100;
-    disaster.debtHistory[age] = newDebt;
-    disaster.debtAmount = disaster.debtAmount + newDebt;
-    return disaster;
-}
-
-function addPrison(disaster, age) {
-    "use strict";
-    var prisonTerm = getRandomInt(1,10);
-    disaster.prisonHistory[age] = prisonTerm;
-    disaster.prisonTime = disaster.prisonTime + prisonTerm;
-    return disaster;
-}
-
-function addIllness(disaster, age) {
-    "use strict";
-    var illnessLength = getRandomInt(1, 10);
-    disaster.illnessHistory[age] = illnessLength;
-    disaster.illnessTime = disaster.illnessTime + illnessLength;
-}
-
 var getLucky = {
+    // Get Lucky table from Big Problems, Big Wins
+    connectionAmount: 0, // Number of Powerful Connections
+    connectionHistory: {},
+    addMakePowerfulConnection: function(whereIsConnection) {
+        "use strict";
+        var connectionMade = {
+            "police" : "in the Police department",
+            "da" : "in the District Attorney's Office",
+            "mayor" : "in the Mayor's office"
+        };
+        return connectionMade[whereIsConnection];
+    },
     windfallAmount: 0,
     windfallHistory: {},
+    addWindFall: function(age) {
+        "use strict";
+        var newWindfall = getRandomInt(1, 10) * 100;
+        this.windfallHistory[age] = newWindfall;
+        this.windfallAmount +=+ newWindfall;
+    },
     scoreAmount: 0,
     scoreHistory: {},
+    addScore: function(age) {
+        "use strict";
+        var newScore = getRandomInt(1,10) * 100;
+        this.scoreHistory[age] = newScore;
+        this.scoreAmount += newScore;
+    },
     senseiFound: 0,
     senseiHistory: {},
+    addSensei: function(age) {
+        "use strict";
+        this.senseiHistory[age] = "Find a Sensei";
+        this.senseiFound += 1;
+    },
     teacherFound: 0,
     teacherHistory: {},
+    addTeacher: function(age) {
+        "use strict";
+        this.teacherHistory[age] = "Find a teacher";
+        this.teacherFound += 1;
+    },
     corpFavor: 0,
     corpFavorHistory: {},
+    addCorpFavor: function(age) {
+        "use strict";
+        this.corpFavorHistory[age] = "Corporate Executive owes you a favor";
+        this.corpFavor += 1;
+    },
     nomadFavor: 0,
     nomadFavorHistory: {},
+    addNomadFavor: function(age) {
+        "use strict";
+        this.nomadFavorHistory[age] = "Develop friendship with a nomad pack";
+        this.nomadFavor += 1;
+    },
     policeFriend: 0,
     policefriendHistory: {},
+    addPoliceFriend: function(age) {
+        "use strict";
+        this.policefriendHistory[age] = "Friend on Police Force";
+        this.policeFriend += 1;
+    },
     boosterFriend: 0,
     boosterFriendHistory: {},
+    addBoosterFriend: function(age) {
+        "use strict";
+        this.boosterFriendHistory[age] = "Local Boostergang likes you";
+        this.boosterFriend += 1;
+    },
     combatTeacher: 0,
     combatTeacherHistory: {},
-    1: {title: "Make a Powerful Connection in City Government", detail: "Roll 1D10" +
+    addCombatTeacher: function(age) {
+        "use strict";
+        this.combatTeacherHistory[age] = "Find combat teacher";
+        this.combatTeacher += 1;
+    },
+    // Life Events table output, Detail column data
+    1: {title: "Make a Powerful Connection in City Government",
+        detail: "Roll 1D10" +
         " 1-4 it's the Police. 5-7 it's in DA office. 8-10 its the Mayor"},
-    2: {title: "Financial Windfall", detail: "Roll 1D10x100 for amount in Euros"},
-    3: {title: "Big Score", detail: "Roll 1D10x100 for amount"},
-    4: {title: "Find a Sensei (Teacher)", detail: "Begin a new Martial Art at +2, or add +1 to an existing Martial Art"},
-    5: {title: "Find a Teacher", detail: "Add +1 to any INT based skill, or begin new at +2"},
-    6: {title: "Favor with a Powerful Corporate Executive", detail: "They owe you a favor"},
-    7: {title: "Local Nomad Pack Befriends You", detail: "Call on them for one favor a month" +
+    2: {title: "Financial Windfall",
+        detail: "Roll 1D10x100 for amount in Euros"},
+    3: {title: "Big Score",
+        detail: "Roll 1D10x100 for amount"},
+    4: {title: "Find a Sensei (Teacher)",
+        detail: "Begin a new Martial Art at +2, or add +1 to an existing Martial Art"},
+    5: {title: "Find a Teacher",
+        detail: "Add +1 to any INT based skill, or begin new at +2"},
+    6: {title: "Favor with a Powerful Corporate Executive",
+        detail: "They owe you a favor"},
+    7: {title: "Local Nomad Pack Befriends You",
+        detail: "Call on them for one favor a month, " +
        " equivalent to Family special ability +2"},
-    8: {title: "Make Friend on Police Force", detail: "You may use them for information at".concat(/*+*/
+    8: {title: "Make Friend on Police Force",
+        detail: "You may use them for information at".concat(
         " a level of +2 Streetwise on any police related situation.")},
-    9: {title: "Local Boostergang likes you", detail: "Who knows why. You can call on them for" +
+    9: {title: "Local Boostergang likes you",
+        detail: "You can call on them for" +
         " one favor a month, equivalent to Family special ability of +2. Don't push it"},
-    10: {title: "Find a combat teacher", detail: "Add +1 to any weapon skill w/ exception" +
+    10: {title: "Find a combat teacher",
+        detail: "Add +1 to any weapon skill w/ exception" +
         " of Martial Arts or Brawling, or begin a new combat skill at +2"}
 };
-
-var getLuckyConnection = {
-    1: "in the Police department",
-    2: "in the District Attorney's Office",
-    3: "in the Mayor's office"
-};
-
-function addWindfall(getLucky, age) {
-    "use strict";
-    var newWindfall = getRandomInt(1,10) * 100;
-    getLucky.windfallHistory[age] = newWindfall;
-    getLucky.windfallAmount = getLucky.windfallAmount + newWindfall;
-    return getLucky;
-}
-
-function addScore(getLucky, age) {
-    "use strict";
-    var newScore = getRandomInt(1,10) * 100;
-    getLucky.scoreHistory[age] = newScore;
-    getLucky.scoreAmount = getLucky.scoreAmount + newScore;
-    return getLucky;
-}
-
-function addSensei(getLucky, age) {
-    "use strict";
-    getLucky.senseiHistory[age] = "Find a Sensei";
-    getLucky.senseiFound = getLucky.senseiFound + 1;
-    return getLucky;
-}
-
-function addTeacher(getLucky, age) {
-    "use strict";
-    getLucky.teacherHistory[age] = "Find a teacher";
-    getLucky.teacherFound = getLucky.teacherFound + 1;
-    return getLucky;
-}
-
-function addCorpFavor(getLucky, age) {
-    "use strict";
-    getLucky.corpFavorHistory[age] = "Corp Exec owes you a favor";
-    getLucky.corpFavor = getLucky.corpFavor + 1;
-    return getLucky;
-}
-
-function addNomadFavor(getLucky, age) {
-    "use strict";
-    getLucky.nomadFavorHistory[age] = "Develop friendship with a nomad pack";
-    getLucky.nomadFavor = getLucky.nomadFavor + 1;
-    return getLucky;
-}
-
-function addPoliceFriend(getLucky, age) {
-    "use strict";
-    getLucky.policefriendHistory[age] = "Friend on Police Force";
-    getLucky.policeFriend = getLucky.policeFriend + 1;
-    return getLucky;
-}
-
-function addBoosterFriend(getLucky, age) {
-    "use strict";
-    getLucky.boosterFriendHistory[age] = "Local Boostergang likes you";
-    getLucky.boosterFriend = getLucky.boosterFriend + 1;
-    return getLucky;
-}
-
-function addCombatTeacher(getLucky, age) {
-    "use strict";
-    getLucky.combatTeacherHistory[age] = "Find combat teacher";
-    getLucky.combatTeacher = getLucky.combatTeacher + 1;
-    return getLucky;
-}
 
 var enemy = {
     enemyAmount: 0,
@@ -2272,12 +2255,13 @@ var friendMade = {
 };
 
 var romance = {
-    happyCount:0,
+    happyCount: 0,
+    romanceCount: 0,
     happyDetail: {},
     happyHistory: {},
     addHappyAffair: function(age) {
         "use strict";
-        this.romanceCount +=1;
+        this.romanceCount += 1;
         this.happyHistory[age] = this.romanceEvent[1];
         this.happyDetail[age] = "n/a";
     },
@@ -2400,7 +2384,7 @@ var skills = {
         cool05: "Streetwise"
     },
     emp: {
-        name: "Empathy Sills",
+        name: "Empathy Skills",
         emp01: "Human Perception",
         emp02: "Interview",
         emp03: "Leadership",
@@ -2485,6 +2469,7 @@ var skills = {
     }
 };
 
+// Career Skills from pg. 44
 var career = {
     solo: {
         1: skills.special.Solo,
@@ -2606,7 +2591,7 @@ var career = {
         7: skills.tech.tech05,
         8: skills.int.int07,
         9: skills.tech.tech09,
-        10: skills.int.int19.main
+        10: skills.int.int19
     }
 };
 
@@ -2992,7 +2977,6 @@ function roleSelectPopulate() {
 
 function randRoleClick() {
     "use strict";
-    //console.log("randRoleClick() fired");
     var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
     while (pickupSkillCharOutput.firstChild) {
         pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
@@ -3064,7 +3048,6 @@ function createPickupSkills() {
     pickupSkillsTable.appendChild(createSkillButton);
     createSkillButton.onclick = createPickupOpt;
     appendBR(pickupSkillsTable);
-    //createPickupOpt(); //temp for testing, REMOVE!
 }
 
 function createPickupOpt() {
@@ -3124,7 +3107,6 @@ function createPickupOpt() {
 
 function pickupOptSelectChange(eventObj) {
     "use strict";
-
     var theSelect = eventObj.target;
     var theID = theSelect.id;
     var whichPickup = theID;
@@ -3170,7 +3152,7 @@ function pickupOptSelectChange(eventObj) {
     }
 }
 
-function pickupSkillInputChange(eventObj) {
+function pickupSkillInputChange() {
     "use strict";
     var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
@@ -3197,8 +3179,9 @@ function pickupSkillInputChange(eventObj) {
 
 function createCareerSkills(role) {
     "use strict";
-
     var careerSkillTable = document.getElementById("careerSkillTable");
+
+    // Clear out previous values if they exist
     while (careerSkillTable.firstChild) { //Remove all children (options) from careerSkillTable
         careerSkillTable.removeChild(careerSkillTable.firstChild);
     }
@@ -3232,8 +3215,10 @@ function createCareerSkills(role) {
         var td = document.createElement("td");
         var td2 = document.createElement("td");
 
+        // Houses the actual skill value
         var textField = document.createElement("input");
         textField.setAttribute("id", skills[i]);
+        textField.setAttribute("class", "skillValueBoxes");
         textField.setAttribute("size", "3");
         var label = document.createElement("label");
         label.innerHTML = skills[i];
@@ -3250,13 +3235,13 @@ function createCareerSkills(role) {
     }
 }
 
-function careerSkillInputChange(eventObj) {
+function careerSkillInputChange() {
     "use strict";
     var skillCharOutput = document.getElementById("skillCharOutput");
     var careerSkillTable = document.getElementById("careerSkillTable");
     var careerSkillArray = careerSkillTable.getElementsByTagName("input");
 
-    while (skillCharOutput.firstChild) { //Remove all children from skillCharOutput
+    while (skillCharOutput.firstChild) { // Remove all children from skillCharOutput
         skillCharOutput.removeChild(skillCharOutput.firstChild);
     }
 
@@ -3299,6 +3284,9 @@ function randEverythingClick() {
     "use strict";
     enableForms();
 
+    // Reset because of the naming on "pickup{dynamic number}Select"
+    characterMeta.pickupSkillsAdded = 0;
+
     var int = document.getElementById("int");
     var ref = document.getElementById("ref");
     var tech = document.getElementById("tech");
@@ -3317,9 +3305,7 @@ function randEverythingClick() {
     }
 
     function generateCinematicArrayRolls(cineTotal) {
-        /*
-        cineTotal: integer for that cinematic class, ie, avg == 50
-         */
+        //cineTotal: integer for that cinematic class, ie, avg == 50
         var currRoll = 0;
         var generatedCinematicRolls = [];
         var newTotal = cineTotal;
@@ -3353,7 +3339,6 @@ function randEverythingClick() {
         return generatedCinematicRolls;
     }
 
-
     var randomizedRollMethod = getRandomInt(1, 7);
     var rollPossibleChoices = {
         1: "random",
@@ -3365,16 +3350,13 @@ function randEverythingClick() {
         7: "Average"
     };
 
-    //randomizedRollMethod = 3;
     var rollMethod = document.getElementById("rollMethod");
     rollMethod.value = rollPossibleChoices[randomizedRollMethod];
     if (randomizedRollMethod === 1) {
         characterMeta.randomPoints();
-        console.log(characterMeta.randRolls);
         randomlyAssignValueToStat(shuffleArray(characterMeta.randRolls));
     } else if (randomizedRollMethod === 2) {
         characterMeta.fastPoints();
-        console.log(characterMeta.fastRolls);
         randomlyAssignValueToStat(shuffleArray(characterMeta.fastRolls));
     } else if (randomizedRollMethod >= 3) {
         var generatedCinematicRolls;
@@ -3399,6 +3381,172 @@ function randEverythingClick() {
     // Check the Random Role radio button
     var randRole = document.getElementById("randRole");
     randRole.checked = true;
+    var roleField = document.getElementById("roleField").value;
+
+    function randomlyAssignValuesToSkills(roleField, career, skills) {
+        var startingSkillPoints = 40;
+        var currentSkillSet;
+        if (roleField === "Solo") {
+            currentSkillSet = career.solo;
+        } else if (roleField === "Corp") {
+            currentSkillSet = career.corp;
+        } else if (roleField === "Media") {
+            currentSkillSet = career.media;
+        } else if (roleField === "Nomad") {
+            currentSkillSet = career.nomad;
+        } else if (roleField === "Techie") {
+            currentSkillSet = career.techie;
+        } else if (roleField === "Cop") {
+            currentSkillSet = career.cop;
+        } else if (roleField === "Rocker") {
+            currentSkillSet = career.rocker;
+        } else if (roleField === "MedTechie") {
+            currentSkillSet = career.med;
+        } else if (roleField === "Fixer") {
+            currentSkillSet = career.fixer;
+        } else if (roleField === "Netrunner") {
+            currentSkillSet = career.net;
+        }
+        var remainingPoints = startingSkillPoints;
+        var numberSkills = Object.keys(currentSkillSet).length;
+
+        function generateSkillPointsArray(remainingPoints, numberSkills) {
+            // Generate values for randomized skill point distribution
+            var distributionNumber;
+            var candidateNumber;
+            var generatedSkillPoints = [];
+            for (var i = 0; i < numberSkills - 1; i++) {
+                if (remainingPoints > 10) {
+                    distributionNumber = getRandomInt(1, 10);
+
+                    if ((distributionNumber >= 1) && (distributionNumber < 7)) {
+                        candidateNumber = getRandomInt(1, 5);
+                    } else if ((distributionNumber >= 7) && (distributionNumber <= 8)) {
+                        candidateNumber = getRandomInt(1, 7);
+                    } else if ((distributionNumber >= 9) && (distributionNumber <= 10)) {
+                        candidateNumber = getRandomInt(1, 10);
+                    }
+                } else if (remainingPoints <= 10) {
+                    candidateNumber = remainingPoints;
+                }
+                remainingPoints -= candidateNumber;
+                generatedSkillPoints.push(candidateNumber);
+            }
+
+            // If there's points remaining, distribute them across the array
+            while (remainingPoints >= 1) {
+                for (var j = 0; j < generatedSkillPoints.length; j++) {
+                    if (remainingPoints >= 1) {
+                    generatedSkillPoints[j] += 1;
+                    remainingPoints -= 1;
+                    }
+                }
+
+            }
+            // If there's 0 values, pull from highest value to make them at least 1
+            for (var k = 0; k < generatedSkillPoints.length; k++) {
+                if (generatedSkillPoints[k] === 0) {
+                    var largest = Math.max.apply(Math, generatedSkillPoints);
+                    var positionOfLargest = generatedSkillPoints.indexOf(largest);
+                    generatedSkillPoints[k] += 1;
+                    generatedSkillPoints[positionOfLargest] -= 1;
+                }
+            }
+            generatedSkillPoints = shuffleArray(generatedSkillPoints);
+            return generatedSkillPoints;
+        }
+
+        function generatePickupPointsArray(currentSkillSet) {
+            var remainingPickupPoints = characterMeta.pickupSkillPoints;
+            var whichSubSkill = {
+                1: "attr",
+                2: "body",
+                3: "cool",
+                4: "emp",
+                5: "int",
+                6: "ref",
+                7: "tech"
+            }
+
+            var numberAdded = 0; //Number of pickup skills added
+            var usedAlready = [];
+            while (remainingPickupPoints > 0) {
+                var currentCandidateSkillLevel;
+                if (remainingPickupPoints <= 10) {
+                    currentCandidateSkillLevel = getRandomInt(1, remainingPickupPoints);
+                } else {
+                    currentCandidateSkillLevel = getRandomInt(1, 10);
+                }
+                if (remainingPickupPoints - currentCandidateSkillLevel >= 0) {
+                    var currentSubSkill = getRandomInt(1, 7);
+
+                    //SubSkill category, attr, etc
+                    var currentCandidateSkillName = whichSubSkill[currentSubSkill];
+                    var fullCurrentCandidateSkillName = skills[currentCandidateSkillName];
+                    var lengthOfCurrentSubSkillSet = Object.keys(fullCurrentCandidateSkillName).length -1;
+                    var anotherInt = getRandomInt(1, lengthOfCurrentSubSkillSet);
+                    if (anotherInt < 10) {
+                        anotherInt.toString();
+                        anotherInt = "0" + anotherInt;
+                    } else {
+                        anotherInt.toString();
+                    }
+                    var theName = currentCandidateSkillName + anotherInt;
+                    if (((theName in usedAlready) === false) && ((skills[currentCandidateSkillName][theName] in currentSkillSet) === false)) {
+                        usedAlready.push(theName);
+                        var addPickup = document.getElementById("createSkillButton");
+                        addPickup.click();
+
+                        numberAdded += 1;
+                        var pickupCategory = document.getElementById("pickup" + numberAdded + "Select");
+
+                        for (var k = 0; k < pickupCategory.options.length; k++) {
+                            if (pickupCategory.options[k].text === currentCandidateSkillName.toUpperCase()) {
+                                pickupCategory.selectedIndex = k;
+                                break;
+                            }
+                        }
+                        // Dynamically fire a onchange for the pickup skill category dropdown
+                        var event = document.createEvent("HTMLEvents");
+                        event.initEvent("change", false, true);
+                        pickupCategory.dispatchEvent(event);
+
+                        var pickupChoice = document.getElementById("subPickup" + numberAdded + "Select");
+
+                        for (var l = 0; l < pickupChoice.options.length; l ++) {
+                            if (pickupChoice.options[l].text === skills[currentCandidateSkillName][theName]) {
+                                pickupChoice.selectedIndex = l;
+                                break;
+                            }
+                        }
+
+                        var pickupField = document.getElementById("subSkillField" + numberAdded);
+                        pickupField.value = currentCandidateSkillLevel;
+                        pickupSkillInputChange();
+                    }
+                    remainingPickupPoints -= currentCandidateSkillLevel;
+                }
+            }
+        }
+
+        // Set the value of the Career Skill
+        var careerSkillName = document.getElementById(currentSkillSet[1]);
+        careerSkillName.value = getRandomInt(1, 10);
+        remainingPoints -= parseInt(careerSkillName.value);
+
+        // Generate the rest of the Role skills
+        var generatedSkillPoints = generateSkillPointsArray(remainingPoints, numberSkills);
+        var currentSkillToUpdate;
+        for (var l = 0; l < generatedSkillPoints.length; l++) {
+            currentSkillToUpdate = document.getElementById(currentSkillSet[l + 2]);
+            currentSkillToUpdate.value = generatedSkillPoints[l];
+        }
+        careerSkillInputChange();
+        generatePickupPointsArray(currentSkillSet);
+    }
+
+    //Randomize Skills
+    randomlyAssignValuesToSkills(roleField, career, skills);
 
     // Randomize Style
     randomStyleClick();
@@ -3470,12 +3618,6 @@ function randEverythingClick() {
     var randAge = document.getElementById("randAge");
     randAge.checked = true;
 }
-
-function manualEverythingClick() {
-    "use strict";
-    console.log("manual Everything clicked");
-}
-
 
 function copyToClipboard() {
     "use strict";
@@ -3617,7 +3759,7 @@ function saveNewImage() {
     var fullCharOutput = document.getElementById("fullCharOutput");
     html2canvas(fullCharOutput, {
         onrendered: function(canvas) {
-            var img = canvas.toDataURL()
+            var img = canvas.toDataURL();
             window.open(img);
         },
         letterRendering: true
@@ -3640,9 +3782,8 @@ function init() {
     // Randomize Everything Elements
     var randomizeEverything = document.getElementById("randomizeEverything");
     var manualEverything = document.getElementById("manualEverything");
-
+    // Randomize Everything Event Handler
     randomizeEverything.onclick = randEverythingClick;
-    manualEverything.onclick = manualEverythingClick;
 
     // Roll method elements
     var rollMethod = document.getElementById("rollMethod");
@@ -3672,19 +3813,19 @@ function init() {
     manualHairSelect.onchange = manualHairSelectChange;
     manualAffecSelect.onchange = manualAffecSelectChange;
 
-    //Origin (random or manual) radio buttons
+    // Origin (random or manual) radio buttons
     var rollEth = document.getElementById("rollEth");
     var manualEth = document.getElementById("manualEth");
     //Origin selects / dropdowns
     var manualEthSelect = document.getElementById("manualEthSelect");
     var manualLangSelect = document.getElementById("manualLangSelect");
-    //Origin event handlers
+    // Origin event handlers
     rollEth.onclick = rollEthClick; //Choose ethnic origins randomly
     manualEth.onclick = manualEthClick; //Choose ethnic origins manually
     manualEthSelect.onchange = updateLang;
     manualLangSelect.onchange = manualLangSelectChange;
 
-    //Family ranking elements
+    // Family ranking elements
     var randFam = document.getElementById("randFam");
     var manualFam = document.getElementById("manualFam");
     var manualFamSelect = document.getElementById("manualFamSelect");
@@ -3693,7 +3834,7 @@ function init() {
     manualFam.onclick = manualFamClick;
     manualFamSelect.onchange = manualFamSelectChange;
 
-    //Parents elements
+    // Parents elements
     var randParents = document.getElementById("randParents");
     var manualParents = document.getElementById("manualParents");
     var parentStatusField = document.getElementById("parentStatusField");
@@ -3703,7 +3844,7 @@ function init() {
     var parentsIssuesRadio = document.getElementById("parentsIssuesRadio");
     var parentsOkayRadio_label = document.getElementById("parentsOkayRadio_label");
     var parentsIssuesRadio_label = document.getElementById("parentsIssuesRadio_label");
-    //Parents event handlers
+    // Parents event handlers
     randParents.onclick = randParentsClick;
     manualParents.onclick = manualParentsClick;
     parentsOkayRadio.onclick = parentsOkayRadioClick;
@@ -3711,13 +3852,13 @@ function init() {
     manualParentSelect.onoclick = manualParentSelectClick;
     manualParentSelect.onchange = manualParentSelectChange;
 
-    //Family status elements
+    // Family status elements
     var randFamilyStatus = document.getElementById("randFamilyStatus");
     var manualFamilyStatus = document.getElementById("manualFamilyStatus");
     var manualFamDanger = document.getElementById("manualFamDanger");
     var manualFamOkay = document.getElementById("manualFamOkay");
     var familyTragedySelect = document.getElementById("familyTragedySelect");
-    //Family status event handlers
+    // Family status event handlers
     randFamilyStatus.onclick = randFamilyStatusClick;
     manualFamilyStatus.onclick = manualFamilyStatusClick;
     manualFamDanger.onclick = manualFamDangerClick;
@@ -3728,29 +3869,29 @@ function init() {
     var randChildEnv = document.getElementById("randChildEnv");
     var manualChildEnv = document.getElementById("manualChildEnv");
     var manualChildSelect = document.getElementById("manualChildSelect");
-    //Childhood event handlers
+    // Childhood event handlers
     randChildEnv.onclick = randChildEnvClick;
     manualChildEnv.onclick = manualChildEnvClick;
     manualChildSelect.onchange = manualChildSelectChange;
 
-    //Siblings elements
+    // Siblings elements
     var randSiblings = document.getElementById("randSiblings");
     var manualSiblings = document.getElementById("manualSiblings");
-    //Siblings event handlers
+    // Siblings event handlers
     randSiblings.onclick = randSiblingsClick;
     manualSiblings.onclick = manualSiblingsClick;
 
-    //Personality elements
+    // Personality elements
     var randPersTraits = document.getElementById("randPersTraits");
     var manualPersTraits = document.getElementById("manualPersTraits");
-    //Personality event handlers
+    // Personality event handlers
     randPersTraits.onclick = randPersTraitsClick;
     manualPersTraits.onclick = manualPersTraitsClick;
 
-    //Person valued elements
+    // Person valued elements
     var randPersValue = document.getElementById("randPersValue");
     var manualPersValue = document.getElementById("manualPersValue");
-    //Person valued event handlers
+    // Person valued event handlers
     randPersValue.onclick = randPersValueClick;
     manualPersValue.onclick = manualPersValueClick;
 
