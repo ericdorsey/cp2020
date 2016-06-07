@@ -107,12 +107,12 @@ a visited {
 }
 
 /* Stats Points Remaining Output */
-#statPointsLine {
+#statPointsLine, #careerSkillPointsLine, #pickupSkillPointsLine {
     font-size: 13px;
     margin-left: 10px;
 }
 
-#statPointsRemaining {
+#statPointsRemaining, #careerSkillPointsRemaining, #pickupSkillPointsRemaining {
     font-weight: bold;
 }
 
@@ -461,6 +461,11 @@ a visited {
 /* Word "Stats" */
 #stats {
     display: inline-block;
+}
+
+#statsTable th {
+    text-align: left;
+    font-weight: normal;
 }
 
 #charINTOutput_label {

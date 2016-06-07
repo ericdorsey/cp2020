@@ -2505,7 +2505,8 @@ var career = {
         6: skills.emp.emp01,
         7: skills.emp.emp05,
         8: skills.cool.cool05,
-        9: skills.tech.tech15
+        9: skills.tech.tech15,
+        10: skills.emp.emp02
     },
     nomad: {
         1: skills.special.Nomad,
@@ -2620,7 +2621,8 @@ function rollMethodClick() {
 var characterMeta = {
     charPoints: 0,
     charPointsRemain: 0,
-    careerSkillPointsRemain: 0,
+    careerSkillPoints: 40,
+    careerSkillPointsRemain: 40,
     pickupSkillPoints: 0,
     pickupSkillPointsRemain: 0,
     pickupSkillsAdded: 0, // Each dropdown box created to add a skill
@@ -2688,6 +2690,17 @@ var characterMeta = {
             var run = document.getElementById("run");
             run.value = runDerived;
             this.updateLeap();
+        }
+    },
+
+    updateHumanity: function() {
+        "use strict";
+        // Update the Humanity derived field
+        var emp = document.getElementById("emp");
+        if (emp.value !== "") {
+            var humanityDerived = parseInt(emp.value) * 10;
+            var humanity = document.getElementById("humanity");
+            humanity.value = humanityDerived;
         }
     },
 
@@ -2884,6 +2897,7 @@ var characterMeta = {
         var liftLBs = document.getElementById("liftLBs");
         var carry = document.getElementById("carry");
         var carryLBS = document.getElementById("carryLBs");
+        var humanity = document.getElementById("humanity");
         var save = document.getElementById("save");
         var btm = document.getElementById("btm");
 
@@ -2892,11 +2906,13 @@ var characterMeta = {
 
         characterMeta.updateBodyDerived();
         characterMeta.updateRun();
+        characterMeta.updateHumanity();
 
         if (int.value !== "" && ref.value !== "") {
-            this.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
+            characterMeta.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
             var pickupSkillPointField = document.getElementById("pickupSkillPointField");
-            pickupSkillPointField.value = this.pickupSkillPoints;
+            pickupSkillPointField.value = characterMeta.pickupSkillPoints;
+            characterMeta.updatePickupSkillPointsRemaining();
         }
         var charINTOutput = document.getElementById("charINTOutput");
         if (int.value !== "") {
@@ -2949,6 +2965,9 @@ var characterMeta = {
         var charEMPOutput = document.getElementById("charEMPOutput");
         if (emp.value !== "") {
             charEMPOutput.innerHTML = " ".concat(emp.value).concat(" ");
+            // Fill out Humanity on char sheet
+            var charHumanityOutput = document.getElementById("charHumanityOutput");
+            charHumanityOutput.innerHTML = " ".concat(humanity.value).concat(" ");
         }
         var saveCharOutput = document.getElementById("saveCharOutput");
         if (save.value !== "") {
@@ -2959,6 +2978,21 @@ var characterMeta = {
             btmCharOutput.innerHTML = btm.value;
         }
 
+    },
+    updatePickupSkillPointsRemaining: function() {
+        "use strict";
+        var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+        var pickupSkillRemainingOutput = document.getElementById("pickupSkillPointsRemaining");
+        var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
+
+        characterMeta.pickupSkillPointsRemain = characterMeta.pickupSkillPoints;
+        for (var i = 0; i < pickupSkillArray.length; i++) {
+            if (pickupSkillArray[i].value !== "") {
+                var skillLevel = pickupSkillArray[i].value;
+                characterMeta.pickupSkillPointsRemain -= parseInt(skillLevel);
+            }
+        }
+        pickupSkillRemainingOutput.innerHTML = characterMeta.pickupSkillPointsRemain;
     }
 };
 
@@ -3047,6 +3081,7 @@ function createPickupSkills() {
     pickupSkillsTable.appendChild(createSkillButton);
     createSkillButton.onclick = createPickupOpt;
     appendBR(pickupSkillsTable);
+    characterMeta.pickupSkillPointsRemain = characterMeta.pickupSkillPoints;
 }
 
 function createPickupOpt() {
@@ -3154,12 +3189,14 @@ function pickupSkillInputChange() {
     "use strict";
     var pickupSkillCharOutput = document.getElementById("pickupSkillCharOutput");
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+    var pickupSkillRemainingOutput = document.getElementById("pickupSkillPointsRemaining");
 
     while (pickupSkillCharOutput.firstChild) { //Remove all children from pickupSkillCharOutput
         pickupSkillCharOutput.removeChild(pickupSkillCharOutput.firstChild);
     }
     var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
 
+    characterMeta.pickupSkillPointsRemain = characterMeta.pickupSkillPoints;
     for (var i = 0; i < pickupSkillArray.length; i++) {
         if (pickupSkillArray[i].value !== "") {
             var skillLevel = pickupSkillArray[i].value;
@@ -3171,8 +3208,10 @@ function pickupSkillInputChange() {
             var newTextNode = document.createTextNode(skillOutString);
             pickupSkillCharOutput.appendChild(newTextNode);
             pickupSkillCharOutput.appendChild(br);
+            characterMeta.pickupSkillPointsRemain -= parseInt(skillLevel);
         }
     }
+    pickupSkillRemainingOutput.innerHTML = characterMeta.pickupSkillPointsRemain;
 }
 
 function createCareerSkills(role) {
@@ -3238,11 +3277,13 @@ function careerSkillInputChange() {
     var skillCharOutput = document.getElementById("skillCharOutput");
     var careerSkillTable = document.getElementById("careerSkillTable");
     var careerSkillArray = careerSkillTable.getElementsByTagName("input");
+    var careerSkillRemainingOutput = document.getElementById("careerSkillPointsRemaining");
 
     while (skillCharOutput.firstChild) { // Remove all children from skillCharOutput
         skillCharOutput.removeChild(skillCharOutput.firstChild);
     }
 
+    characterMeta.careerSkillPointsRemain = characterMeta.careerSkillPoints;
     for (var i = 0; i < careerSkillArray.length; i++) {
         if (careerSkillArray[i].value !== "") {
             var skillLevel = careerSkillArray[i].value;
@@ -3252,8 +3293,10 @@ function careerSkillInputChange() {
             var newTextNode = document.createTextNode(skillOutString);
             skillCharOutput.appendChild(newTextNode);
             skillCharOutput.appendChild(br);
+            characterMeta.careerSkillPointsRemain -= parseInt(skillLevel);
         }
     }
+    careerSkillRemainingOutput.innerHTML = characterMeta.careerSkillPointsRemain;
 }
 
 function handleChange() {
@@ -3654,6 +3697,7 @@ function copyToClipboard() {
     var outLBSLift = document.getElementById("charLiftLBsOutput").innerText;
     var outKGCarry = document.getElementById("charCarryOutput").innerText;
     var outLBCarry = document.getElementById("charCarryLBsOutput").innerText;
+    var outHumanity = document.getElementById("charHumanityOutput").innerText;
     var outSave = document.getElementById("saveCharOutput").innerText;
     var outBTM = document.getElementById("btmCharOutput").innerText;
     var outSkills = document.getElementById("skillCharOutput").innerText;
@@ -3687,6 +3731,7 @@ function copyToClipboard() {
         outMA,
         outBODY, //10
         outEMP,
+        outHumanity,
         outRun,
         outLeap,
         outKGLift,
@@ -3694,8 +3739,8 @@ function copyToClipboard() {
         outKGCarry,
         outLBCarry,
         outSave,
-        outBTM,
-        outSkills, //20
+        outBTM, //20
+        outSkills,
         outClothesStyle,
         outHairStyle,
         outAffecStyle,
@@ -3704,8 +3749,8 @@ function copyToClipboard() {
         outFamRank,
         outFamStatusPar,
         outFamChildEnv,
-        outNumSiblings,
-        outSiblingDetails, //30
+        outNumSiblings, //30
+        outSiblingDetails,
         outMotivPersTraits,
         outMotivValuePers,
         outMotivValueMost,
@@ -3734,36 +3779,37 @@ function copyToClipboard() {
     text += " MA [" + allFields[9] + "]";
     text += " BODY [" + allFields[10] + "]" + "\n";
     text += "EMP [" + allFields[11] + "]";
-    text += " Run [" + allFields[12] + "]";
-    text += " Leap [" + allFields[13] + "]" + "\n";
-    text += "Lift (kgs) [" + allFields[14] + "]";
-    text += " Lift (lbs) [" + allFields[15] + "]" + "\n";
-    text += "Carry (kgs) [" + allFields[16] + "]";
-    text += " Carry (lbs) [" + allFields[17] + "]" + "\n";
-    text += "SAVE [" + allFields[18] + "]";
-    text += " BTM [" + allFields[19] + "]" + "\n";
+    text += " Humanity [" + allFields[12] + "]" + "\n";
+    text += "Run [" + allFields[13] + "]";
+    text += " Leap [" + allFields[14] + "]" + "\n";
+    text += "Lift (kgs) [" + allFields[15] + "]";
+    text += " Lift (lbs) [" + allFields[16] + "]" + "\n";
+    text += "Carry (kgs) [" + allFields[17] + "]";
+    text += " Carry (lbs) [" + allFields[18] + "]" + "\n";
+    text += "SAVE [" + allFields[19] + "]";
+    text += " BTM [" + allFields[20] + "]" + "\n";
     text += "SKILLS";
-    text += "\n" + allFields[20];
+    text += "\n" + allFields[21];
     text += "STYLE" + "\n";
-    text += "Clothes: " + allFields[21] + "\n";
-    text += "Hair: " + allFields[22] + "\n";
-    text += "Affectations: " + allFields[23] + "\n";
-    text += "Ethnicity: " + allFields[24] + "\n";
-    text += "Language: " + allFields[25] + "\n";
+    text += "Clothes: " + allFields[22] + "\n";
+    text += "Hair: " + allFields[23] + "\n";
+    text += "Affectations: " + allFields[24] + "\n";
+    text += "Ethnicity: " + allFields[25] + "\n";
+    text += "Language: " + allFields[26] + "\n";
     text += "FAMILY BACKGROUND" + "\n";
-    text += "Family Ranking: " + allFields[26] + "\n";
-    text += "Family Status: " + allFields[27] + "\n";
-    text += "Childhood Environment: " + allFields[28];
-    text += "\n" + "SIBLINGS [" + allFields[29] + "]";
-    text += "\n" + allFields[30];
+    text += "Family Ranking: " + allFields[27] + "\n";
+    text += "Family Status: " + allFields[28] + "\n";
+    text += "Childhood Environment: " + allFields[29];
+    text += "\n" + "SIBLINGS [" + allFields[30] + "]";
+    text += "\n" + allFields[31];
     text += "MOTIVATIONS" + "\n";
-    text += "Personality Traits: " + allFields[31] + "\n";
-    text += "Valued Person: " + allFields[32] + "\n";
-    text += "Value Most: " + allFields[33] + "\n";
-    text += "Feel About People: " + allFields[34] + "\n";
-    text += "Valued Possession: " + allFields[35] + "\n";
+    text += "Personality Traits: " + allFields[32] + "\n";
+    text += "Valued Person: " + allFields[33] + "\n";
+    text += "Value Most: " + allFields[34] + "\n";
+    text += "Feel About People: " + allFields[35] + "\n";
+    text += "Valued Possession: " + allFields[36] + "\n";
     text += "LIFE EVENTS";
-    text += "\n" + allFields[36];
+    text += "\n" + allFields[37];
     window.prompt("Copy character to clipboard: Ctrl+C (Windows) or Command+C (Mac), then hit Enter " +
         "(this window only shows the first line, but the entire character sheet is copied).", text);
     return false;

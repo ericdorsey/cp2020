@@ -15,7 +15,6 @@
 
         ga('create', 'UA-56531990-1', 'auto');
         ga('send', 'pageview');
-
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -76,6 +75,10 @@
             <label for="charEMPOutput" id="charEMPOutput_label" class="charStatOutput">
                 EMP [<span id="charEMPOutput">&nbsp;&nbsp;&nbsp;</span>]
             </label>
+            <label for="charHumanityOutput" id="charHumanityOutput_label" class="charStatOutputDervied">
+                Humanity [<span id="charHumanityOutput">&nbsp;&nbsp;&nbsp;</span>]
+            </label>
+            <br>
             <label for="charRunOutput" id="charRunOutput_label" class="charStatOutputDervied">
                 Run [<span id="charRunOutput">&nbsp;&nbsp;&nbsp;</span>]
             </label>
@@ -96,6 +99,7 @@
             <label for="charCarryLBsOutput" id="charCarryLBsOutput_label" class="charStatOutputDervied">
                 Carry (lbs) [<span id="charCarryLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
             </label>
+
         </div>
         <table class="savebtm">
             <tr>
@@ -341,16 +345,46 @@
         <br>
         <br>
         <span id="statPointsLine">Stats Points Remaining: <span id="statPointsRemaining"></span></span>
-        <br>
-        <br>Intelligence (INT): <input type="text" id="int" class="statValueBoxes" size="2" disabled="true">
-        <br>Reflexes (REF): <input type="text" id="ref"  class="statValueBoxes"size="2" disabled="true">
-        <br>Technical Ability (TECH): <input type="text" id="tech"  class="statValueBoxes"size="2" disabled="true">
-        <br>Cool (CL): <input type="text" id="cl"  class="statValueBoxes"size="2" disabled="true">
-        <br>Attractiveness (ATT): <input type="text" id="att"  class="statValueBoxes"size="2" disabled="true">
-        <br>Luck (LK): <input type="text" id="lk"  class="statValueBoxes"size="2" disabled="true">
-        <br>Movement Allowance (MA): <input type="text" id="ma"  class="statValueBoxes"size="2" disabled="true">
-        <br>Body Type (BT): <input type="text" id="bt"  class="statValueBoxes"size="2" disabled="true">
-        <br>Empathy (EMP): <input type="text" id="emp"  class="statValueBoxes"size="2" disabled="true">
+        <table id="statsTable">
+            <tbody>
+                <tr>
+                    <th>Intelligence (INT)</th>
+                    <td><input type="text" id="int" class="statValueBoxes" size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Reflexes (REF)</th>
+                    <td><input type="text" id="ref"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Technical Ability (TECH)</th>
+                    <td><input type="text" id="tech"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Cool (COOL)</th>
+                    <td><input type="text" id="cl"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Attractiveness (ATT)</th>
+                    <td><input type="text" id="att"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Luck (LUCK)</th>
+                    <td><input type="text" id="lk"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Movement Allowance (MA)</th>
+                    <td><input type="text" id="ma"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Body Type (BODY)</th>
+                    <td><input type="text" id="bt"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+                <tr>
+                    <th>Empathy (EMP)</th>
+                    <td><input type="text" id="emp"  class="statValueBoxes"size="2" disabled="true"></td>
+                </tr>
+            </tbody>
+        </table>
     </p>
     <p>
         <span class="bold">Derived Stats</span>
@@ -391,6 +425,10 @@
         <label for="save" id="save_label">
             Save <input type="text" id="save" size="3" disabled="true">
         </label>
+        <br>
+        <label for="humanity" id="humanity_label">
+            Humanity <input type="text" id="humanity" size="3" disabled="true">
+        </label>
     </p>
 
     <div id="roleAndSkills">
@@ -423,6 +461,8 @@
         <h4 class="sub4Head">Skills</h4>
         <br>
         <span id="careerSkills" class="bold">Career Skills</span>
+        <br>
+        <span id="careerSkillPointsLine">Career Skill Points Remaining: <span id="careerSkillPointsRemaining">40</span></span>
         <table id="careerSkillTable">
 
         </table>
@@ -432,6 +472,8 @@
         <label for="pickupSkillPointField" id="pickupSkillPointField_label">
             Pickup Skill Points (REF + INT) : <input type="text" id="pickupSkillPointField" size= "3" disabled="true">
         </label>
+        <br>
+        <span id="pickupSkillPointsLine">Pickup Skill Points Remaining: <span id="pickupSkillPointsRemaining"></span></span>
 
         <table id="pickupSkillsTable">
 
