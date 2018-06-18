@@ -11,5 +11,5 @@ Cyberpunk 2020 was a game I played in high school. I remember the character gene
 Back then, I always wanted something like this character creator to save time. This is a tool I would have built if I knew Javascript and PHP in high school.
 
 ### See it here:
-[http://www.ericdorsey.info/cp2020/index.html](http://www.ericdorsey.info/cp2020/index.html)
+[https://www.ericdorsey.info/cp2020/index.html](https://www.ericdorsey.info/cp2020/index.html)
 
