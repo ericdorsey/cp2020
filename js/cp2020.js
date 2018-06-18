@@ -3820,7 +3820,7 @@ function saveNewImage() {
     var fullCharOutput = document.getElementById("fullCharOutput");
     html2canvas(fullCharOutput, {
         onrendered: function(canvas) {
-            var img = canvas.toDataURL();
+            var img = canvas.toDataURL("image/png", 1.0);
             window.open(img);
         },
         letterRendering: true
