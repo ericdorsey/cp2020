@@ -20,25 +20,25 @@ $prependtext = "Feedback from <a href=\"https://www.ericdorsey.info/cp2020/index
 $message = $_POST["comments"];
 
 $sendMessage = filter_var($message, FILTER_SANITIZE_SPECIAL_CHARS);
+$sendMessage = trim($sendMessage);
+#echo 'Message is: '.$sendMessage;
+if (empty($sendMessage)) {
+    echo '<p class="informational">Comments field cannot be blank. Nothing submitted!</p>';
+    echo '<p class="informational"><a href="../index.html" id="link">Click here to go back to the Cyberpunk 2020 Character Generator</a>.';
+    exit();
+}
 $sendMessage = $prependtext . $sendMessage;
-
 $email = $_POST["email"];
 $sendEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
 
 try {
-    if (empty($sendMessage)) {
-        echo '<p class="informational">Comments field cannot be blank.</p>';
-    }
-    elseif (mail($to, $sendSubject, $sendMessage, $headers)) {
-        echo '<p class="informational">Thank you for your feedback!</p>';
-    }
-    echo '<p class="informational"><a href="../index.html" id="link">Click here to go back to the Cyberpunk 2020 Character Generator</a>.
-    </p>';
+    mail($to, $sendSubject, $sendMessage, $headers);
+    echo '<p class="informational">Thank you for your feedback!</p>';
+    echo '<p class="informational"><a href="../index.html" id="link">Click here to go back to the Cyberpunk 2020 Character Generator</a>.';
+    exit();
 } catch (Exception $e) {
     echo "Error: " . $e;
 }
-
 ?>
-
 </body>
 </html>

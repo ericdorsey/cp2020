@@ -2874,7 +2874,6 @@ var characterMeta = {
         for (var i = 0; i < statElements.length; i++) {
             if ((statElements[i].value !== "") && (typeof parseFloat(statElements[i].value) === "number")) {
                 statPointsToDeduct += parseFloat(statElements[i].value);
-                //console.log("statPointsToDeduct currently:" + statPointsToDeduct);
             }
         }
         var remainingStatPoints = characterMeta.charPoints - statPointsToDeduct;
@@ -3035,7 +3034,6 @@ function randRoleClick() {
 
 function manualRoleClick() {
     "use strict";
-    console.log("manualRoleClick() fired");
     var roleSelect = document.getElementById("roleSelect");
     var roleField = document.getElementById("roleField");
     var roleSelect_label = document.getElementById("roleSelect_label");
@@ -3701,6 +3699,7 @@ function copyToClipboard() {
     var outSave = document.getElementById("saveCharOutput").innerText;
     var outBTM = document.getElementById("btmCharOutput").innerText;
     var outSkills = document.getElementById("skillCharOutput").innerText;
+    var outPickupSkills = document.getElementById("pickupSkillCharOutput").innerText;
     var outClothesStyle = document.getElementById("clothesCharOutput").innerText;
     var outHairStyle = document.getElementById("hairCharOutput").innerText;
     var outAffecStyle = document.getElementById("affecCharOutput").innerText;
@@ -3708,6 +3707,7 @@ function copyToClipboard() {
     var outLangStyle = document.getElementById("langCharOutput").innerText;
     var outFamRank = document.getElementById("famRankCharOutput").innerText;
     var outFamStatusPar = document.getElementById("parentStatusCharOutput").innerText;
+    var outFamStatus = document.getElementById("familyStatusCharOutput").innerText;
     var outFamChildEnv = document.getElementById("childEnvCharOutput").innerText;
     var outNumSiblings = document.getElementById("charSiblingOutputNum").innerText;
     var outSiblingDetails = document.getElementById("charSiblingOutput").innerText;
@@ -3718,100 +3718,65 @@ function copyToClipboard() {
     var outMotivValuePos = document.getElementById("valPosessionCharOutput").innerText;
     var outLifeEvents = document.getElementById("charLifeEvents").innerText;
 
-    var allFields = [
-        outName,
-        outRole,
-        outPoints,
-        outINT,
-        outREF,
-        outTECH,
-        outCOOL,
-        outATTR,
-        outLUCK,
-        outMA,
-        outBODY, //10
-        outEMP,
-        outHumanity,
-        outRun,
-        outLeap,
-        outKGLift,
-        outLBSLift,
-        outKGCarry,
-        outLBCarry,
-        outSave,
-        outBTM, //20
-        outSkills,
-        outClothesStyle,
-        outHairStyle,
-        outAffecStyle,
-        outEthStyle,
-        outLangStyle,
-        outFamRank,
-        outFamStatusPar,
-        outFamChildEnv,
-        outNumSiblings, //30
-        outSiblingDetails,
-        outMotivPersTraits,
-        outMotivValuePers,
-        outMotivValueMost,
-        outMotivFeelPeople,
-        outMotivValuePos,
-        outLifeEvents
-    ];
-
-    for (var i = 0; i < allFields.length; i++) {
-        //
-        allFields[i] = allFields[i].replace(/&nbsp;/g, "");
-        allFields[i] = allFields[i].replace(/&amp;/g, "&");
-        //
+    // Check if character name (var outName) is &nbsp;
+    if (outName == String.fromCharCode(160)) { 
+        outName = "No Name Entered";
     }
 
     var text = "";
-    text += "HANDLE: " + allFields[0] + "\n";
-    text += "ROLE: " + allFields[1] + "\n";
-    text += "CHARACTER POINTS: " + allFields[2] + "\n";
-    text += "INT [" + allFields[3] + "]";
-    text += " REF [" + allFields[4] + "]";
-    text += " TECH [" + allFields[5] + "]";
-    text += " COOL [" + allFields[6] + "]" + "\n";
-    text += "ATTR [" + allFields[7] + "]";
-    text += " LUCK [" + allFields[8] + "]";
-    text += " MA [" + allFields[9] + "]";
-    text += " BODY [" + allFields[10] + "]" + "\n";
-    text += "EMP [" + allFields[11] + "]";
-    text += " Humanity [" + allFields[12] + "]" + "\n";
-    text += "Run [" + allFields[13] + "]";
-    text += " Leap [" + allFields[14] + "]" + "\n";
-    text += "Lift (kgs) [" + allFields[15] + "]";
-    text += " Lift (lbs) [" + allFields[16] + "]" + "\n";
-    text += "Carry (kgs) [" + allFields[17] + "]";
-    text += " Carry (lbs) [" + allFields[18] + "]" + "\n";
-    text += "SAVE [" + allFields[19] + "]";
-    text += " BTM [" + allFields[20] + "]" + "\n";
-    text += "SKILLS";
-    text += "\n" + allFields[21];
+    text += "HANDLE: " + outName + "\r\n";
+    text += "ROLE: " + outRole + "\n";
+    text += "CHARACTER POINTS: " + outPoints + "\n";
+    text += "STATS" + "\n";
+    text += "INT [" + outINT + "]";
+    text += " REF [" + outREF + "]";
+    text += " TECH [" + outTECH + "]";
+    text += " COOL [" + outCOOL + "]" + "\n";
+    text += "ATTR [" + outATTR + "]";
+    text += " LUCK [" + outLUCK + "]";
+    text += " MA [" + outMA + "]";
+    text += " BODY [" + outBODY + "]" + "\n";
+    text += "EMP [" + outEMP + "]";
+    text += " Humanity [" + outHumanity + "]" + "\n";
+    text += "run [" + outRun + "]";
+    text += " Leap [" + outLeap + "]" + "\n";
+    text += "Lift (kgs) [" + outKGLift + "]";
+    text += " Lift (lbs) [" + outLBSLift + "]" + "\n";
+    text += "Carry (kgs) [" + outKGCarry + "]";
+    text += " Carry (lbs) [" + outLBCarry + "]" + "\n";
+    text += "SAVE [ " + outSave + " ]";
+    text += " BTM [ " + outBTM + " ]" + "\n";
+    text += "SKILLS" + "\n";
+    text += outSkills;
+    text += outPickupSkills;
     text += "STYLE" + "\n";
-    text += "Clothes: " + allFields[22] + "\n";
-    text += "Hair: " + allFields[23] + "\n";
-    text += "Affectations: " + allFields[24] + "\n";
-    text += "Ethnicity: " + allFields[25] + "\n";
-    text += "Language: " + allFields[26] + "\n";
+    text += "Clothes: " + outClothesStyle + "\n";
+    text += "Hair: " + outHairStyle + "\n";
+    text += "Affectations: " + outAffecStyle + "\n";
+    text += "Ethnicity: " + outEthStyle + "\n";
+    text += "Language: " + outLangStyle + "\n";
     text += "FAMILY BACKGROUND" + "\n";
-    text += "Family Ranking: " + allFields[27] + "\n";
-    text += "Family Status: " + allFields[28] + "\n";
-    text += "Childhood Environment: " + allFields[29];
-    text += "\n" + "SIBLINGS [" + allFields[30] + "]";
-    text += "\n" + allFields[31];
+    text += "Family Ranking: " + outFamRank + "\n";
+    text += "Status of Parents: " + outFamStatusPar + "\n";
+    text += "Family Status: " + outFamStatus + "\n";
+    text += "Childhood Environment: " + outFamChildEnv + "\n";
+    text += "SIBLINGS [ " + outNumSiblings + " ]";
+    text += "\n" + outSiblingDetails;
     text += "MOTIVATIONS" + "\n";
-    text += "Personality Traits: " + allFields[32] + "\n";
-    text += "Valued Person: " + allFields[33] + "\n";
-    text += "Value Most: " + allFields[34] + "\n";
-    text += "Feel About People: " + allFields[35] + "\n";
-    text += "Valued Possession: " + allFields[36] + "\n";
+    text += "Personality Traits: " + outMotivPersTraits + "\n";
+    text += "Valued Person: " + outMotivValuePers + "\n";
+    text += "Value Most: " + outMotivValueMost + "\n";
+    text += "Feel About People: " + outMotivFeelPeople + "\n";
+    text += "Valued Possession: " + outMotivValuePos + "\n";
     text += "LIFE EVENTS";
-    text += "\n" + allFields[37];
-    window.prompt("Copy character to clipboard: Ctrl+C (Windows) or Command+C (Mac), then hit Enter " +
-        "(this window only shows the first line, but the entire character sheet is copied).", text);
+    text += "\n" + outLifeEvents;
+
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
     return false;
 }
 
@@ -3826,7 +3791,6 @@ function saveNewImage() {
         letterRendering: true
     });
 }
-
 
 function init() {
     "use strict";
