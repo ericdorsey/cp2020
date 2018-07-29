@@ -1202,6 +1202,11 @@ function randAgeClick(preventNothing) {
     for (var j = lifeEventStart; j <= age; j++) {
         randLifeEvent(j, preventNothing);
     }
+
+    // Fill out age on the character sheet (just prior to Life Events)
+    var ageCharOutput = document.getElementById("valAgeCharOutput");
+    ageCharOutput.innerHTML = ageField.value;
+
 }
 
 function manAgeClick() {
@@ -1224,6 +1229,10 @@ function manAgeClick() {
     while(charLifeEvents.firstChild) {
         charLifeEvents.removeChild(charLifeEvents.firstChild);
     }
+
+    // Fill out age on the character sheet (just prior to Life Events)
+    var ageCharOutput = document.getElementById("valAgeCharOutput");
+    ageCharOutput.innerHTML = ageField.value;
 }
 
 function ageCheck() {
@@ -1238,6 +1247,7 @@ function ageCheck() {
     var ageField = document.getElementById("ageField");
     ageField.className = "";
     var ageFieldValue = ageField.value;
+
     var errorOut = document.createElement("span");
     errorOut.setAttribute("id", "errorOut");
     errorOut.setAttribute("class", "red");
@@ -1265,8 +1275,12 @@ function ageCheck() {
         for (var j = lifeEventStart; j <= age; j++) {
             randLifeEvent(j);
         }
-    }
 
+        // Fill out age on the character sheet (just prior to Life Events)
+        var ageCharOutput = document.getElementById("valAgeCharOutput");
+        ageCharOutput.innerHTML = ageField.value;
+
+    }
 }
 
 function addLifeRowEnemy(td1Val, td2Val, td3Val) {
@@ -3716,6 +3730,7 @@ function copyToClipboard() {
     var outMotivValueMost = document.getElementById("valMostCharOutput").innerText;
     var outMotivFeelPeople = document.getElementById("feelPeopleCharOutput").innerText;
     var outMotivValuePos = document.getElementById("valPosessionCharOutput").innerText;
+    var outAge = document.getElementById("valAgeCharOutput").innerText;
     var outLifeEvents = document.getElementById("charLifeEvents").innerText;
 
     // Check if character name (var outName) is &nbsp;
@@ -3768,8 +3783,9 @@ function copyToClipboard() {
     text += "Value Most: " + outMotivValueMost + "\n";
     text += "Feel About People: " + outMotivFeelPeople + "\n";
     text += "Valued Possession: " + outMotivValuePos + "\n";
-    text += "LIFE EVENTS";
-    text += "\n" + outLifeEvents;
+    text += "LIFE EVENTS" + "\n";
+    text += "Age: " + outAge + "\n";
+    text += outLifeEvents;
 
     var dummy = document.createElement("textarea");
     document.body.appendChild(dummy);

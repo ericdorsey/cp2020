@@ -696,11 +696,17 @@ a visited {
     margin-bottom: 5px;
 }
 
+#valCharAge_label {
+    font-weight: bold;
+    padding: 4px;
+}
+
 #charLifeEventsTitle_label {
     padding-left: 5px;
 }
 
 #charLifeEvents {
+    padding-top: 4px;
     padding-left: 5px;
 }
 
