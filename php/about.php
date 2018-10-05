@@ -22,14 +22,22 @@ $message = $_POST["comments"];
 $sendMessage = filter_var($message, FILTER_SANITIZE_SPECIAL_CHARS);
 $sendMessage = trim($sendMessage);
 #echo 'Message is: '.$sendMessage;
+
+# Don't email an empty comment field 
 if (empty($sendMessage)) {
     echo '<p class="informational">Comments field cannot be blank. Nothing submitted!</p>';
     echo '<p class="informational"><a href="../index.html" id="link">Click here to go back to the Cyberpunk 2020 Character Generator</a>.';
     exit();
 }
+
 $sendMessage = $prependtext . $sendMessage;
 $email = $_POST["email"];
 $sendEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+# Add the email to the message body if included
+if (!empty($sendEmail)) {
+    $sendMessage = "Reply to: $sendEmail<br><br>" . $sendMessage;
+}
 
 try {
     mail($to, $sendSubject, $sendMessage, $headers);
@@ -39,6 +47,8 @@ try {
 } catch (Exception $e) {
     echo "Error: " . $e;
 }
+
 ?>
+
 </body>
 </html>

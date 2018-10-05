@@ -1237,11 +1237,18 @@ function manAgeClick() {
 
 function ageCheck() {
     "use strict";
+
     // Remove all children from lifeTable
     var lifeTable = document.getElementById("lifeTable");
     var rowCount = lifeTable.rows.length;
     for (var i = rowCount -1; i > 0 ;i--) {
         lifeTable.deleteRow(i);
+    }
+
+    // Clean out the previous (if applicable) charLifeEvents div
+    var charLifeEvents = document.getElementById("charLifeEvents");
+    while(charLifeEvents.firstChild) {
+        charLifeEvents.removeChild(charLifeEvents.firstChild);
     }
 
     var ageField = document.getElementById("ageField");
