@@ -2733,7 +2733,7 @@ var characterMeta = {
         this.charPoints = 0;
         var roll = 0;
         for (var i = 1; i <= 9; i++) {
-            roll = getRandomInt(2, 10);
+            roll = getRandomInt(1, 10);
             // Append each roll to randRolls
             this.randRolls.push(roll);
         }
@@ -2745,11 +2745,13 @@ var characterMeta = {
         for (var j = 0; j < this.randRolls.length; j++) {
             this.randTotal = this.randTotal + this.randRolls[j];
         }
+
         rollOutput.appendChild(document.createTextNode("Roll Method: Random"));
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.randRolls.join(", "))));
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Roll Total: ".concat(this.randTotal.toString())));
         this.charPoints = this.randTotal;
-        //
         var charPointsOutput = document.getElementById("charPointsOutput");
         charPointsOutput.innerHTML = this.charPoints.toString();
 
@@ -2776,14 +2778,14 @@ var characterMeta = {
             rollOutput.removeChild(rollOutput.firstChild);
         }
 
-        rollOutput.appendChild(document.createTextNode("Roll Method: Fast"));
-        rollOutput.appendChild(document.createElement("br"));
-        rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls.join(", "))));
 
         for (var j = 0; j < this.fastRolls.length; j++) {
             this.fastTotal += this.fastRolls[j];
         }
 
+        rollOutput.appendChild(document.createTextNode("Roll Method: Fast"));
+        rollOutput.appendChild(document.createElement("br"));
+        rollOutput.appendChild(document.createTextNode("Rolls: ".concat(this.fastRolls.join(", "))));
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Rolls Total: ".concat(this.fastTotal.toString())));
 
@@ -2809,10 +2811,10 @@ var characterMeta = {
             points = 80;
             cine = "Major Hero";
         } else if (whatClicked === "cineMajorSupp") {
-            points = 75;
+            points = 70;
             cine = "Major Supporting Character";
         } else if (whatClicked === "cineMinorHero") {
-            points = 70;
+            points = 75;
             cine = "Minor Hero";
         } else if (whatClicked === "cineMinorSupp") {
             points = 60;
