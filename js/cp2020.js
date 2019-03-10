@@ -1,7 +1,1022 @@
+// Static data tables variables
+
+var clothes = {
+    1: "Biker leathers",
+    2: "Blue jeans",
+    3: "Corporate suits",
+    4: "Jumpsuits",
+    5: "Miniskirts",
+    6: "High Fashion",
+    7: "Cammos",
+    8: "Normal clothes",
+    9: "Nude",
+    10: "Bag lady chic"
+};
+
+var hairStyle = {
+    1: "Mohawk",
+    2: "Long & Ratty",
+    3: "Short & Spiked",
+    4: "Wild & all over",
+    5: "Bald",
+    6: "Striped",
+    7: "Tinted",
+    8: "Neat, short",
+    9: "Short, curly",
+    10: "Long, straight"
+};
+
+var affectations = {
+    1: "Tattoos",
+    2: "Mirrorshades",
+    3: "Ritual Scars",
+    4: "Spiked gloves",
+    5: "Nose Rings",
+    6: "Earrings",
+    7: "Long fingernails",
+    8: "Spike heel boots",
+    9: "Weird contact lenses",
+    10: "Fingerless gloves"
+};
+
+var ethnic = {
+    origins: [
+        {origin: "Anglo-American", languages: ["English"]},
+        {origin: "African", languages: ["Bantu", "Fante", "Kongo","Ashanti","Zulu","Swahili"]},
+        {origin: "Japanese/Korean", languages: ["Japanese", "Korean"]},
+        {origin: "Central European/Soviet", languages: ["Bulgarian", "Russian", "Czech", "Polish", "Ukranian", "Slovak"]},
+        {origin: "Pacific Islander", languages: ["Micronesian", "Tagalog", "Polynesian", "Malayan", "Sudanese", "Indonesian", "Hawaiian"]},
+        {origin: "Chinese/Southeast Asian", languages: ["Burmese", "Cantonese", "Mandarin","Thai", "Tibetan", "Vietnamese"]},
+        {origin: "Black American", languages: ["English", "Blackfolk"]},
+        {origin: "Hispanic/American", languages: ["Spanish", "English"]},
+        {origin: "Central/South American", languages: ["Spanish", "Portuguese"]},
+        {origin: "European", languages: ["French", "German", "Enlgish", "Spanish", "Italian", "Greek", "Danish", "Dutch", "Norwegian", "Swedish"]}
+    ]
+};
+
+var famRank = {
+    1: "Corporate Executive",
+    2: "Corporate Manager",
+    3: "Corporate Technician",
+    4: "Nomad Pack",
+    5: "Pirate Fleet",
+    6: "Gang family",
+    7: "Crime Lord",
+    8: "Combat Zone Poor",
+    9: "Urban homeless",
+    10: "Arcology family"
+};
+
+var parentStatus = {
+    okay: "Both parents are living",
+    somethingHappened: "Something happened to one or both parents"
+};
+
+var parentTragedy = {
+    1: "Your parent(s) died in warefare",
+    2: "Your parent(s) died in an accident",
+    3: "Your parent(s) were murdered",
+    4: "Your parent(s) have amnesia and don't remember you",
+    5: "You never knew your parent(s)",
+    6: "Your parent(s) are in hiding to protect you",
+    7: "You were left with relatives for safekeeping",
+    8: "You grew up on the street and never had parents",
+    9: "Your parent(s) gave you up for adoption",
+    10: "Your parent(s) sold you for money"
+};
+
+var familyStatusOptions = {
+    danger: "Family status in danger, and you risk losing everything",
+    okay: "Family status is OK, even if parents are missing or dead"
+};
+
+var familyTragedy = {
+    1: "Family lost everything through betrayal",
+    2: "Family lost everything through bad management",
+    3: "Family exiled or otherwise driven from their original home/ nation/ corporation",
+    4: "Family is imprisoned and you alone escaped",
+    5: "Family vanished. You are the only remaining member",
+    6: "Family was murdered or killed, and you were the only survivor",
+    7: "Family is involved in a longterm conspiracy, organization or assocation, such as a crime family or revolutionary group",
+    8: "Your family was scattered to the winds due to misfortune",
+    9: "Your family is cursed with a hereditary feud that has lasted for generations",
+    10: "You are the inheritor of a family debt; you must honor this debt before moving on with your life"
+};
+
+var childEnv = {
+    1: "Spent on the street, with no adult supervision",
+    2: "Spent in a safe corporate suburbia",
+    3: "In a Nomad Pack moving from town to town",
+    4: "In a decarying, once upscale neighborhood",
+    5: "In a defended corporate zone in the central City",
+    6: "In the heart of the combat zone",
+    7: "In a small village or town far from the city",
+    8: "In a large archology city",
+    9: "In an aquatic pirate pack",
+    10: "On a corporate controlled farm or research facility"
+};
+
+var siblingGenders = {
+    1: "male",
+    2: "female"
+};
+
+var siblingAges = {
+    1: "older",
+    2: "younger",
+    3: "twin"
+};
+
+var siblingFeelings = {
+    1: "sibling dislikes you",
+    2: "sibling likes you",
+    3: "sibling neutral towards you",
+    4: "sibling hero worships you",
+    5: "sibling hates you"
+};
+
+var manualSiblingsList = {
+    1: "only child",
+    2: 1,
+    3: 2,
+    4: 3,
+    5: 4,
+    6: 5,
+    7: 6,
+    8: 7
+};
+
+var persTraits = {
+    1: "Shy and secretive",
+    2: "Rebellious, antisocial, violent",
+    3: "Arrogant, proud, aloof",
+    4: "Moody, rash and headstrong",
+    5: "Picky, fussy and nervous",
+    6: "Stable and serious",
+    7: "Silly and fluffheaded",
+    8: "Sneaky and deceptive",
+    9: "Intellectual and detached",
+    10: "Friendly and outgoing"
+};
+
+var persValued = {
+    1: "A parent (or guardian)",
+    2: "Brother or sister",
+    3: "Lover",
+    4: "Friend",
+    5: "Yourself",
+    6: "A pet",
+    7: "Teacher or mentor",
+    8: "Public figure",
+    9: "A personal hero",
+    10: "No one"
+};
+
+var youValue = {
+    1: "Money",
+    2: "Honor",
+    3: "Your word",
+    4: "Honesty",
+    5: "Knowledge",
+    6: "Vengeance",
+    7: "Love",
+    8: "Power",
+    9: "Having a good time",
+    10: "Friendship"
+};
+
+var howFeel = {
+    1: "Neutral",
+    2: "Neutral",
+    3: "I like almost everyone",
+    4: "I hate almost everyone",
+    5: "People are tools. Use them for your own goals and discard them",
+    6: "Every person is a valuable individual",
+    7: "People are obstacles to be destroyed if they cross me",
+    8: "People are untrustworthy. Don't depend on anyone",
+    9: "Wipe 'em all out and give the place to the cockroaches",
+    10: "People are wonderful"
+};
+
+var valuedPos = {
+    1: "A weapon",
+    2: "A tool",
+    3: "A piece of clothing",
+    4: "A photograph",
+    5: "A book or diary",
+    6: "A recording",
+    7: "A musical instrument",
+    8: "A piece of jewelry",
+    9: "A toy",
+    10: "A letter"
+};
+
+var disaster = {
+    // Disaster Strikes table from Big Problems, Big Wins
+    betrayalAmount: 0,
+    betrayalHistory: {},
+    betrayDetail: {},
+    addBetray: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.betrayalHistory[age] = this[thirdLifeRoll].title;
+        this.betrayalAmount += 1;
+        if (fourthLifeRoll <= 3) {
+            this.betrayDetail[age] = " You are being blackmailed.";
+        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 7) {
+            this.betrayDetail[age] = " A secret was exposed.";
+        } else if (fourthLifeRoll >= 8 && fourthLifeRoll <= 10) {
+            this.betrayDetail[age] = " Betrayed by close friend in romance or career (you choose)";
+        }
+    },
+    accidentAmount: 0,
+    accidentHistory: {},
+    accidentDetail: {},
+    addAccident: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.accidentHistory[age] = this[thirdLifeRoll].title;
+        this.accidentAmount += 1;
+        var randInt = getRandomInt(1,10);
+        if (fourthLifeRoll <= 4) {
+            this.accidentDetail[age] = "Terribly disfigured. Subtract -5 from ATT";
+        } else if (fourthLifeRoll >= 5 && fourthLifeRoll <= 6) {
+            this.accidentDetail[age] = "Hospitalized for " + randInt + " months this year";
+        } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
+            this.accidentDetail[age] = "You have lost " + randInt + " months of memory this year";
+        } else if (fourthLifeRoll >= 9) {
+            this.accidentDetail[age] = "You constantly relive nightmares ".concat(
+                "(8 in 10 chance each night) of the accident and wake up screaming");
+        }
+    },
+    loverKilledAmount: 0,
+    loverKilledHistory: {},
+    loverKilledDetail: {},
+    loverKilled: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.loverKilledAmount += 1;
+        this.loverKilledHistory[age] = this[thirdLifeRoll].title;
+        if (fourthLifeRoll <= 5) {
+            this.loverKilledDetail[age] = "They died accidentally";
+        } else if (fourthLifeRoll >= 6 && fourthLifeRoll <= 8) {
+            this.loverKilledDetail[age] = "They were murdered by unknown parties";
+        } else if (fourthLifeRoll >=9) {
+            this.loverKilledDetail[age] = "They were murdered; you know who did it. You just need proof";
+        }
+    },
+    falseAccuseAmount: 0,
+    falseAccuseHistory: {},
+    falseAccuseDetail: {},
+    addFalseAccused: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.falseAccuseAmount += 1;
+        this.falseAccuseHistory[age] = this[thirdLifeRoll].title;
+        if (fourthLifeRoll <= 3) {
+            this.falseAccuseDetail[age] = "The accusation is theft.";
+        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 5) {
+            this.falseAccuseDetail[age] = "The accusation is cowardice.";
+        } else if (fourthLifeRoll >= 6 && fourthLifeRoll <= 8) {
+            this.falseAccuseDetail[age] = "The accusation is murder";
+        } else if (fourthLifeRoll === 9) {
+            this.falseAccuseDetail[age] = "The accusation is rape";
+        } else if (fourthLifeRoll === 10) {
+            this.falseAccuseDetail[age] = "The accusation is lying or betrayal";
+        }
+    },
+    lawHuntedAmount: 0,
+    lawHuntedHistory: {},
+    lawHuntedDetail: {},
+    addLawHunted: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.lawHuntedAmount += 1;
+        this.lawHuntedHistory[age] = this[thirdLifeRoll].title;
+        if (fourthLifeRoll <= 3) {
+            this.lawHuntedDetail[age] = "Only a couple local cops want you.";
+        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 6) {
+            this.lawHuntedDetail[age] = "The entire local police force wants you.";
+        } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
+            this.lawHuntedDetail[age] = "the State Police or militia wants you.";
+        } else if (fourthLifeRoll >= 9) {
+            this.lawHuntedDetail[age] = "the FBI or equivalent national police force wants you.";
+        }
+    },
+    corpHuntedAmount: 0,
+    corpHuntedHistory: {},
+    corpHuntedDetail: {},
+    addCorpHunted: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        //
+        this.corpHuntedAmount += 1;
+        this.corpHuntedHistory[age] = this[thirdLifeRoll].title;
+        if (fourthLifeRoll <= 3) {
+            this.corpHuntedDetail[age] = "Small local firm is hunting you";
+        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 6) {
+            this.corpHuntedDetail[age] = "Larger corporation with offices statewide hunting you";
+        } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
+            this.corpHuntedDetail[age] = "Big, national corporation with agents in major cities nationwide hunting you";
+        } else if (fourthLifeRoll >= 9) {
+            this.corpHuntedDetail[age] = "Huge multinational corporation hunting you; they have armies, ninjas and spies everywhere";
+        }
+    },
+    incapAmount: 0,
+    incapHistory: {},
+    incapDetail: {},
+    addIncap: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.incapAmount += 1;
+        this.incapHistory[age] = this[thirdLifeRoll].title;
+        if (fourthLifeRoll <= 3) {
+            this.incapDetail[age] = "It's some type of nervous disorder, probably from a bioplague -- Lose 1 pt. REF";
+        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 7) {
+            this.incapDetail[age] = "It's some kind of mental problem; you suffer from anxiety".concat(
+                "attacks and phobias. Lose 1 pt. from your CL stat.");
+        } else if (fourthLifeRoll >= 8) {
+            this.incapDetail[age] = "It's a major psychosis. You hear voices, are violent,".concat(
+                "irrational, depressive. Lose 1pt from CL, 1pt from REF");
+        }
+    },
+    debtAmount: 0,
+    debtHistory: {},
+    addDebt: function(age) {
+        "use strict";
+        var newDebt = getRandomInt(1, 10) * 100;
+        this.debtHistory[age] = newDebt;
+        this.debtAmount += newDebt;
+    },
+    prisonTime: 0,
+    prisonHistory: {},
+    addPrison: function(age) {
+        "use strict";
+        var prisonTerm = getRandomInt(1,10);
+        this.prisonHistory[age] = prisonTerm;
+        this.prisonTime += prisonTerm;
+    },
+    illnessTime: 0,
+    illnessHistory: {},
+    addIllness: function(age) {
+        "use strict";
+        var illnessLength = getRandomInt(1, 10);
+        this.illnessHistory[age] = illnessLength;
+        this.illnessTime += illnessLength;
+    },
+    1: {title: "Financial Loss or Debt",
+        detail: "Roll 1D10x100." +
+        "You have lost this much in Eurodollars. If you can't pay this now," +
+        " you have a debt to pay, in cash--or blood."},
+    2: {title: "Imprisonment",
+        detail: "You have been in prison, or possibly held hostage" +
+        " (your choice). Roll 1D10 for length of imprisonment in months."},
+    3: {title: "Illness or addiction",
+        detail: "You have contracted either an illness or" +
+        " drug habit in this time. Lose 1 point of REF permanently as a result."},
+    4: {title: "Betrayal. You have been backstabbed in some manner",
+        detail:
+        "Roll another 1D10. 1-3, you are being blackmailed. 4-7 a secret was".concat(
+        " exposed. 8-10, you were betrayed by a close friend in either romance",
+        " or career (your choice).")},
+    5: {title: "Accident",
+        detail: "You were in some kind of terrible accident. Roll" +
+        " 1D10. 1-4, you were terribly disfigured and must subtract -5 from your ATT." +
+        " 5-6 you were hospitalized for 1D10 months that year. 7-8, you have lost" +
+        " 1D10 months of memory that year. 9-10, you constantly relive nightmares" +
+        " (8 in 10 chance each night) of the accident and wake up screaming"},
+    6: {title: "Lover, friend or relative killed",
+        detail: "You lost someone you" +
+        " really cared about. 1-5, they died accidentally. 6-8 they were murdered" +
+        " by unknown parties. 9-10, they were murdered and you know who did it. You" +
+        " just need the proof."},
+    7: {title: "False Accusation",
+        detail: "You were set up. Roll 1D10. 1-3, the" +
+        " accusation is theft. 4-5 it's cowardice. 6-8 it's murder. 9 it's rape" +
+        " 10, it's lying or betrayal"},
+    8: {title: "Hunted by the law",
+        detail: "You are hunted by the law for crimes" +
+        " you may or may not have committed (your choice). Roll 1D10. 1-3 only" +
+        " a couple cops want you. 4-6 it's the entire local force. 7-8, it's the" +
+        " State police or Militia. 9-10 it's the FBI or equivalent national police force."},
+    9: {title: "Hunted by a Corporation",
+        detail: "You have angered some corporate" +
+        " honcho. Roll 1D10. 1-3 it's a small, local firm. 4-6 it's a larger corp with offices" +
+        "statewide. 7-8 it's a big, national corp with agents in major cities nationwide." +
+        "9-10; it's a huge multinational with armies, ninja and spies everywhere."},
+    10: {title: "Mental or physical incapacitation",
+        detail: "You have experienced" +
+        " some type of mental or physical breakdown. Roll 1D10. 1-3 it's some type"+
+        " of nervous disorder, probably from a bioplague -- lose 1pt REF. 4-7 it's" +
+        " some kind of mental problem; you suffer anxiety attacks and phobias. Lose" +
+        " 1pt from your CL stat. 8-10 it's a major psychosis. You hear voices" +
+        " are violent, irrational, depressive. Lose 1pt from CL, 1pt from REF"}
+};
+
+var getLucky = {
+    // Get Lucky table from Big Problems, Big Wins
+    connectionAmount: 0, // Number of Powerful Connections
+    connectionHistory: {},
+    addMakePowerfulConnection: function(whereIsConnection) {
+        "use strict";
+        var connectionMade = {
+            "police" : "in the Police department",
+            "da" : "in the District Attorney's Office",
+            "mayor" : "in the Mayor's office"
+        };
+        return connectionMade[whereIsConnection];
+    },
+    windfallAmount: 0,
+    windfallHistory: {},
+    addWindFall: function(age) {
+        "use strict";
+        var newWindfall = getRandomInt(1, 10) * 100;
+        this.windfallHistory[age] = newWindfall;
+        this.windfallAmount +=+ newWindfall;
+    },
+    scoreAmount: 0,
+    scoreHistory: {},
+    addScore: function(age) {
+        "use strict";
+        var newScore = getRandomInt(1,10) * 100;
+        this.scoreHistory[age] = newScore;
+        this.scoreAmount += newScore;
+    },
+    senseiFound: 0,
+    senseiHistory: {},
+    addSensei: function(age) {
+        "use strict";
+        this.senseiHistory[age] = "Find a Sensei";
+        this.senseiFound += 1;
+    },
+    teacherFound: 0,
+    teacherHistory: {},
+    addTeacher: function(age) {
+        "use strict";
+        this.teacherHistory[age] = "Find a teacher";
+        this.teacherFound += 1;
+    },
+    corpFavor: 0,
+    corpFavorHistory: {},
+    addCorpFavor: function(age) {
+        "use strict";
+        this.corpFavorHistory[age] = "Corporate Executive owes you a favor";
+        this.corpFavor += 1;
+    },
+    nomadFavor: 0,
+    nomadFavorHistory: {},
+    addNomadFavor: function(age) {
+        "use strict";
+        this.nomadFavorHistory[age] = "Develop friendship with a nomad pack";
+        this.nomadFavor += 1;
+    },
+    policeFriend: 0,
+    policefriendHistory: {},
+    addPoliceFriend: function(age) {
+        "use strict";
+        this.policefriendHistory[age] = "Friend on Police Force";
+        this.policeFriend += 1;
+    },
+    boosterFriend: 0,
+    boosterFriendHistory: {},
+    addBoosterFriend: function(age) {
+        "use strict";
+        this.boosterFriendHistory[age] = "Local Boostergang likes you";
+        this.boosterFriend += 1;
+    },
+    combatTeacher: 0,
+    combatTeacherHistory: {},
+    addCombatTeacher: function(age) {
+        "use strict";
+        this.combatTeacherHistory[age] = "Find combat teacher";
+        this.combatTeacher += 1;
+    },
+    // Life Events table output, Detail column data
+    1: {title: "Make a Powerful Connection in City Government",
+        detail: "Roll 1D10" +
+        " 1-4 it's the Police. 5-7 it's in DA office. 8-10 its the Mayor"},
+    2: {title: "Financial Windfall",
+        detail: "Roll 1D10x100 for amount in Euros"},
+    3: {title: "Big Score",
+        detail: "Roll 1D10x100 for amount"},
+    4: {title: "Find a Sensei (Teacher)",
+        detail: "Begin a new Martial Art at +2, or add +1 to an existing Martial Art"},
+    5: {title: "Find a Teacher",
+        detail: "Add +1 to any INT based skill, or begin new at +2"},
+    6: {title: "Favor with a Powerful Corporate Executive",
+        detail: "They owe you a favor"},
+    7: {title: "Local Nomad Pack Befriends You",
+        detail: "Call on them for one favor a month, " +
+       " equivalent to Family special ability +2"},
+    8: {title: "Make Friend on Police Force",
+        detail: "You may use them for information at".concat(
+        " a level of +2 Streetwise on any police related situation.")},
+    9: {title: "Local Boostergang likes you",
+        detail: "You can call on them for" +
+        " one favor a month, equivalent to Family special ability of +2. Don't push it"},
+    10: {title: "Find a combat teacher",
+        detail: "Add +1 to any weapon skill w/ exception" +
+        " of Martial Arts or Brawling, or begin a new combat skill at +2"}
+};
+
+var enemy = {
+    enemyAmount: 0,
+    enemyGender: {},
+    enemyWhoIsIt: {},
+    enemyCauseIs: {},
+    enemyWhoMad: {},
+    enemyWhatDo: {},
+    enemyWhatThrow: {},
+    addEnemy: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.enemyAmount += 1;
+        var causeRoll = getRandomInt(1,10);
+        var whoIsMadRoll = getRandomInt(1,10);
+        var whatDoRoll = getRandomInt(1,10);
+        var whatThrowRoll = getRandomInt(1,10);
+
+        if ((fourthLifeRoll % 2 === 0) === true) {
+            this.enemyGender[age] = "Male";
+        } else if ((fourthLifeRoll % 2 === 0) === false) {
+            this.enemyGender[age] = "Female";
+        }
+        this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; // Who are they
+        this.enemyCauseIs[age] = this.enemyCause[causeRoll]; // What is the cause
+        if (whoIsMadRoll <= 4) { //Who's mad
+            this.enemyWhoMad[age] = this.whoIsAngry[1];
+        } else if (whoIsMadRoll >= 5 && whoIsMadRoll <= 7) {
+            this.enemyWhoMad[age] = this.whoIsAngry[2];
+        } else if (whoIsMadRoll >= 8 && whoIsMadRoll <= 10) {
+            this.enemyWhoMad[age] = this.whoIsAngry[3];
+        }
+        if (whatDoRoll <= 2) { // Whatcha gonna do about it
+            this.enemyWhatDo[age] = this.whatDo[1];
+        } else if (whatDoRoll >= 3 && whatDoRoll <= 4) {
+            this.enemyWhatDo[age] = this.whatDo[2];
+        } else if (whatDoRoll >= 5 && whatDoRoll <= 6) {
+            this.enemyWhatDo[age] = this.whatDo[3];
+        } else if (whatDoRoll >= 7 && whatDoRoll <= 8) {
+            this.enemyWhatDo[age] = this.whatDo[4];
+        } else if (whatDoRoll >= 9 && whatDoRoll <= 10) {
+            this.enemyWhatDo[age] = this.whatDo[5];
+        }
+        if (whatThrowRoll <=3) { // What can they throw against you
+            this.enemyWhatThrow[age] = this.whatThrow[1];
+        } else if (whatThrowRoll >= 4 && whatThrowRoll <= 5) {
+            this.enemyWhatThrow[age] = this.whatThrow[2];
+        } else if (whatThrowRoll >= 6 && whatThrowRoll <= 7) {
+            this.enemyWhatThrow[age] = this.whatThrow[3];
+        } else if (whatThrowRoll === 8) {
+            this.enemyWhatThrow[age] = this.whatThrow[4];
+        } else if (whatThrowRoll === 9) {
+            this.enemyWhatThrow[age] = this.whatThrow[5];
+        } else if (whatThrowRoll === 10) {
+            this.enemyWhatThrow[age] = this.whatThrow[6];
+        }
+
+    },
+    enemyMade: {
+        1: "Ex friend",
+        2: "Ex lover",
+        3: "Relative",
+        4: "Childhood enemy",
+        5: "Person working for you",
+        6: "Person you work for",
+        7: "Partner or co-worker",
+        8: "Booster gang member",
+        9: "Corporate Executive",
+        10: "Government Official"
+    },
+    enemyCause: {
+        1: "Caused the other to lose face or status",
+        2: "Caused the loss of a lover, friend or relative",
+        3: "Caused a major humiliation",
+        4: "Accused the other of cowardice or other personal flaw",
+        5: "Caused a physical disability",
+        6: "Deserted or betrayed the other",
+        7: "Turned down the other's offer of job or romantic involvement",
+        8: "Just didn't like each other",
+        9: "Was a romantic rival",
+        10: "Foiled plans of the other"
+    },
+    whoIsAngry: {
+        1: "They hate you",
+        2: "You hate them",
+        3: "The feeling's mutual"
+    },
+    whatDo: {
+        1: "Go into a murderous killing rage",
+        2: "Avoid the scum",
+        3: "Backstab them indirectly",
+        4: "Ignore them",
+        5: "Rip into them verbally"
+    },
+    whatThrow: {
+        1: "Just themselves",
+        2: "Them and a few friends",
+        3: "An entire gang",
+        4: "A small corporation",
+        5: "A Large corporation",
+        6: "An entire government agency"
+    }
+};
+
+var friendMade = {
+    1: "Like a big brother/sister to you",
+    2: "Like a kid sister/brother to you",
+    3: "A teacher or mentor",
+    4: "A partner or coworker",
+    5: "An old lover (choose which one)",
+    6: "An old enemy (choose which one)",
+    7: "Like a foster parent to you",
+    8: "A relative",
+    9: "Reconnect with an old childhood friend",
+    10: "Met through a common interest",
+    friendMadeAmount: 0,
+    friendMadeHistory: {},
+    friendMadeGender: {},
+    addFriend: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.friendMadeAmount += 1;
+        this.friendMadeHistory[age] = this[thirdLifeRoll];
+        if ((fourthLifeRoll % 2 === 0) === true) {
+            this.friendMadeGender[age] = "Gender of friend: male";
+        } else if ((fourthLifeRoll % 2 === 0) === false) {
+            this.friendMadeGender[age] = "Gender of friend: female";
+        }
+
+    }
+};
+
+var romance = {
+    happyCount: 0,
+    romanceCount: 0,
+    happyDetail: {},
+    happyHistory: {},
+    addHappyAffair: function(age) {
+        "use strict";
+        this.romanceCount += 1;
+        this.happyHistory[age] = this.romanceEvent[1];
+        this.happyDetail[age] = "n/a";
+    },
+    tragicCount: 0,
+    tragicDetail: {},
+    tragicHistory: {},
+    addTragic: function(age, thirdLifeRoll) {
+        "use strict";
+        this.tragicCount += 1;
+        this.tragicHistory[age] = this.romanceEvent[2];
+        this.tragicDetail[age] = this.romanceTragic[thirdLifeRoll];
+    },
+    problemCount: 0,
+    problemDetail: {},
+    problemHistory: {},
+    addProblem: function(age, thirdLifeRoll, fourthLifeRoll) {
+        "use strict";
+        this.problemCount += 1;
+        this.problemHistory[age] = this.romanceProblems[thirdLifeRoll];
+        this.problemDetail[age] = this.romanceMutalFeel[fourthLifeRoll];
+    },
+    fastCount: 0,
+    fastDetail: {},
+    fastHistory: {},
+    addFast: function(age) {
+        "use strict";
+        this.fastCount += 1;
+        this.fastHistory[age] = this.romanceEvent[4];
+        this.fastDetail[age] = "n/a";
+    },
+    romanceEvent: {
+        1: "Happy Love Affair",
+        2: "Tragic Love Affair",
+        3: "Love Affair With Problems",
+        4: "Fast affairs and Hot Dates"
+    },
+    romanceTragic: {
+        1: "Lover died in an accident",
+        2: "Lover mysteriously vanisehd",
+        3: "It didnt work out",
+        4: "A personal goal or vendetta came between you",
+        5: "Lover kidnapped",
+        6: "Lover went insane",
+        7: "Lover committed suicide",
+        8: "Lover killed in a fight",
+        9: "Rival cut you out of the action",
+        10: "Lover imprisoned or exiled"
+    },
+    romanceProblems: {
+        1: "Your lover's friends/family hate you",
+        2: "Your lover's friends/family would use any means to get rid of you",
+        3: "Your friends/family hate your lover",
+        4: "One of you has a romantic rival",
+        5: "You are seperated in some way",
+        6: "You fight constantly",
+        7: "You're professional rivals",
+        8: "One of you is insanely jealous",
+        9: "One of you is messing around",
+        10: "You have conflicting backgrounds and families"
+    },
+    romanceMutalFeel: {
+        1: "They still love you",
+        2: "You still love them",
+        3: "You still love each other",
+        4: "You hate them",
+        5: "They hate you",
+        6: "You hate each other",
+        7: "You're friends",
+        8: "No feelings either way; its over",
+        9: "You like them, they hate you",
+        10: "They like you, you hate them"
+    }
+
+};
+
+// A "nothing happened" data structure from Life Events
+var nothing = {
+    nothingCount: 0,
+    nothingDetail: {},
+    nothingHistory: {},
+    addNothing: function(age) {
+        "use strict";
+        this.nothingCount += 1;
+        this.nothingHistory[age] = "Nothing Happened This Year";
+        this.nothingDetail[age] = "n/a";
+    },
+    nothingResult: "Nothing Happened This Year"
+};
+
+var skills = {
+    special: {
+        name: "Special Abilities",
+        Cop: "Authority",
+        Rocker: "Charismatic Leadership",
+        Solo: "Combat Sense",
+        Media: "Credibility",
+        Nomad: "Family",
+        Netrunner: "Interface",
+        Techie: "Jury Rig",
+        MedTechie: "Medical Tech",
+        Corp: "Resources",
+        Fixer: "Streetdeal"
+    },
+    attr: {
+        name: "Attractiveness Skills",
+        attr01: "Personal Grooming",
+        attr02: "Wardrobe & Style"
+    },
+    body: {
+        name: "Body Skills",
+        body01: "Endurance",
+        body02: "Strength Feat",
+        body03: "Swimming"
+    },
+    cool: {
+        name: "Cool / Will Skills",
+        cool01: "Interrogation",
+        cool02: "Intimidate",
+        cool03: "Oratory",
+        cool04: "Resist Torture/Drugs",
+        cool05: "Streetwise"
+    },
+    emp: {
+        name: "Empathy Skills",
+        emp01: "Human Perception",
+        emp02: "Interview",
+        emp03: "Leadership",
+        emp04: "Seduction",
+        emp05: "Social",
+        emp06: "Persuasion and Fast Talk",
+        emp07: "Perform"
+    },
+    int: {
+        name: "Intelligence Skills",
+        int01: "Accounting",
+        int02: "Anthropology",
+        int03: "Awareness / Notice",
+        int04: "Biology",
+        int05: "Botany",
+        int06: "Chemistry",
+        int07: "Composition",
+        int08: "Diagnose Illness",
+        int09: "Ed./General Knowledge",
+        int10: "Expert",
+        int11: "Gamble",
+        int12: "Geology",
+        int13: "Hide/Evade",
+        int14: "History",
+        int15: "Know Language",
+        int16: "Library Search",
+        int17: "Mathematics",
+        int18: "Physics",
+        int19: "Programming",
+        int20: "Shadow/Track",
+        int21: "Stock Market",
+        int22: "System Knowledge",
+        int23: "Teaching",
+        int24: "Wilderness Survival",
+        int25: "Zoology"
+    },
+    ref: {
+        name: "Reflex Skills",
+        ref01: "Archery",
+        ref02: "Athletics",
+        ref03: "Brawling",
+        ref04: "Dance",
+        ref05: "Dodge & Escape",
+        ref06: "Driving",
+        ref07: "Fencing",
+        ref08: "Handgun",
+        ref09: "Heavy Weapons",
+        ref10: "Martial Art",
+        ref11: "Melee",
+        ref12: "Motorcycle",
+        ref13: "Operate Heavy Machinery",
+        ref14: "Pilot Gyro",
+        ref15: "Pilot Fixed Wing",
+        ref16: "Pilot Dirigible",
+        ref17: "Pilot Vect. Thrust Vehicle",
+        ref18: "Rifle",
+        ref19: "Stealth",
+        ref20: "Submachinegun"
+    },
+    tech: {
+        name: "Tech Skills",
+        tech01: "Aero Tech",
+        tech02: "AV Tech",
+        tech03: "Basic Tech",
+        tech04: "Cryotank Operation",
+        tech05: "Cyberdeck Design",
+        tech06: "CyberTech",
+        tech07: "Demolitions",
+        tech08: "Disguise",
+        tech09: "Electronics",
+        tech10: "Electronic Security",
+        tech11: "First Aid",
+        tech12: "Forgery",
+        tech13: "Gyro Tech",
+        tech14: "Paint or Draw",
+        tech15: "Photo & Film",
+        tech16: "Pharmaceuticals",
+        tech17: "Pick Lock",
+        tech18: "Pick Pocket",
+        tech19: "Play Instrument",
+        tech20: "Weaponsmith"
+    }
+};
+
+// Career Skills from pg. 44
+var career = {
+    solo: {
+        1: skills.special.Solo,
+        2: skills.int.int03,
+        3: skills.ref.ref08,
+        4: skills.ref.ref03,
+        5: skills.ref.ref10,
+        6: skills.ref.ref11,
+        7: skills.tech.tech20,
+        8: skills.ref.ref18,
+        9: skills.ref.ref02,
+        10: skills.ref.ref20,
+        11: skills.ref.ref19
+    },
+    corp: {
+        1: skills.special.Corp,
+        2: skills.int.int03,
+        3: skills.emp.emp01,
+        4: skills.int.int09,
+        5: skills.int.int16,
+        6: skills.emp.emp05,
+        7: skills.emp.emp06,
+        8: skills.int.int21,
+        9: skills.attr.attr02,
+        10: skills.attr.attr01
+    },
+    media: {
+        1: skills.special.Media,
+        2: skills.int.int03,
+        3: skills.int.int07,
+        4: skills.int.int09,
+        5: skills.emp.emp06,
+        6: skills.emp.emp01,
+        7: skills.emp.emp05,
+        8: skills.cool.cool05,
+        9: skills.tech.tech15,
+        10: skills.emp.emp02
+    },
+    nomad: {
+        1: skills.special.Nomad,
+        2: skills.int.int03,
+        3: skills.body.body01,
+        4: skills.ref.ref11,
+        5: skills.ref.ref18,
+        6: skills.ref.ref06,
+        7: skills.tech.tech03,
+        8: skills.int.int24,
+        9: skills.ref.ref03,
+        10: skills.ref.ref02
+    },
+    techie: {
+        1: skills.special.Techie,
+        2: skills.int.int03,
+        3: skills.tech.tech03,
+        4: skills.tech.tech06,
+        5: skills.int.int23,
+        6: skills.int.int09,
+        7: skills.tech.tech09,
+        8: skills.tech.tech01,
+        9: skills.tech.tech02,
+        10: skills.tech.tech20,
+        11: skills.tech.tech10,
+        12: skills.tech.tech13
+    },
+    cop: {
+        1: skills.special.Cop,
+        2: skills.int.int03,
+        3: skills.ref.ref08,
+        4: skills.emp.emp01,
+        5: skills.ref.ref02,
+        6: skills.int.int09,
+        7: skills.ref.ref03,
+        8: skills.ref.ref11,
+        9: skills.cool.cool01,
+        10: skills.cool.cool05
+    },
+    rocker: {
+        1: skills.special.Rocker,
+        2: skills.int.int03,
+        3: skills.emp.emp07,
+        4: skills.attr.attr02,
+        5: skills.int.int07,
+        6: skills.ref.ref03,
+        7: skills.tech.tech19,
+        8: skills.cool.cool05,
+        9: skills.emp.emp06,
+        10: skills.emp.emp04
+    },
+    med: {
+        1: skills.special.MedTechie,
+        2: skills.int.int03,
+        3: skills.tech.tech03,
+        4: skills.int.int08,
+        5: skills.int.int09,
+        6: skills.tech.tech04,
+        7: skills.int.int16,
+        8: skills.tech.tech16,
+        9: skills.int.int25,
+        10: skills.emp.emp01
+    },
+    fixer: {
+        1: skills.special.Fixer,
+        2: skills.int.int03,
+        3: skills.tech.tech12,
+        4: skills.ref.ref08,
+        5: skills.ref.ref03,
+        6: skills.ref.ref11,
+        7: skills.tech.tech17,
+        8: skills.tech.tech18,
+        9: skills.cool.cool02,
+        10: skills.emp.emp06
+    },
+    net: {
+        1: skills.special.Netrunner,
+        2: skills.int.int03,
+        3: skills.tech.tech03,
+        4: skills.int.int09,
+        5: skills.int.int22,
+        6: skills.tech.tech06,
+        7: skills.tech.tech05,
+        8: skills.int.int07,
+        9: skills.tech.tech09,
+        10: skills.int.int19
+    }
+};
+
+var cineCharacterPoints = {
+    cineMajorHero: {
+        "Major Hero": 80
+    },
+    cineMajorSuppChar: {
+        "Major Supporting Character": 70
+    },
+    cineMinorHero: {
+        "Minor Hero": 75
+    },
+    cineMinorSuppChar: {
+        "Minor Supporting Character": 60
+    },
+    Average: {
+        "Average": 50
+	}
+};
+
+// Generic functions follow
+
 function getRandomInt(min, max) {
     "use strict";
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+function appendBR (toParent) {
+    "use strict";
+    var br = document.createElement("br");
+    br.setAttribute("class", "dynamicBR");
+    toParent.appendChild(br);
+}
+
+// Specific functions follow
 
 function enableForms() {
     "use strict";
@@ -737,12 +1752,6 @@ function randSiblingsClick() {
     }
 }
 
-function appendBR (toParent) {
-    "use strict";
-    var br = document.createElement("br");
-    br.setAttribute("class", "dynamicBR");
-    toParent.appendChild(br);
-}
 
 function manualSiblingsClick () {
     "use strict";
@@ -1316,8 +2325,8 @@ function addLifeRow(td1Val, td2Val, td3Val, td4Val) {
     "use strict";
     /*
     Adds the row for the lifeTable table
-     example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
-     */
+    Example usage: addLifeRow(age, eventType, enemy.enemyGender[age], enemyDetailTable);
+    */
     var lifeTable = document.getElementById("lifeTable");
     var tBody = lifeTable.getElementsByTagName("tbody");
 
@@ -1634,991 +2643,11 @@ function addEnemyTable(tdVal1, tdVal2, tdVal3, tdVal4, tdVal5, tdVal6) {
     return enemyDetailTable;
 }
 
-var clothes = {
-    1: "Biker leathers",
-    2: "Blue jeans",
-    3: "Corporate suits",
-    4: "Jumpsuits",
-    5: "Miniskirts",
-    6: "High Fashion",
-    7: "Cammos",
-    8: "Normal clothes",
-    9: "Nude",
-    10: "Bag lady chic"
-};
-
-var hairStyle = {
-    1: "Mohawk",
-    2: "Long & Ratty",
-    3: "Short & Spiked",
-    4: "Wild & all over",
-    5: "Bald",
-    6: "Striped",
-    7: "Tinted",
-    8: "Neat, short",
-    9: "Short, curly",
-    10: "Long, straight"
-};
-
-var affectations = {
-    1: "Tattoos",
-    2: "Mirrorshades",
-    3: "Ritual Scars",
-    4: "Spiked gloves",
-    5: "Nose Rings",
-    6: "Earrings",
-    7: "Long fingernails",
-    8: "Spike heel boots",
-    9: "Weird contact lenses",
-    10: "Fingerless gloves"
-};
-
-var ethnic = {
-    origins: [
-        {origin: "Anglo-American", languages: ["English"]},
-        {origin: "African", languages: ["Bantu", "Fante", "Kongo","Ashanti","Zulu","Swahili"]},
-        {origin: "Japanese/Korean", languages: ["Japanese", "Korean"]},
-        {origin: "Central European/Soviet", languages: ["Bulgarian", "Russian", "Czech", "Polish", "Ukranian", "Slovak"]},
-        {origin: "Pacific Islander", languages: ["Micronesian", "Tagalog", "Polynesian", "Malayan", "Sudanese", "Indonesian", "Hawaiian"]},
-        {origin: "Chinese/Southeast Asian", languages: ["Burmese", "Cantonese", "Mandarin","Thai", "Tibetan", "Vietnamese"]},
-        {origin: "Black American", languages: ["English", "Blackfolk"]},
-        {origin: "Hispanic/American", languages: ["Spanish", "English"]},
-        {origin: "Central/South American", languages: ["Spanish", "Portuguese"]},
-        {origin: "European", languages: ["French", "German", "Enlgish", "Spanish", "Italian", "Greek", "Danish", "Dutch", "Norwegian", "Swedish"]}
-    ]
-};
-
-var famRank = {
-    1: "Corporate Executive",
-    2: "Corporate Manager",
-    3: "Corporate Technician",
-    4: "Nomad Pack",
-    5: "Pirate Fleet",
-    6: "Gang family",
-    7: "Crime Lord",
-    8: "Combat Zone Poor",
-    9: "Urban homeless",
-    10: "Arcology family"
-};
-
-var parentStatus = {
-    okay: "Both parents are living",
-    somethingHappened: "Something happened to one or both parents"
-};
-
-var parentTragedy = {
-    1: "Your parent(s) died in warefare",
-    2: "Your parent(s) died in an accident",
-    3: "Your parent(s) were murdered",
-    4: "Your parent(s) have amnesia and don't remember you",
-    5: "You never knew your parent(s)",
-    6: "Your parent(s) are in hiding to protect you",
-    7: "You were left with relatives for safekeeping",
-    8: "You grew up on the street and never had parents",
-    9: "Your parent(s) gave you up for adoption",
-    10: "Your parent(s) sold you for money"
-};
-
-var familyStatusOptions = {
-    danger: "Family status in danger, and you risk losing everything",
-    okay: "Family status is OK, even if parents are missing or dead"
-};
-
-var familyTragedy = {
-    1: "Family lost everything through betrayal",
-    2: "Family lost everything through bad management",
-    3: "Family exiled or otherwise driven from their original home/ nation/ corporation",
-    4: "Family is imprisoned and you alone escaped",
-    5: "Family vanished. You are the only remaining member",
-    6: "Family was murdered or killed, and you were the only survivor",
-    7: "Family is involved in a longterm conspiracy, organization or assocation, such as a crime family or revolutionary group",
-    8: "Your family was scattered to the winds due to misfortune",
-    9: "Your family is cursed with a hereditary feud that has lasted for generations",
-    10: "You are the inheritor of a family debt; you must honor this debt before moving on with your life"
-};
-
-var childEnv = {
-    1: "Spent on the street, with no adult supervision",
-    2: "Spent in a safe corporate suburbia",
-    3: "In a Nomad Pack moving from town to town",
-    4: "In a decarying, once upscale neighborhood",
-    5: "In a defended corporate zone in the central City",
-    6: "In the heart of the combat zone",
-    7: "In a small village or town far from the city",
-    8: "In a large archology city",
-    9: "In an aquatic pirate pack",
-    10: "On a corporate controlled farm or research facility"
-};
-
-var siblingGenders = {
-    1: "male",
-    2: "female"
-};
-
-var siblingAges = {
-    1: "older",
-    2: "younger",
-    3: "twin"
-};
-
-var siblingFeelings = {
-    1: "sibling dislikes you",
-    2: "sibling likes you",
-    3: "sibling neutral towards you",
-    4: "sibling hero worships you",
-    5: "sibling hates you"
-};
-
-var manualSiblingsList = {
-    1: "only child",
-    2: 1,
-    3: 2,
-    4: 3,
-    5: 4,
-    6: 5,
-    7: 6,
-    8: 7
-};
-
-var persTraits = {
-    1: "Shy and secretive",
-    2: "Rebellious, antisocial, violent",
-    3: "Arrogant, proud, aloof",
-    4: "Moody, rash and headstrong",
-    5: "Picky, fussy and nervous",
-    6: "Stable and serious",
-    7: "Silly and fluffheaded",
-    8: "Sneaky and deceptive",
-    9: "Intellectual and detached",
-    10: "Friendly and outgoing"
-};
-
-var persValued = {
-    1: "A parent (or guardian)",
-    2: "Brother or sister",
-    3: "Lover",
-    4: "Friend",
-    5: "Yourself",
-    6: "A pet",
-    7: "Teacher or mentor",
-    8: "Public figure",
-    9: "A personal hero",
-    10: "No one"
-};
-
-var youValue = {
-    1: "Money",
-    2: "Honor",
-    3: "Your word",
-    4: "Honesty",
-    5: "Knowledge",
-    6: "Vengeance",
-    7: "Love",
-    8: "Power",
-    9: "Having a good time",
-    10: "Friendship"
-};
-
-var howFeel = {
-    1: "Neutral",
-    2: "Neutral",
-    3: "I like almost everyone",
-    4: "I hate almost everyone",
-    5: "People are tools. Use them for your own goals and discard them",
-    6: "Every person is a valuable individual",
-    7: "People are obstacles to be destroyed if they cross me",
-    8: "People are untrustworthy. Don't depend on anyone",
-    9: "Wipe 'em all out and give the place to the cockroaches",
-    10: "People are wonderful"
-};
-
-var valuedPos = {
-    1: "A weapon",
-    2: "A tool",
-    3: "A piece of clothing",
-    4: "A photograph",
-    5: "A book or diary",
-    6: "A recording",
-    7: "A musical instrument",
-    8: "A piece of jewelry",
-    9: "A toy",
-    10: "A letter"
-};
-
-var disaster = {
-    // Disaster Strikes table from Big Problems, Big Wins
-    betrayalAmount: 0,
-    betrayalHistory: {},
-    betrayDetail: {},
-    addBetray: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.betrayalHistory[age] = this[thirdLifeRoll].title;
-        this.betrayalAmount += 1;
-        if (fourthLifeRoll <= 3) {
-            this.betrayDetail[age] = " You are being blackmailed.";
-        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 7) {
-            this.betrayDetail[age] = " A secret was exposed.";
-        } else if (fourthLifeRoll >= 8 && fourthLifeRoll <= 10) {
-            this.betrayDetail[age] = " Betrayed by close friend in romance or career (you choose)";
-        }
-    },
-    accidentAmount: 0,
-    accidentHistory: {},
-    accidentDetail: {},
-    addAccident: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.accidentHistory[age] = this[thirdLifeRoll].title;
-        this.accidentAmount += 1;
-        var randInt = getRandomInt(1,10);
-        if (fourthLifeRoll <= 4) {
-            this.accidentDetail[age] = "Terribly disfigured. Subtract -5 from ATT";
-        } else if (fourthLifeRoll >= 5 && fourthLifeRoll <= 6) {
-            this.accidentDetail[age] = "Hospitalized for " + randInt + " months this year";
-        } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
-            this.accidentDetail[age] = "You have lost " + randInt + " months of memory this year";
-        } else if (fourthLifeRoll >= 9) {
-            this.accidentDetail[age] = "You constantly relive nightmares ".concat(
-                "(8 in 10 chance each night) of the accident and wake up screaming");
-        }
-    },
-    loverKilledAmount: 0,
-    loverKilledHistory: {},
-    loverKilledDetail: {},
-    loverKilled: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.loverKilledAmount += 1;
-        this.loverKilledHistory[age] = this[thirdLifeRoll].title;
-        if (fourthLifeRoll <= 5) {
-            this.loverKilledDetail[age] = "They died accidentally";
-        } else if (fourthLifeRoll >= 6 && fourthLifeRoll <= 8) {
-            this.loverKilledDetail[age] = "They were murdered by unknown parties";
-        } else if (fourthLifeRoll >=9) {
-            this.loverKilledDetail[age] = "They were murdered; you know who did it. You just need proof";
-        }
-    },
-    falseAccuseAmount: 0,
-    falseAccuseHistory: {},
-    falseAccuseDetail: {},
-    addFalseAccused: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.falseAccuseAmount += 1;
-        this.falseAccuseHistory[age] = this[thirdLifeRoll].title;
-        if (fourthLifeRoll <= 3) {
-            this.falseAccuseDetail[age] = "The accusation is theft.";
-        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 5) {
-            this.falseAccuseDetail[age] = "The accusation is cowardice.";
-        } else if (fourthLifeRoll >= 6 && fourthLifeRoll <= 8) {
-            this.falseAccuseDetail[age] = "The accusation is murder";
-        } else if (fourthLifeRoll === 9) {
-            this.falseAccuseDetail[age] = "The accusation is rape";
-        } else if (fourthLifeRoll === 10) {
-            this.falseAccuseDetail[age] = "The accusation is lying or betrayal";
-        }
-    },
-    lawHuntedAmount: 0,
-    lawHuntedHistory: {},
-    lawHuntedDetail: {},
-    addLawHunted: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.lawHuntedAmount += 1;
-        this.lawHuntedHistory[age] = this[thirdLifeRoll].title;
-        if (fourthLifeRoll <= 3) {
-            this.lawHuntedDetail[age] = "Only a couple local cops want you.";
-        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 6) {
-            this.lawHuntedDetail[age] = "The entire local police force wants you.";
-        } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
-            this.lawHuntedDetail[age] = "the State Police or militia wants you.";
-        } else if (fourthLifeRoll >= 9) {
-            this.lawHuntedDetail[age] = "the FBI or equivalent national police force wants you.";
-        }
-    },
-    corpHuntedAmount: 0,
-    corpHuntedHistory: {},
-    corpHuntedDetail: {},
-    addCorpHunted: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        //
-        this.corpHuntedAmount += 1;
-        this.corpHuntedHistory[age] = this[thirdLifeRoll].title;
-        if (fourthLifeRoll <= 3) {
-            this.corpHuntedDetail[age] = "Small local firm is hunting you";
-        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 6) {
-            this.corpHuntedDetail[age] = "Larger corporation with offices statewide hunting you";
-        } else if (fourthLifeRoll >= 7 && fourthLifeRoll <= 8) {
-            this.corpHuntedDetail[age] = "Big, national corporation with agents in major cities nationwide hunting you";
-        } else if (fourthLifeRoll >= 9) {
-            this.corpHuntedDetail[age] = "Huge multinational corporation hunting you; they have armies, ninjas and spies everywhere";
-        }
-    },
-    incapAmount: 0,
-    incapHistory: {},
-    incapDetail: {},
-    addIncap: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.incapAmount += 1;
-        this.incapHistory[age] = this[thirdLifeRoll].title;
-        if (fourthLifeRoll <= 3) {
-            this.incapDetail[age] = "It's some type of nervous disorder, probably from a bioplague -- Lose 1 pt. REF";
-        } else if (fourthLifeRoll >= 4 && fourthLifeRoll <= 7) {
-            this.incapDetail[age] = "It's some kind of mental problem; you suffer from anxiety".concat(
-                "attacks and phobias. Lose 1 pt. from your CL stat.");
-        } else if (fourthLifeRoll >= 8) {
-            this.incapDetail[age] = "It's a major psychosis. You hear voices, are violent,".concat(
-                "irrational, depressive. Lose 1pt from CL, 1pt from REF");
-        }
-    },
-    debtAmount: 0,
-    debtHistory: {},
-    addDebt: function(age) {
-        "use strict";
-        var newDebt = getRandomInt(1, 10) * 100;
-        this.debtHistory[age] = newDebt;
-        this.debtAmount += newDebt;
-    },
-    prisonTime: 0,
-    prisonHistory: {},
-    addPrison: function(age) {
-        "use strict";
-        var prisonTerm = getRandomInt(1,10);
-        this.prisonHistory[age] = prisonTerm;
-        this.prisonTime += prisonTerm;
-    },
-    illnessTime: 0,
-    illnessHistory: {},
-    addIllness: function(age) {
-        "use strict";
-        var illnessLength = getRandomInt(1, 10);
-        this.illnessHistory[age] = illnessLength;
-        this.illnessTime += illnessLength;
-    },
-    1: {title: "Financial Loss or Debt",
-        detail: "Roll 1D10x100." +
-        "You have lost this much in Eurodollars. If you can't pay this now," +
-        " you have a debt to pay, in cash--or blood."},
-    2: {title: "Imprisonment",
-        detail: "You have been in prison, or possibly held hostage" +
-        " (your choice). Roll 1D10 for length of imprisonment in months."},
-    3: {title: "Illness or addiction",
-        detail: "You have contracted either an illness or" +
-        " drug habit in this time. Lose 1 point of REF permanently as a result."},
-    4: {title: "Betrayal. You have been backstabbed in some manner",
-        detail:
-        "Roll another 1D10. 1-3, you are being blackmailed. 4-7 a secret was".concat(
-        " exposed. 8-10, you were betrayed by a close friend in either romance",
-        " or career (your choice).")},
-    5: {title: "Accident",
-        detail: "You were in some kind of terrible accident. Roll" +
-        " 1D10. 1-4, you were terribly disfigured and must subtract -5 from your ATT." +
-        " 5-6 you were hospitalized for 1D10 months that year. 7-8, you have lost" +
-        " 1D10 months of memory that year. 9-10, you constantly relive nightmares" +
-        " (8 in 10 chance each night) of the accident and wake up screaming"},
-    6: {title: "Lover, friend or relative killed",
-        detail: "You lost someone you" +
-        " really cared about. 1-5, they died accidentally. 6-8 they were murdered" +
-        " by unknown parties. 9-10, they were murdered and you know who did it. You" +
-        " just need the proof."},
-    7: {title: "False Accusation",
-        detail: "You were set up. Roll 1D10. 1-3, the" +
-        " accusation is theft. 4-5 it's cowardice. 6-8 it's murder. 9 it's rape" +
-        " 10, it's lying or betrayal"},
-    8: {title: "Hunted by the law",
-        detail: "You are hunted by the law for crimes" +
-        " you may or may not have committed (your choice). Roll 1D10. 1-3 only" +
-        " a couple cops want you. 4-6 it's the entire local force. 7-8, it's the" +
-        " State police or Militia. 9-10 it's the FBI or equivalent national police force."},
-    9: {title: "Hunted by a Corporation",
-        detail: "You have angered some corporate" +
-        " honcho. Roll 1D10. 1-3 it's a small, local firm. 4-6 it's a larger corp with offices" +
-        "statewide. 7-8 it's a big, national corp with agents in major cities nationwide." +
-        "9-10; it's a huge multinational with armies, ninja and spies everywhere."},
-    10: {title: "Mental or physical incapacitation",
-        detail: "You have experienced" +
-        " some type of mental or physical breakdown. Roll 1D10. 1-3 it's some type"+
-        " of nervous disorder, probably from a bioplague -- lose 1pt REF. 4-7 it's" +
-        " some kind of mental problem; you suffer anxiety attacks and phobias. Lose" +
-        " 1pt from your CL stat. 8-10 it's a major psychosis. You hear voices" +
-        " are violent, irrational, depressive. Lose 1pt from CL, 1pt from REF"}
-};
-
-var getLucky = {
-    // Get Lucky table from Big Problems, Big Wins
-    connectionAmount: 0, // Number of Powerful Connections
-    connectionHistory: {},
-    addMakePowerfulConnection: function(whereIsConnection) {
-        "use strict";
-        var connectionMade = {
-            "police" : "in the Police department",
-            "da" : "in the District Attorney's Office",
-            "mayor" : "in the Mayor's office"
-        };
-        return connectionMade[whereIsConnection];
-    },
-    windfallAmount: 0,
-    windfallHistory: {},
-    addWindFall: function(age) {
-        "use strict";
-        var newWindfall = getRandomInt(1, 10) * 100;
-        this.windfallHistory[age] = newWindfall;
-        this.windfallAmount +=+ newWindfall;
-    },
-    scoreAmount: 0,
-    scoreHistory: {},
-    addScore: function(age) {
-        "use strict";
-        var newScore = getRandomInt(1,10) * 100;
-        this.scoreHistory[age] = newScore;
-        this.scoreAmount += newScore;
-    },
-    senseiFound: 0,
-    senseiHistory: {},
-    addSensei: function(age) {
-        "use strict";
-        this.senseiHistory[age] = "Find a Sensei";
-        this.senseiFound += 1;
-    },
-    teacherFound: 0,
-    teacherHistory: {},
-    addTeacher: function(age) {
-        "use strict";
-        this.teacherHistory[age] = "Find a teacher";
-        this.teacherFound += 1;
-    },
-    corpFavor: 0,
-    corpFavorHistory: {},
-    addCorpFavor: function(age) {
-        "use strict";
-        this.corpFavorHistory[age] = "Corporate Executive owes you a favor";
-        this.corpFavor += 1;
-    },
-    nomadFavor: 0,
-    nomadFavorHistory: {},
-    addNomadFavor: function(age) {
-        "use strict";
-        this.nomadFavorHistory[age] = "Develop friendship with a nomad pack";
-        this.nomadFavor += 1;
-    },
-    policeFriend: 0,
-    policefriendHistory: {},
-    addPoliceFriend: function(age) {
-        "use strict";
-        this.policefriendHistory[age] = "Friend on Police Force";
-        this.policeFriend += 1;
-    },
-    boosterFriend: 0,
-    boosterFriendHistory: {},
-    addBoosterFriend: function(age) {
-        "use strict";
-        this.boosterFriendHistory[age] = "Local Boostergang likes you";
-        this.boosterFriend += 1;
-    },
-    combatTeacher: 0,
-    combatTeacherHistory: {},
-    addCombatTeacher: function(age) {
-        "use strict";
-        this.combatTeacherHistory[age] = "Find combat teacher";
-        this.combatTeacher += 1;
-    },
-    // Life Events table output, Detail column data
-    1: {title: "Make a Powerful Connection in City Government",
-        detail: "Roll 1D10" +
-        " 1-4 it's the Police. 5-7 it's in DA office. 8-10 its the Mayor"},
-    2: {title: "Financial Windfall",
-        detail: "Roll 1D10x100 for amount in Euros"},
-    3: {title: "Big Score",
-        detail: "Roll 1D10x100 for amount"},
-    4: {title: "Find a Sensei (Teacher)",
-        detail: "Begin a new Martial Art at +2, or add +1 to an existing Martial Art"},
-    5: {title: "Find a Teacher",
-        detail: "Add +1 to any INT based skill, or begin new at +2"},
-    6: {title: "Favor with a Powerful Corporate Executive",
-        detail: "They owe you a favor"},
-    7: {title: "Local Nomad Pack Befriends You",
-        detail: "Call on them for one favor a month, " +
-       " equivalent to Family special ability +2"},
-    8: {title: "Make Friend on Police Force",
-        detail: "You may use them for information at".concat(
-        " a level of +2 Streetwise on any police related situation.")},
-    9: {title: "Local Boostergang likes you",
-        detail: "You can call on them for" +
-        " one favor a month, equivalent to Family special ability of +2. Don't push it"},
-    10: {title: "Find a combat teacher",
-        detail: "Add +1 to any weapon skill w/ exception" +
-        " of Martial Arts or Brawling, or begin a new combat skill at +2"}
-};
-
-var enemy = {
-    enemyAmount: 0,
-    enemyGender: {},
-    enemyWhoIsIt: {},
-    enemyCauseIs: {},
-    enemyWhoMad: {},
-    enemyWhatDo: {},
-    enemyWhatThrow: {},
-    addEnemy: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.enemyAmount += 1;
-        var causeRoll = getRandomInt(1,10);
-        var whoIsMadRoll = getRandomInt(1,10);
-        var whatDoRoll = getRandomInt(1,10);
-        var whatThrowRoll = getRandomInt(1,10);
-
-        if ((fourthLifeRoll % 2 === 0) === true) {
-            this.enemyGender[age] = "Male";
-        } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.enemyGender[age] = "Female";
-        }
-        this.enemyWhoIsIt[age] = this.enemyMade[thirdLifeRoll]; // Who are they
-        this.enemyCauseIs[age] = this.enemyCause[causeRoll]; // What is the cause
-        if (whoIsMadRoll <= 4) { //Who's mad
-            this.enemyWhoMad[age] = this.whoIsAngry[1];
-        } else if (whoIsMadRoll >= 5 && whoIsMadRoll <= 7) {
-            this.enemyWhoMad[age] = this.whoIsAngry[2];
-        } else if (whoIsMadRoll >= 8 && whoIsMadRoll <= 10) {
-            this.enemyWhoMad[age] = this.whoIsAngry[3];
-        }
-        if (whatDoRoll <= 2) { // Whatcha gonna do about it
-            this.enemyWhatDo[age] = this.whatDo[1];
-        } else if (whatDoRoll >= 3 && whatDoRoll <= 4) {
-            this.enemyWhatDo[age] = this.whatDo[2];
-        } else if (whatDoRoll >= 5 && whatDoRoll <= 6) {
-            this.enemyWhatDo[age] = this.whatDo[3];
-        } else if (whatDoRoll >= 7 && whatDoRoll <= 8) {
-            this.enemyWhatDo[age] = this.whatDo[4];
-        } else if (whatDoRoll >= 9 && whatDoRoll <= 10) {
-            this.enemyWhatDo[age] = this.whatDo[5];
-        }
-        if (whatThrowRoll <=3) { // What can they throw against you
-            this.enemyWhatThrow[age] = this.whatThrow[1];
-        } else if (whatThrowRoll >= 4 && whatThrowRoll <= 5) {
-            this.enemyWhatThrow[age] = this.whatThrow[2];
-        } else if (whatThrowRoll >= 6 && whatThrowRoll <= 7) {
-            this.enemyWhatThrow[age] = this.whatThrow[3];
-        } else if (whatThrowRoll === 8) {
-            this.enemyWhatThrow[age] = this.whatThrow[4];
-        } else if (whatThrowRoll === 9) {
-            this.enemyWhatThrow[age] = this.whatThrow[5];
-        } else if (whatThrowRoll === 10) {
-            this.enemyWhatThrow[age] = this.whatThrow[6];
-        }
-
-    },
-    enemyMade: {
-        1: "Ex friend",
-        2: "Ex lover",
-        3: "Relative",
-        4: "Childhood enemy",
-        5: "Person working for you",
-        6: "Person you work for",
-        7: "Partner or co-worker",
-        8: "Booster gang member",
-        9: "Corporate Executive",
-        10: "Government Official"
-    },
-    enemyCause: {
-        1: "Caused the other to lose face or status",
-        2: "Caused the loss of a lover, friend or relative",
-        3: "Caused a major humiliation",
-        4: "Accused the other of cowardice or other personal flaw",
-        5: "Caused a physical disability",
-        6: "Deserted or betrayed the other",
-        7: "Turned down the other's offer of job or romantic involvement",
-        8: "Just didn't like each other",
-        9: "Was a romantic rival",
-        10: "Foiled plans of the other"
-    },
-    whoIsAngry: {
-        1: "They hate you",
-        2: "You hate them",
-        3: "The feeling's mutual"
-    },
-    whatDo: {
-        1: "Go into a murderous killing rage",
-        2: "Avoid the scum",
-        3: "Backstab them indirectly",
-        4: "Ignore them",
-        5: "Rip into them verbally"
-    },
-    whatThrow: {
-        1: "Just themselves",
-        2: "Them and a few friends",
-        3: "An entire gang",
-        4: "A small corporation",
-        5: "A Large corporation",
-        6: "An entire government agency"
-    }
-};
-
-var friendMade = {
-    1: "Like a big brother/sister to you",
-    2: "Like a kid sister/brother to you",
-    3: "A teacher or mentor",
-    4: "A partner or coworker",
-    5: "An old lover (choose which one)",
-    6: "An old enemy (choose which one)",
-    7: "Like a foster parent to you",
-    8: "A relative",
-    9: "Reconnect with an old childhood friend",
-    10: "Met through a common interest",
-    friendMadeAmount: 0,
-    friendMadeHistory: {},
-    friendMadeGender: {},
-    addFriend: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.friendMadeAmount += 1;
-        this.friendMadeHistory[age] = this[thirdLifeRoll];
-        if ((fourthLifeRoll % 2 === 0) === true) {
-            this.friendMadeGender[age] = "Gender of friend: male";
-        } else if ((fourthLifeRoll % 2 === 0) === false) {
-            this.friendMadeGender[age] = "Gender of friend: female";
-        }
-
-    }
-};
-
-var romance = {
-    happyCount: 0,
-    romanceCount: 0,
-    happyDetail: {},
-    happyHistory: {},
-    addHappyAffair: function(age) {
-        "use strict";
-        this.romanceCount += 1;
-        this.happyHistory[age] = this.romanceEvent[1];
-        this.happyDetail[age] = "n/a";
-    },
-    tragicCount: 0,
-    tragicDetail: {},
-    tragicHistory: {},
-    addTragic: function(age, thirdLifeRoll) {
-        "use strict";
-        this.tragicCount += 1;
-        this.tragicHistory[age] = this.romanceEvent[2];
-        this.tragicDetail[age] = this.romanceTragic[thirdLifeRoll];
-    },
-    problemCount: 0,
-    problemDetail: {},
-    problemHistory: {},
-    addProblem: function(age, thirdLifeRoll, fourthLifeRoll) {
-        "use strict";
-        this.problemCount += 1;
-        this.problemHistory[age] = this.romanceProblems[thirdLifeRoll];
-        this.problemDetail[age] = this.romanceMutalFeel[fourthLifeRoll];
-    },
-    fastCount: 0,
-    fastDetail: {},
-    fastHistory: {},
-    addFast: function(age) {
-        "use strict";
-        this.fastCount += 1;
-        this.fastHistory[age] = this.romanceEvent[4];
-        this.fastDetail[age] = "n/a";
-    },
-    romanceEvent: {
-        1: "Happy Love Affair",
-        2: "Tragic Love Affair",
-        3: "Love Affair With Problems",
-        4: "Fast affairs and Hot Dates"
-    },
-    romanceTragic: {
-        1: "Lover died in an accident",
-        2: "Lover mysteriously vanisehd",
-        3: "It didnt work out",
-        4: "A personal goal or vendetta came between you",
-        5: "Lover kidnapped",
-        6: "Lover went insane",
-        7: "Lover committed suicide",
-        8: "Lover killed in a fight",
-        9: "Rival cut you out of the action",
-        10: "Lover imprisoned or exiled"
-    },
-    romanceProblems: {
-        1: "Your lover's friends/family hate you",
-        2: "Your lover's friends/family would use any means to get rid of you",
-        3: "Your friends/family hate your lover",
-        4: "One of you has a romantic rival",
-        5: "You are seperated in some way",
-        6: "You fight constantly",
-        7: "You're professional rivals",
-        8: "One of you is insanely jealous",
-        9: "One of you is messing around",
-        10: "You have conflicting backgrounds and families"
-    },
-    romanceMutalFeel: {
-        1: "They still love you",
-        2: "You still love them",
-        3: "You still love each other",
-        4: "You hate them",
-        5: "They hate you",
-        6: "You hate each other",
-        7: "You're friends",
-        8: "No feelings either way; its over",
-        9: "You like them, they hate you",
-        10: "They like you, you hate them"
-    }
-
-};
-
-var nothing = {
-    nothingCount: 0,
-    nothingDetail: {},
-    nothingHistory: {},
-    addNothing: function(age) {
-        "use strict";
-        this.nothingCount += 1;
-        this.nothingHistory[age] = "Nothing Happened This Year";
-        this.nothingDetail[age] = "n/a";
-    },
-    nothingResult: "Nothing Happened This Year"
-};
-
-var skills = {
-    special: {
-        name: "Special Abilities",
-        Cop: "Authority",
-        Rocker: "Charismatic Leadership",
-        Solo: "Combat Sense",
-        Media: "Credibility",
-        Nomad: "Family",
-        Netrunner: "Interface",
-        Techie: "Jury Rig",
-        MedTechie: "Medical Tech",
-        Corp: "Resources",
-        Fixer: "Streetdeal"
-    },
-    attr: {
-        name: "Attractiveness Skills",
-        attr01: "Personal Grooming",
-        attr02: "Wardrobe & Style"
-    },
-    body: {
-        name: "Body Skills",
-        body01: "Endurance",
-        body02: "Strength Feat",
-        body03: "Swimming"
-    },
-    cool: {
-        name: "Cool / Will Skills",
-        cool01: "Interrogation",
-        cool02: "Intimidate",
-        cool03: "Oratory",
-        cool04: "Resist Torture/Drugs",
-        cool05: "Streetwise"
-    },
-    emp: {
-        name: "Empathy Skills",
-        emp01: "Human Perception",
-        emp02: "Interview",
-        emp03: "Leadership",
-        emp04: "Seduction",
-        emp05: "Social",
-        emp06: "Persuasion and Fast Talk",
-        emp07: "Perform"
-    },
-    int: {
-        name: "Intelligence Skills",
-        int01: "Accounting",
-        int02: "Anthropology",
-        int03: "Awareness / Notice",
-        int04: "Biology",
-        int05: "Botany",
-        int06: "Chemistry",
-        int07: "Composition",
-        int08: "Diagnose Illness",
-        int09: "Ed./General Knowledge",
-        int10: "Expert",
-        int11: "Gamble",
-        int12: "Geology",
-        int13: "Hide/Evade",
-        int14: "History",
-        int15: "Know Language",
-        int16: "Library Search",
-        int17: "Mathematics",
-        int18: "Physics",
-        int19: "Programming",
-        int20: "Shadow/Track",
-        int21: "Stock Market",
-        int22: "System Knowledge",
-        int23: "Teaching",
-        int24: "Wilderness Survival",
-        int25: "Zoology"
-    },
-    ref: {
-        name: "Reflex Skills",
-        ref01: "Archery",
-        ref02: "Athletics",
-        ref03: "Brawling",
-        ref04: "Dance",
-        ref05: "Dodge & Escape",
-        ref06: "Driving",
-        ref07: "Fencing",
-        ref08: "Handgun",
-        ref09: "Heavy Weapons",
-        ref10: "Martial Art",
-        ref11: "Melee",
-        ref12: "Motorcycle",
-        ref13: "Operate Heavy Machinery",
-        ref14: "Pilot Gyro",
-        ref15: "Pilot Fixed Wing",
-        ref16: "Pilot Dirigible",
-        ref17: "Pilot Vect. Thrust Vehicle",
-        ref18: "Rifle",
-        ref19: "Stealth",
-        ref20: "Submachinegun"
-    },
-    tech: {
-        name: "Tech Skills",
-        tech01: "Aero Tech",
-        tech02: "AV Tech",
-        tech03: "Basic Tech",
-        tech04: "Cryotank Operation",
-        tech05: "Cyberdeck Design",
-        tech06: "CyberTech",
-        tech07: "Demolitions",
-        tech08: "Disguise",
-        tech09: "Electronics",
-        tech10: "Electronic Security",
-        tech11: "First Aid",
-        tech12: "Forgery",
-        tech13: "Gyro Tech",
-        tech14: "Paint or Draw",
-        tech15: "Photo & Film",
-        tech16: "Pharmaceuticals",
-        tech17: "Pick Lock",
-        tech18: "Pick Pocket",
-        tech19: "Play Instrument",
-        tech20: "Weaponsmith"
-    }
-};
-
-// Career Skills from pg. 44
-var career = {
-    solo: {
-        1: skills.special.Solo,
-        2: skills.int.int03,
-        3: skills.ref.ref08,
-        4: skills.ref.ref03,
-        5: skills.ref.ref10,
-        6: skills.ref.ref11,
-        7: skills.tech.tech20,
-        8: skills.ref.ref18,
-        9: skills.ref.ref02,
-        10: skills.ref.ref20,
-        11: skills.ref.ref19
-    },
-    corp: {
-        1: skills.special.Corp,
-        2: skills.int.int03,
-        3: skills.emp.emp01,
-        4: skills.int.int09,
-        5: skills.int.int16,
-        6: skills.emp.emp05,
-        7: skills.emp.emp06,
-        8: skills.int.int21,
-        9: skills.attr.attr02,
-        10: skills.attr.attr01
-    },
-    media: {
-        1: skills.special.Media,
-        2: skills.int.int03,
-        3: skills.int.int07,
-        4: skills.int.int09,
-        5: skills.emp.emp06,
-        6: skills.emp.emp01,
-        7: skills.emp.emp05,
-        8: skills.cool.cool05,
-        9: skills.tech.tech15,
-        10: skills.emp.emp02
-    },
-    nomad: {
-        1: skills.special.Nomad,
-        2: skills.int.int03,
-        3: skills.body.body01,
-        4: skills.ref.ref11,
-        5: skills.ref.ref18,
-        6: skills.ref.ref06,
-        7: skills.tech.tech03,
-        8: skills.int.int24,
-        9: skills.ref.ref03,
-        10: skills.ref.ref02
-    },
-    techie: {
-        1: skills.special.Techie,
-        2: skills.int.int03,
-        3: skills.tech.tech03,
-        4: skills.tech.tech06,
-        5: skills.int.int23,
-        6: skills.int.int09,
-        7: skills.tech.tech09,
-        8: skills.tech.tech01,
-        9: skills.tech.tech02,
-        10: skills.tech.tech20,
-        11: skills.tech.tech10,
-        12: skills.tech.tech13
-    },
-    cop: {
-        1: skills.special.Cop,
-        2: skills.int.int03,
-        3: skills.ref.ref08,
-        4: skills.emp.emp01,
-        5: skills.ref.ref02,
-        6: skills.int.int09,
-        7: skills.ref.ref03,
-        8: skills.ref.ref11,
-        9: skills.cool.cool01,
-        10: skills.cool.cool05
-    },
-    rocker: {
-        1: skills.special.Rocker,
-        2: skills.int.int03,
-        3: skills.emp.emp07,
-        4: skills.attr.attr02,
-        5: skills.int.int07,
-        6: skills.ref.ref03,
-        7: skills.tech.tech19,
-        8: skills.cool.cool05,
-        9: skills.emp.emp06,
-        10: skills.emp.emp04
-    },
-    med: {
-        1: skills.special.MedTechie,
-        2: skills.int.int03,
-        3: skills.tech.tech03,
-        4: skills.int.int08,
-        5: skills.int.int09,
-        6: skills.tech.tech04,
-        7: skills.int.int16,
-        8: skills.tech.tech16,
-        9: skills.int.int25,
-        10: skills.emp.emp01
-    },
-    fixer: {
-        1: skills.special.Fixer,
-        2: skills.int.int03,
-        3: skills.tech.tech12,
-        4: skills.ref.ref08,
-        5: skills.ref.ref03,
-        6: skills.ref.ref11,
-        7: skills.tech.tech17,
-        8: skills.tech.tech18,
-        9: skills.cool.cool02,
-        10: skills.emp.emp06
-    },
-    net: {
-        1: skills.special.Netrunner,
-        2: skills.int.int03,
-        3: skills.tech.tech03,
-        4: skills.int.int09,
-        5: skills.int.int22,
-        6: skills.tech.tech06,
-        7: skills.tech.tech05,
-        8: skills.int.int07,
-        9: skills.tech.tech09,
-        10: skills.int.int19
-    }
-};
 
 function rollMethodClick() {
     "use strict";
+    // All Roll methods: Random, Fast, Major Hero, Major Supp Char, Minor Hero, Minor Supp Char, Average
+    // Determines what was clicked to pass to characterMeta
     var rollMethod = document.getElementById("rollMethod");
     var whatClicked = rollMethod.options[rollMethod.selectedIndex].value;
     characterMeta.rollStyle = whatClicked;
@@ -2629,9 +2658,9 @@ function rollMethodClick() {
         characterMeta.fastPoints();
     } else if (
         whatClicked === "cineMajorHero" ||
-        whatClicked ===  "cineMajorSupp" ||
+        whatClicked ===  "cineMajorSuppChar" ||
         whatClicked === "cineMinorHero" ||
-        whatClicked === "cineMinorSupp" ||
+        whatClicked === "cineMinorSuppChar" ||
         whatClicked === "Average")  {
         characterMeta.cinematicChar(whatClicked);
     } else if (whatClicked === "manual") {
@@ -2802,27 +2831,30 @@ var characterMeta = {
         "use strict";
         this.charPoints = 0;
         var rollOutput = document.getElementById("rollOutput");
-        while (rollOutput.firstChild) { // Remove all children from rollOutput
+        // Remove all children from rollOutput
+        while (rollOutput.firstChild) { 
             rollOutput.removeChild(rollOutput.firstChild);
         }
+
         var points = 0;
         var cine = "";
         if (whatClicked === "cineMajorHero") {
-            points = 80;
-            cine = "Major Hero";
-        } else if (whatClicked === "cineMajorSupp") {
-            points = 70;
-            cine = "Major Supporting Character";
+            points = cineCharacterPoints[whatClicked][Object.keys(cineCharacterPoints[whatClicked])[0]];
+            cine = Object.keys(cineCharacterPoints[whatClicked])[0];
+        } else if (whatClicked === "cineMajorSuppChar") {
+            points = cineCharacterPoints[whatClicked][Object.keys(cineCharacterPoints[whatClicked])[0]];
+            cine = Object.keys(cineCharacterPoints[whatClicked])[0];
         } else if (whatClicked === "cineMinorHero") {
-            points = 75;
-            cine = "Minor Hero";
-        } else if (whatClicked === "cineMinorSupp") {
-            points = 60;
-            cine = "Minor Supporting Character";
+            points = cineCharacterPoints[whatClicked][Object.keys(cineCharacterPoints[whatClicked])[0]];
+            cine = Object.keys(cineCharacterPoints[whatClicked])[0];
+        } else if (whatClicked === "cineMinorSuppChar") {
+            points = cineCharacterPoints[whatClicked][Object.keys(cineCharacterPoints[whatClicked])[0]];
+            cine = Object.keys(cineCharacterPoints[whatClicked])[0];
         } else if (whatClicked === "Average") {
-            points = 50;
-            cine = "Average";
+            points = cineCharacterPoints[whatClicked][Object.keys(cineCharacterPoints[whatClicked])[0]];
+            cine = Object.keys(cineCharacterPoints[whatClicked])[0];
         }
+
         rollOutput.appendChild(document.createTextNode("Cinematic Method: ".concat(cine)));
         rollOutput.appendChild(document.createElement("br"));
         rollOutput.appendChild(document.createTextNode("Points: ".concat(points.toString())));
@@ -3341,75 +3373,135 @@ function shuffleArray(array) {
     return array;
 }
 
-
+// Randomize everything
 function randEverythingClick() {
     "use strict";
     enableForms();
     // Reset because of the naming on "pickup{dynamic number}Select"
     characterMeta.pickupSkillsAdded = 0;
 
-    var int = document.getElementById("int");
-    var ref = document.getElementById("ref");
-    var tech = document.getElementById("tech");
-    var cl = document.getElementById("cl");
-    var att = document.getElementById("att");
-    var lk = document.getElementById("lk");
-    var ma = document.getElementById("ma");
-    var bt = document.getElementById("bt"); // Body type stat
-    var emp = document.getElementById("emp");
+    var stat_int = document.getElementById("int");
+    var stat_ref = document.getElementById("ref");
+    var stat_tech = document.getElementById("tech");
+    var stat_cl = document.getElementById("cl");
+    var stat_att = document.getElementById("att");
+    var stat_lk = document.getElementById("lk");
+    var stat_ma = document.getElementById("ma");
+    var stat_bt = document.getElementById("bt"); // Body type stat
+    var stat_emp = document.getElementById("emp");
 
+    // Function that randomly assigns a previously genererated array of rolls to Stats
     function randomlyAssignValueToStat(rolls) {
-        var theStats = [int, ref, tech, cl, att, lk, ma, bt, emp];
+        var theStats = [stat_int, stat_ref, stat_tech, stat_cl, stat_att, stat_lk, stat_ma, stat_bt, stat_emp];
         for (var i = 0; i < rolls.length; i++) {
             theStats[i].value = rolls[i];
         }
     }
 
+    // Generates random values for the Cinematic character point options
     function generateCinematicArrayRolls(cineTotal) {
-        //cineTotal: integer for that cinematic class, ie, avg == 50
-        var currRoll = 0;
-        var generatedCinematicRolls = [];
-        var newTotal = cineTotal;
-        for (var i = 0; i < 8; i++ ) {
-            currRoll = getRandomInt(2, 10);
-            generatedCinematicRolls.push(currRoll);
-            newTotal -= currRoll;
-        }
-        var totalOfGeneratedValues = 0;
-        for (var j = 0; j < generatedCinematicRolls.length; j++) {
-            totalOfGeneratedValues += generatedCinematicRolls[j];
-        }
-        var lastValue = cineTotal - totalOfGeneratedValues;
-        var subtractValue = 0;
-        var tempModifyIndexValue = 0;
+        // cineTotal is the starting points for the selected cinematic character category; Average, Minor Hero, etc. 
 
-        while (lastValue > 10) {
-            subtractValue = getRandomInt(1, 3);
-            tempModifyIndexValue = getRandomInt(0, 7);
-            var tempValue;
-            if (generatedCinematicRolls[tempModifyIndexValue] < 10) {
-                tempValue = generatedCinematicRolls[tempModifyIndexValue] + subtractValue;
-                if (tempValue <= 10) {
-                    generatedCinematicRolls[tempModifyIndexValue] += subtractValue;
-                    lastValue -= subtractValue;
-                }
+	    // Number of stats to generate. This should always be 9.
+	    // Didn't want to hardcode a bunch of 9's in below findGetRandomIntMax function
+	    // INT REF TECH COOL ATTR LUCK MA BODY EMP
+	    var numStatsToGenerate = 9;	
 
-            }
-        }
-        generatedCinematicRolls.push(lastValue);
-        return generatedCinematicRolls;
+        // Initial character points for Cinematic rolls
+        // In theory could just use cineTotal for all locations of originalTotal below
+        // Was using originalTotal in rework code on repl.it
+        var originalTotal = cineTotal;
+
+        /* 
+        findGetRandomIntMax: a function to find the largest value to pass as maxNumber to getRandomInt for the the initial 
+        9 values generated below based on original cineTotal used. Picks a number such that if we multiple that number * 9 it is
+        not larger than originalTotal to help ensure that the 9 values we generate are roughly "evenly" distributed
+        */
+		function findGetRandomIntMax(originalTotal) {
+			// Start from 10 and work our way down
+		  	var maxNumber = 10;
+		  	while((maxNumber * numStatsToGenerate) > originalTotal) {
+				maxNumber -= 1;
+		  	}
+		  	return maxNumber;
+		}
+		var maxNumber = findGetRandomIntMax(originalTotal);
+
+		/*
+		findGetRandomIntMin: a function that generates a "reasonable" minimum number to use in getRandomInt rolls below; 
+		lower for Average characters, higher for "Hero" characters. 
+		*/
+		function findGetRandomIntMin(originalTotal) {
+			var minNumber = (Math.floor((originalTotal / numStatsToGenerate) / 2));
+		  	return minNumber;
+		}
+		var minNumber = findGetRandomIntMin(originalTotal);
+
+        // Array to hold the generated values
+        var generatedCinematicRolls = []; 
+
+
+		// Create new var newTotal to deduct from as we generate + add values 
+		var newTotal = cineTotal;
+
+      	// Generate 9 Stats values (counting from 0): INT REF TECH COOL ATTR LUCK MA BODY EMP
+		for (var i = 0; i < numStatsToGenerate; i++ ) {
+		  	var currRoll = getRandomInt(minNumber, maxNumber);
+		  	if ((currRoll > newTotal) || (currRoll === newTotal)) {
+				currRoll = newTotal;
+				generatedCinematicRolls.push(currRoll);
+				newTotal -= currRoll;
+				break;
+			} 
+			// Deduct the last roll from the running total newTotal
+		  	newTotal -= currRoll;
+			// Add the last roll to the array
+		  	generatedCinematicRolls.push(currRoll);
+		}
+
+		// var newTotal still has values remaining from var originalTotal to distribute among Stats
+		// INT REF TECH COOL ATTR LUCK MA BODY EMP
+		if (newTotal != 0) {
+		  	// Still have values remaining to distribute in newTotal
+		  	while (newTotal > 0) {
+				// Increaes Stat values by 2 each until we get down to only a few remaining to distribute. Makes Stats a touch less uniform
+				if (newTotal >= 3) {
+			  		var changeStatValueBy = 2;    
+				} else {
+			  		var changeStatValueBy = 1;
+				}
+				//var index_to_change = generatedCinematicRolls[Math.floor(Math.random()*generatedCinematicRolls.length)];
+				var index_to_change = currRoll = getRandomInt(0, 8);
+				var new_value = (generatedCinematicRolls[index_to_change] + changeStatValueBy);
+				if (new_value <= 10) {
+			  		// Increase the value of this array item by amount of var changeStatValueBy
+			  		generatedCinematicRolls[index_to_change] = new_value;
+			  		newTotal -= changeStatValueBy;
+				} else {
+			  		// Do nothing -- We can't use values > 10 for stats; so try again in another slot
+				}
+		  	}
+		}
+
+		var total = 0;
+		for (var i in generatedCinematicRolls) {
+		  total += generatedCinematicRolls[i];
+		}
+		return generatedCinematicRolls
     }
+    
 
     var randomizedRollMethod = getRandomInt(1, 7);
     var rollPossibleChoices = {
         1: "random",
         2: "fast",
-        3: "cineMajorHero",
-        4: "cineMajorSupp",
-        5: "cineMinorHero",
-        6: "cineMinorSupp",
-        7: "Average"
+        3: "cineMajorHero", // gets 80 points
+        4: "cineMajorSuppChar", // gets 70 points
+        5: "cineMinorHero", // gets 75 points
+        6: "cineMinorSuppChar", // gets 60 points
+        7: "Average" // gets 50 points
     };
+
 
     var rollMethod = document.getElementById("rollMethod");
     rollMethod.value = rollPossibleChoices[randomizedRollMethod];
@@ -3420,18 +3512,23 @@ function randEverythingClick() {
         characterMeta.fastPoints();
         randomlyAssignValueToStat(shuffleArray(characterMeta.fastRolls));
     } else if (randomizedRollMethod >= 3) {
-        var generatedCinematicRolls;
+        var generatedCinematicRolls = [];
         characterMeta.cinematicChar(rollPossibleChoices[randomizedRollMethod]);
         if (randomizedRollMethod === 3) {
-            generatedCinematicRolls = generateCinematicArrayRolls(80);
+            // Cinematic Major Hero 80
+            generatedCinematicRolls = generateCinematicArrayRolls(cineCharacterPoints["cineMajorHero"]["Major Hero"]);
         } else if (randomizedRollMethod === 4) {
-            generatedCinematicRolls = generateCinematicArrayRolls(75);
+            // Cinematic Major Supporting Character 70
+            generatedCinematicRolls = generateCinematicArrayRolls(cineCharacterPoints["cineMajorSuppChar"]["Major Supporting Character"]);
         } else if (randomizedRollMethod === 5) {
-            generatedCinematicRolls = generateCinematicArrayRolls(70);
+            // Cinematic Minor Hero 75
+            generatedCinematicRolls = generateCinematicArrayRolls(cineCharacterPoints["cineMinorHero"]["Minor Hero"]);
         } else if (randomizedRollMethod === 6) {
-            generatedCinematicRolls = generateCinematicArrayRolls(60);
+            // Cinematic Minor Supporting Character 60
+            generatedCinematicRolls = generateCinematicArrayRolls(cineCharacterPoints["cineMinorSuppChar"]["Minor Supporting Character"]);
         } else if (randomizedRollMethod === 7) {
-            generatedCinematicRolls = generateCinematicArrayRolls(50);
+            // Average 50
+            generatedCinematicRolls = generateCinematicArrayRolls(cineCharacterPoints["Average"]["Average"]);
         }
         randomlyAssignValueToStat(shuffleArray(generatedCinematicRolls));
     }

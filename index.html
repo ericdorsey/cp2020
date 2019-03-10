@@ -295,12 +295,15 @@
         <h3 class="sub3Head">Randomize Everything?</h3>
         <br>
         <span class="instructSmall">
-            Clicking yes below will randomly select everything:
+            Clicking "Randomize Everything" button below will randomly select everything:
             Roll Method, Stats, Role, Skills, Style, Background, etc.
         </span>
         <br>
+        <br>
         <label for="randRole" id="randomizeEverything_label">
-            <input type="radio" name="randOrManualRadios" id="randomizeEverything"> Yes, randomize everything.
+            <!--<input type="radio" name="randOrManualRadios" id="randomizeEverything"> Yes, randomize everything.-->
+            <input type="button" name="randOrManualRadios" id="randomizeEverything" class="indent_label" value="Randomize Everything">
+
         </label>
     </div>
 
@@ -329,9 +332,9 @@
                     <option value="random">Random Method</option>
                     <option value="fast">Fast Method</option>
                     <option value="cineMajorHero">Major Hero</option>
-                    <option value="cineMajorSupp">Major Supporting Character</option>
+                    <option value="cineMajorSuppChar">Major Supporting Character</option>
                     <option value="cineMinorHero">Minor Hero</option>
-                    <option value="cineMinorSupp">Minor Supporting Character</option>
+                    <option value="cineMinorSuppChar">Minor Supporting Character</option>
                     <option value="Average">Average</option>
                     <option value="manual">Manually Enter Value</option>
                 </select>
