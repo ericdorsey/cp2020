@@ -781,7 +781,7 @@ var skills = {
         emp06: "Persuasion and Fast Talk",
         emp07: "Perform"
     },
-    int: {
+    stat_int: {
         name: "Intelligence Skills",
         int01: "Accounting",
         int02: "Anthropology",
@@ -861,7 +861,7 @@ var skills = {
 var career = {
     solo: {
         1: skills.special.Solo,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.ref.ref08,
         4: skills.ref.ref03,
         5: skills.ref.ref10,
@@ -874,21 +874,21 @@ var career = {
     },
     corp: {
         1: skills.special.Corp,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.emp.emp01,
-        4: skills.int.int09,
-        5: skills.int.int16,
+        4: skills.stat_int.int09,
+        5: skills.stat_int.int16,
         6: skills.emp.emp05,
         7: skills.emp.emp06,
-        8: skills.int.int21,
+        8: skills.stat_int.int21,
         9: skills.attr.attr02,
         10: skills.attr.attr01
     },
     media: {
         1: skills.special.Media,
-        2: skills.int.int03,
-        3: skills.int.int07,
-        4: skills.int.int09,
+        2: skills.stat_int.int03,
+        3: skills.stat_int.int07,
+        4: skills.stat_int.int09,
         5: skills.emp.emp06,
         6: skills.emp.emp01,
         7: skills.emp.emp05,
@@ -898,23 +898,23 @@ var career = {
     },
     nomad: {
         1: skills.special.Nomad,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.body.body01,
         4: skills.ref.ref11,
         5: skills.ref.ref18,
         6: skills.ref.ref06,
         7: skills.tech.tech03,
-        8: skills.int.int24,
+        8: skills.stat_int.int24,
         9: skills.ref.ref03,
         10: skills.ref.ref02
     },
     techie: {
         1: skills.special.Techie,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.tech.tech03,
         4: skills.tech.tech06,
-        5: skills.int.int23,
-        6: skills.int.int09,
+        5: skills.stat_int.int23,
+        6: skills.stat_int.int09,
         7: skills.tech.tech09,
         8: skills.tech.tech01,
         9: skills.tech.tech02,
@@ -924,11 +924,11 @@ var career = {
     },
     cop: {
         1: skills.special.Cop,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.ref.ref08,
         4: skills.emp.emp01,
         5: skills.ref.ref02,
-        6: skills.int.int09,
+        6: skills.stat_int.int09,
         7: skills.ref.ref03,
         8: skills.ref.ref11,
         9: skills.cool.cool01,
@@ -936,10 +936,10 @@ var career = {
     },
     rocker: {
         1: skills.special.Rocker,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.emp.emp07,
         4: skills.attr.attr02,
-        5: skills.int.int07,
+        5: skills.stat_int.int07,
         6: skills.ref.ref03,
         7: skills.tech.tech19,
         8: skills.cool.cool05,
@@ -948,19 +948,19 @@ var career = {
     },
     med: {
         1: skills.special.MedTechie,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.tech.tech03,
-        4: skills.int.int08,
-        5: skills.int.int09,
+        4: skills.stat_int.int08,
+        5: skills.stat_int.int09,
         6: skills.tech.tech04,
-        7: skills.int.int16,
+        7: skills.stat_int.int16,
         8: skills.tech.tech16,
-        9: skills.int.int25,
+        9: skills.stat_int.int25,
         10: skills.emp.emp01
     },
     fixer: {
         1: skills.special.Fixer,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.tech.tech12,
         4: skills.ref.ref08,
         5: skills.ref.ref03,
@@ -972,15 +972,15 @@ var career = {
     },
     net: {
         1: skills.special.Netrunner,
-        2: skills.int.int03,
+        2: skills.stat_int.int03,
         3: skills.tech.tech03,
-        4: skills.int.int09,
-        5: skills.int.int22,
+        4: skills.stat_int.int09,
+        5: skills.stat_int.int22,
         6: skills.tech.tech06,
         7: skills.tech.tech05,
-        8: skills.int.int07,
+        8: skills.stat_int.int07,
         9: skills.tech.tech09,
-        10: skills.int.int19
+        10: skills.stat_int.int19
     }
 };
 
@@ -1025,7 +1025,7 @@ function enableForms() {
     Don't disable Run, Leap & Lift because they are derived
     */
     //Statistics fields
-    var int = document.getElementById("int");
+    var stat_int = document.getElementById("int");
     var ref = document.getElementById("ref");
     var tech = document.getElementById("tech");
     var cl = document.getElementById("cl");
@@ -1035,7 +1035,7 @@ function enableForms() {
     var bt = document.getElementById("bt"); //body type stat
     var emp = document.getElementById("emp");
 
-    var formArr = [int, ref, tech, cl, att, lk, ma, bt, emp];
+    var formArr = [stat_int, ref, tech, cl, att, lk, ma, bt, emp];
     for (var i = 0; i < formArr.length; i++) {
         formArr[i].removeAttribute("disabled");
         //re-enable to implement checking stats against roll remaining
@@ -2916,7 +2916,7 @@ var characterMeta = {
         "use strict";
         var statPointsRemainingOutput = document.getElementById("statPointsRemaining");
         var statPointsToDeduct = 0;
-        var int = document.getElementById("int");
+        var stat_int = document.getElementById("int");
         var ref = document.getElementById("ref");
         var tech = document.getElementById("tech");
         var cl = document.getElementById("cl");
@@ -2925,7 +2925,7 @@ var characterMeta = {
         var ma = document.getElementById("ma");
         var bt = document.getElementById("bt"); //body type stat
         var emp = document.getElementById("emp");
-        var statElements = [int, ref, tech, cl, att, lk, ma, bt, emp];
+        var statElements = [stat_int, ref, tech, cl, att, lk, ma, bt, emp];
         for (var i = 0; i < statElements.length; i++) {
             if ((statElements[i].value !== "") && (typeof parseFloat(statElements[i].value) === "number")) {
                 statPointsToDeduct += parseFloat(statElements[i].value);
@@ -2936,7 +2936,7 @@ var characterMeta = {
     },
     statChange: function() {
         "use strict";
-        var int = document.getElementById("int");
+        var stat_int = document.getElementById("int");
         var ref = document.getElementById("ref");
         var tech = document.getElementById("tech");
         var cl = document.getElementById("cl");
@@ -2962,15 +2962,15 @@ var characterMeta = {
         characterMeta.updateRun();
         characterMeta.updateHumanity();
 
-        if (int.value !== "" && ref.value !== "") {
-            characterMeta.pickupSkillPoints = parseInt(int.value) + parseInt(ref.value);
+        if (stat_int.value !== "" && ref.value !== "") {
+            characterMeta.pickupSkillPoints = parseInt(stat_int.value) + parseInt(ref.value);
             var pickupSkillPointField = document.getElementById("pickupSkillPointField");
             pickupSkillPointField.value = characterMeta.pickupSkillPoints;
             characterMeta.updatePickupSkillPointsRemaining();
         }
         var charINTOutput = document.getElementById("charINTOutput");
-        if (int.value !== "") {
-            charINTOutput.innerHTML = " ".concat(int.value).concat(" ");
+        if (stat_int.value !== "") {
+            charINTOutput.innerHTML = " ".concat(stat_int.value).concat(" ");
         }
         var charREFOutput = document.getElementById("charREFOutput");
         if (ref.value !== "") {
@@ -3210,7 +3210,7 @@ function pickupOptSelectChange(eventObj) {
     } else if (theValue === "4") {
         subCategory = "emp";
     } else if (theValue === "5") {
-        subCategory = "int";
+        subCategory = "stat_int";
     } else if (theValue === "6") {
         subCategory = "ref";
     } else if (theValue === "7") {
@@ -3622,7 +3622,7 @@ function randEverythingClick() {
                 2: "body",
                 3: "cool",
                 4: "emp",
-                5: "int",
+                5: "stat_int",
                 6: "ref",
                 7: "tech"
             }
