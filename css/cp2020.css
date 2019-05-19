@@ -27,7 +27,7 @@ input {
 
 
 .indent_label {
-    margin-left: 10px;
+    margin-left: 6px;
 }
 
 .feedback {
@@ -38,18 +38,16 @@ input {
     border: 2px dashed black;
     padding: 5px;
     width: 48%;
-    margin: 5px 5px 12px;
+    margin: 5px 5px 4px;
 }
 
-a {
-    font-weight: bold;
-    color: #2a507f;
-    margin-left: 10px;
+a:link, a:visited {
+    font-size: 14.5px;
+    color: #9c0606;
 }
 
-a visited {
-    font-weight: bold;
-    color: #2a507f;
+br {
+    padding: 1px;
 }
 
 #calcChar {

@@ -738,6 +738,7 @@ var nothing = {
     nothingResult: "Nothing Happened This Year"
 };
 
+// Referenced by createPickupOpt()
 var skills = {
     special: {
         name: "Special Abilities",
@@ -783,31 +784,31 @@ var skills = {
     },
     stat_int: {
         name: "Intelligence Skills",
-        int01: "Accounting",
-        int02: "Anthropology",
-        int03: "Awareness / Notice",
-        int04: "Biology",
-        int05: "Botany",
-        int06: "Chemistry",
-        int07: "Composition",
-        int08: "Diagnose Illness",
-        int09: "Ed./General Knowledge",
-        int10: "Expert",
-        int11: "Gamble",
-        int12: "Geology",
-        int13: "Hide/Evade",
-        int14: "History",
-        int15: "Know Language",
-        int16: "Library Search",
-        int17: "Mathematics",
-        int18: "Physics",
-        int19: "Programming",
-        int20: "Shadow/Track",
-        int21: "Stock Market",
-        int22: "System Knowledge",
-        int23: "Teaching",
-        int24: "Wilderness Survival",
-        int25: "Zoology"
+        stat_int01: "Accounting",
+        stat_int02: "Anthropology",
+        stat_int03: "Awareness / Notice",
+        stat_int04: "Biology",
+        stat_int05: "Botany",
+        stat_int06: "Chemistry",
+        stat_int07: "Composition",
+        stat_int08: "Diagnose Illness",
+        stat_int09: "Ed./General Knowledge",
+        stat_int10: "Expert",
+        stat_int11: "Gamble",
+        stat_int12: "Geology",
+        stat_int13: "Hide/Evade",
+        stat_int14: "History",
+        stat_int15: "Know Language",
+        stat_int16: "Library Search",
+        stat_int17: "Mathematics",
+        stat_int18: "Physics",
+        stat_int19: "Programming",
+        stat_int20: "Shadow/Track",
+        stat_int21: "Stock Market",
+        stat_int22: "System Knowledge",
+        stat_int23: "Teaching",
+        stat_int24: "Wilderness Survival",
+        stat_int25: "Zoology"
     },
     ref: {
         name: "Reflex Skills",
@@ -861,7 +862,7 @@ var skills = {
 var career = {
     solo: {
         1: skills.special.Solo,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.ref.ref08,
         4: skills.ref.ref03,
         5: skills.ref.ref10,
@@ -874,21 +875,21 @@ var career = {
     },
     corp: {
         1: skills.special.Corp,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.emp.emp01,
-        4: skills.stat_int.int09,
-        5: skills.stat_int.int16,
+        4: skills.stat_int.stat_int09,
+        5: skills.stat_int.stat_int16,
         6: skills.emp.emp05,
         7: skills.emp.emp06,
-        8: skills.stat_int.int21,
+        8: skills.stat_int.stat_int21,
         9: skills.attr.attr02,
         10: skills.attr.attr01
     },
     media: {
         1: skills.special.Media,
-        2: skills.stat_int.int03,
-        3: skills.stat_int.int07,
-        4: skills.stat_int.int09,
+        2: skills.stat_int.stat_int03,
+        3: skills.stat_int.stat_int07,
+        4: skills.stat_int.stat_int09,
         5: skills.emp.emp06,
         6: skills.emp.emp01,
         7: skills.emp.emp05,
@@ -898,23 +899,23 @@ var career = {
     },
     nomad: {
         1: skills.special.Nomad,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.body.body01,
         4: skills.ref.ref11,
         5: skills.ref.ref18,
         6: skills.ref.ref06,
         7: skills.tech.tech03,
-        8: skills.stat_int.int24,
+        8: skills.stat_int.stat_int24,
         9: skills.ref.ref03,
         10: skills.ref.ref02
     },
     techie: {
         1: skills.special.Techie,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.tech.tech03,
         4: skills.tech.tech06,
-        5: skills.stat_int.int23,
-        6: skills.stat_int.int09,
+        5: skills.stat_int.stat_int23,
+        6: skills.stat_int.stat_int09,
         7: skills.tech.tech09,
         8: skills.tech.tech01,
         9: skills.tech.tech02,
@@ -924,11 +925,11 @@ var career = {
     },
     cop: {
         1: skills.special.Cop,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.ref.ref08,
         4: skills.emp.emp01,
         5: skills.ref.ref02,
-        6: skills.stat_int.int09,
+        6: skills.stat_int.stat_int09,
         7: skills.ref.ref03,
         8: skills.ref.ref11,
         9: skills.cool.cool01,
@@ -936,10 +937,10 @@ var career = {
     },
     rocker: {
         1: skills.special.Rocker,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.emp.emp07,
         4: skills.attr.attr02,
-        5: skills.stat_int.int07,
+        5: skills.stat_int.stat_int07,
         6: skills.ref.ref03,
         7: skills.tech.tech19,
         8: skills.cool.cool05,
@@ -948,19 +949,19 @@ var career = {
     },
     med: {
         1: skills.special.MedTechie,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.tech.tech03,
-        4: skills.stat_int.int08,
-        5: skills.stat_int.int09,
+        4: skills.stat_int.stat_int08,
+        5: skills.stat_int.stat_int09,
         6: skills.tech.tech04,
-        7: skills.stat_int.int16,
+        7: skills.stat_int.stat_int16,
         8: skills.tech.tech16,
-        9: skills.stat_int.int25,
+        9: skills.stat_int.stat_int25,
         10: skills.emp.emp01
     },
     fixer: {
         1: skills.special.Fixer,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.tech.tech12,
         4: skills.ref.ref08,
         5: skills.ref.ref03,
@@ -972,15 +973,15 @@ var career = {
     },
     net: {
         1: skills.special.Netrunner,
-        2: skills.stat_int.int03,
+        2: skills.stat_int.stat_int03,
         3: skills.tech.tech03,
-        4: skills.stat_int.int09,
-        5: skills.stat_int.int22,
+        4: skills.stat_int.stat_int09,
+        5: skills.stat_int.stat_int22,
         6: skills.tech.tech06,
         7: skills.tech.tech05,
-        8: skills.stat_int.int07,
+        8: skills.stat_int.stat_int07,
         9: skills.tech.tech09,
-        10: skills.stat_int.int19
+        10: skills.stat_int.stat_int19
     }
 };
 
@@ -3121,6 +3122,7 @@ function manualRoleSelectChange() {
     charRoleOutput.innerHTML = roleField.value;
 }
 
+// Remove old values / create table; Pickup Skills dropdowns ("selects") get appended later
 function createPickupSkills() {
     "use strict";
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
@@ -3140,34 +3142,41 @@ function createPickupSkills() {
 function createPickupOpt() {
     "use strict";
     var pickupSkillsTable = document.getElementById("pickupSkillsTable");
+    // A dropdown ("select") to house all the skills categories
     var pickupOptSelect = document.createElement("select");
     characterMeta.pickupSkillsAdded += 1;
     var pickupOptID = "pickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
     pickupOptSelect.setAttribute("id", pickupOptID);
 
-    // Populate the "category" pickup skill option selet (ATTR, BODY, etc)
+    // Dynamically populate the "category" pickup skill option dropdown ("select") textContent (ATTR, BODY, etc)
+    // attr: 1, body: 2, cool: 3, emp: 4, stat_int: 5, ref: 6, tech: 7
     for (var i = 1; i < Object.keys(skills).length; i ++) {
         var opt = document.createElement("option");
-        opt.value = i;
+        opt.value = i; // will be 1, 2, 3, 4, etc up to max length of the skills object
         opt.textContent = Object.keys(skills)[i].toUpperCase();
+        // Hacky workaround for bug introduced by commit 4860693 (which removed use of reserved keyword "int")
+        // Pickup dropdown was being populated with STAT_INT
+        if (opt.textContent === "STAT_INT") {
+            opt.textContent = "INT";
+        }
         pickupOptSelect.appendChild(opt);
     }
     appendBR(pickupSkillsTable);
     pickupSkillsTable.appendChild(pickupOptSelect);
     pickupOptSelect.onchange = pickupOptSelectChange;
 
-    //Create the sub-skill Select dropdown
+    // Create the sub-skill Select dropdown; initial (default) value is ATTR > Personal Grooming
+    // Default of "ATTR > Personal Grooming" then gets replaced by manual selections or random pickup skill selections
     var subSkillSelect = document.createElement("select");
     pickupSkillsTable.appendChild(subSkillSelect);
     var subSkillSelectID = "subPickup".concat(characterMeta.pickupSkillsAdded.toString()).concat("Select");
     subSkillSelect.setAttribute("id", subSkillSelectID);
-
+    
     for (var j = 1; j < Object.keys(skills.attr).length; j++) {
-        var opt2 = document.createElement("option");
+        var opt2 = document.createElement("option"); 
         opt2.value = j;
         var opt2Temp;
-        opt2Temp = "attr".concat("0").concat(j.toString());
-        //
+        opt2Temp = "attr".concat("0").concat(j.toString()); //attr01, attr02 (temp ATTR subskills refs for the initial default pickup dropdowns)
         opt2.textContent = skills.attr[opt2Temp];
         subSkillSelect.appendChild(opt2);
     }
@@ -3178,13 +3187,13 @@ function createPickupOpt() {
     subSkillField.setAttribute("size", "3");
     pickupSkillsTable.appendChild(subSkillField);
 
-    //Assign event handler for the pickup skill fields on change
+    // Assign event handler for the pickup skill fields on change
     var pickupSkillArray = pickupSkillsTable.getElementsByTagName("input");
     for (var k = 0; k < pickupSkillArray.length; k++) {
         pickupSkillArray[k].onchange = pickupSkillInputChange;
     }
 
-    //Assign event handler for the pickup skill two dropdowns (pickup2Select and subPickup2Select)
+    // Assign event handler for the pickup skill two dropdowns (pickup2Select and subPickup2Select)
     var pickupSelectArray = pickupSkillsTable.getElementsByTagName("select");
     for (var l = 0; l < pickupSelectArray.length; l++) {
         pickupSelectArray[l].addEventListener("change", pickupSkillInputChange);
@@ -3227,6 +3236,8 @@ function pickupOptSelectChange(eventObj) {
         var opt = document.createElement("option");
         opt.value = i;
         var optText;
+        // Less than 10 or >= 10 logic needed for skills array skill descriptions mappings
+        // example, under skills.stat_int: int09 == Ed./General Knowledge, then int10 == Expert
         if (i  < 10) {
             optText = subCategory.concat("0").concat(i.toString());
             opt.textContent = skills[subCategory][optText];
