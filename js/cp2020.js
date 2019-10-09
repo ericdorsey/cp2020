@@ -1997,6 +1997,9 @@ function persTraitsSelectChange() {
     var persTraitsField = document.getElementById("persTraitsField");
     var persTraitsSelect = document.getElementById("persTraitsSelect");
     persTraitsField.value = persTraitsSelect[persTraitsSelect.selectedIndex].text;
+
+    var persTraitCharOutput = document.getElementById("persTraitCharOutput");
+    persTraitCharOutput.innerHTML = persTraitsField.value;
 }
 
 function randPersValueClick() {
