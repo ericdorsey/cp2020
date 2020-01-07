@@ -50,7 +50,7 @@ var ethnic = {
         {origin: "Black American", languages: ["English", "Blackfolk"]},
         {origin: "Hispanic/American", languages: ["Spanish", "English"]},
         {origin: "Central/South American", languages: ["Spanish", "Portuguese"]},
-        {origin: "European", languages: ["French", "German", "Enlgish", "Spanish", "Italian", "Greek", "Danish", "Dutch", "Norwegian", "Swedish"]}
+        {origin: "European", languages: ["French", "German", "English", "Spanish", "Italian", "Greek", "Danish", "Dutch", "Norwegian", "Swedish"]}
     ]
 };
 
