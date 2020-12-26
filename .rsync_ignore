@@ -1,4 +1,5 @@
 .git/
 .gitignore
+.rsync_ignore
 LICENSE.txt
 README.md
