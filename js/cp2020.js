@@ -73,7 +73,7 @@ var parentStatus = {
 };
 
 var parentTragedy = {
-    1: "Your parent(s) died in warefare",
+    1: "Your parent(s) died in warfare",
     2: "Your parent(s) died in an accident",
     3: "Your parent(s) were murdered",
     4: "Your parent(s) have amnesia and don't remember you",
